@@ -1,10 +1,14 @@
+class Positional:
+    def __init__(self, positional: str):
+        self.positional = positional
+
 class Command:
-    def __init__(self,command: str, short: str, alt: str):
+    def __init__(self,command: str, short: str, alt: str, positionals: list[Positional]):
         self.command = command
         self.short = short
         self.alt = alt
+        self.positionals = positionals
 
-class Positional:
-    def __init__(self,positional: str, parent: str):
-        self.positional = positional
-        self.parent = parent
+test_command = Command("TEST", short="T", alt="TE", positional=[
+    Positional("EMSE")
+])
