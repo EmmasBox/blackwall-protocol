@@ -27,7 +27,9 @@ class Blackwall(App):
         self.title = "Blackwall Protocol"
         self.sub_title = "Mainframe Security Administration"
 
+    #UI elements
     def compose(self):
+        yield Label(f"You are working on mainframe system {system_name}")
         #display system and LPAR name
         if zoau_enabled:
             yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}")
@@ -39,6 +41,7 @@ class Blackwall(App):
             Tab("User profiles", id="three"),
             Tab("Statistics", id="four"),
         )
+        yield Input()
         yield ListView()
         yield Footer()
 
