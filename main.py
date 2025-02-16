@@ -41,7 +41,6 @@ class Blackwall(App):
             Tab("User profiles", id="three"),
             Tab("Statistics", id="four"),
         )
-        yield Input()
         yield ListView()
         yield Footer()
 
