@@ -1,5 +1,6 @@
-.tml
+*.tml
 !pyproject.toml
-.log
-.csv
-.txt
+*.toml
+*.log
+*.csv
+*.txt
