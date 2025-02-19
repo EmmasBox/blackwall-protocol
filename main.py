@@ -1,3 +1,5 @@
+#Project by Emma Skovgaard
+
 try:
     from textual.app import App
     from textual.widgets import Header, Footer, Tabs, ListView, Input, Label, Tab
