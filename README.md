@@ -7,6 +7,7 @@ Required dependencies:
 - Python 3.13 or later
 - Textual (For UI)
 - [RACFU](https://github.com/ambitus/racfu) (To communicate with RACF)
+  - RACFU being a dependency also indirectly also means you need the IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space configured
 
 Optional dependencies:
 - [ZOAU 1.3.4.x or later](https://www.ibm.com/docs/en/zoau/1.3.x) (For gathering system information like LPAR name, not required but highly recommended)
