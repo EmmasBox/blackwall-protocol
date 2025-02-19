@@ -29,7 +29,6 @@ class Blackwall(App):
 
     #UI elements
     def compose(self):
-        yield Label(f"You are working on mainframe system {system_name}")
         #display system and LPAR name
         if zoau_enabled:
             yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}")
