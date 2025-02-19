@@ -1,9 +1,6 @@
-[build-system]
-requires = ["setuptools >= 61.0"]
-build-backend = "setuptools.build_meta"
-
 [project]
 name = "blackwall-protocol"
+version = "0.0.0"
 requires-python = ">= 3.13"
 dependencies = [
   "racfu",
@@ -18,3 +15,7 @@ keywords = ["RACF", "security", "mainframe"]
 [project.urls]
 Repository = "https://github.com/EmmasBox/blackwall-protocol.git"
 Issues = "https://github.com/EmmasBox/blackwall-protocol/issues"
+
+[build-system]
+requires = ["setuptools >= 61.0"]
+build-backend = "setuptools.build_meta"
