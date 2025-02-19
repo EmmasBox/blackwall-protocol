@@ -1,9 +1,14 @@
-from textual.app import App
-from textual.widgets import Header, Footer, Tabs, ListView, Input, Label, Tab
+try:
+    from textual.app import App
+    from textual.widgets import Header, Footer, Tabs, ListView, Input, Label, Tab
+except:
+    print("Error: the textual package is missing and is required to run Project Blackwall")    
+
 try:
     from zoautil_py import zsystem
     zoau_enabled = True
 except:
+    print("Warning: could not find ZOAU, certain features will be disabled such as diplaying system and LPAR names")    
     zoau_enabled = False
 
 import json
