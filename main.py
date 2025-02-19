@@ -2,10 +2,10 @@ try:
     from textual.app import App
     from textual.widgets import Header, Footer, Tabs, ListView, Input, Label, Tab
 except:
-    print("Error: the textual package is missing and is required to run Project Blackwall")    
+    exit("Error: the textual package is missing and is required to run Project Blackwall")
 
 try:
-    from zoautil_py import zsystem
+    from zoautil_py import zsystem # type: ignore
     zoau_enabled = True
 except:
     print("Warning: could not find ZOAU, certain features will be disabled such as diplaying system and LPAR names")    
@@ -15,7 +15,7 @@ import json
 
 #system information
 if zoau_enabled:
-    zsystem_info = json.loads(zsystem.zinfo())
+    zsystem_info = json.loads(zsystem.zinfo()) # type: ignore
     system_name = zsystem_info["sys_info"]["sys_name"]
     lpar_name = zsystem_info["sys_info"]["lpar_name"]
 
