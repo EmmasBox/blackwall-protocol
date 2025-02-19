@@ -3,6 +3,7 @@ Blackwall Protocol is a terminal based administration panel for RACF. The goal o
 
 ## Dependencies
 Required dependencies:
+- z/OS 2.4 or later
 - Python 3.13 or later
 - Textual (For UI)
 - [RACFU](https://github.com/ambitus/racfu) (To communicate with RACF)
