@@ -1,10 +1,7 @@
 #Project by Emma Skovgaard
 
-try:
-    from textual.app import App
-    from textual.widgets import Header, Footer, Tabs, ListView, Input, Label, Tab
-except:
-    exit("Error: the textual package is missing and is required to run Project Blackwall")
+from textual.app import App
+from textual.widgets import Header, Footer, Tabs, ListView, Input, Label, Tab
 
 try:
     from zoautil_py import zsystem # type: ignore
@@ -27,20 +24,38 @@ class Blackwall(App):
         self.title = "Blackwall Protocol"
         self.sub_title = "Mainframe Security Administration"
 
+    BINDINGS = [
+        ("a", "add", "Add tab"),
+        ("r", "remove", "Remove active tab"),
+        ("c", "clear", "Clear all tabs"),
+    ]
+
     #UI elements
     def compose(self):
         #display system and LPAR name
         if zoau_enabled:
             yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}")
-        yield Input()
+        yield Input(id="cli")
         yield Header()
-        yield Tabs(
-            Tab("Dataset profiles", id="one"),
-            Tab("Resource profiles", id="two"),
-            Tab("User profiles", id="three"),
-            Tab("Statistics", id="four"),
-        )
+        yield Tabs()
         yield ListView()
         yield Footer()
+
+    def action_add(self) -> None:
+        """Add a new tab."""
+        tabs = self.query_one(Tabs)
+        tabs.add_tab("Empty tab")
+
+    def action_remove(self) -> None:
+        """Remove active tab."""
+        tabs = self.query_one(Tabs)
+        active_tab = tabs.active_tab
+        if active_tab is not None:
+            tabs.remove_tab(active_tab.id)
+
+    def action_clear(self) -> None:
+        """Clear the tabs."""
+        self.query_one(Tabs).clear()
+
 
 Blackwall().run()
