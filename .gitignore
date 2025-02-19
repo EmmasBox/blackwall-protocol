@@ -1,5 +1,5 @@
 .tml
-.toml
+!pyproject.toml
 .log
 .csv
 .txt
