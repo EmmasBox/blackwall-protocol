@@ -3,7 +3,8 @@ class Positional:
         self.positional = positional
 
 class Command:
-    def __init__(self,command: str, short: str, alt: str, positionals: list[Positional]):
+    def __init__(self,type: str,command: str, short: str, alt: str, positionals: list[Positional]):
+        self.type = type
         self.command = command
         self.short = short
         self.alt = alt
