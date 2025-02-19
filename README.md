@@ -7,4 +7,4 @@ Required dependencies:
 - [RACFU](https://github.com/ambitus/racfu) (To communicate with RACF)
 
 Optional dependencies:
-- ZOAU (For gathering system information like LPAR name, not required but highly recommended)
+- [ZOAU 1.3.x or later](https://www.ibm.com/docs/en/zoau/1.3.x) (For gathering system information like LPAR name, not required but highly recommended)
