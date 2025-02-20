@@ -1,6 +1,8 @@
 # Blackwall Protocol
 Blackwall Protocol is a terminal based administration panel for RACF. The goal of Blackwall is to create a more modern and open source alternative to zSecure. Blackwall does not support ACF2 or Top Secret and never will, people are more than welcome to fork it and create their own versions however.
 
+## Features
+
 ## Dependencies
 ### Required dependencies:
 - z/OS 2.4 or later
@@ -14,5 +16,3 @@ Blackwall Protocol is a terminal based administration panel for RACF. The goal o
 
 ## Installation
 As mentioned in dependencies before you install you will have to install Python and ZOAU yourself. You also manually need to make sure IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space are configured. Textual and RACFU are bundled with the program and thus do not need to be installed manually via pip.
-
-## Features
