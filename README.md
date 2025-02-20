@@ -13,6 +13,6 @@ Blackwall Protocol is a terminal based administration panel for RACF. The goal o
 - [ZOAU 1.3.4.x or later](https://www.ibm.com/docs/en/zoau/1.3.x) (For gathering system information like LPAR name, not required but highly recommended)
 
 ## Installation
-Before you install you will have to install Python and ZOAU yourself. You also manually need to make sure IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space are configured. Textual and RACFU are bundled with the program and thus do not need to be installed manually via pip.
+As mentioned in dependencies before you install you will have to install Python and ZOAU yourself. You also manually need to make sure IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space are configured. Textual and RACFU are bundled with the program and thus do not need to be installed manually via pip.
 
 ## Features
