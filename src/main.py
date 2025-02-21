@@ -38,7 +38,7 @@ class Blackwall(App):
         #display system and LPAR name
         if zoau_enabled:
             yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}")
-        yield Input(id="cli")
+        yield Input(id="cli",max_length=250)
         yield Header()
         with TabbedContent():
             with TabPane("Empty tab"):
