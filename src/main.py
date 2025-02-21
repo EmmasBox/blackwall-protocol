@@ -1,7 +1,7 @@
 #Project by Emma Skovgaard
 
 from textual.app import App
-from textual.widgets import Header, Footer, Tabs, ListView, Input, Label, Tab
+from textual.widgets import Header, Footer, Tabs, ListView, Input, Label, TabPane, TabbedContent
 
 try:
     from zoautil_py import zsystem # type: ignore
@@ -37,25 +37,31 @@ class Blackwall(App):
             yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}")
         yield Input(id="cli")
         yield Header()
-        yield Tabs()
+        with TabbedContent():
+            with TabPane("Empty tab"):
+                pass
+            with TabPane("Empty tab"):
+                pass
+            with TabPane("Empty tab"):
+                pass
         yield ListView()
         yield Footer()
 
     def action_add(self) -> None:
         """Add a new tab."""
-        tabs = self.query_one(Tabs)
-        tabs.add_tab("Empty tab")
+        tabs = self.query_one(TabbedContent)
+        tabs.add_pane(TabPane("Empty Tab"))
 
     def action_remove(self) -> None:
         """Remove active tab."""
-        tabs = self.query_one(Tabs)
-        active_tab = tabs.active_tab
-        if active_tab is not None:
-            tabs.remove_tab(active_tab.id)
+        tabs = self.query_one(TabbedContent)
+        active_pane = tabs.active_pane
+        if active_pane is not None:
+            tabs.remove_pane(active_pane.id)
 
     def action_clear(self) -> None:
         """Clear the tabs."""
-        self.query_one(Tabs).clear()
+        self.query_one(TabbedContent).clear_panes()
 
 
 Blackwall().run()
