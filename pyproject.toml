@@ -4,7 +4,7 @@ version = "0.0.0"
 requires-python = ">= 3.13"
 dependencies = [
   "racfu",
-  "textual"
+  "textual>2.1"
 ]
 authors = [
   {name = "Emma Skovgaard"}
