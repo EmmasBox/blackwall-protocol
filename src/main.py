@@ -19,6 +19,9 @@ if zoau_enabled:
     lpar_name = zsystem_info["sys_info"]["lpar_name"]
 
 class Blackwall(App):
+    #Import css
+    CSS_PATH = "UI.tcss"
+
     #This portion handles the text in the header bar
     def on_mount(self) -> None:
         self.title = "Blackwall Protocol"
