@@ -7,14 +7,14 @@ try:
     from zoautil_py import zsystem # type: ignore
     zoau_enabled = True
 except:
-    print("Warning: could not find ZOAU, certain features will be disabled such as diplaying system and LPAR names")    
+    print("##BLKWL_ERROR_1 Warning: could not find ZOAU, certain features will be disabled such as diplaying system and LPAR names")    
     zoau_enabled = False
 
 try:
     from racfu import racfu # type: ignore
     racfu_enabled = True
 except:
-    print("Warning: could not find RACFU, entering development mode")    
+    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering development mode")    
     racfu_enabled = False
 
 import json
@@ -67,6 +67,5 @@ class Blackwall(App):
     def action_clear(self) -> None:
         """Clear the tabs."""
         self.query_one(TabbedContent).clear_panes()
-
 
 Blackwall().run()
