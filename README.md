@@ -17,3 +17,6 @@ Blackwall Protocol is a terminal based administration panel for RACF. The goal o
 
 ## Installation
 As mentioned in dependencies before you install you will have to install Python and ZOAU yourself. You also manually need to make sure IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space are configured. Textual and RACFU are bundled with the program and thus do not need to be installed manually via pip.
+
+## VS Code
+If you plan to use this application via a VS Code terminal you must set minimum contrast ratio to 1, otherwise certain UI elements will not be displayed correctly causing a degraded user experience
