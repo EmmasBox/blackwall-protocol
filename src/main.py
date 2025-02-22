@@ -1,7 +1,7 @@
 #Project by Emma Skovgaard
 
 from textual.app import App
-from textual.widgets import Header, Footer, Tabs, ListView, Input, Label, TabPane, TabbedContent
+from textual.widgets import Header, Footer, ListView, Input, Label, TabPane, TabbedContent
 
 try:
     from zoautil_py import zsystem # type: ignore
