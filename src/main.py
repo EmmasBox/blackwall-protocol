@@ -20,7 +20,7 @@ except:
 
 import json
 from panel_user import PanelUserName, PanelUserOwnership, PanelUserPassword, PanelUserPassphrase, PanelUserAttributes, PanelUserSegments
-from theme import cyanosure_theme
+from theme import cynosure_theme
 
 #system information
 if zoau_enabled:
@@ -36,8 +36,8 @@ class Blackwall(App):
     def on_mount(self) -> None:
         self.title = "Blackwall Protocol"
         self.sub_title = "Mainframe Security Administration"
-        self.register_theme(cyanosure_theme)
-        self.theme = "cyanosure"
+        self.register_theme(cynosure_theme)
+        self.theme = "cynosure"
 
     BINDINGS = [
         ("a", "add", "Add tab"),

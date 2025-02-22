@@ -1,7 +1,7 @@
 from textual.theme import Theme
 
-cyanosure_theme = Theme(
-    name="cyanosure",
+cynosure_theme = Theme(
+    name="cynosure",
     primary="#e8e1c1",
     secondary="#ff0000",
     accent="#ff0000",
