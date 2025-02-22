@@ -52,11 +52,13 @@ class Blackwall(App):
         yield ListView()
         yield Footer()
 
+    #Add new tab
     def action_add(self) -> None:
         """Add a new tab."""
         tabs = self.query_one(TabbedContent)
         tabs.add_pane(TabPane("Empty Tab"))
 
+    #Remove current tab
     def action_remove(self) -> None:
         """Remove active tab."""
         tabs = self.query_one(TabbedContent)
@@ -64,6 +66,7 @@ class Blackwall(App):
         if active_pane is not None:
             tabs.remove_pane(active_pane.id)
 
+    #Clear all tabs
     def action_clear(self) -> None:
         """Clear the tabs."""
         self.query_one(TabbedContent).clear_panes()
