@@ -10,6 +10,13 @@ except:
     print("Warning: could not find ZOAU, certain features will be disabled such as diplaying system and LPAR names")    
     zoau_enabled = False
 
+try:
+    from racfu import racfu # type: ignore
+    racfu_enabled = True
+except:
+    print("Warning: could not find RACFU, entering development mode")    
+    racfu_enabled = False
+
 import json
 
 #system information
@@ -41,12 +48,7 @@ class Blackwall(App):
         yield Input(id="cli",max_length=250)
         yield Header()
         with TabbedContent():
-            with TabPane("Empty tab"):
-                pass
-            with TabPane("Empty tab"):
-                pass
-            with TabPane("Empty tab"):
-                pass
+            pass
         yield ListView()
         yield Footer()
 
