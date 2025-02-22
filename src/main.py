@@ -2,6 +2,7 @@
 
 from textual.app import App
 from textual.widgets import Header, Footer, ListView, Input, Label, TabPane, TabbedContent
+from textual.containers import VerticalScroll
 
 try:
     from zoautil_py import zsystem # type: ignore
@@ -18,6 +19,8 @@ except:
     racfu_enabled = False
 
 import json
+from panel_user import PanelUserName, PanelUserOwnership, PanelUserPassword, PanelUserPassphrase, PanelUserAttributes, PanelUserSegments
+from theme import cyanosure_theme
 
 #system information
 if zoau_enabled:
@@ -33,6 +36,8 @@ class Blackwall(App):
     def on_mount(self) -> None:
         self.title = "Blackwall Protocol"
         self.sub_title = "Mainframe Security Administration"
+        self.register_theme(cyanosure_theme)
+        self.theme = "cyanosure"
 
     BINDINGS = [
         ("a", "add", "Add tab"),
@@ -48,7 +53,14 @@ class Blackwall(App):
         yield Input(id="cli",max_length=250)
         yield Header()
         with TabbedContent():
-            pass
+            with TabPane("Test"):
+                with VerticalScroll():
+                    yield PanelUserName()
+                    yield PanelUserOwnership()
+                    yield PanelUserPassword()
+                    yield PanelUserPassphrase()
+                    yield PanelUserAttributes()
+                    yield PanelUserSegments()
         yield ListView()
         yield Footer()
 

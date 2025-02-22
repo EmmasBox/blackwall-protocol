@@ -1,0 +1,28 @@
+
+.username {
+    width: 16;
+}
+
+.name {
+    width: 32;
+}
+
+.password {
+    width: 16;
+}
+
+.passphrase {
+    width: 32;
+}
+
+.owner {
+    width: 16;
+}
+
+ToggleButton > .toggle--button {
+    display: none;
+}
+
+ToggleButton.-on > .toggle--button {
+    color: $text-success;
+}
