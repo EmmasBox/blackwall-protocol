@@ -67,7 +67,7 @@ class PanelUserSegments(VerticalGroup):
             with Collapsible(title="OMVS"):
                 yield RadioButton("OMVS",id="user_segment_omvs")
                 yield Label("UID: ")
-                yield Input(max_length=30,id="uid",classes="username")
+                yield Input(max_length=30,id="uid",classes="username",type="integer")
                 yield Label("Home directory: ")
                 yield Input(max_length=255,id="home_directory",classes="username")
                 yield Label("Shell path: ")
