@@ -1,6 +1,6 @@
 from textual.app import ComposeResult
 from textual.widgets import Input, MaskedInput, Label, Button, RadioButton, Collapsible
-from textual.containers import HorizontalGroup, VerticalGroup, Right, Container
+from textual.containers import HorizontalGroup, VerticalGroup, Right, Container, VerticalScroll
 
 class PanelUserInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -79,16 +79,16 @@ class PanelUserSegments(VerticalGroup):
             with Collapsible(title="CICS"): 
                 yield RadioButton("CICS",id="user_segment_cics")
 
-def action_save_user(self) -> None:
-    """Save user"""
-    pass
-
 class PanelUserSave(Right):
+    def action_save_user(self) -> None:
+        username = self.parent.query_exactly_one(selector="#username")
+        self.notify(f"User {username.value} created",severity="error")
+
     """Save user button"""
     def compose(self) -> ComposeResult:
-        yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="saveUser")
+        yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save_user")
 
-class PanelUser(Container):
+class PanelUser(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield PanelUserInfo()
         yield PanelUserName()
