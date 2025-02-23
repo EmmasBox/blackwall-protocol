@@ -1,6 +1,6 @@
 from textual.app import ComposeResult
 from textual.widgets import Input, MaskedInput, Label, Button, RadioButton, Collapsible
-from textual.containers import HorizontalGroup, VerticalGroup, Right
+from textual.containers import HorizontalGroup, VerticalGroup, Right, Container
 
 class PanelUserInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -20,7 +20,7 @@ class PanelUserOwnership(HorizontalGroup):
         yield Label("Owner*: ")
         yield Input(max_length=8,id="owner",classes="owner", tooltip="The group or user that owns this user profile. This is required in the RACF database")
         yield Label("Default group*: ")
-        yield Input(max_length=8,id="dfltgrp",classes="owner")
+        yield Input(max_length=8,id="dfltgrp",classes="owner", tooltip="All users must belong to a group in the RACF database")
 
 class PanelUserPassword(VerticalGroup):
     #Import css
@@ -81,4 +81,15 @@ class PanelUserSegments(VerticalGroup):
 
 class PanelUserConfirm(Right):
     def compose(self) -> ComposeResult:
-        yield Button("Confirm")
+        yield Button("Confirm", tooltip="This will update or create the user")
+
+class PanelUser(Container):
+    def compose(self) -> ComposeResult:
+        yield PanelUserInfo()
+        yield PanelUserName()
+        yield PanelUserOwnership()
+        yield PanelUserPassword()
+        yield PanelUserPassphrase()
+        yield PanelUserAttributes()
+        yield PanelUserSegments()
+        yield PanelUserConfirm()
