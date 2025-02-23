@@ -1,8 +1,17 @@
-__pycache__
+#Ignore config files
 *.tml
-!pyproject.toml
 *.toml
+
+#ignore logs, reports, and notes
 *.log
 *.csv
 *.txt
+*.xls
+*.xlsb
+*.xlsm
+*.xlsx
+
+#Python
+!pyproject.toml
 .venv
+__pycache__
