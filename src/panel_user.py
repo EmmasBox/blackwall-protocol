@@ -105,16 +105,17 @@ class PanelUserSave(Right):
                 {
                     "operation": "add", 
                     "admin_type": "user", 
-                    "profile_name": username,
+                    "profile_name": username.value,
                     "traits": {
-                        "base:name": name,
-                        "base:owner": owner,
-                        "base:default_group": default_group,
-                        "omvs:uid": uid,
-                        "omvs:home_directory": home_directory
+                        "base:name": name.value,
+                        "base:owner": owner.value,
+                        "base:default_group": default_group.value,
+                        "omvs:uid": uid.value,
+                        "omvs:home_directory": home_directory.value
                     }
                 }
             )
+            self.notify(result.result)
         else:
             self.notify("Error: RACFU features disabled, no user was created",severity="error")
 
