@@ -2,6 +2,12 @@ from textual.app import ComposeResult
 from textual.widgets import Input, MaskedInput, Label, Button, RadioButton, Collapsible
 from textual.containers import HorizontalGroup, VerticalGroup, Right, Container, VerticalScroll
 
+try:
+    from racfu import racfu # type: ignore
+    racfu_enabled = True
+except: 
+    racfu_enabled = False
+
 class PanelUserInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Created: ")
@@ -20,7 +26,7 @@ class PanelUserOwnership(HorizontalGroup):
         yield Label("Owner*: ")
         yield Input(max_length=8,id="owner",classes="owner", tooltip="The group or user that owns this user profile. This is required in the RACF database")
         yield Label("Default group*: ")
-        yield Input(max_length=8,id="dfltgrp",classes="owner", tooltip="All users must belong to a group in the RACF database")
+        yield Input(max_length=8,id="default_group",classes="owner", tooltip="All users must belong to a group in the RACF database")
 
 class PanelUserPassword(VerticalGroup):
     #Import css
@@ -60,6 +66,12 @@ class PanelUserSegments(VerticalGroup):
                 yield RadioButton("TSO enabled",id="user_segment_tso")
             with Collapsible(title="OMVS"):
                 yield RadioButton("OMVS",id="user_segment_omvs")
+                yield Label("UID: ")
+                yield Input(max_length=30,id="uid",classes="username")
+                yield Label("Home directory: ")
+                yield Input(max_length=255,id="home_directory",classes="username")
+                yield Label("Shell path: ")
+                yield Input(max_length=255,id="shell",classes="username")
             with Collapsible(title="CSDATA"):    
                 yield RadioButton("CSDATA",id="user_segment_csdata")
             with Collapsible(title="KERB"):   
@@ -81,8 +93,30 @@ class PanelUserSegments(VerticalGroup):
 
 class PanelUserSave(Right):
     def action_save_user(self) -> None:
-        username = self.parent.query_exactly_one(selector="#username")
-        self.notify(f"User {username.value} created",severity="error")
+        if  racfu_enabled:
+            username = self.parent.query_exactly_one(selector="#username")
+            name = self.parent.query_exactly_one(selector="#name")
+            owner = self.parent.query_exactly_one(selector="#owner")
+            default_group = self.parent.query_exactly_one(selector="#default_group")
+            uid = self.parent.query_exactly_one(selector="#uid")
+            home_directory = self.parent.query_exactly_one(selector="#home_directory")
+            self.notify(f"User {username.value} created",severity="information")
+            result = racfu(
+                {
+                    "operation": "add", 
+                    "admin_type": "user", 
+                    "profile_name": username,
+                    "traits": {
+                        "base:name": name,
+                        "base:owner": owner,
+                        "base:default_group": default_group,
+                        "omvs:uid": uid,
+                        "omvs:home_directory": home_directory
+                    }
+                }
+            )
+        else:
+            self.notify("Error: RACFU features disabled, no user was created",severity="error")
 
     """Save user button"""
     def compose(self) -> ComposeResult:
