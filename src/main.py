@@ -2,7 +2,7 @@
 
 from textual.app import App
 from textual.widgets import Header, Footer, ListView, Input, Label, TabPane, TabbedContent
-from textual.containers import VerticalScroll
+from textual.containers import VerticalScroll, Container
 
 try:
     from zoautil_py import zsystem # type: ignore
@@ -48,16 +48,17 @@ class Blackwall(App):
     #UI elements
     def compose(self):
         #display system and LPAR name
-        if zoau_enabled:
-            yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}")
-        yield Input(id="cli",max_length=250)
-        yield Header()
-        with TabbedContent():
-            with TabPane("User administration"):
-                with VerticalScroll():
-                    yield PanelUser()
-        yield ListView()
-        yield Footer()
+        with Container():
+            if zoau_enabled:
+                yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}")
+            yield Input(id="cli",max_length=250)
+            yield Header()
+            with TabbedContent():
+                with TabPane("User administration"):
+                    with VerticalScroll():
+                        yield PanelUser()
+            yield ListView()
+            yield Footer()
 
     #Add new tab
     def action_add(self) -> None:
