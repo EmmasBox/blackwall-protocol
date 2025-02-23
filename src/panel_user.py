@@ -115,7 +115,6 @@ class PanelUserSave(Right):
                     }
                 }
             )
-            self.notify(result.result)
         else:
             self.notify("Error: RACFU features disabled, no user was created",severity="error")
 
