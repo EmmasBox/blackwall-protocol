@@ -79,9 +79,14 @@ class PanelUserSegments(VerticalGroup):
             with Collapsible(title="CICS"): 
                 yield RadioButton("CICS",id="user_segment_cics")
 
-class PanelUserConfirm(Right):
+def action_save_user(self) -> None:
+    """Save user"""
+    pass
+
+class PanelUserSave(Right):
+    """Save user button"""
     def compose(self) -> ComposeResult:
-        yield Button("Confirm", tooltip="This will update or create the user")
+        yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="saveUser")
 
 class PanelUser(Container):
     def compose(self) -> ComposeResult:
@@ -92,4 +97,4 @@ class PanelUser(Container):
         yield PanelUserPassphrase()
         yield PanelUserAttributes()
         yield PanelUserSegments()
-        yield PanelUserConfirm()
+        yield PanelUserSave()
