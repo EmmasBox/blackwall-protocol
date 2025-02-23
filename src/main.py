@@ -19,7 +19,7 @@ except:
     racfu_enabled = False
 
 import json
-from panel_user import PanelUserName, PanelUserOwnership, PanelUserPassword, PanelUserPassphrase, PanelUserAttributes, PanelUserSegments
+from panel_user import PanelUserName, PanelUserOwnership, PanelUserPassword, PanelUserPassphrase, PanelUserAttributes, PanelUserSegments, PanelUserConfirm, PanelUserInfo
 from theme import cynosure_theme
 
 #system information
@@ -53,14 +53,16 @@ class Blackwall(App):
         yield Input(id="cli",max_length=250)
         yield Header()
         with TabbedContent():
-            with TabPane("Test"):
+            with TabPane("User administration"):
                 with VerticalScroll():
+                    yield PanelUserInfo()
                     yield PanelUserName()
                     yield PanelUserOwnership()
                     yield PanelUserPassword()
                     yield PanelUserPassphrase()
                     yield PanelUserAttributes()
                     yield PanelUserSegments()
+                    yield PanelUserConfirm()
         yield ListView()
         yield Footer()
 
