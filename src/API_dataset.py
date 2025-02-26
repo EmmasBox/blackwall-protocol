@@ -26,7 +26,7 @@ class BaseDatasetTraits(TraitsBase):
     erase_data_sets_on_delete: bool | None = None
     model_profile_class: str | None = None
     model_profile_generic: str | None = None
-    tape_data_set_file_sequence_number: str | None = None
+    tape_data_set_file_sequence_number: int | None = None
     model_profile: str | None = None
     model_profile_volume: str | None = None
     global_audit_alter: str | None = None
@@ -34,7 +34,7 @@ class BaseDatasetTraits(TraitsBase):
     global_audit_none: str | None = None
     global_audit_read: str | None = None
     global_audit_update: str | None = None
-    level: str | None = None
+    level: int | None = None
     data_set_model_profile: str | None = None
     notify_userid: str | None = None
     auditing: str | None = None
