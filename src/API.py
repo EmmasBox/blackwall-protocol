@@ -12,7 +12,7 @@ if racfu_enabled:
     #User functions
     def user_exists(username: str):
         """Checks if a user exists, returns true or false"""
-        result = racfu({"operation": "extract", "admin_type": "user", "profile_name": {username}})
+        result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username})
         return result.result["return_codes"]["racf_return_code"] == "0"
         
     def user_get():
