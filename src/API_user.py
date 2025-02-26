@@ -204,6 +204,7 @@ if racfu_enabled:
             tso: TSOUserTraits | None = None, 
             workattr: WorkattrUserTraits | None = None, 
             ):
+        """Creates a new user, returns true if the user was successfully created and false if an error code was given"""
         traits = base.to_traits(prefix="base")
         
         if cics is not None:
