@@ -118,7 +118,24 @@ class OMVSUserTraits(TraitsBase):
 
 @dataclass
 class OperparmUserTraits(TraitsBase):
-    pass
+    alternate_console_group: str | None = None
+    receive_automated_messages: str | None = None
+    command_target_system: str | None = None
+    receive_delete_operator_messages: str | None = None
+    receive_hardcopy_messages: str | None = None
+    receive_internal_console_messages: str | None = None
+    console_searching_key: str | None = None
+    message_level: str | None = None
+    log_command_responses: str | None = None
+    message_format: str | None = None
+    migration_id: str | None = None
+    monitor_event: str | None = None
+    message_scope: str | None = None
+    console_authority: str | None = None
+    receive_routing_code: str | None = None
+    message_queue_storage: str | None = None
+    receive_undelivered_messages: str | None = None
+    receive_unknown_console_id_messages: str | None = None
 
 @dataclass
 class OvmUserTraits(TraitsBase):
