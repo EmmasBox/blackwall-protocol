@@ -1,5 +1,10 @@
 #Project by Emma Skovgaard
 
+#Enables true colors to be active by default
+from os import environ
+if "TEXTUAL_COLOR_SYSTEM" not in environ:
+    environ["TEXTUAL_COLOR_SYSTEM"] = "truecolor"
+
 from textual.app import App
 from textual.widgets import Header, Footer, ListView, Input, Label, TabPane, TabbedContent
 from textual.containers import VerticalScroll, Container
