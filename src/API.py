@@ -5,7 +5,7 @@ try:
     from racfu import racfu # type: ignore
     racfu_enabled = True
 except:
-    print("##BLKWL_ERROR_2 Warning: could not find RACFU, lockdown mode")    
+    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")    
     racfu_enabled = False
 
 if racfu_enabled:
@@ -28,9 +28,10 @@ if racfu_enabled:
         pass
 
     #Dataset functions
-    def dataset_profile_exists():
+    def dataset_profile_exists(dataset: str):
         """Checks if a dataset profile exists, returns true or false"""
-        pass
+        result = racfu({"operation": "extract", "admin_type": "data-set", "profile_name": dataset})
+        return result.result["return_codes"]["racf_return_code"] == "0"
 
     def dataset_profile_get():
         pass
@@ -45,9 +46,10 @@ if racfu_enabled:
         pass
 
     #General resource profile function
-    def resource_profile_exists():
+    def resource_profile_exists(resource: str):
         """Checks if a general resource profile exists, returns true or false"""
-        pass
+        result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource})
+        return result.result["return_codes"]["racf_return_code"] == "0"
 
     def resource_profile_get():
         pass
