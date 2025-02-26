@@ -11,16 +11,11 @@ except:
     print("##BLKWL_ERROR_1 Warning: could not find ZOAU, certain features will be disabled such as diplaying system and LPAR names")    
     zoau_enabled = False
 
-try:
-    from racfu import racfu # type: ignore
-    racfu_enabled = True
-except:
-    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering development mode")    
-    racfu_enabled = False
-
 import json
 from panel_user import PanelUser
 from theme import cynosure_theme
+
+from API import RACFAPI
 
 #system information
 if zoau_enabled:
