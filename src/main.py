@@ -15,8 +15,6 @@ import json
 from panel_user import PanelUser
 from theme import cynosure_theme
 
-import API
-
 #system information
 if zoau_enabled:
     zsystem_info = json.loads(zsystem.zinfo()) # type: ignore
