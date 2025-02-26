@@ -15,7 +15,7 @@ import json
 from panel_user import PanelUser
 from theme import cynosure_theme
 
-from API import RACFAPI
+import API
 
 #system information
 if zoau_enabled:
