@@ -1,6 +1,7 @@
 
 .username {
     width: 16;
+    margin-bottom: 1;
 }
 
 .name {
@@ -17,6 +18,7 @@
 
 .owner {
     width: 16;
+    margin-bottom: 1;
 }
 
 ToggleButton > .toggle--button {

@@ -23,7 +23,7 @@ if zoau_enabled:
 
 class Blackwall(App):
     #Import css
-    CSS_PATH = "UI.tcss"
+    CSS_PATH = "UI.css"
 
     #This portion handles the text in the header bar
     def on_mount(self) -> None:
