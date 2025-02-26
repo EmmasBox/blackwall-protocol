@@ -135,13 +135,28 @@ class ProxyUserTraits(TraitsBase):
 
 @dataclass
 class TSOUserTraits(TraitsBase):
-    uid: str | None = None
-    home_directory: str | None = None
+    account_number: str | None = None
+    logon_command: str | None = None
+    sysout_destination_id: str | None = None
+    hold_class: str | None = None
+    job_class: str | None = None
+    max_region_size: int | None = None
+    message_class: str | None = None
+    logon_procedure: str | None = None
+    security_label: str | None = None
+    default_region_size: str | None = None
+    sysout_class: str | None = None
+    data_set_allocation_unit: str | None = None
+    user_data: str | None = None
 
 @dataclass
 class WorkattrUserTraits(TraitsBase):
-    uid: str | None = None
-    home_directory: str | None = None
+    account_number: str | None = None
+    sysout_building: str | None = None
+    sysout_department: str | None = None
+    sysout_user: str | None = None
+    sysout_room: str | None = None
+    sysout_email: str | None = None
 
 
 if racfu_enabled:
