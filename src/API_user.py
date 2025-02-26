@@ -65,7 +65,7 @@ class KerbUserTraits(TraitsBase):
     name: str | None = None
     key_from: str | None = None
     key_version: str | None = None
-    max_ticket_life: str | None = None
+    max_ticket_life: int | None = None
 
 @dataclass
 class LanguageUserTraits(TraitsBase):
@@ -101,7 +101,7 @@ class NetviewUserTraits(TraitsBase):
 
 @dataclass
 class OMVSUserTraits(TraitsBase):
-    uid: str | None = None
+    uid: int | None = None
     home_directory: str | None = None
     auto_uid: bool | None = None
     max_address_space_size: int | None = None
@@ -161,7 +161,7 @@ class TSOUserTraits(TraitsBase):
     message_class: str | None = None
     logon_procedure: str | None = None
     security_label: str | None = None
-    default_region_size: str | None = None
+    default_region_size: int | None = None
     sysout_class: str | None = None
     data_set_allocation_unit: str | None = None
     user_data: str | None = None
