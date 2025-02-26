@@ -15,16 +15,16 @@ if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username})
         return result.result["return_codes"]["racf_return_code"] == "0"
         
-    def user_get():
+    def user_get(username: str):
         pass
 
     def user_create():
         pass
 
-    def user_delete():
+    def user_delete(username: str):
         pass
 
-    def user_update():
+    def user_update(username: str):
         pass
 
     #Dataset functions
@@ -33,16 +33,16 @@ if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "data-set", "profile_name": dataset})
         return result.result["return_codes"]["racf_return_code"] == "0"
 
-    def dataset_profile_get():
+    def dataset_profile_get(dataset: str):
         pass
 
     def dataset_profile_create():
         pass
 
-    def dataset_profile_delete():
+    def dataset_profile_delete(dataset: str):
         pass
 
-    def dataset_profile_update():
+    def dataset_profile_update(dataset: str):
         pass
 
     #General resource profile function
@@ -51,16 +51,16 @@ if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource})
         return result.result["return_codes"]["racf_return_code"] == "0"
 
-    def resource_profile_get():
+    def resource_profile_get(resource: str):
         pass
 
     def resource_profile_create():
         pass
 
-    def resource_profile_delete():
+    def resource_profile_delete(resource: str):
         pass
 
-    def resource_profile_update():
+    def resource_profile_update(resource: str):
         pass
 
     #Group functions
@@ -69,14 +69,14 @@ if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "group", "profile_name": group})
         return result.result["return_codes"]["racf_return_code"] == "0"
     
-    def group_get():
+    def group_get(group: str):
         pass
 
     def group_create():
         pass
 
-    def group_delete():
+    def group_delete(group: str):
         pass
 
-    def group_update():
+    def group_update(group: str):
         pass
