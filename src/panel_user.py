@@ -8,6 +8,8 @@ try:
 except: 
     racfu_enabled = False
 
+import API_user
+
 class PanelUserInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Created: ")
@@ -94,27 +96,18 @@ class PanelUserSegments(VerticalGroup):
 class PanelUserSave(Right):
     def action_save_user(self) -> None:
         if  racfu_enabled:
-            username = self.parent.query_exactly_one(selector="#username")
-            name = self.parent.query_exactly_one(selector="#name")
-            owner = self.parent.query_exactly_one(selector="#owner")
-            default_group = self.parent.query_exactly_one(selector="#default_group")
-            uid = self.parent.query_exactly_one(selector="#uid")
-            home_directory = self.parent.query_exactly_one(selector="#home_directory")
-            self.notify(f"User {username.value} created",severity="information")
-            result = racfu(
-                {
-                    "operation": "add", 
-                    "admin_type": "user", 
-                    "profile_name": username.value,
-                    "traits": {
-                        "base:name": name.value,
-                        "base:owner": owner.value,
-                        "base:default_group": default_group.value,
-                        "omvs:uid": uid.value,
-                        "omvs:home_directory": home_directory.value
-                    }
-                }
-            )
+            username = self.parent.query_exactly_one(selector="#username").value
+            name = self.parent.query_exactly_one(selector="#name").value
+            owner = self.parent.query_exactly_one(selector="#owner").value
+            default_group = self.parent.query_exactly_one(selector="#default_group").value
+            if API_user.user_create(
+                username=username,
+                base=API_user.BaseUserTraits(owner=owner,name=name,default_group=default_group)
+                ):
+                self.notify(f"User {username.value} created",severity="information")
+            else:
+                self.notify(f"Unable to create user",severity="error")
+
         else:
             self.notify("Error: RACFU features disabled, no user was created",severity="error")
 
