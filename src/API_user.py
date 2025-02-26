@@ -203,7 +203,14 @@ if racfu_enabled:
         pass
 
     def user_delete(username: str):
-        pass
+        result = racfu(
+                {
+                    "operation": "delete", 
+                    "admin_type": "user", 
+                    "profile_name": username,
+                }
+            )
+        return result.result["return_codes"]["racf_return_code"] == "0" 
 
     def user_update(username: str):
         pass
