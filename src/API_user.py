@@ -1,6 +1,6 @@
 #User API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from API_traits_base import TraitsBase
 
 #Checks if RACFU can be imported
@@ -19,10 +19,19 @@ class BaseUserTraits(TraitsBase):
     name: str | None = None
     installation_data: str | None = None
 
+    password: str | None = field(default=None, metadata={
+        "masked": True,
+        "maximum": 8,
+    })
+    
+    passphrase: str | None = field(default=None, metadata={
+        "masked": True,
+        "minimum": 12,
+    })
     #user attributes
-    special: str | None = None 
-    operations: str | None = None 
-    auditor: str | None = None
+    special: bool | None = None
+    operations: bool | None = None
+    auditor: bool | None = None
     
     default_group_authority: str | None = None
     security_category: str | None = None
