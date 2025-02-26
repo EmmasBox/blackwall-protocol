@@ -175,7 +175,6 @@ class WorkattrUserTraits(TraitsBase):
     sysout_room: str | None = None
     sysout_email: str | None = None
 
-
 if racfu_enabled:
     #User functions
     def user_exists(username: str):
@@ -186,11 +185,71 @@ if racfu_enabled:
     def user_get(username: str):
         pass
 
-    def user_create(username: str, base: BaseUserTraits, omvs: OMVSUserTraits | None = None):
+    def user_create(
+            username: str, 
+            base: BaseUserTraits, 
+            cics: CICSUserTraits | None = None, 
+            dce: DCEUserTraits | None = None, 
+            dfp: DFPUserTraits | None = None, 
+            eim: EIMUserTraits | None = None, 
+            language: LanguageUserTraits | None = None, 
+            lnotes: LnotesUserTraits | None = None, 
+            mfa: MfaUserTraits | None = None, 
+            nds: NDSUserTraits | None = None, 
+            netview: NetviewUserTraits | None = None, 
+            omvs: OMVSUserTraits | None = None,
+            operparm: OperparmUserTraits | None = None, 
+            ovm: OvmUserTraits | None = None, 
+            proxy: ProxyUserTraits | None = None, 
+            tso: TSOUserTraits | None = None, 
+            workattr: WorkattrUserTraits | None = None, 
+            ):
         traits = base.to_traits(prefix="base")
         
+        if cics is not None:
+            traits.update(cics.to_traits("cics"))
+
+        if dce is not None:
+            traits.update(dce.to_traits("dce"))
+
+        if dfp is not None:
+            traits.update(dfp.to_traits("dfp"))
+
+        if eim is not None:
+            traits.update(eim.to_traits("eim"))
+
+        if language is not None:
+            traits.update(language.to_traits("language"))
+
+        if lnotes is not None:
+            traits.update(lnotes.to_traits("lnotes"))
+
+        if mfa is not None:
+            traits.update(mfa.to_traits("mfa"))
+
+        if nds is not None:
+            traits.update(nds.to_traits("nds"))
+
+        if netview is not None:
+            traits.update(netview.to_traits("netview"))
+
         if omvs is not None:
             traits.update(omvs.to_traits("omvs"))
+
+        if operparm is not None:
+            traits.update(omvs.to_traits("operparm"))
+
+        if ovm is not None:
+            traits.update(ovm.to_traits("ovm"))
+
+        if proxy is not None:
+            traits.update(proxy.to_traits("proxy"))
+
+        if tso is not None:
+            traits.update(tso.to_traits("tso"))
+        
+        if workattr is not None:
+            traits.update(workattr.to_traits("workattr"))
 
         result = racfu(
                 {
