@@ -51,6 +51,10 @@ if racfu_enabled:
     def group_get(group: str):
         pass
 
+    def group_get_connections(group: str):
+        """Get information on group connections"""
+        pass
+
     def group_create():
         pass
 
