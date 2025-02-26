@@ -14,29 +14,32 @@ except:
 @dataclass
 class BaseGroupTraits(TraitsBase):
     owner: str
-    default_group: str
-    name: str | None = None
+    installation_data: str | None = None
+    superior_group: str
+    terminal_universal_access: str | None = None
+    universal: str | None = None
 
 @dataclass
 class DFPGroupTraits(TraitsBase):
-    uid: str | None = None
-    home_directory: str | None = None
+    data_application: str | None = None
+    data_class: str | None = None
+    management_class: str | None = None
+    storage_class: str | None = None
 
 @dataclass
 class OMVSGroupTraits(TraitsBase):
-    uid: str | None = None
-    home_directory: str | None = None
+    auto_gid: str | None = None
+    gid: str | None = None
+    shared: str | None = None
 
 @dataclass
 class OVMGroupTraits(TraitsBase):
-    uid: str | None = None
+    gid: str | None = None
     home_directory: str | None = None
 
 @dataclass
 class TMEGroupTraits(TraitsBase):
-    uid: str | None = None
-    home_directory: str | None = None
-
+    roles: str | None = None
 
 if racfu_enabled:
     #Group functions
