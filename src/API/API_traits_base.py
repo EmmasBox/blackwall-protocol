@@ -9,6 +9,7 @@ class TraitsBase(ABC):
 
         for field in fields(type(self)):
             value = getattr(self, field.name)
+            field.metadata.get("masked", False)
             if value is not None:
                 traits[f"{prefix}:{field.name}"] = value
 
