@@ -2,7 +2,7 @@ from . import commands_definition as defintion
 from textual.app import ComposeResult
 
 from textual import on
-from textual.widgets import Input, Label
+from textual.widgets import Input
 from textual.containers import HorizontalGroup
 
 import subprocess
