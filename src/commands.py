@@ -1,9 +1,24 @@
 import commands_definition as definition
 from textual.app import ComposeResult
 
-from textual.widgets import Input
+from textual.widgets import Input, Label
 from textual.containers import HorizontalGroup
 
+try:
+    from zoautil_py import mvscmd # type: ignore
+    zoau_enabled = True
+except:
+    print("##BLKWL_ERROR_1 Warning: could not find ZOAU, disabling MVS commands")    
+    zoau_enabled = False
+
 class MVSCommandField(HorizontalGroup):
+    def execute_command(self) -> None:
+        command = self.query_exactly_one(selector="#cli").value
+        mvscmd.execute(command)
+        self.notify("command submitted")
+
     def compose(self) -> ComposeResult:
-        yield Input(id="cli",max_length=250,classes="commands")
+        if zoau_enabled:
+            yield Input(id="cli",max_length=250,classes="commands").action_submit()
+        else:
+            yield Label("Install ZOAU to access MVS command field")
