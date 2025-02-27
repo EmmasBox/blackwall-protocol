@@ -22,5 +22,5 @@ class MVSCommandField(HorizontalGroup):
     @on(Input.Submitted)
     def execute_command(self) -> None:
         command = self.query_exactly_one(selector="#cli").value
-        #mvscmd.execute(command)
-        self.notify("command submitted")
+        output = mvscmd.execute(command)
+        self.notify(f"command submitted: {output}")
