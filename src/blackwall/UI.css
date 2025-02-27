@@ -4,6 +4,11 @@
     margin: 1;
 }
 
+# General
+.save-button {
+    margin-top: 1;
+}
+
 # User creation/modification panel
 .username {
     width: 16;

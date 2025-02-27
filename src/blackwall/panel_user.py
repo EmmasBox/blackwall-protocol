@@ -113,7 +113,7 @@ class PanelUserSave(Right):
 
     """Save user button"""
     def compose(self) -> ComposeResult:
-        yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save_user")
+        yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save_user",classes="save-button")
 
 class PanelUser(VerticalScroll):
     def compose(self) -> ComposeResult:
