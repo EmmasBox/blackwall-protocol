@@ -1,6 +1,7 @@
 from . import commands_definition as defintion
 from textual.app import ComposeResult
 
+from textual import on
 from textual.widgets import Input, Label
 from textual.containers import HorizontalGroup
 
@@ -12,13 +13,14 @@ except:
     zoau_enabled = False
 
 class MVSCommandField(HorizontalGroup):
-    def execute_command(self) -> None:
-        command = self.query_exactly_one(selector="#cli").value
-        mvscmd.execute(command)
-        self.notify("command submitted")
-
     def compose(self) -> ComposeResult:
         if zoau_enabled:
             yield Input(id="cli",max_length=250,classes="commands")
         else:
             yield Label("Install ZOAU to access MVS command field")
+
+    @on(Input.Submitted)
+    def execute_command(self) -> None:
+        command = self.query_exactly_one(selector="#cli").value
+        #mvscmd.execute(command)
+        self.notify("command submitted")
