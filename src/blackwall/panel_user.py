@@ -8,7 +8,7 @@ try:
 except: 
     racfu_enabled = False
 
-from API import API_user
+from .api import user
 
 class PanelUserInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:

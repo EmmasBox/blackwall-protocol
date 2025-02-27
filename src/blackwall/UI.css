@@ -1,4 +1,10 @@
 
+# Main
+.commands {
+    margin: 1;
+}
+
+# User creation/modification panel
 .username {
     width: 16;
     margin-bottom: 1;
@@ -27,8 +33,4 @@ ToggleButton > .toggle--button {
 
 ToggleButton.-on > .toggle--button {
     color: $text-success;
-}
-
-.commands {
-    margin: 1;
 }

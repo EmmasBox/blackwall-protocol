@@ -1,9 +1,3 @@
-#Project by Emma Skovgaard
-
-#Enables true colors to be active by default
-from os import environ
-if "TEXTUAL_COLOR_SYSTEM" not in environ:
-    environ["TEXTUAL_COLOR_SYSTEM"] = "truecolor"
 
 from textual.app import App, SystemCommand
 from textual.widgets import Header, Footer, ListView, Input, Label, TabPane, TabbedContent
@@ -20,10 +14,10 @@ except:
     zoau_enabled = False
 
 import json
-from subcommands import Subcommands
-from panel_user import PanelUser
-from commands import MVSCommandField
-from theme import cynosure_theme
+from .subcommands import Subcommands
+from .panel_user import PanelUser
+from .commands import MVSCommandField
+from .theme import cynosure_theme
 
 #system information
 if zoau_enabled:
@@ -85,5 +79,3 @@ class Blackwall(App):
     def action_clear(self) -> None:
         """Clear the tabs."""
         self.query_one(TabbedContent).clear_panes()
-
-Blackwall().run()

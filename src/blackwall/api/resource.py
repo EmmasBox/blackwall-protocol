@@ -1,7 +1,7 @@
 #General resource API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
 from dataclasses import dataclass, fields
-from API.API_traits_base import TraitsBase
+from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
 try:

@@ -12,6 +12,9 @@ authors = [
 readme = "README.md"
 keywords = ["RACF", "security", "mainframe"]
 
+[project.scripts]
+blackwall = "blackwall.main:main"
+
 [project.urls]
 Repository = "https://github.com/EmmasBox/blackwall-protocol.git"
 Issues = "https://github.com/EmmasBox/blackwall-protocol/issues"
