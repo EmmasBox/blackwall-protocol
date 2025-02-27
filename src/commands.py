@@ -6,4 +6,4 @@ from textual.containers import HorizontalGroup
 
 class MVSCommandField(HorizontalGroup):
     def compose(self) -> ComposeResult:
-        yield Input(id="cli",max_length=250)
+        yield Input(id="cli",max_length=250,classes="commands")

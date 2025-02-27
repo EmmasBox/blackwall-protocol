@@ -28,3 +28,7 @@ ToggleButton > .toggle--button {
 ToggleButton.-on > .toggle--button {
     color: $text-success;
 }
+
+.commands {
+    margin: 1;
+}
