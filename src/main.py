@@ -5,9 +5,12 @@ from os import environ
 if "TEXTUAL_COLOR_SYSTEM" not in environ:
     environ["TEXTUAL_COLOR_SYSTEM"] = "truecolor"
 
-from textual.app import App
+from textual.app import App, SystemCommand
 from textual.widgets import Header, Footer, ListView, Input, Label, TabPane, TabbedContent
 from textual.containers import VerticalScroll, Container
+from textual.screen import Screen
+
+from typing import Iterable
 
 try:
     from zoautil_py import zsystem # type: ignore
@@ -17,7 +20,9 @@ except:
     zoau_enabled = False
 
 import json
+from subcommands import Subcommands
 from panel_user import PanelUser
+from commands import MVSCommandField
 from theme import cynosure_theme
 
 #system information
@@ -43,13 +48,17 @@ class Blackwall(App):
         ("c", "clear", "Clear all tabs"),
     ]
 
+    def get_system_commands(self, screen: Screen) -> Iterable[SystemCommand]:
+        yield from super().get_system_commands(screen)  
+        yield Subcommands()
+
     #UI elements
     def compose(self):
         #display system and LPAR name
         with Container():
             if zoau_enabled:
                 yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}")
-            yield Input(id="cli",max_length=250)
+            yield MVSCommandField()
             yield Header()
             with TabbedContent():
                 with TabPane("User administration"):
