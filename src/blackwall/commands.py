@@ -21,6 +21,7 @@ class MVSCommandField(HorizontalGroup):
 
     @on(Input.Submitted)
     def execute_command(self) -> None:
+        global command_history
         command = self.query_exactly_one(selector="#cli").value
         if command != "":
             try:
