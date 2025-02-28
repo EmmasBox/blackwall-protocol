@@ -36,16 +36,14 @@ class Blackwall(App):
         self.sub_title = "Mainframe Security Administration"
         self.register_theme(cynosure_theme)
         self.theme = "cynosure"
+        self.install_screen(CommandHistoryScreen(), name="history")
 
     BINDINGS = [
         ("a", "add", "Add tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
-        ("h", "switch_mode('history')", "Switch to command history view")
+        ("h", "switch_screen('history')", "Switch to command history view")
     ]
-    MODES = {
-        "history": CommandHistoryScreen,  
-    }
 
     def get_system_commands(self, screen: Screen) -> Iterable[SystemCommand]:
         yield from super().get_system_commands(screen)  
