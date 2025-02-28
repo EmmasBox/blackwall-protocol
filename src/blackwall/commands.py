@@ -11,6 +11,8 @@ import subprocess
 command_history = ""
 
 class CommandHistoryScreen(Screen):
+    BINDINGS = [("escape", "app.pop_screen", "Pop screen")]
+    
     def compose(self) -> ComposeResult:
         yield Label("Command history: ")
         log = Log()
