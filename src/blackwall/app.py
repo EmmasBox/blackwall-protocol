@@ -42,7 +42,7 @@ class Blackwall(App):
         ("a", "add", "Add tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
-        ("h", "switch_screen('history')", "Switch to command history view")
+        ("h", "push_screen('history')", "Switch to command history view")
     ]
 
     def get_system_commands(self, screen: Screen) -> Iterable[SystemCommand]:
