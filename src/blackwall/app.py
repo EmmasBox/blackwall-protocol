@@ -18,6 +18,7 @@ from .subcommands import Subcommands
 from .panel_user import PanelUser
 from .commands import MVSCommandField
 from .theme import cynosure_theme
+from .commands import CommandHistoryScreen
 
 #system information
 if zoau_enabled:
@@ -40,7 +41,11 @@ class Blackwall(App):
         ("a", "add", "Add tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
+        ("h", "switch_mode('history')", "Switch to command history view")
     ]
+    MODES = {
+        "history": CommandHistoryScreen,  
+    }
 
     def get_system_commands(self, screen: Screen) -> Iterable[SystemCommand]:
         yield from super().get_system_commands(screen)  

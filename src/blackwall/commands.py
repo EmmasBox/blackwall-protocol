@@ -8,12 +8,14 @@ from textual.screen import Screen
 
 import subprocess
 
-class CommandOutputScreen(Screen):
+command_history = ""
+
+class CommandHistoryScreen(Screen):
     BINDINGS = [("escape", "app.pop_screen", "Pop screen")]
 
     def compose(self) -> ComposeResult:
-        yield Label()
-        yield Log()
+        yield Label("Command history: ")
+        yield Log(command_history)
 
 class MVSCommandField(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -25,7 +27,7 @@ class MVSCommandField(HorizontalGroup):
         if command != "":
             try:
                 output = subprocess.run(f'tsocmd "{command}"' , shell=True, check=True, capture_output=True)
+                command_history = command_history + output
                 self.notify(f"command {command.upper()} successfully completed",severity="information")
-                self.install_screen(CommandOutputScreen(), name="bsod")
             except:
                 self.notify(f"Command {command.upper()} failed",severity="error")
