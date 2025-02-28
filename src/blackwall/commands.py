@@ -25,7 +25,7 @@ class MVSCommandField(HorizontalGroup):
         if command != "":
             try:
                 output = subprocess.run(f'tsocmd "{command}"' , shell=True, check=True, capture_output=True)
-                command_history = command_history + output.stdout
+                command_history = command_history + output.stdout.decode()
                 self.notify(f"command {command.upper()} successfully completed",severity="information")
             except:
                 self.notify(f"Command {command.upper()} failed",severity="error")
