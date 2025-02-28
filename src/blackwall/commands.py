@@ -1,6 +1,8 @@
 from . import commands_definition as defintion
 from textual.app import ComposeResult
 
+from datetime import datetime
+
 from textual import on
 from textual.events import ScreenResume
 from textual.widgets import Input, Log, Label
@@ -10,6 +12,18 @@ from textual.screen import Screen
 import subprocess
 
 command_history = ""
+
+
+
+def generate_command_meta(command):
+    now = datetime.now() # current date and time
+    date_time = now.strftime("d-%m-%d-%Y-t-%H-%M-%S")
+    return f"""
+    ------------------------------------------------------
+    Command '{command}' executed on {date_time}
+    ------------------------------------------------------
+    \n
+    """
 
 class CommandHistoryScreen(Screen):
     BINDINGS = [("escape", "app.pop_screen", "Pop screen")]
@@ -36,7 +50,7 @@ class MVSCommandField(HorizontalGroup):
         if command != "":
             try:
                 output = subprocess.run(f'tsocmd "{command}"' , shell=True, check=True, capture_output=True,encoding="utf-8")
-                command_history = command_history + "Command: " + command + "\n" + output.stdout
+                command_history = command_history + generate_command_meta() + output.stdout
                 self.notify(f"command {command.upper()} successfully completed",severity="information")
             except BaseException as e:
                 self.notify(f"Command {command.upper()} failed: {e}",severity="error")
