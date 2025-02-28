@@ -40,7 +40,7 @@ class CommandHistoryScreen(Screen):
         log.clear()
         log.write(command_history)
 
-class MVSCommandField(HorizontalGroup):
+class TSOCommandField(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Input(id="cli",max_length=250,classes="commands")
 

@@ -16,7 +16,7 @@ except:
 import json
 from .subcommands import Subcommands
 from .panel_user import PanelUser
-from .commands import MVSCommandField
+from .commands import TSOCommandField
 from .theme import cynosure_theme
 from .commands import CommandHistoryScreen
 
@@ -55,7 +55,7 @@ class Blackwall(App):
         with Container():
             if zoau_enabled:
                 yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}")
-            yield MVSCommandField()
+            yield TSOCommandField()
             yield Header()
             with TabbedContent():
                 with TabPane("User administration"):
