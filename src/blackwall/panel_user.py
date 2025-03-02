@@ -1,6 +1,6 @@
 from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, RadioButton, Collapsible
-from textual.containers import HorizontalGroup, VerticalGroup, Right, Container, VerticalScroll
+from textual.containers import HorizontalGroup, VerticalGroup, Right, VerticalScroll
 
 try:
     from racfu import racfu # type: ignore
