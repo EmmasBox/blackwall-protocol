@@ -15,6 +15,10 @@
     margin-bottom: 1;
 }
 
+.search-selector {
+    margin: 1;
+}
+
 # User creation/modification panel
 .username {
     width: 16;
