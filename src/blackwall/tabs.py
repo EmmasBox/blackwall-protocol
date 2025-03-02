@@ -1,7 +1,7 @@
 
 from textual.app import ComposeResult
 from textual.widgets import Button, TabPane, TabbedContent
-from textual.containers import VerticalScroll, HorizontalGroup
+from textual.containers import HorizontalGroup
 from .panel_user import PanelUser
 
 class TabSystem(HorizontalGroup):
