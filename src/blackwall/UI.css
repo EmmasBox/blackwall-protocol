@@ -9,6 +9,12 @@
     margin-top: 1;
 }
 
+# Search panel
+.search-field {
+    width: 200;
+    margin-bottom: 1;
+}
+
 # User creation/modification panel
 .username {
     width: 16;

@@ -5,7 +5,7 @@ from textual.containers import HorizontalGroup, VerticalScroll
 
 class SearchField(HorizontalGroup):
     def compose(self) -> ComposeResult:
-        yield Input()
+        yield Input(name="Search",classes="search-field")
         yield Button("Search")
 
 class PanelSearch(VerticalScroll):
