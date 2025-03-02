@@ -25,7 +25,7 @@ class TabSystem(HorizontalGroup):
     def open_search(self) -> None:
         """Add a new search tab."""
         tabs = self.query_one(TabbedContent)
-        tabs.add_pane(TabPane("Update user",PanelSearch()))
+        tabs.add_pane(TabPane("Search",PanelSearch()))
 
     #Remove current tab
     def action_remove(self) -> None:
