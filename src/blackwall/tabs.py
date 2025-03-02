@@ -8,7 +8,7 @@ from .panel_search import PanelSearch
 class TabSystem(HorizontalGroup):
     BINDINGS = [
         ("u", "open_user_administration", "Open user tab"),
-        ("s", "open_search", "Open search tab"),
+        ("f", "open_search", "Open search tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
     ]
