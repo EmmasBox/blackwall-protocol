@@ -100,9 +100,9 @@ class PanelUserSave(Right):
             name = self.parent.query_exactly_one(selector="#name").value
             owner = self.parent.query_exactly_one(selector="#owner").value
             default_group = self.parent.query_exactly_one(selector="#default_group").value
-            if API_user.user_create(
+            if user.user_create(
                 username=username,
-                base=API_user.BaseUserTraits(owner=owner,name=name,default_group=default_group)
+                base=user.BaseUserTraits(owner=owner,name=name,default_group=default_group)
                 ):
                 self.notify(f"User {username.value} created",severity="information")
             else:
