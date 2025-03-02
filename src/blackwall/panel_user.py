@@ -106,7 +106,7 @@ class PanelUserSave(Right):
                 ):
                 self.notify(f"User {username.value} created",severity="information")
             else:
-                self.notify(f"Unable to create user",severity="error")
+                self.notify("Unable to create user",severity="error")
 
         else:
             self.notify("Error: RACFU features disabled, no user was created",severity="error")
