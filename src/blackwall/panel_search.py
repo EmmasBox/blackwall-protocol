@@ -6,7 +6,7 @@ from textual.containers import HorizontalGroup, VerticalScroll
 class SearchSelector(HorizontalGroup):
     def compose(self) -> ComposeResult:
         with RadioSet(id="selector",classes="search-selector"):
-            yield RadioButton("Any")
+            yield RadioButton("Any",value=True)
             yield RadioButton("User")
             yield RadioButton("Dataset profile")
             yield RadioButton("Resource profile")
