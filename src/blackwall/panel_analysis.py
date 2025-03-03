@@ -3,7 +3,7 @@ from textual.app import ComposeResult
 from textual.widgets import Button, Label, RadioButton, RadioSet
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
-class AnalysisSelector(HorizontalGroup):
+class AnalysisSelector(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Select desired health checks: ")
         with RadioSet(id="selector-health-checks",classes="selector-health-checks"):
