@@ -19,6 +19,12 @@
     margin: 1;
 }
 
+# Analysis panel
+
+.analysis-confirm {
+    margin: 1;
+}
+
 # User creation/modification panel
 .username {
     width: 16;

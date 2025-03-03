@@ -14,7 +14,7 @@ class AnalysisSelector(VerticalGroup):
 
 class AnalysisConfirm(VerticalGroup):
     def compose(self) -> ComposeResult:
-        yield Button("Run")
+        yield Button("Run",classes="analysis-confirm")
 
 class PanelAnalysis(VerticalScroll):
     def compose(self) -> ComposeResult:
