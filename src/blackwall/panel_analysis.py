@@ -20,9 +20,12 @@ class AnalysisConfirm(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Button("Run",classes="analysis-confirm")
 
+class AnalysisMainView(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield AnalysisSelector()
+        yield AnalysisLog()
+
 class PanelAnalysis(VerticalScroll):
     def compose(self) -> ComposeResult:
-        with Horizontal:
-            yield AnalysisSelector()
-            yield AnalysisLog()
+        yield AnalysisMainView()
         yield AnalysisConfirm()
