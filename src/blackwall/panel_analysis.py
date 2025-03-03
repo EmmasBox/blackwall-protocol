@@ -17,7 +17,7 @@ class AnalysisSelector(VerticalGroup):
             yield RadioButton("UACC best practice",value=True, tooltip="Checks if UACC is being used instead of any=*")
             yield RadioButton("z/OS Unix excessive permissions",tooltip="Checks if files have RWX set for everyone on the system")
             yield RadioButton("Unprotected APF datasets",tooltip="Checks if APF datasets are unprotected by a dataset profile")
-            yield RadioButton("Unused users","Checks if users haven't been used in a really long time")
+            yield RadioButton("Unused users",tooltip="Checks if users haven't been used in a really long time")
 
 class AnalysisLog(VerticalGroup):
     def compose(self) -> ComposeResult:
