@@ -33,7 +33,7 @@ class TabSystem(HorizontalGroup):
     def action_open_analysis(self) -> None:
         """Add a new analysis tab."""
         tabs = self.query_one(TabbedContent)
-        tabs.add_pane(TabPane("Search",PanelAnalysis()))
+        tabs.add_pane(TabPane("Health check",PanelAnalysis()))
 
     #Remove current tab
     def action_remove(self) -> None:
