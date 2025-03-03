@@ -11,7 +11,7 @@ class TabSystem(HorizontalGroup):
     BINDINGS = [
         ("u", "open_user_administration", "Open user tab"),
         ("f", "open_search", "Open search tab"),
-        ("f", "open_analysis", "Open analysis tab"),
+        ("l", "open_analysis", "Open analysis tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
     ]
