@@ -1,6 +1,6 @@
 
 from textual.app import ComposeResult
-from textual.widgets import Button, Label, RadioButton, RadioSet
+from textual.widgets import Button, Label, RadioButton, RadioSet, Log
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 class AnalysisSelector(VerticalGroup):
@@ -12,11 +12,17 @@ class AnalysisSelector(VerticalGroup):
             yield RadioButton("Unprotected APF datasets")
             yield RadioButton("Unused users")
 
+class AnalysisLog(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield Log()
+
 class AnalysisConfirm(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Button("Run",classes="analysis-confirm")
 
 class PanelAnalysis(VerticalScroll):
     def compose(self) -> ComposeResult:
-        yield AnalysisSelector()
+        with HorizontalGroup:
+            yield AnalysisSelector()
+            yield AnalysisLog()
         yield AnalysisConfirm()
