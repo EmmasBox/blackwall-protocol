@@ -1,7 +1,7 @@
 
 from textual.app import ComposeResult
 from textual.widgets import Button, Label, RadioButton, RadioSet, Log
-from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
+from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll, Horizontal
 
 class AnalysisSelector(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -22,7 +22,7 @@ class AnalysisConfirm(VerticalGroup):
 
 class PanelAnalysis(VerticalScroll):
     def compose(self) -> ComposeResult:
-        with HorizontalGroup:
+        with Horizontal:
             yield AnalysisSelector()
             yield AnalysisLog()
         yield AnalysisConfirm()
