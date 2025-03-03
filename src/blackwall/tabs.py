@@ -2,13 +2,16 @@
 from textual.app import ComposeResult
 from textual.widgets import Button, TabPane, TabbedContent
 from textual.containers import HorizontalGroup
+
 from .panel_user import PanelUser
 from .panel_search import PanelSearch
+from .panel_analysis import PanelAnalysis
 
 class TabSystem(HorizontalGroup):
     BINDINGS = [
         ("u", "open_user_administration", "Open user tab"),
         ("f", "open_search", "Open search tab"),
+        ("f", "open_analysis", "Open analysis tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
     ]
@@ -26,6 +29,11 @@ class TabSystem(HorizontalGroup):
         """Add a new search tab."""
         tabs = self.query_one(TabbedContent)
         tabs.add_pane(TabPane("Search",PanelSearch()))
+
+    def action_open_analysis(self) -> None:
+        """Add a new analysis tab."""
+        tabs = self.query_one(TabbedContent)
+        tabs.add_pane(TabPane("Search",PanelAnalysis()))
 
     #Remove current tab
     def action_remove(self) -> None:
