@@ -13,10 +13,6 @@ class SearchSelector(HorizontalGroup):
         with RadioSet(id="filter-selector",classes="search-selector"):
             yield RadioButton("All",value=True)
             yield RadioButton("Only one")
-        with RadioSet(id="where-selector",classes="search-selector"):
-            yield RadioButton("Occurence of",value=True)
-            yield RadioButton("Occurence in")
-
 
 class SearchField(HorizontalGroup):
     def compose(self) -> ComposeResult:
