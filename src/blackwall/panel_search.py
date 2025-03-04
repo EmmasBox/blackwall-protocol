@@ -11,8 +11,8 @@ class SearchSelector(HorizontalGroup):
             yield RadioButton("Dataset profile")
             yield RadioButton("Resource profile")
         with RadioSet(id="filter-selector",classes="search-selector"):
-            yield RadioButton("All",value=True)
-            yield RadioButton("Only one")
+            yield RadioButton("All",disabled=True)
+            yield RadioButton("Only one",value=True)
 
 class SearchField(HorizontalGroup):
     def compose(self) -> ComposeResult:
