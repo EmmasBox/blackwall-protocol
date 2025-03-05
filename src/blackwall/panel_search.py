@@ -1,7 +1,9 @@
 
 from textual.app import ComposeResult
-from textual.widgets import Button, Input, Label, RadioButton, RadioSet
+from textual.widgets import Button, Input, Label, RadioButton, RadioSet, TabbedContent, TabPane
 from textual.containers import HorizontalGroup, VerticalScroll
+
+from .panel_results import PanelResultsMixedType
 
 class SearchSelector(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -15,6 +17,11 @@ class SearchSelector(HorizontalGroup):
             yield RadioButton("Only one",value=True)
 
 class SearchField(HorizontalGroup):
+    def action_search(self) -> None:
+        # This is really stupid but it works *insert shrug emoji*
+        tabs = self.parent.parent.parent.parent.parent.query_one(TabbedContent)
+        tabs.add_pane(TabPane("Results",PanelResultsMixedType()))
+
     def compose(self) -> ComposeResult:
         yield Label("Search:")
         yield Input(name="Search",classes="search-field")
