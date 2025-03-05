@@ -89,21 +89,17 @@ class PanelUserSegments(VerticalGroup):
 
 class PanelUserSave(Right):
     def action_save_user(self) -> None:
-        if racfu_enabled:
-            username = self.parent.query_exactly_one(selector="#username").value
-            name = self.parent.query_exactly_one(selector="#name").value
-            owner = self.parent.query_exactly_one(selector="#owner").value
-            default_group = self.parent.query_exactly_one(selector="#default_group").value
-            if user.user_create(
-                username=username,
-                base=user.BaseUserTraits(owner=owner,name=name,default_group=default_group)
-                ):
-                self.notify(f"User {username.value} created",severity="information")
-            else:
-                self.notify("Unable to create user",severity="error")
-
+        username = self.parent.query_exactly_one(selector="#username").value
+        name = self.parent.query_exactly_one(selector="#name").value
+        owner = self.parent.query_exactly_one(selector="#owner").value
+        default_group = self.parent.query_exactly_one(selector="#default_group").value
+        if user.user_create(
+            username=username,
+            base=user.BaseUserTraits(owner=owner,name=name,default_group=default_group)
+            ):
+            self.notify(f"User {username.value} created",severity="information")
         else:
-            self.notify("Error: RACFU features disabled, no user was created",severity="error")
+            self.notify("Unable to create user",severity="error")
 
     """Save user button"""
     def compose(self) -> ComposeResult:
