@@ -89,7 +89,7 @@ class PanelUserSegments(VerticalGroup):
 
 class PanelUserSave(Right):
     def action_save_user(self) -> None:
-        if  racfu_enabled:
+        if racfu_enabled:
             username = self.parent.query_exactly_one(selector="#username").value
             name = self.parent.query_exactly_one(selector="#name").value
             owner = self.parent.query_exactly_one(selector="#owner").value
