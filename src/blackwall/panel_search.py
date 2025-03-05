@@ -18,7 +18,7 @@ class SearchField(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Search:")
         yield Input(name="Search",classes="search-field")
-        yield Button("Search")
+        yield Button("Search",action="search")
 
 class PanelSearch(VerticalScroll):
     def compose(self) -> ComposeResult:
