@@ -192,7 +192,9 @@ if racfu_enabled:
         return result.result["return_codes"]["racf_return_code"] == "0"
         
     def user_get(username: str):
-        pass
+        """Doesn't handle users that don't exist, recommend using user_exists() first"""
+        result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username})
+        return result.result
 
     def user_create(
             username: str, 
