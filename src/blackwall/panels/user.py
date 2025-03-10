@@ -2,7 +2,7 @@ from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, RadioButton, Collapsible
 from textual.containers import HorizontalGroup, VerticalGroup, Right, VerticalScroll
 
-from .api import user
+from blackwall.api import user
 
 class PanelUserInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
