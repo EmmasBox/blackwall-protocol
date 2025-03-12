@@ -8,9 +8,12 @@ from textual.containers import HorizontalGroup, VerticalGroup, Right, VerticalSc
 from blackwall.api import user
 
 class PanelUserInfo(HorizontalGroup):
+    edit_mode: reactive[str] = reactive("create",recompose=True)
+
     def compose(self) -> ComposeResult:
-        yield Label("Created: ")
-        yield Label("Last logon: ")
+        if self.edit_mode != "create":
+            yield Label("Created: ")
+            yield Label("Last logon: ")
 
 class PanelUserName(HorizontalGroup):
     """Username and name components"""
