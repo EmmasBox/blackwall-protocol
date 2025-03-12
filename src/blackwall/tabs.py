@@ -23,7 +23,7 @@ class TabSystem(HorizontalGroup):
     def action_open_user_administration(self) -> None:
         """Add a new user administration tab."""
         tabs = self.query_one(TabbedContent)
-        tabs.add_pane(TabPane("Update user",PanelUser()))
+        tabs.add_pane(TabPane("User management",PanelUser()))
 
     def action_open_search(self) -> None:
         """Add a new search tab."""

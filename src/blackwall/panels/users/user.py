@@ -87,7 +87,10 @@ class PanelUserSegments(VerticalGroup):
             with Collapsible(title="CICS"): 
                 yield RadioButton("CICS",id="user_segment_cics")
 
-class PanelUserSave(Right):
+class PanelUserActionButtons(HorizontalGroup):
+    def action_delete_user(self) -> None:
+        pass
+
     def action_save_user(self) -> None:
         username = self.parent.query_exactly_one(selector="#username").value
         name = self.parent.query_exactly_one(selector="#name").value
@@ -99,27 +102,31 @@ class PanelUserSave(Right):
         special = self.parent.query_exactly_one(selector="#user_attribute_special").value
         operations = self.parent.query_exactly_one(selector="#user_attribute_operations").value
         auditor = self.parent.query_exactly_one(selector="#user_attribute_auditor").value
-        result = user.user_create(
-            username=username,
-            base=user.BaseUserTraits(
-                owner=owner,
-                name=name,
-                default_group=default_group,
-                password=password,
-                passphrase=passphrase,
-                special=special,
-                operations=operations,
-                auditor=auditor
-                                     )
-            )
-        if result == "0":
-            self.notify(f"User {username.value} created",severity="information")
+        if user.user_exists(username=username):
+            result = user.user_create(
+                username=username,
+                base=user.BaseUserTraits(
+                    owner=owner,
+                    name=name,
+                    default_group=default_group,
+                    password=password,
+                    passphrase=passphrase,
+                    special=special,
+                    operations=operations,
+                    auditor=auditor
+                                        )
+                )
+            if result == "0" or result == "4":
+                self.notify(f"User {username.value} created, return code: {result}",severity="information")
+            else:
+                self.notify(f"Unable to create user, return code: {result}",severity="error")
         else:
-            self.notify(f"Unable to create user, return code: {result}",severity="error")
+            pass
 
     """Save user button"""
     def compose(self) -> ComposeResult:
-        yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save_user",classes="save-button")
+        yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save_user",classes="user-action-button")
+        yield Button("Delete", tooltip="This will delete the user",action="delete_user",classes="user-action-button")
 
 class PanelUser(VerticalScroll):
     def compose(self) -> ComposeResult:
@@ -130,4 +137,4 @@ class PanelUser(VerticalScroll):
         yield PanelUserPassphrase()
         yield PanelUserAttributes()
         yield PanelUserSegments()
-        yield PanelUserSave()
+        yield PanelUserActionButtons()
