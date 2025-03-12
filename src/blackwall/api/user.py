@@ -249,7 +249,7 @@ if racfu_enabled:
             traits.update(omvs.to_traits("omvs"))
 
         if operparm is not None:
-            traits.update(omvs.to_traits("operparm"))
+            traits.update(operparm.to_traits("operparm"))
 
         if ovm is not None:
             traits.update(ovm.to_traits("ovm"))
@@ -271,7 +271,7 @@ if racfu_enabled:
                     "traits":  traits
                 }
             )
-        pass
+        return result.result["return_codes"]["racf_return_code"] == "0" 
 
     def user_delete(username: str):
         result = racfu(
