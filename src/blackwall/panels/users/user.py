@@ -112,7 +112,7 @@ class PanelUserActionButtons(HorizontalGroup):
 
 @dataclass
 class UserInfo:
-    mode: str = ""
+    mode: str = "create"
     username: str = ""
     name: str = ""
 
