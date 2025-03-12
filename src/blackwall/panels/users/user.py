@@ -93,9 +93,12 @@ class PanelUserSave(Right):
         name = self.parent.query_exactly_one(selector="#name").value
         owner = self.parent.query_exactly_one(selector="#owner").value
         default_group = self.parent.query_exactly_one(selector="#default_group").value
+        password = self.parent.query_exactly_one(selector="#password").value
+        passphrase = self.parent.query_exactly_one(selector="#passphrase").value
+
         if user.user_create(
             username=username,
-            base=user.BaseUserTraits(owner=owner,name=name,default_group=default_group)
+            base=user.BaseUserTraits(owner=owner,name=name,default_group=default_group,password=password,passphrase=passphrase)
             ):
             self.notify(f"User {username.value} created",severity="information")
         else:
