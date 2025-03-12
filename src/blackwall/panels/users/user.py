@@ -115,6 +115,9 @@ class UserInfo:
     mode: str = "create"
     username: str = ""
     name: str = ""
+    owner: str = ""
+    dfltgrp: str = ""
+    installation_data: str = ""
 
 class PanelUser(VerticalScroll):
     user_info: reactive[UserInfo] = reactive(UserInfo)
@@ -135,6 +138,9 @@ class PanelUser(VerticalScroll):
         user_name_panel.mode = value.mode
         user_name_panel.username = value.username
         user_name_panel.name = value.name
+        user_name_panel.owner = value.owner
+        user_name_panel.dfltgrp = value.dfltgrp
+        user_name_panel.installation_data = value.installation_data
 
     def action_delete_user(self) -> None:
         pass
