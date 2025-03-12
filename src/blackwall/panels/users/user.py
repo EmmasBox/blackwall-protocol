@@ -99,7 +99,7 @@ class PanelUserSave(Right):
         special = self.parent.query_exactly_one(selector="#user_attribute_special").value
         operations = self.parent.query_exactly_one(selector="#user_attribute_operations").value
         auditor = self.parent.query_exactly_one(selector="#user_attribute_auditor").value
-        if user.user_create(
+        result = user.user_create(
             username=username,
             base=user.BaseUserTraits(
                 owner=owner,
@@ -111,10 +111,11 @@ class PanelUserSave(Right):
                 operations=operations,
                 auditor=auditor
                                      )
-            ):
+            )
+        if result == "0":
             self.notify(f"User {username.value} created",severity="information")
         else:
-            self.notify("Unable to create user",severity="error")
+            self.notify(f"Unable to create user, return code: {result}",severity="error")
 
     """Save user button"""
     def compose(self) -> ComposeResult:

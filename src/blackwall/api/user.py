@@ -271,8 +271,7 @@ if racfu_enabled:
                     "traits":  traits
                 }
             )
-        print(result.result["return_codes"])
-        return result.result["return_codes"]["racf_return_code"] == "0" 
+        return result.result["return_codes"]["racf_return_code"]
 
     def user_delete(username: str):
         result = racfu(
