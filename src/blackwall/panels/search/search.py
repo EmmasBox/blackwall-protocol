@@ -3,7 +3,7 @@ from textual.app import ComposeResult
 from textual.widgets import Button, Input, Label, RadioButton, RadioSet, TabbedContent, TabPane
 from textual.containers import HorizontalGroup, VerticalScroll
 
-from blackwall.panels.results import PanelResultsMixedType
+from blackwall.panels.search.results import PanelResultsMixedType
 
 class SearchSelector(HorizontalGroup):
     def compose(self) -> ComposeResult:

@@ -1,7 +1,7 @@
 
-from .api.user import user_exists, user_get
-from .api.dataset import dataset_profile_exists, dataset_profile_get
-from .api.resource import resource_profile_exists, resource_profile_get
+from blackwall.api.user import user_exists, user_get
+from blackwall.api.dataset import dataset_profile_exists, dataset_profile_get
+from blackwall.api.resource import resource_profile_exists, resource_profile_get
 
 def user_possible(query: str):
     return len(query) <= 8 and query.isalnum()

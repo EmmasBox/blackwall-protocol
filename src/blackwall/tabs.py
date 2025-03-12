@@ -3,9 +3,9 @@ from textual.app import ComposeResult
 from textual.widgets import Button, TabPane, TabbedContent
 from textual.containers import HorizontalGroup
 
-from .panels.user import PanelUser
-from .panels.search import PanelSearch
-from .panels.analysis import PanelAnalysis
+from .panels.users.user import PanelUser
+from .panels.search.search import PanelSearch
+from .panels.analysis.analysis import PanelAnalysis
 
 class TabSystem(HorizontalGroup):
     BINDINGS = [
