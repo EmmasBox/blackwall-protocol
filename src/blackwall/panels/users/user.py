@@ -126,7 +126,7 @@ class PanelUserActionButtons(HorizontalGroup):
     """Save user button"""
     def compose(self) -> ComposeResult:
         yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save_user",classes="user-action-button")
-        yield Button("Delete", tooltip="This will delete the user",action="delete_user",classes="user-action-button")
+        yield Button("Delete", tooltip="This will delete the user permanently from the RACF database",action="delete_user",classes="user-action-button")
 
 class PanelUser(VerticalScroll):
     def compose(self) -> ComposeResult:
