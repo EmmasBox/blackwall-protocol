@@ -42,7 +42,7 @@ class CommandHistoryScreen(Screen):
 
 class TSOCommandField(HorizontalGroup):
     def compose(self) -> ComposeResult:
-        yield Input(id="cli",max_length=250,classes="commands",tooltip="Use this command field to submit TSO and RACF commands")
+        yield Input(id="cli",max_length=250,classes="commands",tooltip="Use this command field to submit TSO and RACF commands. You can view the output in the command history panel")
 
     @on(Input.Submitted)
     def execute_command(self) -> None:
