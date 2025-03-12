@@ -22,9 +22,9 @@ class PanelUserName(HorizontalGroup):
 
     def compose(self) -> ComposeResult:
         yield Label("Username*: ")
-        yield Input(max_length=8,id="username",classes="username",tooltip="Username is what the user uses to log on with, this is required.").data_bind(value=PanelUserName.username)
+        yield Input(max_length=8,id="username",classes="username",tooltip="Username is what the user uses to log on with, this is required. While very few characters can be used at least 4 character long usernames are recommended to avoid collisions").data_bind(value=PanelUserName.username)
         yield Label("name: ")
-        yield Input(max_length=20,id="name",classes="name",tooltip="For personal users this is typically used for names i.e. Valerie, for system users it can be the subsystem that it is used for").data_bind(value=PanelUserName.name)
+        yield Input(max_length=20,id="name",classes="name",tooltip="For personal users this is typically used for names i.e. Song So Mi, for system users it can be the subsystem that it is used for").data_bind(value=PanelUserName.name)
 
 class PanelUserOwnership(HorizontalGroup):
     """Component that contains ownership field and default group"""
