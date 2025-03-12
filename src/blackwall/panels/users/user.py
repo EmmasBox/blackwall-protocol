@@ -1,3 +1,6 @@
+
+from dataclasses import dataclass
+from textual.reactive import reactive
 from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, RadioButton, Collapsible
 from textual.containers import HorizontalGroup, VerticalGroup, Right, VerticalScroll
@@ -7,14 +10,18 @@ from blackwall.api import user
 class PanelUserInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Created: ")
+        yield Label("Last logon: ")
 
 class PanelUserName(HorizontalGroup):
     """Username and name components"""
+    username: reactive[str] = reactive("")
+    name: reactive[str] = reactive("")
+
     def compose(self) -> ComposeResult:
         yield Label("Username*: ")
-        yield Input(max_length=8,id="username",classes="username",tooltip="Username is what the user uses to log on with, this is required.")
+        yield Input(max_length=8,id="username",classes="username",tooltip="Username is what the user uses to log on with, this is required.").data_bind(value=PanelUserName.username)
         yield Label("name: ")
-        yield Input(max_length=20,id="name",classes="name",tooltip="For personal users this is typically used for names i.e. Valerie, for system users it can be the subsystem that it is used for")
+        yield Input(max_length=20,id="name",classes="name",tooltip="For personal users this is typically used for names i.e. Valerie, for system users it can be the subsystem that it is used for").data_bind(value=PanelUserName.name)
 
 class PanelUserOwnership(HorizontalGroup):
     """Component that contains ownership field and default group"""
@@ -25,7 +32,6 @@ class PanelUserOwnership(HorizontalGroup):
         yield Input(max_length=8,id="default_group",classes="owner", tooltip="All users must belong to a group in the RACF database")
 
 class PanelUserPassword(VerticalGroup):
-    #Import css
     """Change/add password component"""
     def compose(self) -> ComposeResult:
         with Collapsible(title="Password"):
@@ -88,20 +94,61 @@ class PanelUserSegments(VerticalGroup):
                 yield RadioButton("CICS",id="user_segment_cics")
 
 class PanelUserActionButtons(HorizontalGroup):
+    """Save user button"""
+    def __init__(self, save_action: str, delete_action: str):
+        super().__init__()
+        self.save_action = save_action
+        self.delete_action = delete_action
+
+    def compose(self) -> ComposeResult:
+        yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save",classes="user-action-button")
+        yield Button("Delete", tooltip="This will delete the user permanently from the RACF database",action="delete",classes="user-action-button")
+
+    async def action_save(self):
+        await self.app.run_action(self.save_action,default_namespace=self.parent)
+
+    async def action_delete(self):
+        await self.app.run_action(self.delete_action,default_namespace=self.parent)
+
+@dataclass
+class UserInfo:
+    username: str = ""
+    name: str = ""
+
+class PanelUser(VerticalScroll):
+    user_info: reactive[UserInfo] = reactive(UserInfo)
+
+    def compose(self) -> ComposeResult:
+        yield PanelUserInfo()
+        yield PanelUserName()
+        yield PanelUserOwnership()
+        yield PanelUserPassword()
+        yield PanelUserPassphrase()
+        yield PanelUserAttributes()
+        yield PanelUserSegments()
+        yield PanelUserActionButtons(save_action="save_user", delete_action="delete_user")
+    
+    def watch_user_info(self, value: UserInfo):
+        user_name_panel = self.query_exactly_one(PanelUserName)
+        #valid modes: create, edit, and read
+        user_name_panel.mode = value.mode
+        user_name_panel.username = value.username
+        user_name_panel.name = value.name
+
     def action_delete_user(self) -> None:
         pass
 
     def action_save_user(self) -> None:
-        username = self.parent.query_exactly_one(selector="#username").value
-        name = self.parent.query_exactly_one(selector="#name").value
-        owner = self.parent.query_exactly_one(selector="#owner").value
-        default_group = self.parent.query_exactly_one(selector="#default_group").value
-        password = self.parent.query_exactly_one(selector="#password").value
-        passphrase = self.parent.query_exactly_one(selector="#passphrase").value
+        username = self.query_exactly_one(selector="#username").value
+        name = self.query_exactly_one(selector="#name").value
+        owner = self.query_exactly_one(selector="#owner").value
+        default_group = self.query_exactly_one(selector="#default_group").value
+        password = self.query_exactly_one(selector="#password").value
+        passphrase = self.query_exactly_one(selector="#passphrase").value
 
-        special = self.parent.query_exactly_one(selector="#user_attribute_special").value
-        operations = self.parent.query_exactly_one(selector="#user_attribute_operations").value
-        auditor = self.parent.query_exactly_one(selector="#user_attribute_auditor").value
+        special = self.query_exactly_one(selector="#user_attribute_special").value
+        operations = self.query_exactly_one(selector="#user_attribute_operations").value
+        auditor = self.query_exactly_one(selector="#user_attribute_auditor").value
         if user.user_exists(username=username):
             result = user.user_create(
                 username=username,
@@ -122,19 +169,3 @@ class PanelUserActionButtons(HorizontalGroup):
                 self.notify(f"Unable to create user, return code: {result}",severity="error")
         else:
             pass
-
-    """Save user button"""
-    def compose(self) -> ComposeResult:
-        yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save_user",classes="user-action-button")
-        yield Button("Delete", tooltip="This will delete the user permanently from the RACF database",action="delete_user",classes="user-action-button")
-
-class PanelUser(VerticalScroll):
-    def compose(self) -> ComposeResult:
-        yield PanelUserInfo()
-        yield PanelUserName()
-        yield PanelUserOwnership()
-        yield PanelUserPassword()
-        yield PanelUserPassphrase()
-        yield PanelUserAttributes()
-        yield PanelUserSegments()
-        yield PanelUserActionButtons()
