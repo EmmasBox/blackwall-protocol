@@ -192,7 +192,7 @@ class PanelUser(VerticalScroll):
                     auditor=auditor
                                         )
                 )
-            if result == "0" or result == "4":
+            if (result == "0" or result == "4"):
                 self.notify(f"User {username.value} created, return code: {result}",severity="information")
                 self.set_edit_mode(self)
             else:
