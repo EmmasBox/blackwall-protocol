@@ -104,8 +104,8 @@ class PanelUserActionButtons(HorizontalGroup):
         self.delete_action = delete_action
 
     def compose(self) -> ComposeResult:
-        yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save",classes="user-action-button")
-        yield Button("Delete", tooltip="This will delete the user permanently from the RACF database",action="delete",classes="user-action-button")
+        yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save",classes="action-button")
+        yield Button("Delete", tooltip="This will delete the user permanently from the RACF database",action="delete",classes="action-button")
 
     async def action_save(self):
         await self.app.run_action(self.save_action,default_namespace=self.parent)

@@ -5,6 +5,16 @@
 }
 
 # General
+.action-button {
+    margin-top: 1;
+    margin-left: 1;
+    align: center middle;
+}
+
+# Dataset panel
+.uacc-select {
+    width: 20
+}
 
 # Search panel
 .search-field {
@@ -22,12 +32,6 @@
 }
 
 # User creation/modification panel
-
-.user-action-button {
-    margin-top: 1;
-    margin-right: 1;
-}
-
 .username {
     width: 16;
     margin-bottom: 1;
