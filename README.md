@@ -1,4 +1,4 @@
-# Stability notice
+#### Stability notice
 This software is still in pre-alpha, do not use it for production systems. Features might not work yet and there are numerous bugs in the ones that do work to some extent.
 
 # Blackwall Protocol
