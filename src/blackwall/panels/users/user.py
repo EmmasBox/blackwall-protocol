@@ -178,7 +178,7 @@ class PanelUser(VerticalScroll):
         special = self.query_exactly_one(selector="#user_attribute_special").value
         operations = self.query_exactly_one(selector="#user_attribute_operations").value
         auditor = self.query_exactly_one(selector="#user_attribute_auditor").value
-        if user.user_exists(username=username):
+        if not user.user_exists(username=username):
             result = user.user_create(
                 username=username,
                 base=user.BaseUserTraits(
