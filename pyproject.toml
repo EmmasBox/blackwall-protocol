@@ -22,8 +22,8 @@ keywords = ["RACF", "security", "mainframe"]
 blackwall = "blackwall.main:main"
 
 [project.urls]
-Repository = "https://github.com/EmmasBox/blackwall-protocol.git"
-Source = "https://github.com/EmmasBox/blackwall-protocol.git"
+Repository = "https://github.com/EmmasBox/blackwall-protocol"
+Source = "https://github.com/EmmasBox/blackwall-protocol"
 Issues = "https://github.com/EmmasBox/blackwall-protocol/issues"
 
 [tool.setuptools.packages.find]
