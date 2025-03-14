@@ -23,6 +23,7 @@ blackwall = "blackwall.main:main"
 
 [project.urls]
 Repository = "https://github.com/EmmasBox/blackwall-protocol.git"
+Source = "https://github.com/EmmasBox/blackwall-protocol.git"
 Issues = "https://github.com/EmmasBox/blackwall-protocol/issues"
 
 [tool.setuptools.packages.find]
