@@ -26,3 +26,6 @@ Pypi = "https://pypi.org/project/blackwall/"
 [build-system]
 requires = ["setuptools >= 61.0"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.package-data]
+blackwall = ["*.css", "*.tcss"]
