@@ -26,11 +26,18 @@ class PanelUserName(HorizontalGroup):
     username: reactive[str] = reactive("")
     name: reactive[str] = reactive("")
 
+    edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
+
+    if edit_mode == True:
+        is_disabled = True
+    else:
+        is_disabled = False
+
     def compose(self) -> ComposeResult:
         yield Label("Username*: ")
         yield Input(max_length=8,id="username",classes="username",tooltip="Username is what the user uses to log on with, this is required. While very few characters can be used at least 4 character long usernames are recommended to avoid collisions").data_bind(value=PanelUserName.username)
         yield Label("name: ")
-        yield Input(max_length=20,id="name",classes="name",tooltip="For personal users this is typically used for names i.e. Song So Mi, for system users it can be the name of the subsystem that it is used for").data_bind(value=PanelUserName.name)
+        yield Input(max_length=20,id="name",classes="name",tooltip="For personal users this is typically used for names i.e. Song So Mi, for system users it can be the name of the subsystem that it is used for").data_bind(value=PanelUserName.name,disabled=self.is_disabled)
 
 class PanelUserOwnership(HorizontalGroup):
     """Component that contains ownership field and default group"""
@@ -151,6 +158,12 @@ class PanelUser(VerticalScroll):
         user_name_panel.dfltgrp = value.dfltgrp
         user_name_panel.installation_data = value.installation_data
 
+    def set_edit_mode(self):
+        user_name_panel = self.query_exactly_one(PanelUserName)
+        user_name_panel.mode = PanelMode.edit
+        username = self.query_exactly_one(selector="#username").disabled = True
+        self.notify(f"Switched to edit mode",severity="information")
+
     def action_delete_user(self) -> None:
         pass
 
@@ -181,6 +194,7 @@ class PanelUser(VerticalScroll):
                 )
             if result == "0" or result == "4":
                 self.notify(f"User {username.value} created, return code: {result}",severity="information")
+                self.set_edit_mode(self)
             else:
                 self.notify(f"Unable to create user, return code: {result}",severity="error")
         else:
