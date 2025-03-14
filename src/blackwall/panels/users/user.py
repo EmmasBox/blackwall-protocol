@@ -194,10 +194,8 @@ class PanelUser(VerticalScroll):
                 )
             if (result == 0 or result == 4):
                 self.notify(f"User {username} created, return code: {result}",severity="information")
-                self.set_edit_mode(self)
+                self.set_edit_mode()
             else:
                 self.notify(f"Unable to create user, return code: {result}",severity="error")
-                is_string = type(result)
-                self.notify(is_string,severity="warning")
         else:
             pass
