@@ -14,6 +14,7 @@ authors = [
   {name = "Emma Skovgaard"}
 ]
 readme = "README.md"
+license = {file = "LICENSE"}
 keywords = ["RACF", "security", "mainframe"]
 
 [project.scripts]
