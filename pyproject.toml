@@ -1,6 +1,6 @@
 [project]
 name = "blackwall"
-description = "Blackwall for mainframe security administration"
+description = "Blackwall Protocol for mainframe security administration"
 dynamic = ["version"]
 requires-python = ">= 3.11"
 dependencies = [
