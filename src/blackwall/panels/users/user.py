@@ -110,14 +110,19 @@ class PanelUserSegments(VerticalGroup):
                 yield RadioButton("CICS",id="user_segment_cics")
 
 class PanelUserActionButtons(HorizontalGroup):
-    """Save user button"""
+    """Action buttons"""
+    edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
+
     def __init__(self, save_action: str, delete_action: str):
         super().__init__()
         self.save_action = save_action
         self.delete_action = delete_action
 
     def compose(self) -> ComposeResult:
-        yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save",classes="action-button")
+        if self.edit_mode != PanelMode.create:
+            yield Button("Create", tooltip="This will update the user, or create it if the user doesn't exist",action="save",classes="action-button",id="save")
+        else:
+            yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save",classes="action-button",id="save")
         yield Button("Delete", tooltip="This will delete the user permanently from the RACF database",action="delete",classes="action-button")
 
     async def action_save(self):
@@ -161,7 +166,8 @@ class PanelUser(VerticalScroll):
     def set_edit_mode(self):
         user_name_panel = self.query_exactly_one(PanelUserName)
         user_name_panel.mode = PanelMode.edit
-        username = self.query_exactly_one(selector="#username").disabled = True
+        self.query_exactly_one(selector="#username").disabled = True
+        self.query_exactly_one(selector="#save").label = "Save"
         self.notify(f"Switched to edit mode",severity="information")
 
     def action_delete_user(self) -> None:
