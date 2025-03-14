@@ -26,7 +26,3 @@ Repository = "https://github.com/EmmasBox/blackwall-protocol"
 Source = "https://github.com/EmmasBox/blackwall-protocol"
 Issues = "https://github.com/EmmasBox/blackwall-protocol/issues"
 Pypi = "https://pypi.org/project/blackwall/"
-
-[tool.setuptools.packages.find]
-where = ["python"]
-include = ["blackwall"]
