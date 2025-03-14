@@ -149,7 +149,7 @@ class PanelUser(VerticalScroll):
     user_info: reactive[UserInfo] = reactive(UserInfo)
 
     def compose(self) -> ComposeResult:
-        yield PanelUserInfo()
+        yield PanelUserInfo().recompose()
         yield PanelUserName()
         yield PanelUserOwnership()
         yield PanelUserPassword()
