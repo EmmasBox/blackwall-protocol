@@ -1,4 +1,5 @@
 
+from enum import Enum
 from dataclasses import dataclass
 from textual.reactive import reactive
 from textual.app import ComposeResult
@@ -7,11 +8,16 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.api import user
 
+class PanelMode(Enum):
+    create = 1
+    edit = 2
+    read = 3
+
 class PanelUserInfo(HorizontalGroup):
-    edit_mode: reactive[str] = reactive("create",recompose=True)
+    edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
 
     def compose(self) -> ComposeResult:
-        if self.edit_mode != "create":
+        if self.edit_mode != PanelMode.create:
             yield Label("Created: ")
             yield Label("Last logon: ")
 
@@ -115,7 +121,7 @@ class PanelUserActionButtons(HorizontalGroup):
 
 @dataclass
 class UserInfo:
-    mode: str = "create"
+    mode: PanelMode = PanelMode.create
     username: str = ""
     name: str = ""
     owner: str = ""
