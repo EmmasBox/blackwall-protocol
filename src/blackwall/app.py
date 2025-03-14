@@ -15,9 +15,9 @@ except:
 
 import json
 from .subcommands import Subcommands
-from .commands import TSOCommandField
+from .command_line import TSOCommandField
+from .command_line import CommandHistoryScreen
 from .theme import cynosure_theme
-from .commands import CommandHistoryScreen
 
 from .tabs import TabSystem
 
