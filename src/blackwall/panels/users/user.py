@@ -119,11 +119,11 @@ class PanelUserActionButtons(HorizontalGroup):
         self.delete_action = delete_action
 
     def compose(self) -> ComposeResult:
-        if self.edit_mode != PanelMode.create:
+        if self.edit_mode == PanelMode.create:
             yield Button("Create", tooltip="This will update the user, or create it if the user doesn't exist",action="save",classes="action-button",id="save")
-        else:
+        elif self.edit_mode == PanelMode.edit:
             yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save",classes="action-button",id="save")
-        yield Button("Delete", tooltip="This will delete the user permanently from the RACF database",action="delete",classes="action-button")
+        yield Button("Delete", tooltip="This will delete the user permanently from the RACF database",id="delete",action="delete",classes="action-button",disabled=True)
 
     async def action_save(self):
         await self.app.run_action(self.save_action,default_namespace=self.parent)
@@ -167,6 +167,7 @@ class PanelUser(VerticalScroll):
         user_name_panel = self.query_exactly_one(PanelUserName)
         user_name_panel.mode = PanelMode.edit
         self.query_exactly_one(selector="#username").disabled = True
+        self.query_exactly_one(selector="#delete").disabled = False
         self.query_exactly_one(selector="#save").name = "Save"
         self.notify(f"Switched to edit mode",severity="information")
 
