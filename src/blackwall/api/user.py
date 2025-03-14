@@ -19,6 +19,11 @@ class BaseUserTraits(TraitsBase):
     name: str | None = None
     installation_data: str | None = None
 
+    #user attributes
+    special: bool | None = None
+    operations: bool | None = None
+    auditor: bool | None = None
+
     password: str | None = field(default=None, metadata={
         "masked": True,
         "maximum": 8,
@@ -28,10 +33,6 @@ class BaseUserTraits(TraitsBase):
         "masked": True,
         "minimum": 12,
     })
-    #user attributes
-    special: bool | None = None
-    operations: bool | None = None
-    auditor: bool | None = None
     
     default_group_authority: str | None = None
     security_category: str | None = None
