@@ -1,7 +1,7 @@
 [project]
 name = "blackwall"
 description = "Blackwall for mainframe security administration"
-version = "0.1.1"
+dynamic = ["version"]
 requires-python = ">= 3.11"
 dependencies = [
   "racfu",
@@ -24,8 +24,10 @@ Issues = "https://github.com/EmmasBox/blackwall-protocol/issues"
 Pypi = "https://pypi.org/project/blackwall/"
 
 [build-system]
-requires = ["setuptools >= 61.0"]
+requires = ["setuptools >= 61.0", "setuptools-scm >= 8.2"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
 
 [tool.setuptools.package-data]
 blackwall = ["*.css", "*.tcss"]
