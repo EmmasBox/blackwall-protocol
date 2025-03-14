@@ -1,7 +1,7 @@
 [project]
 name = "blackwall-protocol"
 version = "0.0.0"
-requires-python = ">= 3.13"
+requires-python = ">= 3.11"
 dependencies = [
   "racfu",
   "textual>2.1"
