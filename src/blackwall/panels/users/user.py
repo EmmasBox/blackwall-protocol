@@ -185,7 +185,11 @@ class PanelUser(VerticalScroll):
         owner = self.query_exactly_one(selector="#owner").value
         default_group = self.query_exactly_one(selector="#default_group").value
         password = self.query_exactly_one(selector="#password").value
+        if password == "":
+            password = None
         passphrase = self.query_exactly_one(selector="#passphrase").value
+        if passphrase == "":
+            passphrase = None
 
         special = self.query_exactly_one(selector="#user_attribute_special").value
         operations = self.query_exactly_one(selector="#user_attribute_operations").value
