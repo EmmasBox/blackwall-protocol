@@ -3,15 +3,17 @@ from textual.app import ComposeResult
 from textual.widgets import Button, TabPane, TabbedContent
 from textual.containers import HorizontalGroup
 
-from .panels.users.user import PanelUser
+from .panels.users.user import PanelUser, UserInfo
 from .panels.search.search import PanelSearch
 from .panels.analysis.analysis import PanelAnalysis
+from .panels.dataset.dataset import PanelDataset
 
 class TabSystem(HorizontalGroup):
     BINDINGS = [
         ("u", "open_user_administration", "Open user tab"),
         ("f", "open_search", "Open search tab"),
         ("l", "open_analysis", "Open analysis tab"),
+        ("x", "open_dataset", "Open dataset profile tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
     ]
@@ -20,10 +22,20 @@ class TabSystem(HorizontalGroup):
         yield TabbedContent()
 
     #Add new tab
-    def action_open_user_administration(self) -> None:
+    async def action_open_user_administration(self) -> None:
         """Add a new user administration tab."""
         tabs = self.query_one(TabbedContent)
-        tabs.add_pane(TabPane("User management",PanelUser()))
+        new_user_panel = PanelUser()
+        await tabs.add_pane(TabPane("User management",new_user_panel))
+        #new_user_panel.user_info = UserInfo(
+        #    username="",
+        #    name="",
+        #)
+
+    async def action_open_dataset(self) -> None:
+        """Add a new dataset profile management tab."""
+        tabs = self.query_one(TabbedContent)
+        await tabs.add_pane(TabPane("Dataset profile mangement",PanelDataset()))
 
     def action_open_search(self) -> None:
         """Add a new search tab."""
