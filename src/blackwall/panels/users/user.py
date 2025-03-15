@@ -185,10 +185,12 @@ class PanelUser(VerticalScroll):
         owner = self.query_exactly_one(selector="#owner").value
         default_group = self.query_exactly_one(selector="#default_group").value
         password = self.query_exactly_one(selector="#password").value
-        if password == "":
+        password_repeat = self.query_exactly_one(selector="#password_repeat").value
+        if password == "" or password != password_repeat:
             password = None
         passphrase = self.query_exactly_one(selector="#passphrase").value
-        if passphrase == "":
+        passphrase_repeat = self.query_exactly_one(selector="#passphrase_repeat").value
+        if passphrase == "" or passphrase != passphrase_repeat:
             passphrase = None
 
         special = self.query_exactly_one(selector="#user_attribute_special").value
