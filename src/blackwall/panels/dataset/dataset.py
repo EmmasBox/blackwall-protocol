@@ -25,7 +25,7 @@ class PanelDatasetUACC(VerticalGroup):
 class PanelDatasetNotify(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Notify user:")
-        yield Input() 
+        yield Input(max_length=8) 
 
 class PanelDatasetAccessSettings(HorizontalGroup):
     def compose(self) -> ComposeResult:
