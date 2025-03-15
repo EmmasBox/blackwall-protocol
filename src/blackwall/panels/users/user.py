@@ -42,7 +42,7 @@ class PanelUserName(HorizontalGroup):
 class PanelUserOwnership(HorizontalGroup):
     """Component that contains ownership field and default group"""
     def compose(self) -> ComposeResult:
-        yield Label("Owner*: ")
+        yield Label("Owner: ")
         yield Input(max_length=8,id="owner",classes="owner", tooltip="The group or user that owns this user profile. This is required in the RACF database")
         yield Label("Default group*: ")
         yield Input(max_length=8,id="default_group",classes="owner", tooltip="All users must belong to a group in the RACF database")
