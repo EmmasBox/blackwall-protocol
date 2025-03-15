@@ -11,6 +11,11 @@
     align: center middle;
 }
 
+.installation-data {
+    width: 120;
+    margin-bottom: 1;
+}
+
 # Dataset panel
 .uacc-select {
     width: 20

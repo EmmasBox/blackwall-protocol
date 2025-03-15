@@ -1,5 +1,4 @@
 
-from enum import Enum
 from dataclasses import dataclass
 from textual.reactive import reactive
 from textual.app import ComposeResult
@@ -7,11 +6,7 @@ from textual.widgets import Input, Label, Button, RadioButton, Collapsible
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.api import user
-
-class PanelMode(Enum):
-    create = 1
-    edit = 2
-    read = 3
+from blackwall.panels.panel_mode import PanelMode
 
 class PanelUserInfo(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
@@ -46,6 +41,12 @@ class PanelUserOwnership(HorizontalGroup):
         yield Input(max_length=8,id="owner",classes="owner", tooltip="The group or user that owns this user profile. This is required in the RACF database")
         yield Label("Default group*: ")
         yield Input(max_length=8,id="default_group",classes="owner", tooltip="All users must belong to a group in the RACF database")
+
+class PanelUserInstalldata(HorizontalGroup):
+    """Component that contains install data field"""
+    def compose(self) -> ComposeResult:
+        yield Label("installation_data: ")
+        yield Input(max_length=100,id="installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a user. You can use installation data to describe whatever you want, such as department or what the user is for")
 
 class PanelUserPassword(VerticalGroup):
     """Change/add password component"""
@@ -152,6 +153,7 @@ class PanelUser(VerticalScroll):
         yield PanelUserInfo()
         yield PanelUserName()
         yield PanelUserOwnership()
+        yield PanelUserInstalldata()
         yield PanelUserPassword()
         yield PanelUserPassphrase()
         yield PanelUserAttributes()
@@ -184,6 +186,9 @@ class PanelUser(VerticalScroll):
         name = self.query_exactly_one(selector="#name").value
         owner = self.query_exactly_one(selector="#owner").value
         default_group = self.query_exactly_one(selector="#default_group").value
+        installation_data = self.query_exactly_one(selector="#installation_data").value
+        if installation_data == "":
+            installation_data = None
         password = self.query_exactly_one(selector="#password").value
         password_repeat = self.query_exactly_one(selector="#password_repeat").value
         if password == "" or password != password_repeat:
@@ -207,7 +212,8 @@ class PanelUser(VerticalScroll):
                     passphrase=passphrase,
                     special=special,
                     operations=operations,
-                    auditor=auditor
+                    auditor=auditor,
+                    installation_data=installation_data
                                         )
                 )
             if (result == 0 or result == 4):
