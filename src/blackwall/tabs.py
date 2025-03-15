@@ -1,6 +1,6 @@
 
 from textual.app import ComposeResult
-from textual.widgets import Button, TabPane, TabbedContent
+from textual.widgets import TabPane, TabbedContent
 from textual.containers import HorizontalGroup
 
 from .panels.users.user import PanelUser, UserInfo
