@@ -134,7 +134,8 @@ class PanelUserSegments(VerticalGroup):
             with Collapsible(title="OVM"):   
                 yield RadioButton("OVM",id="user_segment_ovm")
             with Collapsible(title="NDS"): 
-                yield RadioButton("NDS",id="user_segment_nds")
+                yield Label("NDS username: ")
+                yield Input(id="nds_username")
             with Collapsible(title="DCE"): 
                 yield RadioButton("DCE",id="user_segment_dce")
             with Collapsible(title="DFP"): 
