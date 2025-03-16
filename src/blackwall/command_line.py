@@ -12,55 +12,7 @@ from textual.screen import Screen
 
 import subprocess
 
-commands = [
-    #RACF commands
-    "addgroup",
-    "altgroup",
-    "adduser", 
-    "altuser",
-    "addsd",
-    "altdsd",
-    "deluser",
-    "delgroup",
-    "deldsd",
-    "connect",
-    "remove",
-    "permit",
-    "racmap",
-    "raclink",
-    "racpriv",
-    "racprmck",
-    "racdcert",
-    "rdefine",
-    "ralter",
-    "rdelete",
-    "rlist",
-    "listdsd",
-    "listuser",
-    "listgrp", 
-    "display",
-    "setropts",
-    "target",
-    "rvary",
-
-    "password",
-    "passphrase",
-
-    #TSO commands
-    "PROFILE",
-    "ALLOC",
-    "EXEC",
-    "DELETE",
-    "STATUS",
-    "LISTALC",
-    "LISTBC",
-    "LISTCAT",
-    "LISTDS",
-    "FREE",
-    "SMCOPY",
-    "OUTPUT",
-    "PRINTDS"
-    ]
+from blackwall.commands_definition import commands
 
 command_history = ""
 

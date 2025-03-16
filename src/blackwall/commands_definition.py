@@ -1,14 +1,49 @@
-class Positional:
-    def __init__(self, positional: str):
-        self.positional = positional
+commands = [
+    #RACF commands
+    "addgroup",
+    "altgroup",
+    "adduser", 
+    "altuser",
+    "addsd",
+    "altdsd",
+    "deluser",
+    "delgroup",
+    "deldsd",
+    "connect",
+    "remove",
+    "permit",
+    "racmap",
+    "raclink",
+    "racpriv",
+    "racprmck",
+    "racdcert",
+    "rdefine",
+    "ralter",
+    "rdelete",
+    "rlist",
+    "listdsd",
+    "listuser",
+    "listgrp", 
+    "display",
+    "setropts",
+    "target",
+    "rvary",
 
-class Command:
-    def __init__(self,command: str, short: str, alt: str, positionals: list[Positional]):
-        self.command = command
-        self.short = short
-        self.alt = alt
-        self.positionals = positionals
+    "password",
+    "passphrase",
 
-test_command = Command(command="TEST", short="T", alt="TE", positionals=[
-    Positional("EMSE")
-])
+    #TSO commands
+    "PROFILE",
+    "ALLOC",
+    "EXEC",
+    "DELETE",
+    "STATUS",
+    "LISTALC",
+    "LISTBC",
+    "LISTCAT",
+    "LISTDS",
+    "FREE",
+    "SMCOPY",
+    "OUTPUT",
+    "PRINTDS"
+    ]
