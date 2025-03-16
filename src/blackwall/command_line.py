@@ -56,8 +56,10 @@ commands = [
     "LISTBC",
     "LISTCAT",
     "LISTDS",
+    "FREE",
     "SMCOPY",
-    "OUTPUT"
+    "OUTPUT",
+    "PRINTDS"
     ]
 
 command_history = ""
