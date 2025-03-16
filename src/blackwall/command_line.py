@@ -1,8 +1,43 @@
-from . import commands_definition as defintion
+
 from textual.app import ComposeResult
+
+commands = [
+    "addgroup",
+    "altgroup",
+    "adduser", 
+    "altuser",
+    "addsd",
+    "altdsd",
+    "deluser",
+    "delgroup",
+    "deldsd",
+    "connect",
+    "remove",
+    "permit",
+    "racmap",
+    "raclink",
+    "racpriv",
+    "racprmck",
+    "racdcert",
+    "rdefine",
+    "ralter",
+    "rdelete",
+    "rlist",
+    "listdsd",
+    "listuser",
+    "listgrp", 
+    "display",
+    "setropts",
+    "target",
+    "rvary",
+
+    "password",
+    "passphrase"
+    ]
 
 from datetime import datetime
 
+from textual.suggester import SuggestFromList
 from textual import on
 from textual.events import ScreenResume
 from textual.widgets import Input, Log, Label
@@ -12,8 +47,6 @@ from textual.screen import Screen
 import subprocess
 
 command_history = ""
-
-
 
 def generate_command_meta_header(command):
     now = datetime.now() # current date and time
@@ -42,7 +75,7 @@ class CommandHistoryScreen(Screen):
 
 class TSOCommandField(HorizontalGroup):
     def compose(self) -> ComposeResult:
-        yield Input(id="cli",max_length=250,classes="commands",tooltip="Use this command field to submit TSO and RACF commands. You can view the output in the command history panel")
+        yield Input(id="cli",max_length=250,classes="commands",suggester=SuggestFromList(commands,case_sensitive=False),tooltip="Use this command field to submit TSO and RACF commands. You can view the output in the command history panel")
 
     @on(Input.Submitted)
     def execute_command(self) -> None:
