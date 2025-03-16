@@ -10,7 +10,7 @@ class PanelDatasetName(VerticalGroup):
 class PanelDatasetInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Installation data:")
-        yield Input(max_length=100,id="installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a dataset profile. You can use installation data to describe whatever you want, such as owning department or what kind of data it protects")
+        yield Input(max_length=254,id="installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a dataset profile. You can use installation data to describe whatever you want, such as owning department or what kind of data it protects")
 
 class PanelDatasetAudit(VerticalGroup):
     def compose(self) -> ComposeResult:

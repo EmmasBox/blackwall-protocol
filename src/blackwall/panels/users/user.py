@@ -46,7 +46,7 @@ class PanelUserInstalldata(HorizontalGroup):
     """Component that contains install data field"""
     def compose(self) -> ComposeResult:
         yield Label("Installation data: ")
-        yield Input(max_length=100,id="installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a user. You can use installation data to describe whatever you want, such as department or what the user is for")
+        yield Input(max_length=254,id="installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a user. You can use installation data to describe whatever you want, such as department or what the user is for")
 
 class PanelUserPassword(VerticalGroup):
     """Change/add password component"""
