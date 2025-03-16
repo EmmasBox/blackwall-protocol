@@ -1,6 +1,17 @@
 
 from textual.app import ComposeResult
 
+from datetime import datetime
+
+from textual.suggester import SuggestFromList
+from textual import on
+from textual.events import ScreenResume
+from textual.widgets import Input, Log, Label
+from textual.containers import HorizontalGroup
+from textual.screen import Screen
+
+import subprocess
+
 commands = [
     #RACF commands
     "addgroup",
@@ -36,23 +47,18 @@ commands = [
     "passphrase",
 
     #TSO commands
+    "PROFILE",
+    "ALLOC",
     "EXEC",
     "DELETE",
     "STATUS",
-    "PROFILE",
-    "SMCOPY"
+    "LISTALC",
+    "LISTBC",
+    "LISTCAT",
+    "LISTDS",
+    "SMCOPY",
+    "OUTPUT"
     ]
-
-from datetime import datetime
-
-from textual.suggester import SuggestFromList
-from textual import on
-from textual.events import ScreenResume
-from textual.widgets import Input, Log, Label
-from textual.containers import HorizontalGroup
-from textual.screen import Screen
-
-import subprocess
 
 command_history = ""
 
