@@ -2,6 +2,7 @@
 from textual.app import ComposeResult
 
 commands = [
+    #RACF commands
     "addgroup",
     "altgroup",
     "adduser", 
@@ -32,7 +33,14 @@ commands = [
     "rvary",
 
     "password",
-    "passphrase"
+    "passphrase",
+
+    #TSO commands
+    "EXEC",
+    "DELETE",
+    "STATUS",
+    "PROFILE",
+    "SMCOPY"
     ]
 
 from datetime import datetime
