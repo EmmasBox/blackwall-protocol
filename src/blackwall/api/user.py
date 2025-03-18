@@ -197,8 +197,9 @@ if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username})
         return result.result
 
-    def user_create(
+    def update_user(
             username: str, 
+            create: bool,
             base: BaseUserTraits, 
             cics: CICSUserTraits | None = None, 
             dce: DCEUserTraits | None = None, 
@@ -216,7 +217,7 @@ if racfu_enabled:
             tso: TSOUserTraits | None = None, 
             workattr: WorkattrUserTraits | None = None, 
             ):
-        """Creates a new user, returns true if the user was successfully created and false if an error code was given"""
+        """Update or creates a new user, returns true if the user was successfully created and false if an error code was given"""
         traits = base.to_traits(prefix="base")
         
         if cics is not None:
@@ -264,9 +265,14 @@ if racfu_enabled:
         if workattr is not None:
             traits.update(workattr.to_traits("workattr"))
 
+        if create:
+            operation = "add"
+        else:
+            operation = "alter"
+
         result = racfu(
                 {
-                    "operation": "add", 
+                    "operation": operation, 
                     "admin_type": "user", 
                     "profile_name": username,
                     "traits":  traits
@@ -283,6 +289,3 @@ if racfu_enabled:
                 }
             )
         return result.result["return_codes"]["racf_return_code"] == 0
-
-    def user_update(username: str):
-        pass
