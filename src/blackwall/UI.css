@@ -22,7 +22,17 @@
 }
 
 .notify-user {
-    width: 16
+    width: 16;
+}
+
+# Resource panel
+.class-field {
+    width: 16;
+    margin-right: 0;
+}
+
+.resource-name-field {
+    margin-left: 0;
 }
 
 # Search panel

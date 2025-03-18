@@ -7,6 +7,7 @@ from .panels.users.user import PanelUser, UserInfo
 from .panels.search.search import PanelSearch
 from .panels.analysis.analysis import PanelAnalysis
 from .panels.dataset.dataset import PanelDataset
+from .panels.resource.resource import PanelResource
 
 class TabSystem(HorizontalGroup):
     BINDINGS = [
@@ -14,6 +15,7 @@ class TabSystem(HorizontalGroup):
         ("f", "open_search", "Open search tab"),
         ("l", "open_analysis", "Open analysis tab"),
         ("x", "open_dataset", "Open dataset profile tab"),
+        ("g", "open_resource", "Open resource profile tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
     ]
@@ -36,6 +38,11 @@ class TabSystem(HorizontalGroup):
         """Add a new dataset profile management tab."""
         tabs = self.query_one(TabbedContent)
         await tabs.add_pane(TabPane("Dataset profile mangement",PanelDataset()))
+
+    async def action_open_resource(self) -> None:
+        """Add a new general resource profile management tab."""
+        tabs = self.query_one(TabbedContent)
+        await tabs.add_pane(TabPane("Resource profile mangement",PanelResource()))
 
     def action_open_search(self) -> None:
         """Add a new search tab."""
