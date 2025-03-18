@@ -71,4 +71,11 @@ if racfu_enabled:
         pass
 
     def delete_dataset_profile(dataset: str):
-        pass
+        result = racfu(
+                {
+                    "operation": "delete", 
+                    "admin_type": "data-set", 
+                    "profile_name": dataset,
+                }
+            )
+        return result.result["return_codes"]["racf_return_code"] == 0
