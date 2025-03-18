@@ -23,11 +23,11 @@ if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource})
         return result.result
 
-    def resource_profile_create():
+    def update_resource_profile():
         pass
 
-    def resource_profile_delete(resource: str):
+    def delete_resource_profile(resource: str):
         pass
 
-    def resource_profile_update(resource: str):
+    def update_resource_profile(resource: str):
         pass

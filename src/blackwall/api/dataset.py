@@ -67,11 +67,8 @@ if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "data-set", "profile_name": dataset})
         return result.result
 
-    def dataset_profile_create():
+    def update_dataset_profile():
         pass
 
-    def dataset_profile_delete(dataset: str):
-        pass
-
-    def dataset_profile_update(dataset: str):
+    def delete_dataset_profile(dataset: str):
         pass

@@ -280,7 +280,7 @@ if racfu_enabled:
             )
         return result.result["return_codes"]["racf_return_code"]
 
-    def user_delete(username: str):
+    def delete_user(username: str):
         result = racfu(
                 {
                     "operation": "delete", 
