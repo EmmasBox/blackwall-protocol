@@ -234,26 +234,34 @@ class PanelUser(VerticalScroll):
         special = self.query_exactly_one(selector="#user_attribute_special").value
         operations = self.query_exactly_one(selector="#user_attribute_operations").value
         auditor = self.query_exactly_one(selector="#user_attribute_auditor").value
-        if not user.user_exists(username=username):
-            result = user.update_user(
-                username=username,
-                create=True,
-                base=user.BaseUserTraits(
-                    owner=owner,
-                    name=name,
-                    default_group=default_group,
-                    password=password,
-                    passphrase=passphrase,
-                    special=special,
-                    operations=operations,
-                    auditor=auditor,
-                    installation_data=installation_data
+
+        is_existing_user = user.user_exists(username=username)
+
+        result = user.update_user(
+            username=username,
+            create=not is_existing_user,
+            base=user.BaseUserTraits(
+                owner=owner,
+                name=name,
+                default_group=default_group,
+                password=password,
+                passphrase=passphrase,
+                special=special,
+                operations=operations,
+                auditor=auditor,
+                installation_data=installation_data
                                         )
-                )
+        )
+
+        if not is_existing_user:
             if (result == 0 or result == 4):
                 self.notify(f"User {username} created, return code: {result}",severity="information")
                 self.set_edit_mode()
             else:
                 self.notify(f"Unable to create user, return code: {result}",severity="error")
         else:
-            pass
+            if (result == 0 or result == 4):
+                self.notify(f"User {username} updated, return code: {result}",severity="information")
+                self.set_edit_mode()
+            else:
+                self.notify(f"Unable to update user, return code: {result}",severity="error")
