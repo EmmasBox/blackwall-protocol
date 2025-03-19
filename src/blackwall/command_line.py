@@ -18,7 +18,7 @@ command_history = ""
 
 def generate_command_meta_header(command):
     now = datetime.now() # current date and time
-    date_time = now.strftime("d-%m-%d-%Y-t-%H-%M-%S")
+    date_time = now.strftime("date: %m/%d/%Y time %H-%M-%S")
     return f"""
     --------------------------------------------------------------------------------------------------
     Command '{command}' 
@@ -43,7 +43,7 @@ class CommandHistoryScreen(Screen):
 
 class TSOCommandField(HorizontalGroup):
     def compose(self) -> ComposeResult:
-        yield Input(id="cli",max_length=250,classes="commands",suggester=SuggestFromList(commands,case_sensitive=False),tooltip="Use this command field to submit TSO and RACF commands. You can view the output in the command history panel")
+        yield Input(id="cli",max_length=250,classes="commands",highlighter="",suggester=SuggestFromList(commands,case_sensitive=False),tooltip="Use this command field to submit TSO and RACF commands. You can view the output in the command history panel")
 
     @on(Input.Submitted)
     def execute_command(self) -> None:
