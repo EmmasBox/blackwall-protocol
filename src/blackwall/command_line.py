@@ -19,10 +19,14 @@ command_history = ""
 def generate_command_meta_header(command):
     now = datetime.now() # current date and time
     date_time = now.strftime("date: %m/%d/%Y time: %H:%M:%S")
+    local_now = now.astimezone()
+    local_tz = local_now.tzinfo
+    local_tzname = local_tz.tzname(local_now)
+    
     return f"""
     --------------------------------------------------------------------------------------------------
     Command '{command}' 
-    executed on {date_time}
+    executed on {date_time} {local_tzname}
     --------------------------------------------------------------------------------------------------
     \n
     """
