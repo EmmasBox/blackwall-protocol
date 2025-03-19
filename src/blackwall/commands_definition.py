@@ -25,6 +25,7 @@ commands = [
     "listuser",
     "listgrp", 
     "display",
+    "search",
     "setropts",
     "target",
     "rvary",
