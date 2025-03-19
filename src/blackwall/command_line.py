@@ -18,7 +18,7 @@ command_history = ""
 
 def generate_command_meta_header(command):
     now = datetime.now() # current date and time
-    date_time = now.strftime("date: %m/%d/%Y time %H-%M-%S")
+    date_time = now.strftime("date: %m/%d/%Y time: %H:%M:%S")
     return f"""
     --------------------------------------------------------------------------------------------------
     Command '{command}' 
