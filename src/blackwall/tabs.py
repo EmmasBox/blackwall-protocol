@@ -3,6 +3,7 @@ from textual.app import ComposeResult
 from textual.widgets import TabPane, TabbedContent
 from textual.containers import HorizontalGroup
 
+from .panels.welcome.welcome import PanelWelcome
 from .panels.users.user import PanelUser, UserInfo
 from .panels.search.search import PanelSearch
 from .panels.analysis.analysis import PanelAnalysis
@@ -21,7 +22,8 @@ class TabSystem(HorizontalGroup):
     ]
 
     def compose(self) -> ComposeResult:
-        yield TabbedContent()
+        with TabbedContent():
+            yield TabPane("Welcome!",PanelWelcome())
 
     #Add new tab
     async def action_open_user_administration(self) -> None:

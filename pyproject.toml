@@ -30,4 +30,4 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools_scm]
 
 [tool.setuptools.package-data]
-blackwall = ["*.css", "*.tcss"]
+blackwall = ["*.css", "*.tcss", "*.md"]
