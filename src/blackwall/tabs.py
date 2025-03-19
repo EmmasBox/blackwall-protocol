@@ -12,7 +12,7 @@ from .panels.resource.resource import PanelResource
 
 class TabSystem(HorizontalGroup):
     BINDINGS = [
-        ("u", "open_user_administration", "Open user tab"),
+        ("u", "open_user", "Open user tab"),
         ("f", "open_search", "Open search tab"),
         ("l", "open_analysis", "Open analysis tab"),
         ("x", "open_dataset", "Open dataset profile tab"),
@@ -26,7 +26,7 @@ class TabSystem(HorizontalGroup):
             yield TabPane("Welcome!",PanelWelcome())
 
     #Add new tab
-    async def action_open_user_administration(self) -> None:
+    async def action_open_user(self) -> None:
         """Add a new user administration tab."""
         tabs = self.query_one(TabbedContent)
         new_user_panel = PanelUser()
