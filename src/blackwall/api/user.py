@@ -41,14 +41,14 @@ class BaseUserTraits(TraitsBase):
 
 @dataclass
 class CICSUserTraits(TraitsBase):
-    operator_class: str | None = None
-    operator_id: str | None = None
+    operator_class: str | None = field(default=None, metadata={"label": "operator class", "input_args": {"max_length": 8}})
+    operator_id: str | None = field(default=None, metadata={"label": "operator id", "input_args": {"max_length": 8}})
     operator_priority: str | None = None
     resource_security_level_key: str | None = None
     resource_security_level_keys: str | None = None
     timeout: str | None = None
     transaction_security_level_key: str | None = None
-    force_signoff_when_xrf_takeover: bool | None = None
+    force_signoff_when_xrf_takeover: bool | None = field(default=None, metadata={"label": "Force signoff when xrf takeover"})
 
 @dataclass
 class DCEUserTraits(TraitsBase):
@@ -79,8 +79,8 @@ class KerbUserTraits(TraitsBase):
 
 @dataclass
 class LanguageUserTraits(TraitsBase):
-    primary: str | None = None
-    secondary: str | None = None
+    primary: str | None = field(default=None, metadata={"label": "primary language"})
+    secondary: str | None = field(default=None, metadata={"label": "secondary language"})
 
 @dataclass
 class LnotesUserTraits(TraitsBase):
@@ -96,7 +96,7 @@ class MfaUserTraits(TraitsBase):
 
 @dataclass
 class NDSUserTraits(TraitsBase):
-    username: str | None = None
+    username: str | None = field(default=None, metadata={"label": "username"})
 
 @dataclass
 class NetviewUserTraits(TraitsBase):
@@ -111,20 +111,19 @@ class NetviewUserTraits(TraitsBase):
 
 @dataclass
 class OMVSUserTraits(TraitsBase):
-    uid: int | None = None
-    home_directory: str | None = None
-    auto_uid: bool | None = None
-    max_address_space_size: int | None = None
-    max_cpu_time: int | None = None
-    max_files_per_process: int | None = None
-    home_directory: str | None = None
-    max_non_shared_memory: str | None = None
-    max_file_mapping_pages: int | None = None
-    max_processes: int | None = None
-    default_shell: str | None = None
-    shared: bool | None = None
-    max_shared_memory: int | None = None
-    max_threads: int | None = None
+    uid: int | None = field(default=None, metadata={"label": "uid"})
+    auto_uid: bool | None = field(default=None, metadata={"label": "auto uid"})
+    shared: bool | None = field(default=None, metadata={"label": "shared"})
+    home_directory: str | None = field(default=None, metadata={"label": "home directory"})
+    default_shell: str | None = field(default=None, metadata={"label": "default shell"})
+    max_address_space_size: int | None = field(default=None, metadata={"label": "max address space size"})
+    max_cpu_time: int | None = field(default=None, metadata={"label": "home directory"})
+    max_files_per_process: int | None = field(default=None, metadata={"label": "max files per process"})
+    max_file_mapping_pages: int | None = field(default=None, metadata={"label": "max file mapping pages"})
+    max_processes: int | None = field(default=None, metadata={"label": "max processes"})
+    max_shared_memory: int | None = field(default=None, metadata={"label": "max shared memory"})
+    max_non_shared_memory: str | None = field(default=None, metadata={"label": "max non shared memory"})
+    max_threads: int | None = field(default=None, metadata={"label": "max threads"})
 
 @dataclass
 class OperparmUserTraits(TraitsBase):
@@ -149,10 +148,10 @@ class OperparmUserTraits(TraitsBase):
 
 @dataclass
 class OvmUserTraits(TraitsBase):
-    file_system_root: str | None = None
-    home_directory: str | None = None
-    default_shell: str | None = None
-    uid: str | None = None
+    file_system_root: str | None = field(default=None, metadata={"label": "file system root"})
+    home_directory: str | None = field(default=None, metadata={"label": "home directory"})
+    default_shell: str | None = field(default=None, metadata={"label": "default shell"})
+    uid: str | None = field(default=None, metadata={"label": "uid"})
 
 @dataclass
 class ProxyUserTraits(TraitsBase):
@@ -162,28 +161,28 @@ class ProxyUserTraits(TraitsBase):
 
 @dataclass
 class TSOUserTraits(TraitsBase):
-    account_number: str | None = None
-    logon_command: str | None = None
-    sysout_destination_id: str | None = None
-    hold_class: str | None = None
-    job_class: str | None = None
-    max_region_size: int | None = None
-    message_class: str | None = None
-    logon_procedure: str | None = None
-    security_label: str | None = None
-    default_region_size: int | None = None
-    sysout_class: str | None = None
-    data_set_allocation_unit: str | None = None
-    user_data: str | None = None
+    account_number: str | None = field(default=None, metadata={"label": "account number", "input_args": {"max_length": 8}})
+    logon_command: str | None = field(default=None, metadata={"label": "logon command", "input_args": {"max_length": 8}})
+    sysout_destination_id: str | None = field(default=None, metadata={"label": "sysout destination id", "input_args": {"max_length": 8}})
+    hold_class: str | None = field(default=None, metadata={"label": "hold class", "input_args": {"max_length": 8}})
+    job_class: str | None = field(default=None, metadata={"label": "job class", "input_args": {"max_length": 8}})
+    message_class: str | None = field(default=None, metadata={"label": "message class", "input_args": {"max_length": 8}})
+    logon_procedure: str | None = field(default=None, metadata={"label": "logon procedure", "input_args": {"max_length": 8}})
+    security_label: str | None = field(default=None, metadata={"label": "security label", "input_args": {"max_length": 8}})
+    default_region_size: int | None = field(default=None, metadata={"label": "default region size"})
+    max_region_size: int | None = field(default=None, metadata={"label": "max region size"})
+    sysout_class: str | None = field(default=None, metadata={"label": "sysout class", "input_args": {"max_length": 8}})
+    data_set_allocation_unit: str | None = field(default=None, metadata={"label": "dataset allocation unit", "input_args": {"max_length": 8}})
+    user_data: str | None = field(default=None, metadata={"label": "user data", "input_args": {"max_length": 8}})
 
 @dataclass
 class WorkattrUserTraits(TraitsBase):
-    account_number: str | None = None
-    sysout_building: str | None = None
-    sysout_department: str | None = None
-    sysout_user: str | None = None
-    sysout_room: str | None = None
-    sysout_email: str | None = None
+    account_number: str | None = field(default=None, metadata={"label": "account number", "input_args": {"max_length": 8}})
+    sysout_building: str | None = field(default=None, metadata={"label": "sysout building", "input_args": {"max_length": 8}})
+    sysout_department: str | None = field(default=None, metadata={"label": "sysout department", "input_args": {"max_length": 8}})
+    sysout_user: str | None = field(default=None, metadata={"label": "sysout user", "input_args": {"max_length": 8}})
+    sysout_room: str | None = field(default=None, metadata={"label": "sysout room", "input_args": {"max_length": 8}})
+    sysout_email: str | None = field(default=None, metadata={"label": "email"})
 
 if racfu_enabled:
     #User functions

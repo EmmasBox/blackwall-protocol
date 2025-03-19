@@ -1,5 +1,8 @@
 
-from dataclasses import dataclass
+from collections.abc import Generator
+from dataclasses import dataclass, fields
+from types import UnionType
+from typing import get_args
 from textual.reactive import reactive
 from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, RadioButton, Collapsible
@@ -32,7 +35,7 @@ class PanelUserName(HorizontalGroup):
         yield Label("Username*: ")
         yield Input(max_length=8,id="username",classes="username",tooltip="Username is what the user uses to log on with, this is required. While very few characters can be used at least 4 character long usernames are recommended to avoid collisions",disabled=self.is_disabled).data_bind(value=PanelUserName.username)
         yield Label("name: ")
-        yield Input(max_length=20,id="name",classes="name",tooltip="For personal users this is typically used for names i.e. Song So Mi, for system users it can be the name of the subsystem that it is used for").data_bind(value=PanelUserName.name)
+        yield Input(max_length=20,id="base_name",classes="name",tooltip="For personal users this is typically used for names i.e. Song So Mi, for system users it can be the name of the subsystem that it is used for").data_bind(value=PanelUserName.name)
 
 class PanelUserOwnership(HorizontalGroup):
     """Component that contains ownership field and default group"""
@@ -77,71 +80,83 @@ class PanelUserAttributes(VerticalGroup):
             yield RadioButton("Auditor",id="user_attribute_auditor")
             yield RadioButton("Read only auditor (ROAUDIT)",id="user_attribute_roaudit")
 
+def generate_trait_inputs(title: str, prefix: str, traits_class: type[user.TraitsBase]) -> Generator:
+    with Collapsible(title=title):
+        for field in fields(traits_class):
+            label = field.metadata.get("label")
+            # only show an input field if it is labelled
+            if label is not None:
+                # UnionType is 'str | None'
+                if isinstance(field.type, UnionType):
+                    # parse out actual type out of optional type
+                    # will be tuple (type(str), type(None))
+                    args = get_args(field.type)
+                    # the field is optional if type args contains 'type(None)'
+                    optional = type(None) in args
+                    # the actual type is the first non-'type(None)' in args
+                    actual_type = next((t for t in args if t is not type(None)), field.type)
+                else:
+                    optional = False
+                    actual_type = field.type
+
+                input_args = field.metadata.get("input_args", {})
+
+                input_id = f"{prefix}-{field.name}"
+
+                if actual_type == str:
+                    #yield Label(f"{label}{'*' if not optional else ''} ({actual_type}):")
+                    yield Label(label)
+                    yield Input(id=input_id, **input_args)
+                elif actual_type == int:
+                    yield Label(label)
+                    yield Input(id=input_id, type="integer", **input_args)
+                elif actual_type == bool:
+                    yield RadioButton(label=label, id=input_id, **input_args)
+
 class PanelUserSegments(VerticalGroup):
     """Component where the user can add segments such as the OMVS segment"""
     def compose(self) -> ComposeResult:
         with Collapsible(title="User segments"):
-            with Collapsible(title="TSO"):
-                yield Label("logon procedure:")
-                yield Input(max_length=8,id="logon_procedure")
-                yield Label("account number:")
-                yield Input(max_length=8,id="account_number")
-                yield Label("logon command:")
-                yield Input(max_length=16,id="logon_command")
-                yield Label("hold class:")
-                yield Input(max_length=8,id="hold_class")
-                yield Label("job class:")
-                yield Input(max_length=8,id="job_class")
-                yield Label("message class:")
-                yield Input(max_length=8,id="message_class")
-                yield Label("sysout class:")
-                yield Input(max_length=8,id="sysout_class")
-                yield Label("max region size:")
-                yield Input(id="max_region_size",type="integer")
-            with Collapsible(title="OMVS"):
-                yield Label("UID:")
-                yield Input(max_length=30,id="uid",classes="username",type="integer")
-                yield RadioButton(label="auto uid",value=False)
-                yield Label("Home directory: ")
-                yield Input(max_length=255,id="home_directory",classes="username")
-                yield Label("Shell path: ")
-                yield Input(max_length=255,id="default_shell",classes="username")
-                yield Label("Max CPU time: ")
-                yield Input(id="max_cpu_time")
-                yield Label("Max threads: ")
-                yield Input(id="max_threads")
-                yield Label("Max processes: ")
-                yield Input(id="max_processes")
-                yield Label("Max shared memory: ")
-                yield Input(id="max_shared_memory")
-                yield Label("Max non-shared memory: ")
-                yield Input(id="max_non_shared_memory")
-                yield Label("Max files per process: ")
-                yield Input(id="max_files_per_process")
-                yield Label("Max files mapping pages: ")
-                yield Input(id="max_file_mapping_pages")
-            with Collapsible(title="CSDATA"):    
-                yield RadioButton("CSDATA",id="user_segment_csdata")
-            with Collapsible(title="KERB"):   
-                yield RadioButton("KERB",id="user_segment_kerb")
-            with Collapsible(title="LANGUAGE"):   
-                yield Label("Primary language: ")
-                yield Input(id="language_primary")
-                yield Label("Secondary language: ")
-                yield Input(id="language_secondary")
-            with Collapsible(title="OPERPARM"):   
-                yield RadioButton("OPERPARM",id="user_segment_operparm")
-            with Collapsible(title="OVM"):   
-                yield RadioButton("OVM",id="user_segment_ovm")
-            with Collapsible(title="NDS"): 
-                yield Label("NDS username: ")
-                yield Input(id="nds_username")
-            with Collapsible(title="DCE"): 
-                yield RadioButton("DCE",id="user_segment_dce")
-            with Collapsible(title="DFP"): 
-                yield RadioButton("DFP",id="user_segment_dfp")
-            with Collapsible(title="CICS"): 
-                yield RadioButton("CICS",id="user_segment_cics")
+            yield from generate_trait_inputs(title="TSO", prefix="tso", traits_class=user.TSOUserTraits)
+            yield from generate_trait_inputs(title="OMVS", prefix="omvs", traits_class=user.OMVSUserTraits)
+            yield from generate_trait_inputs(title="Work attributes", prefix="workattr", traits_class=user.WorkattrUserTraits)
+            yield from generate_trait_inputs(title="CICS", prefix="cics", traits_class=user.CICSUserTraits)
+            yield from generate_trait_inputs(title="KERB", prefix="kerb", traits_class=user.KerbUserTraits)
+            yield from generate_trait_inputs(title="Language", prefix="language", traits_class=user.LanguageUserTraits)
+            yield from generate_trait_inputs(title="OPERPARM", prefix="operparm", traits_class=user.OperparmUserTraits)
+            yield from generate_trait_inputs(title="OVM", prefix="ovm", traits_class=user.OvmUserTraits)
+            yield from generate_trait_inputs(title="NDS", prefix="nds", traits_class=user.NDSUserTraits)
+            yield from generate_trait_inputs(title="DCE", prefix="dce", traits_class=user.DCEUserTraits)
+            yield from generate_trait_inputs(title="DFP", prefix="dfp", traits_class=user.DFPUserTraits)
+            yield from generate_trait_inputs(title="EIM", prefix="eim", traits_class=user.EIMUserTraits)
+            yield from generate_trait_inputs(title="Proxy", prefix="proxy", traits_class=user.ProxyUserTraits)
+
+                # yield Label("account number:")
+                # yield Input(max_length=8,id="tso:account_number")
+                # yield Label("logon command:")
+                # yield Input(max_length=16,id="logon_command")
+                # yield Label("hold class:")
+                # yield Input(max_length=8,id="hold_class")
+                # yield Label("job class:")
+                # yield Input(max_length=8,id="job_class")
+                # yield Label("message class:")
+                # yield Input(max_length=8,id="message_class")
+                # yield Label("sysout class:")
+                # yield Input(max_length=8,id="sysout_class")
+                # yield Label("max region size:")
+                # yield Input(id="max_region_size",type="integer")
+            # with Collapsible(title="CSDATA"):    
+            #     yield RadioButton("CSDATA",id="user_segment_csdata")
+            # with Collapsible(title="KERB"):   
+            #     yield RadioButton("KERB",id="user_segment_kerb")
+            # with Collapsible(title="LANGUAGE"):   
+            #     yield Label("Primary language: ")
+            #     yield Input(id="language_primary")
+            #     yield Label("Secondary language: ")
+            #     yield Input(id="language_secondary")
+            # with Collapsible(title="NDS"): 
+            #     yield Label("NDS username: ")
+            #     yield Input(id="nds_username")
 
 class PanelUserActionButtons(HorizontalGroup):
     """Action buttons"""
