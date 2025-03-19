@@ -16,6 +16,20 @@
     margin-bottom: 1;
 }
 
+# Welcome
+.welcome-message {
+    
+}
+
+.welcome-suggestion-header {
+    margin-left: 1;
+}
+
+.welcome-suggestion-button {
+    width: 28;
+    margin: 1;
+}
+
 # Dataset panel
 .uacc-select {
     width: 20
