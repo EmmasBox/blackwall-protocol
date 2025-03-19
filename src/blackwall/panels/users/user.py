@@ -131,33 +131,6 @@ class PanelUserSegments(VerticalGroup):
             yield from generate_trait_inputs(title="EIM", prefix="eim", traits_class=user.EIMUserTraits)
             yield from generate_trait_inputs(title="Proxy", prefix="proxy", traits_class=user.ProxyUserTraits)
 
-                # yield Label("account number:")
-                # yield Input(max_length=8,id="tso:account_number")
-                # yield Label("logon command:")
-                # yield Input(max_length=16,id="logon_command")
-                # yield Label("hold class:")
-                # yield Input(max_length=8,id="hold_class")
-                # yield Label("job class:")
-                # yield Input(max_length=8,id="job_class")
-                # yield Label("message class:")
-                # yield Input(max_length=8,id="message_class")
-                # yield Label("sysout class:")
-                # yield Input(max_length=8,id="sysout_class")
-                # yield Label("max region size:")
-                # yield Input(id="max_region_size",type="integer")
-            # with Collapsible(title="CSDATA"):    
-            #     yield RadioButton("CSDATA",id="user_segment_csdata")
-            # with Collapsible(title="KERB"):   
-            #     yield RadioButton("KERB",id="user_segment_kerb")
-            # with Collapsible(title="LANGUAGE"):   
-            #     yield Label("Primary language: ")
-            #     yield Input(id="language_primary")
-            #     yield Label("Secondary language: ")
-            #     yield Input(id="language_secondary")
-            # with Collapsible(title="NDS"): 
-            #     yield Label("NDS username: ")
-            #     yield Input(id="nds_username")
-
 class PanelUserActionButtons(HorizontalGroup):
     """Action buttons"""
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
