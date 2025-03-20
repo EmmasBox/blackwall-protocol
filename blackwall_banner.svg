@@ -16,7 +16,7 @@
    xmlns:svg="http://www.w3.org/2000/svg">
   <sodipodi:namedview
      id="namedview1"
-     pagecolor="#c5c5c5"
+     pagecolor="#c5ffff"
      bordercolor="#000000"
      borderopacity="0.25"
      inkscape:showpageshadow="2"
@@ -24,17 +24,41 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="1.16"
-     inkscape:cx="440.51724"
-     inkscape:cy="306.03448"
+     inkscape:zoom="1.29"
+     inkscape:cx="495.34884"
+     inkscape:cy="150.3876"
      inkscape:window-width="1920"
      inkscape:window-height="1011"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="svg1" />
   <defs
      id="defs1">
+    <linearGradient
+       id="linearGradient14"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#c5c5c5;stop-opacity:1;"
+         offset="0"
+         id="stop14" />
+      <stop
+         style="stop-color:#dcdcdc;stop-opacity:1;"
+         offset="1"
+         id="stop15" />
+    </linearGradient>
+    <linearGradient
+       id="linearGradient12"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#c5c5c5;stop-opacity:1;"
+         offset="0"
+         id="stop12" />
+      <stop
+         style="stop-color:#dcdcdc;stop-opacity:1;"
+         offset="1"
+         id="stop13" />
+    </linearGradient>
     <rect
        x="41.37931"
        y="258.62069"
@@ -62,14 +86,32 @@
        x2="240.54175"
        y2="48.390537"
        gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient12"
+       id="linearGradient13"
+       x1="3.8146973e-05"
+       y1="50.000013"
+       x2="249.99997"
+       y2="50.000013"
+       gradientUnits="userSpaceOnUse" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient14"
+       id="linearGradient15"
+       x1="3.8146973e-05"
+       y1="50.000013"
+       x2="249.99997"
+       y2="50.000013"
+       gradientUnits="userSpaceOnUse" />
   </defs>
   <rect
-     style="fill:#c5c5c5;fill-opacity:1;stroke-width:0.264583"
+     style="fill:url(#linearGradient15);fill-opacity:1;stroke:url(#linearGradient13);stroke-width:18.8787;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:16.5;stroke-dasharray:none;stroke-opacity:1"
      id="rect10"
-     width="253.63506"
-     height="103.55244"
-     x="-1.5966235"
-     y="-1.1404454"
+     width="231.12123"
+     height="81.121254"
+     x="9.4393883"
+     y="9.4393864"
      inkscape:label="background" />
   <g
      inkscape:label="Layer 1"
