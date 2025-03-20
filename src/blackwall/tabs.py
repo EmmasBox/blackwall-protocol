@@ -30,31 +30,41 @@ class TabSystem(HorizontalGroup):
         """Add a new user administration tab."""
         tabs = self.query_one(TabbedContent)
         new_user_panel = PanelUser()
-        await tabs.add_pane(TabPane("User management",new_user_panel))
+        new_tab = TabPane("User management",new_user_panel)
+        await tabs.add_pane(new_tab)
         #new_user_panel.user_info = UserInfo(
         #    username="",
         #    name="",
         #)
+        tabs.active = new_tab.id
 
     async def action_open_dataset(self) -> None:
         """Add a new dataset profile management tab."""
         tabs = self.query_one(TabbedContent)
-        await tabs.add_pane(TabPane("Dataset profile mangement",PanelDataset()))
+        new_tab = TabPane("Dataset profile mangement",PanelDataset())
+        await tabs.add_pane(new_tab)
+        tabs.active = new_tab.id
 
     async def action_open_resource(self) -> None:
         """Add a new general resource profile management tab."""
         tabs = self.query_one(TabbedContent)
-        await tabs.add_pane(TabPane("Resource profile mangement",PanelResource()))
+        new_tab = TabPane("Resource management",PanelResource())
+        await tabs.add_pane(new_tab)
+        tabs.active = new_tab.id
 
     def action_open_search(self) -> None:
         """Add a new search tab."""
         tabs = self.query_one(TabbedContent)
-        tabs.add_pane(TabPane("Search",PanelSearch()))
+        new_tab = TabPane("Search",PanelSearch())
+        tabs.add_pane(new_tab)
+        tabs.active = new_tab.id
 
     def action_open_analysis(self) -> None:
         """Add a new analysis tab."""
         tabs = self.query_one(TabbedContent)
-        tabs.add_pane(TabPane("Health check",PanelAnalysis()))
+        new_tab = TabPane("Health check",PanelAnalysis())
+        tabs.add_pane(new_tab)
+        tabs.active = new_tab.id
 
     #Remove current tab
     def action_remove(self) -> None:
