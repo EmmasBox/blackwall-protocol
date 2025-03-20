@@ -63,7 +63,7 @@ class DFPUserTraits(TraitsBase):
     data_application: str | None = None
     data_class: str | None = None
     management_class: str | None = None
-    storage_class: str | None = None
+    storage_class: str | None = field(default=None, metadata={"label": "storage class", "input_args": {"max_length": 8}})
 
 @dataclass
 class EIMUserTraits(TraitsBase):
@@ -155,9 +155,9 @@ class OvmUserTraits(TraitsBase):
 
 @dataclass
 class ProxyUserTraits(TraitsBase):
-    bind_distinguished_name: str | None = None
-    bind_password: str | None = None
-    ldap_host: str | None = None
+    bind_distinguished_name: str | None = field(default=None, metadata={"label": "bind distinguished name"})
+    bind_password: str | None = field(default=None, metadata={"label": "bind password"})
+    ldap_host: str | None = field(default=None, metadata={"label": "LDAP host"})
 
 @dataclass
 class TSOUserTraits(TraitsBase):
