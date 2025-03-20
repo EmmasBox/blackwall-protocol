@@ -1,5 +1,5 @@
 #### Stability notice
-This software is still in pre-alpha, do not use it for production systems. Features might not work yet and there are numerous bugs in the ones that do work to some extent.
+This software is still in pre-alpha and under active development, do not use it on production systems. Features might not work yet and there are numerous bugs in the ones that do work to some extent.
 
 ![Blackwall Logo](blackwall_banner.svg)
 # Blackwall Protocol
