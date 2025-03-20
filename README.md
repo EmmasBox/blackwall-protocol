@@ -1,6 +1,7 @@
 #### Stability notice
 This software is still in pre-alpha, do not use it for production systems. Features might not work yet and there are numerous bugs in the ones that do work to some extent.
 
+![Blackwall Logo](blackwall_banner.svg)
 # Blackwall Protocol
 Blackwall Protocol is a terminal based administration panel for RACF. The goal of Blackwall is to create a more modern and open source alternative to zSecure. Blackwall does not support ACF2 or Top Secret and never will, people are more than welcome to fork it and create their own versions however.
 
