@@ -75,7 +75,7 @@ class KerbUserTraits(TraitsBase):
     name: str | None = None
     key_from: str | None = None
     key_version: str | None = None
-    max_ticket_life: int | None = None
+    max_ticket_life: int | None = field(default=None, metadata={"label": "max ticket life"})
 
 @dataclass
 class LanguageUserTraits(TraitsBase):
@@ -84,15 +84,15 @@ class LanguageUserTraits(TraitsBase):
 
 @dataclass
 class LnotesUserTraits(TraitsBase):
-    zos_short_name: str | None = None
+    zos_short_name: str | None = field(default=None, metadata={"label": "short name"})
 
 @dataclass
 class MfaUserTraits(TraitsBase):
-    factor: str | None = None
+    factor: str | None = field(default=None, metadata={"label": "factor"})
     active: bool | None = field(default=None, metadata={"label": "mfa active"})
-    tags: str | None = None
+    tags: str | None = field(default=None, metadata={"label": "tags"})
     password_fallback: bool | None = field(default=None, metadata={"label": "password fallback"})
-    mfa_policy: str | None = None
+    mfa_policy: str | None = field(default=None, metadata={"label": "MFA policy"})
 
 @dataclass
 class NDSUserTraits(TraitsBase):
