@@ -52,7 +52,7 @@ class CICSUserTraits(TraitsBase):
 
 @dataclass
 class DCEUserTraits(TraitsBase):
-    auto_login: bool | None = None
+    auto_login: bool | None = field(default=None, metadata={"label": "auto login"})
     name: str | None = None
     home_cell: str | None = None
     home_cell_uuid: str | None = None
@@ -89,9 +89,9 @@ class LnotesUserTraits(TraitsBase):
 @dataclass
 class MfaUserTraits(TraitsBase):
     factor: str | None = None
-    active: bool | None = None
+    active: bool | None = field(default=None, metadata={"label": "mfa active"})
     tags: str | None = None
-    password_fallback: bool | None = None
+    password_fallback: bool | None = field(default=None, metadata={"label": "password fallback"})
     mfa_policy: str | None = None
 
 @dataclass
