@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="250mm"
+   height="100mm"
+   viewBox="0 0 250 100"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
+   sodipodi:docname="blackwall_banner.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#c5c5c5"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="1.16"
+     inkscape:cx="440.51724"
+     inkscape:cy="198.27586"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs1">
+    <rect
+       x="41.37931"
+       y="258.62069"
+       width="309.48276"
+       height="74.137931"
+       id="rect8" />
+    <linearGradient
+       id="linearGradient4"
+       inkscape:collect="always">
+      <stop
+         style="stop-color:#c00000;stop-opacity:1;"
+         offset="0"
+         id="stop4" />
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="1"
+         id="stop5" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4"
+       id="linearGradient5"
+       x1="159.10178"
+       y1="48.390537"
+       x2="240.54175"
+       y2="48.390537"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <path
+       id="path1"
+       style="stroke-width:0.268776;fill:url(#linearGradient5)"
+       d="m 240.26881,56.653467 c -0.54616,2.669001 -1.35166,5.243534 -2.38901,7.69612 -1.03736,2.452588 -2.30657,4.783228 -3.78017,6.964441 -1.4736,2.181214 -3.15159,4.213002 -5.00647,6.067887 -1.85489,1.854885 -3.88668,3.532866 -6.06789,5.006466 -2.18122,1.473599 -4.51186,2.742816 -6.96444,3.780173 -2.45259,1.037356 -5.02712,1.842852 -7.69612,2.389009 -2.669,0.546156 -5.43247,0.832974 -8.26293,0.832974 -2.83046,0 -5.59393,-0.286818 -8.26293,-0.832974 -2.669,-0.546157 -5.24353,-1.351653 -7.69612,-2.389009 -2.45259,-1.037357 -4.78323,-2.306574 -6.96444,-3.780173 -2.18122,-1.473599 -4.21301,-3.151581 -6.06789,-5.006466 -1.85489,-1.854885 -3.53287,-3.886674 -5.00647,-6.067888 -1.4736,-2.181215 -2.74282,-4.511854 -3.78017,-6.96444 -1.03736,-2.452586 -1.84285,-5.027119 -2.38901,-7.69612 M 159.10178,48.391 c 0,-22.643675 18.35633,-41.0004627 41,-41.0004627 22.64367,0 40.43997,18.3567877 40.43997,41.0004627"
+       sodipodi:nodetypes="csssssssssssssccsc" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87778px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       x="199.75827"
+       y="55.925331"
+       id="text1"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87778px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.264583"
+         x="199.75827"
+         y="55.925331"
+         id="tspan3">Blackwall Protocol</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12.7px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       x="7.6952"
+       y="23.493"
+       id="text5"><tspan
+         sodipodi:role="line"
+         id="tspan5"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12.7px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;text-anchor:start;stroke-width:0.264583"
+         x="7.6952"
+         y="23.493">Secure tomorrow's </tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12.7px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;text-anchor:start;stroke-width:0.264583"
+         x="7.6952"
+         y="39.368"
+         id="tspan6">mainframe systems</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12.7px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;text-anchor:start;stroke-width:0.264583"
+         x="7.6952"
+         y="55.243"
+         id="tspan8">Today with Blackwall_</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:12.7px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;text-anchor:start;stroke-width:0.264583"
+         x="7.6952"
+         y="71.117996"
+         id="tspan7" /></text>
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text8"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:48px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans';text-align:start;writing-mode:lr-tb;direction:ltr;white-space:pre;shape-inside:url(#rect8);fill:#000000;fill-opacity:1" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       x="7.8052664"
+       y="67.286278"
+       id="text10"><tspan
+         sodipodi:role="line"
+         id="tspan10"
+         style="font-size:8.46667px;stroke-width:0.264583"
+         x="7.8052664"
+         y="67.286278">An open source project</tspan></text>
+  </g>
+</svg>
