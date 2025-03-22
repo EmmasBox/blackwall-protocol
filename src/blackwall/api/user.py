@@ -67,7 +67,7 @@ class DFPUserTraits(TraitsBase):
 
 @dataclass
 class EIMUserTraits(TraitsBase):
-    ldap_bind_profile: str | None = None
+    ldap_bind_profile: str | None = field(default=None, metadata={"label": "LDAP bind profile", "input_args": {"max_length": 255}})
 
 @dataclass
 class KerbUserTraits(TraitsBase):
