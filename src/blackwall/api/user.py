@@ -44,10 +44,10 @@ class CICSUserTraits(TraitsBase):
     operator_class: str | None = field(default=None, metadata={"label": "operator class", "input_args": {"max_length": 8}})
     operator_id: str | None = field(default=None, metadata={"label": "operator id", "input_args": {"max_length": 8}})
     operator_priority: str | None = field(default=None, metadata={"label": "operator priority", "input_args": {"max_length": 4}})
-    resource_security_level_key: str | None = None
-    resource_security_level_keys: str | None = None
+    resource_security_level_key: str | None = field(default=None, metadata={"label": "resource security level key"})
+    resource_security_level_keys: str | None = field(default=None, metadata={"label": "resource security level keys"})
     timeout: str | None = field(default=None, metadata={"label": "timeout", "input_args": {"max_length": 4}})
-    transaction_security_level_key: str | None = None
+    transaction_security_level_key: str | None = field(default=None, metadata={"label": "transaction security level key"})
     force_signoff_when_xrf_takeover: bool | None = field(default=None, metadata={"label": "Force signoff when xrf takeover"})
 
 @dataclass
