@@ -126,6 +126,7 @@ class PanelUserSegments(VerticalGroup):
             yield from generate_trait_inputs(title="OPERPARM", prefix="operparm", traits_class=user.OperparmUserTraits)
             yield from generate_trait_inputs(title="OVM", prefix="ovm", traits_class=user.OvmUserTraits)
             yield from generate_trait_inputs(title="NDS", prefix="nds", traits_class=user.NDSUserTraits)
+            yield from generate_trait_inputs(title="Netview", prefix="netview", traits_class=user.NetviewUserTraits)
             yield from generate_trait_inputs(title="MFA", prefix="mfa", traits_class=user.MfaUserTraits)
             yield from generate_trait_inputs(title="DCE", prefix="dce", traits_class=user.DCEUserTraits)
             yield from generate_trait_inputs(title="DFP", prefix="dfp", traits_class=user.DFPUserTraits)
