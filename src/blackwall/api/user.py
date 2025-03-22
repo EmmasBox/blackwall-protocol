@@ -127,10 +127,10 @@ class OMVSUserTraits(TraitsBase):
 
 @dataclass
 class OperparmUserTraits(TraitsBase):
-    alternate_console_group: str | None = None
+    alternate_console_group: str | None = field(default=None, metadata={"label": "alternate console group", "input_args": {"max_length": 8}})
     receive_automated_messages: str | None = None
     command_target_system: str | None = None
-    receive_delete_operator_messages: str | None = None
+    receive_delete_operator_messages: str | None = field(default=None, metadata={"label": "receive delete operator messages", "input_args": {"max_length": 8}})
     receive_hardcopy_messages: str | None = None
     receive_internal_console_messages: str | None = None
     console_searching_key: str | None = None
@@ -177,12 +177,12 @@ class TSOUserTraits(TraitsBase):
 
 @dataclass
 class WorkattrUserTraits(TraitsBase):
-    account_number: str | None = field(default=None, metadata={"label": "account number", "input_args": {"max_length": 8}})
-    sysout_building: str | None = field(default=None, metadata={"label": "sysout building", "input_args": {"max_length": 8}})
-    sysout_department: str | None = field(default=None, metadata={"label": "sysout department", "input_args": {"max_length": 8}})
+    account_number: str | None = field(default=None, metadata={"label": "account number", "input_args": {"max_length": 255}})
+    sysout_building: str | None = field(default=None, metadata={"label": "sysout building", "input_args": {"max_length": 60}})
+    sysout_department: str | None = field(default=None, metadata={"label": "sysout department", "input_args": {"max_length": 60}})
     sysout_user: str | None = field(default=None, metadata={"label": "sysout user", "input_args": {"max_length": 8}})
-    sysout_room: str | None = field(default=None, metadata={"label": "sysout room", "input_args": {"max_length": 8}})
-    sysout_email: str | None = field(default=None, metadata={"label": "email"})
+    sysout_room: str | None = field(default=None, metadata={"label": "sysout room", "input_args": {"max_length": 60}})
+    sysout_email: str | None = field(default=None, metadata={"label": "email", "input_args": {"max_length": 255}})
 
 if racfu_enabled:
     #User functions
