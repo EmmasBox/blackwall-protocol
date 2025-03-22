@@ -43,10 +43,10 @@ class BaseUserTraits(TraitsBase):
 class CICSUserTraits(TraitsBase):
     operator_class: str | None = field(default=None, metadata={"label": "operator class", "input_args": {"max_length": 8}})
     operator_id: str | None = field(default=None, metadata={"label": "operator id", "input_args": {"max_length": 8}})
-    operator_priority: str | None = None
+    operator_priority: str | None = field(default=None, metadata={"label": "operator priority", "input_args": {"max_length": 4}})
     resource_security_level_key: str | None = None
     resource_security_level_keys: str | None = None
-    timeout: str | None = None
+    timeout: str | None = field(default=None, metadata={"label": "timeout", "input_args": {"max_length": 4}})
     transaction_security_level_key: str | None = None
     force_signoff_when_xrf_takeover: bool | None = field(default=None, metadata={"label": "Force signoff when xrf takeover"})
 
@@ -60,9 +60,9 @@ class DCEUserTraits(TraitsBase):
 
 @dataclass
 class DFPUserTraits(TraitsBase):
-    data_application: str | None = None
-    data_class: str | None = None
-    management_class: str | None = None
+    data_application: str | None = field(default=None, metadata={"label": "data application", "input_args": {"max_length": 8}})
+    data_class: str | None = field(default=None, metadata={"label": "data class", "input_args": {"max_length": 8}})
+    management_class: str | None = field(default=None, metadata={"label": "management class", "input_args": {"max_length": 8}})
     storage_class: str | None = field(default=None, metadata={"label": "storage class", "input_args": {"max_length": 8}})
 
 @dataclass
