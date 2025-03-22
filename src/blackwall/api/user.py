@@ -117,13 +117,13 @@ class OMVSUserTraits(TraitsBase):
     home_directory: str | None = field(default=None, metadata={"label": "home directory"})
     default_shell: str | None = field(default=None, metadata={"label": "default shell"})
     max_address_space_size: int | None = field(default=None, metadata={"label": "max address space size"})
-    max_cpu_time: int | None = field(default=None, metadata={"label": "home directory"})
+    max_cpu_time: int | None = field(default=None, metadata={"label": "home directory", "input_args": {"max_length": 10}})
     max_files_per_process: int | None = field(default=None, metadata={"label": "max files per process"})
     max_file_mapping_pages: int | None = field(default=None, metadata={"label": "max file mapping pages"})
     max_processes: int | None = field(default=None, metadata={"label": "max processes"})
-    max_shared_memory: int | None = field(default=None, metadata={"label": "max shared memory"})
-    max_non_shared_memory: str | None = field(default=None, metadata={"label": "max non shared memory"})
-    max_threads: int | None = field(default=None, metadata={"label": "max threads"})
+    max_shared_memory: int | None = field(default=None, metadata={"label": "max shared memory", "input_args": {"max_length": 10}})
+    max_non_shared_memory: str | None = field(default=None, metadata={"label": "max non shared memory", "input_args": {"max_length": 8}})
+    max_threads: int | None = field(default=None, metadata={"label": "max threads", "input_args": {"max_length": 10}})
 
 @dataclass
 class OperparmUserTraits(TraitsBase):
