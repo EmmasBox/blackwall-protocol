@@ -132,6 +132,7 @@ class PanelUserSegments(VerticalGroup):
             yield from generate_trait_inputs(title="DFP", prefix="dfp", traits_class=user.DFPUserTraits)
             yield from generate_trait_inputs(title="EIM", prefix="eim", traits_class=user.EIMUserTraits)
             yield from generate_trait_inputs(title="Proxy", prefix="proxy", traits_class=user.ProxyUserTraits)
+            yield from generate_trait_inputs(title="Lotus Notes", prefix="lnotes", traits_class=user.LnotesUserTraits)
 
 class PanelUserActionButtons(HorizontalGroup):
     """Action buttons"""
