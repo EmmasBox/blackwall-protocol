@@ -104,11 +104,10 @@ def generate_trait_inputs(title: str, prefix: str, traits_class: type[user.Trait
                 input_id = f"{prefix}-{field.name}"
 
                 if actual_type == str:
-                    #yield Label(f"{label}{'*' if not optional else ''} ({actual_type}):")
-                    yield Label(label)
+                    yield Label(f"{label}{'*' if not optional else ''}:")
                     yield Input(id=input_id, **input_args)
                 elif actual_type == int:
-                    yield Label(label)
+                    yield Label(f"{label}{'*' if not optional else ''}:")
                     yield Input(id=input_id, type="integer", **input_args)
                 elif actual_type == bool:
                     yield RadioButton(label=label, id=input_id, **input_args)
