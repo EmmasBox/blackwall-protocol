@@ -71,11 +71,11 @@ class EIMUserTraits(TraitsBase):
 
 @dataclass
 class KerbUserTraits(TraitsBase):
-    encryption_algorithm: str | None = None
-    name: str | None = None
-    key_from: str | None = None
-    key_version: str | None = None
-    max_ticket_life: int | None = field(default=None, metadata={"label": "max ticket life"})
+    encryption_algorithm: str | None = field(default=None, metadata={"label": "encryption algorithm", "input_args": {"max_length": 255}})
+    name: str | None = field(default=None, metadata={"label": "name", "input_args": {"max_length": 255}})
+    key_from: str | None = field(default=None, metadata={"label": "key from", "input_args": {"max_length": 8}})
+    key_version: str | None = field(default=None, metadata={"label": "key version", "input_args": {"max_length": 3}})
+    max_ticket_life: int | None = field(default=None, metadata={"label": "max ticket life", "input_args": {"max_length": 16}})
 
 @dataclass
 class LanguageUserTraits(TraitsBase):
