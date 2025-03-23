@@ -248,6 +248,19 @@ class PanelUser(VerticalScroll):
         operations = self.query_exactly_one(selector="#base_user_attribute_operations").value
         auditor = self.query_exactly_one(selector="#base_user_attribute_auditor").value
         tso_segment = get_traits_from_input(self, prefix="tso", trait_cls=user.TSOUserTraits)
+        omvs_segment = get_traits_from_input(self, prefix="omvs", trait_cls=user.OMVSUserTraits)
+        cics_segment = get_traits_from_input(self, prefix="cics", trait_cls=user.CICSUserTraits)
+        workattr_segment = get_traits_from_input(self, prefix="workattr", trait_cls=user.WorkattrUserTraits)
+        language_segment = get_traits_from_input(self, prefix="language", trait_cls=user.LanguageUserTraits)
+        dfp_segment = get_traits_from_input(self, prefix="language", trait_cls=user.DFPUserTraits)
+        dce_segment = get_traits_from_input(self, prefix="language", trait_cls=user.DCEUserTraits)
+        proxy_segment = get_traits_from_input(self, prefix="language", trait_cls=user.ProxyUserTraits)
+        operparm_segment = get_traits_from_input(self, prefix="language", trait_cls=user.OperparmUserTraits)
+        ovm_segment = get_traits_from_input(self, prefix="language", trait_cls=user.OvmUserTraits)
+        eim_segment = get_traits_from_input(self, prefix="language", trait_cls=user.EIMUserTraits)
+        nds_segment = get_traits_from_input(self, prefix="language", trait_cls=user.NDSUserTraits)
+        lnotes_segment = get_traits_from_input(self, prefix="language", trait_cls=user.LnotesUserTraits)
+        mfa_segment = get_traits_from_input(self, prefix="language", trait_cls=user.MfaUserTraits)
         result = user.update_user(
             username=username,
             create=not user.user_exists(username=username),
@@ -262,7 +275,20 @@ class PanelUser(VerticalScroll):
                 auditor=auditor,
                 installation_data=installation_data
                                         ),
-            tso=tso_segment
+            tso=tso_segment,
+            omvs=omvs_segment,
+            cics=cics_segment,
+            workattr=workattr_segment,
+            language=language_segment,
+            dfp=dfp_segment,
+            dce=dce_segment,
+            proxy=proxy_segment,
+            operparm=operparm_segment,
+            ovm=ovm_segment,
+            eim=eim_segment,
+            nds=nds_segment,
+            lnotes=lnotes_segment,
+            mfa=mfa_segment
         )
 
         if not user.user_exists(username=username):
