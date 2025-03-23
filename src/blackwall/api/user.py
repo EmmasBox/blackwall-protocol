@@ -127,10 +127,10 @@ class OMVSUserTraits(TraitsBase):
 
 @dataclass
 class OperparmUserTraits(TraitsBase):
-    alternate_console_group: str | None = field(default=None, metadata={"label": "alternate console group", "input_args": {"max_length": 8}})
+    alternate_console_group: str | None = field(default=None, metadata={"label": "alternate console group", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
     receive_automated_messages: str | None = None
     command_target_system: str | None = None
-    receive_delete_operator_messages: str | None = field(default=None, metadata={"label": "receive delete operator messages", "input_args": {"max_length": 8}})
+    receive_delete_operator_messages: str | None = field(default=None, metadata={"label": "receive delete operator messages", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
     receive_hardcopy_messages: str | None = None
     receive_internal_console_messages: str | None = None
     console_searching_key: str | None = None
@@ -148,10 +148,10 @@ class OperparmUserTraits(TraitsBase):
 
 @dataclass
 class OvmUserTraits(TraitsBase):
-    file_system_root: str | None = field(default=None, metadata={"label": "file system root"})
-    home_directory: str | None = field(default=None, metadata={"label": "home directory"})
-    default_shell: str | None = field(default=None, metadata={"label": "default shell"})
-    uid: str | None = field(default=None, metadata={"label": "uid"})
+    file_system_root: str | None = field(default=None, metadata={"label": "file system root", "input_args": {"classes": "field-long-generic"}})
+    home_directory: str | None = field(default=None, metadata={"label": "home directory", "input_args": {"classes": "field-long-generic"}})
+    default_shell: str | None = field(default=None, metadata={"label": "default shell", "input_args": {"classes": "field-long-generic"}})
+    uid: str | None = field(default=None, metadata={"label": "uid", "input_args": {"classes": "field-long-generic"}})
 
 @dataclass
 class ProxyUserTraits(TraitsBase):
