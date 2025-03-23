@@ -174,7 +174,7 @@ def get_traits_from_input(self, prefix: str, traits_segment: user.TraitsBase):
             try:
                 field_value = self.query_exactly_one(selector=input_id).value
             except:
-                pass
+                field_value = None
             field = field_value
         return traits_segment
 
