@@ -233,6 +233,8 @@ class PanelUser(VerticalScroll):
 
     def action_save_user(self) -> None:
         username = self.query_exactly_one(selector="#username").value
+        user_exists = user.user_exists(username=username)
+        
         name = self.query_exactly_one(selector="#base_name").value
         if name == "":
             name = None
@@ -299,7 +301,7 @@ class PanelUser(VerticalScroll):
             netview=netview_segment
         )
 
-        if not user.user_exists(username=username):
+        if not user_exists:
             if (result == 0 or result == 4):
                 self.notify(f"User {username} created, return code: {result}",severity="information")
                 self.set_edit_mode()
