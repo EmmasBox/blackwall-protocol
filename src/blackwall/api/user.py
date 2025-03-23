@@ -84,7 +84,7 @@ class LanguageUserTraits(TraitsBase):
 
 @dataclass
 class LnotesUserTraits(TraitsBase):
-    zos_short_name: str | None = field(default=None, metadata={"label": "short name"})
+    zos_short_name: str | None = field(default=None, metadata={"label": "Lotus Notes short name", "input_args": {"max_length": 64,"classes": "field-medium-generic"}})
 
 @dataclass
 class MfaUserTraits(TraitsBase):
