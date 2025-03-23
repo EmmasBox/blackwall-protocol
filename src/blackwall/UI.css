@@ -5,6 +5,21 @@
 }
 
 # General
+.field-short-generic {
+    width: 16;
+    margin-bottom: 1;
+}
+
+.field-medium-generic {
+    width: 50;
+    margin-bottom: 1;
+}
+
+.field-long-generic {
+    width: 100;
+    margin-bottom: 1;
+}
+
 .action-button {
     margin-top: 1;
     margin-left: 1;
