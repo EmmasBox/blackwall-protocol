@@ -165,8 +165,9 @@ class UserInfo:
     dfltgrp: str = ""
     installation_data: str = ""
 
-def get_traits_from_input(self, prefix: str, traits_segment: user.TraitsBase):
-    for field in fields(traits_segment):
+def get_traits_from_input(self, prefix: str, trait_cls: user.TraitsBase):
+    value = trait_cls()
+    for field in fields(trait_cls):
         label = field.metadata.get("label")
         # only show an input field if it is labelled
         if label is not None:
@@ -174,9 +175,10 @@ def get_traits_from_input(self, prefix: str, traits_segment: user.TraitsBase):
             try:
                 field_value = self.query_exactly_one(selector=input_id).value
             except:
-                field_value = None
-            field = field_value
-        return traits_segment
+                continue
+
+            setattr(value, field.name, field_value)
+        return value
 
 class PanelUser(VerticalScroll):
     user_info: reactive[UserInfo] = reactive(UserInfo)
@@ -231,7 +233,7 @@ class PanelUser(VerticalScroll):
         special = self.query_exactly_one(selector="#base_user_attribute_special").value
         operations = self.query_exactly_one(selector="#base_user_attribute_operations").value
         auditor = self.query_exactly_one(selector="#base_user_attribute_auditor").value
-        tso_segment = get_traits_from_input(self, prefix="tso", traits_segment=user.TSOUserTraits)
+        tso_segment = get_traits_from_input(self, prefix="tso", trait_cls=user.TSOUserTraits)
         result = user.update_user(
             username=username,
             create=not user.user_exists(username=username),
