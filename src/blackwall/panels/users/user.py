@@ -261,6 +261,7 @@ class PanelUser(VerticalScroll):
         nds_segment = get_traits_from_input(self, prefix="language", trait_cls=user.NDSUserTraits)
         lnotes_segment = get_traits_from_input(self, prefix="language", trait_cls=user.LnotesUserTraits)
         mfa_segment = get_traits_from_input(self, prefix="language", trait_cls=user.MfaUserTraits)
+        netview_segment = get_traits_from_input(self, prefix="language", trait_cls=user.NetviewUserTraits)
         result = user.update_user(
             username=username,
             create=not user.user_exists(username=username),
@@ -288,7 +289,8 @@ class PanelUser(VerticalScroll):
             eim=eim_segment,
             nds=nds_segment,
             lnotes=lnotes_segment,
-            mfa=mfa_segment
+            mfa=mfa_segment,
+            netview=netview_segment
         )
 
         if not user.user_exists(username=username):
