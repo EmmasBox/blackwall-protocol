@@ -1,8 +1,9 @@
 
 from collections.abc import Generator
-from dataclasses import dataclass, fields
+from dataclasses import dataclass, fields, Field
 from types import UnionType
 from typing import get_args
+from textual.widget import Widget
 from textual.reactive import reactive
 from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, RadioButton, Collapsible
@@ -76,24 +77,28 @@ class PanelUserAttributes(VerticalGroup):
             yield RadioButton("Auditor",id="base_user_attribute_auditor")
             yield RadioButton("Read only auditor (ROAUDIT)",id="base_user_attribute_roaudit")
 
+def get_actual(field: Field) -> tuple[type,bool]:
+    # UnionType is 'str | None'
+    if isinstance(field.type, UnionType):
+        # parse out actual type out of optional type
+        # will be tuple (type(str), type(None))
+        args = get_args(field.type)
+        # the field is optional if type args contains 'type(None)'
+        optional = type(None) in args
+        # the actual type is the first non-'type(None)' in args
+        actual_type = next((t for t in args if t is not type(None)), field.type)
+    else:
+        optional = False
+        actual_type = field.type
+    return actual_type, optional
+
 def generate_trait_inputs(title: str, prefix: str, traits_class: type[user.TraitsBase]) -> Generator:
     with Collapsible(title=title):
         for field in fields(traits_class):
             label = field.metadata.get("label")
             # only show an input field if it is labelled
             if label is not None:
-                # UnionType is 'str | None'
-                if isinstance(field.type, UnionType):
-                    # parse out actual type out of optional type
-                    # will be tuple (type(str), type(None))
-                    args = get_args(field.type)
-                    # the field is optional if type args contains 'type(None)'
-                    optional = type(None) in args
-                    # the actual type is the first non-'type(None)' in args
-                    actual_type = next((t for t in args if t is not type(None)), field.type)
-                else:
-                    optional = False
-                    actual_type = field.type
+                actual_type, optional = get_actual(field)
 
                 input_args = field.metadata.get("input_args", {})
 
@@ -165,20 +170,29 @@ class UserInfo:
     dfltgrp: str = ""
     installation_data: str = ""
 
-def get_traits_from_input(self, prefix: str, trait_cls: user.TraitsBase):
+def get_traits_from_input(widget: Widget, prefix: str, trait_cls: user.TraitsBase):
     value = trait_cls()
     for field in fields(trait_cls):
         label = field.metadata.get("label")
+
         # only show an input field if it is labelled
         if label is not None:
+            actual_type, optional = get_actual(field)
+
             input_id = f"{prefix}_{field.name}"
             try:
-                field_value = self.query_exactly_one(selector=input_id).value
+                field_value = widget.query_exactly_one(selector=input_id).value
             except:
                 continue
-
+            if actual_type == str:
+                if field_value == "":
+                    continue
+            elif actual_type == int:
+                if field_value == "":
+                    continue
+                field_value = int(field_value)                
             setattr(value, field.name, field_value)
-        return value
+    return value
 
 class PanelUser(VerticalScroll):
     user_info: reactive[UserInfo] = reactive(UserInfo)
