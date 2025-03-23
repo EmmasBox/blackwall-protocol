@@ -189,7 +189,7 @@ def get_traits_from_input(widget: Widget, prefix: str, trait_cls: user.TraitsBas
                 if field_value == "":
                     field_value = None
             elif actual_type == int:
-                if field_value == "" or field_value == 0:
+                if field_value == "" or field_value == 0 or field_value == None:
                     field_value = None
                 else:
                     field_value = int(field_value)                
