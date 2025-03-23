@@ -103,7 +103,7 @@ class NetviewUserTraits(TraitsBase):
     default_mcs_console_name: str | None = None
     security_control_check: str | None = None
     domain: str | None = None
-    logon_commands: str | None = field(default=None, metadata={"label": "logon command", "input_args": {"max_length": 255}})
+    logon_commands: str | None = field(default=None, metadata={"label": "logon command", "input_args": {"max_length": 255,"classes": "field-long-generic"}})
     receive_unsolicited_messages: str | None = None
     operator_graphic_monitor_facility_administration_allowed: str | None = None
     operator_graphic_monitor_facility_display_authority: str | None = None
