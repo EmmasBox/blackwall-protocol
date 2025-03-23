@@ -97,7 +97,7 @@ def generate_trait_inputs(title: str, prefix: str, traits_class: type[user.Trait
 
                 input_args = field.metadata.get("input_args", {})
 
-                input_id = f"{prefix}-{field.name}"
+                input_id = f"{prefix}_{field.name}"
 
                 if actual_type == str:
                     yield Label(f"{label}{'*' if not optional else ''}:")
@@ -170,7 +170,7 @@ def get_traits_from_input(self, prefix: str, traits_segment: user.TraitsBase):
         label = field.metadata.get("label")
         # only show an input field if it is labelled
         if label is not None:
-            input_id = f"{prefix}-{field.name}"
+            input_id = f"{prefix}_{field.name}"
             field_value = self.query_exactly_one(selector=input_id).value
             field = field_value
         return traits_segment
