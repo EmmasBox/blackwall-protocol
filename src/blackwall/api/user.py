@@ -60,14 +60,14 @@ class DCEUserTraits(TraitsBase):
 
 @dataclass
 class DFPUserTraits(TraitsBase):
-    data_application: str | None = field(default=None, metadata={"label": "data application", "input_args": {"max_length": 8}})
-    data_class: str | None = field(default=None, metadata={"label": "data class", "input_args": {"max_length": 8}})
-    management_class: str | None = field(default=None, metadata={"label": "management class", "input_args": {"max_length": 8}})
-    storage_class: str | None = field(default=None, metadata={"label": "storage class", "input_args": {"max_length": 8}})
+    data_application: str | None = field(default=None, metadata={"label": "data application", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    data_class: str | None = field(default=None, metadata={"label": "data class", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    management_class: str | None = field(default=None, metadata={"label": "management class", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    storage_class: str | None = field(default=None, metadata={"label": "storage class", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
 
 @dataclass
 class EIMUserTraits(TraitsBase):
-    ldap_bind_profile: str | None = field(default=None, metadata={"label": "LDAP bind profile", "input_args": {"max_length": 255}})
+    ldap_bind_profile: str | None = field(default=None, metadata={"label": "LDAP bind profile", "input_args": {"max_length": 255,"classes": "field-long-generic"}})
 
 @dataclass
 class KerbUserTraits(TraitsBase):
@@ -79,8 +79,8 @@ class KerbUserTraits(TraitsBase):
 
 @dataclass
 class LanguageUserTraits(TraitsBase):
-    primary: str | None = field(default=None, metadata={"label": "primary language"})
-    secondary: str | None = field(default=None, metadata={"label": "secondary language"})
+    primary: str | None = field(default=None, metadata={"label": "primary language", "input_args": {"max_length": 4,"classes": "field-short-generic"}})
+    secondary: str | None = field(default=None, metadata={"label": "secondary language", "input_args": {"max_length": 4,"classes": "field-short-generic"}})
 
 @dataclass
 class LnotesUserTraits(TraitsBase):

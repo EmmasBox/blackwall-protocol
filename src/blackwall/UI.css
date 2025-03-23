@@ -11,12 +11,12 @@
 }
 
 .field-medium-generic {
-    width: 50;
+    width: 64;
     margin-bottom: 1;
 }
 
 .field-long-generic {
-    width: 100;
+    width: 128;
     margin-bottom: 1;
 }
 
