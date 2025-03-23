@@ -177,12 +177,12 @@ class TSOUserTraits(TraitsBase):
 
 @dataclass
 class WorkattrUserTraits(TraitsBase):
-    account_number: str | None = field(default=None, metadata={"label": "account number", "input_args": {"max_length": 255}})
-    sysout_building: str | None = field(default=None, metadata={"label": "sysout building", "input_args": {"max_length": 60}})
-    sysout_department: str | None = field(default=None, metadata={"label": "sysout department", "input_args": {"max_length": 60}})
-    sysout_user: str | None = field(default=None, metadata={"label": "sysout user", "input_args": {"max_length": 8}})
-    sysout_room: str | None = field(default=None, metadata={"label": "sysout room", "input_args": {"max_length": 60}})
-    sysout_email: str | None = field(default=None, metadata={"label": "email", "input_args": {"max_length": 255}})
+    account_number: str | None = field(default=None, metadata={"label": "account number", "input_args": {"max_length": 255,"classes": "field-long-generic"}})
+    sysout_building: str | None = field(default=None, metadata={"label": "sysout building", "input_args": {"max_length": 60, "classes": "field-medium-generic"}})
+    sysout_department: str | None = field(default=None, metadata={"label": "sysout department", "input_args": {"max_length": 60, "classes": "field-medium-generic"}})
+    sysout_user: str | None = field(default=None, metadata={"label": "sysout user", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    sysout_room: str | None = field(default=None, metadata={"label": "sysout room", "input_args": {"max_length": 60, "classes": "field-medium-generic"}})
+    sysout_email: str | None = field(default=None, metadata={"label": "email", "input_args": {"max_length": 255,"classes": "field-long-generic"}})
 
 if racfu_enabled:
     #User functions
