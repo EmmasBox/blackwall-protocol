@@ -135,7 +135,7 @@ class PanelUserSegments(VerticalGroup):
 
 class PanelUserActionButtons(HorizontalGroup):
     """Action buttons"""
-    edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
+    edit_mode: reactive[PanelMode] = reactive(PanelMode.edit,recompose=True)
 
     if edit_mode == False:
         is_disabled = True
