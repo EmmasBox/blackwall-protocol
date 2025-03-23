@@ -179,7 +179,7 @@ def get_traits_from_input(widget: Widget, prefix: str, trait_cls: user.TraitsBas
         if label is not None:
             actual_type, optional = get_actual(field)
 
-            input_id = f"{prefix}_{field.name}"
+            input_id = f"#{prefix}_{field.name}"
             try:
                 field_value = widget.query_exactly_one(selector=input_id).value
             except:
