@@ -183,13 +183,13 @@ def get_traits_from_input(widget: Widget, prefix: str, trait_cls: user.TraitsBas
             try:
                 field_value = widget.query_exactly_one(selector=input_id).value
             except:
-                continue
+                field_value = None
             if actual_type == str:
                 if field_value == "":
-                    continue
+                    field_value = None
             elif actual_type == int:
                 if field_value == "":
-                    continue
+                    field_value = None
                 field_value = int(field_value)                
             setattr(value, field.name, field_value)
     return value
