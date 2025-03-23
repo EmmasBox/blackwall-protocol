@@ -41,14 +41,14 @@ class BaseUserTraits(TraitsBase):
 
 @dataclass
 class CICSUserTraits(TraitsBase):
-    operator_class: str | None = field(default=None, metadata={"label": "operator class", "input_args": {"max_length": 8}})
-    operator_id: str | None = field(default=None, metadata={"label": "operator id", "input_args": {"max_length": 8}})
-    operator_priority: str | None = field(default=None, metadata={"label": "operator priority", "input_args": {"max_length": 4}})
-    resource_security_level_key: str | None = field(default=None, metadata={"label": "resource security level key"})
-    resource_security_level_keys: str | None = field(default=None, metadata={"label": "resource security level keys"})
-    timeout: str | None = field(default=None, metadata={"label": "timeout", "input_args": {"max_length": 4}})
-    transaction_security_level_key: str | None = field(default=None, metadata={"label": "transaction security level key"})
-    force_signoff_when_xrf_takeover: bool | None = field(default=None, metadata={"label": "Force signoff when xrf takeover"})
+    operator_class: str | None = field(default=None, metadata={"label": "operator class", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    operator_id: str | None = field(default=None, metadata={"label": "operator id", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    operator_priority: str | None = field(default=None, metadata={"label": "operator priority", "input_args": {"max_length": 4,"classes": "field-short-generic"}})
+    resource_security_level_key: str | None = field(default=None, metadata={"label": "resource security level key", "input_args": {"classes": "field-long-generic"}})
+    resource_security_level_keys: str | None = field(default=None, metadata={"label": "resource security level keys", "input_args": {"classes": "field-long-generic"}})
+    timeout: str | None = field(default=None, metadata={"label": "timeout", "input_args": {"max_length": 4,"classes": "field-short-generic"}})
+    transaction_security_level_key: str | None = field(default=None, metadata={"label": "transaction security level key", "input_args": {"classes": "field-long-generic"}})
+    force_signoff_when_xrf_takeover: bool | None = field(default=None, metadata={"label": "Force signoff when xrf takeover", "input_args": {"classes": "field-long-generic"}})
 
 @dataclass
 class DCEUserTraits(TraitsBase):
@@ -96,7 +96,7 @@ class MfaUserTraits(TraitsBase):
 
 @dataclass
 class NDSUserTraits(TraitsBase):
-    username: str | None = field(default=None, metadata={"label": "username"})
+    username: str | None = field(default=None, metadata={"label": "username", "input_args": {"max_length": 255,"classes": "field-long-generic"}})
 
 @dataclass
 class NetviewUserTraits(TraitsBase):
