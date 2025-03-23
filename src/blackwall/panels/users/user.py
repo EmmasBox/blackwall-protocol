@@ -41,15 +41,15 @@ class PanelUserOwnership(HorizontalGroup):
     """Component that contains ownership field and default group"""
     def compose(self) -> ComposeResult:
         yield Label("Owner: ")
-        yield Input(max_length=8,id="owner",classes="owner", tooltip="The group or user that owns this user profile. This is required in the RACF database")
+        yield Input(max_length=8,id="base_owner",classes="owner", tooltip="The group or user that owns this user profile. This is required in the RACF database")
         yield Label("Default group*: ")
-        yield Input(max_length=8,id="default_group",classes="owner", tooltip="All users must belong to a group in the RACF database")
+        yield Input(max_length=8,id="base_default_group",classes="owner", tooltip="All users must belong to a group in the RACF database")
 
 class PanelUserInstalldata(HorizontalGroup):
     """Component that contains install data field"""
     def compose(self) -> ComposeResult:
         yield Label("Installation data: ")
-        yield Input(max_length=254,id="installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a user. You can use installation data to describe whatever you want, such as department or what the user is for")
+        yield Input(max_length=254,id="base_installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a user. You can use installation data to describe whatever you want, such as department or what the user is for")
 
 class PanelUserPassword(VerticalGroup):
     """Change/add password component"""
@@ -57,9 +57,7 @@ class PanelUserPassword(VerticalGroup):
         with Collapsible(title="Password"):
             yield Label("Passwords can only be 8 characters long")
             yield Label("New password:")
-            yield Input(max_length=8,id="password",classes="password",password=True)
-            yield Label("Repeat password*:")
-            yield Input(max_length=8,id="password_repeat",classes="password",password=True)
+            yield Input(max_length=8,id="base_password",classes="password",password=True)
 
 class PanelUserPassphrase(VerticalGroup):
     """Change/add passphrase component"""
@@ -67,18 +65,16 @@ class PanelUserPassphrase(VerticalGroup):
         with Collapsible(title="Passphrase"):
             yield Label("Passphrases need to be between 12 and 100 characaters long")
             yield Label("New passphrase:")
-            yield Input(max_length=100,id="passphrase",classes="passphrase",password=True)
-            yield Label("Repeat passphrase*:")
-            yield Input(max_length=100,id="passphrase_repeat",classes="passphrase",password=True)
+            yield Input(max_length=100,id="base_passphrase",classes="passphrase",password=True)
     
 class PanelUserAttributes(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
         with Collapsible(title="User attributes"):
-            yield RadioButton("Special",id="user_attribute_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option")
-            yield RadioButton("Operations",id="user_attribute_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards")
-            yield RadioButton("Auditor",id="user_attribute_auditor")
-            yield RadioButton("Read only auditor (ROAUDIT)",id="user_attribute_roaudit")
+            yield RadioButton("Special",id="base_user_attribute_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option")
+            yield RadioButton("Operations",id="base_user_attribute_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards")
+            yield RadioButton("Auditor",id="base_user_attribute_auditor")
+            yield RadioButton("Read only auditor (ROAUDIT)",id="base_user_attribute_roaudit")
 
 def generate_trait_inputs(title: str, prefix: str, traits_class: type[user.TraitsBase]) -> Generator:
     with Collapsible(title=title):
@@ -206,24 +202,22 @@ class PanelUser(VerticalScroll):
 
     def action_save_user(self) -> None:
         username = self.query_exactly_one(selector="#username").value
-        name = self.query_exactly_one(selector="#name").value
-        owner = self.query_exactly_one(selector="#owner").value
-        default_group = self.query_exactly_one(selector="#default_group").value
-        installation_data = self.query_exactly_one(selector="#installation_data").value
+        name = self.query_exactly_one(selector="#base_name").value
+        owner = self.query_exactly_one(selector="#base_owner").value
+        default_group = self.query_exactly_one(selector="#base_default_group").value
+        installation_data = self.query_exactly_one(selector="#base_installation_data").value
         if installation_data == "":
             installation_data = None
-        password = self.query_exactly_one(selector="#password").value
-        password_repeat = self.query_exactly_one(selector="#password_repeat").value
-        if password == "" or password != password_repeat:
+        password = self.query_exactly_one(selector="#base_password").value
+        if password == "":
             password = None
-        passphrase = self.query_exactly_one(selector="#passphrase").value
-        passphrase_repeat = self.query_exactly_one(selector="#passphrase_repeat").value
-        if passphrase == "" or passphrase != passphrase_repeat:
+        passphrase = self.query_exactly_one(selector="#base_passphrase").value
+        if passphrase == "":
             passphrase = None
 
-        special = self.query_exactly_one(selector="#user_attribute_special").value
-        operations = self.query_exactly_one(selector="#user_attribute_operations").value
-        auditor = self.query_exactly_one(selector="#user_attribute_auditor").value
+        special = self.query_exactly_one(selector="#base_user_attribute_special").value
+        operations = self.query_exactly_one(selector="#base_user_attribute_operations").value
+        auditor = self.query_exactly_one(selector="#base_user_attribute_auditor").value
 
         result = user.update_user(
             username=username,
