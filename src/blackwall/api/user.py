@@ -161,19 +161,19 @@ class ProxyUserTraits(TraitsBase):
 
 @dataclass
 class TSOUserTraits(TraitsBase):
-    account_number: str | None = field(default=None, metadata={"label": "account number", "input_args": {"max_length": 8}})
-    logon_command: str | None = field(default=None, metadata={"label": "logon command", "input_args": {"max_length": 8}})
-    sysout_destination_id: str | None = field(default=None, metadata={"label": "sysout destination id", "input_args": {"max_length": 8}})
-    hold_class: str | None = field(default=None, metadata={"label": "hold class", "input_args": {"max_length": 8}})
-    job_class: str | None = field(default=None, metadata={"label": "job class", "input_args": {"max_length": 8}})
-    message_class: str | None = field(default=None, metadata={"label": "message class", "input_args": {"max_length": 8}})
-    logon_procedure: str | None = field(default=None, metadata={"label": "logon procedure", "input_args": {"max_length": 8}})
-    security_label: str | None = field(default=None, metadata={"label": "security label", "input_args": {"max_length": 8}})
-    default_region_size: int | None = field(default=None, metadata={"label": "default region size"})
-    max_region_size: int | None = field(default=None, metadata={"label": "max region size"})
-    sysout_class: str | None = field(default=None, metadata={"label": "sysout class", "input_args": {"max_length": 8}})
-    data_set_allocation_unit: str | None = field(default=None, metadata={"label": "dataset allocation unit", "input_args": {"max_length": 8}})
-    user_data: str | None = field(default=None, metadata={"label": "user data", "input_args": {"max_length": 8}})
+    account_number: str | None = field(default=None, metadata={"label": "account number", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    logon_command: str | None = field(default=None, metadata={"label": "logon command", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    sysout_destination_id: str | None = field(default=None, metadata={"label": "sysout destination id", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    hold_class: str | None = field(default=None, metadata={"label": "hold class", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    job_class: str | None = field(default=None, metadata={"label": "job class", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    message_class: str | None = field(default=None, metadata={"label": "message class", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    logon_procedure: str | None = field(default=None, metadata={"label": "logon procedure", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    security_label: str | None = field(default=None, metadata={"label": "security label", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    default_region_size: int | None = field(default=None, metadata={"label": "default region size", "input_args": {"classes": "field-short-generic"}})
+    max_region_size: int | None = field(default=None, metadata={"label": "max region size", "input_args": {"classes": "field-short-generic"}})
+    sysout_class: str | None = field(default=None, metadata={"label": "sysout class", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    data_set_allocation_unit: str | None = field(default=None, metadata={"label": "dataset allocation unit", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    user_data: str | None = field(default=None, metadata={"label": "user data", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
 
 @dataclass
 class WorkattrUserTraits(TraitsBase):
