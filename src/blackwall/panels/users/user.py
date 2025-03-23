@@ -234,7 +234,11 @@ class PanelUser(VerticalScroll):
     def action_save_user(self) -> None:
         username = self.query_exactly_one(selector="#username").value
         name = self.query_exactly_one(selector="#base_name").value
+        if name == "":
+            name = None
         owner = self.query_exactly_one(selector="#base_owner").value
+        if owner == "":
+            owner = None
         default_group = self.query_exactly_one(selector="#base_default_group").value
         installation_data = self.query_exactly_one(selector="#base_installation_data").value
         if installation_data == "":
