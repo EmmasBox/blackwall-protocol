@@ -75,7 +75,7 @@ if racfu_enabled:
                 {
                     "operation": "delete", 
                     "admin_type": "data-set", 
-                    "profile_name": dataset,
+                    "profile_name": dataset.upper(),
                 }
             )
         return result.result["return_codes"]["racf_return_code"] == 0
