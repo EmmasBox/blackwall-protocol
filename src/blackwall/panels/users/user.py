@@ -81,9 +81,9 @@ class PanelUserLevelAndCategory(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Collapsible(title="Security level and category"):
             yield Label("Security level:")
-            yield Input(max_length=8,id="base_security_level",classes="field-short-generic",password=True)
+            yield Input(max_length=8,id="base_security_level",classes="field-short-generic")
             yield Label("Security category:")
-            yield Input(max_length=8,id="base_security_category",classes="field-short-generic",password=True)
+            yield Input(max_length=8,id="base_security_category",classes="field-short-generic")
             yield Label("Security label:")
             yield Input(max_length=8,id="base_security_label",classes="field-short-generic",password=True)
 
