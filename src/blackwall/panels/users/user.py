@@ -194,30 +194,26 @@ class UserInfo:
 def get_traits_from_input(widget: Widget, prefix: str, trait_cls: user.TraitsBase):
     value = trait_cls()
     for field in fields(trait_cls):
-        label = field.metadata.get("label")
+        actual_type, optional = get_actual(field)
 
-        # only show an input field if it is labelled
-        if label is not None:
-            actual_type, optional = get_actual(field)
+        input_id = f"#{prefix}_{field.name}"
+        try:
+            field_value = widget.query_exactly_one(selector=input_id).value
+        except:
+            field_value = None
 
-            input_id = f"#{prefix}_{field.name}"
-            try:
-                field_value = widget.query_exactly_one(selector=input_id).value
-            except:
+        if actual_type == str:
+            if field_value == "":
                 field_value = None
-
-            if actual_type == str:
-                if field_value == "":
-                    field_value = None
-            elif actual_type == int:
-                if field_value == "" or field_value == 0 or field_value is None:
-                    field_value = None
-                else:
-                    field_value = int(field_value)
-            elif actual_type == bool:
-                if field_value is False:
-                    field_value = None
-            setattr(value, field.name, field_value)
+        elif actual_type == int:
+            if field_value == "" or field_value == 0 or field_value is None:
+                field_value = None
+            else:
+                field_value = int(field_value)
+        elif actual_type == bool:
+            if field_value is False:
+                field_value = None
+        setattr(value, field.name, field_value)
     return value
 
 class PanelUser(VerticalScroll):
