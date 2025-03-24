@@ -5,6 +5,11 @@
 }
 
 # General
+.uacc-select {
+    width: 20;
+    margin-bottom: 1;
+}
+
 .field-short-generic {
     width: 16;
     margin-bottom: 1;
@@ -46,10 +51,6 @@
 }
 
 # Dataset panel
-.uacc-select {
-    width: 20
-}
-
 .notify-user {
     width: 16;
 }
