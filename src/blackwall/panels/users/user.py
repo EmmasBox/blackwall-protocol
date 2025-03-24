@@ -76,6 +76,17 @@ class PanelUserAttributes(VerticalGroup):
             yield RadioButton("Operations",id="base_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards")
             yield RadioButton("Auditor",id="base_auditor")
 
+class PanelUserLevelAndCategory(VerticalGroup):
+    """User attributes component"""
+    def compose(self) -> ComposeResult:
+        with Collapsible(title="Security level and category"):
+            yield Label("Security level:")
+            yield Input(max_length=8,id="base_security_level",classes="field-short-generic",password=True)
+            yield Label("Security category:")
+            yield Input(max_length=8,id="base_security_category",classes="field-short-generic",password=True)
+            yield Label("Security label:")
+            yield Input(max_length=8,id="base_security_label",classes="field-short-generic",password=True)
+
 def get_actual(field: Field) -> tuple[type,bool]:
     # UnionType is 'str | None'
     if isinstance(field.type, UnionType):
@@ -209,6 +220,7 @@ class PanelUser(VerticalScroll):
         yield PanelUserPassword()
         yield PanelUserPassphrase()
         yield PanelUserAttributes()
+        yield PanelUserLevelAndCategory()
         yield PanelUserSegments()
         yield PanelUserActionButtons(save_action="save_user", delete_action="delete_user")
     
