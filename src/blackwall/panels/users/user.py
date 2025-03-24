@@ -72,10 +72,9 @@ class PanelUserAttributes(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
         with Collapsible(title="User attributes"):
-            yield RadioButton("Special",id="base_user_attribute_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option")
-            yield RadioButton("Operations",id="base_user_attribute_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards")
-            yield RadioButton("Auditor",id="base_user_attribute_auditor")
-            yield RadioButton("Read only auditor (ROAUDIT)",id="base_user_attribute_roaudit")
+            yield RadioButton("Special",id="base_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option")
+            yield RadioButton("Operations",id="base_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards")
+            yield RadioButton("Auditor",id="base_auditor")
 
 def get_actual(field: Field) -> tuple[type,bool]:
     # UnionType is 'str | None'
@@ -275,7 +274,7 @@ class PanelUser(VerticalScroll):
         netview_segment = get_traits_from_input(self, prefix="netview", trait_cls=user.NetviewUserTraits)
         result = user.update_user(
             username=username,
-            create=not user.user_exists(username=username),
+            create=not user_exists,
             base=user.BaseUserTraits(
                 owner=owner,
                 name=name,
