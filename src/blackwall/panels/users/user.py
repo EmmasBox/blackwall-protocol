@@ -6,7 +6,7 @@ from typing import get_args
 from textual.widget import Widget
 from textual.reactive import reactive
 from textual.app import ComposeResult
-from textual.widgets import Input, Label, Button, RadioButton, Collapsible
+from textual.widgets import Input, Label, Button, RadioButton, Collapsible, Select
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.api import user
@@ -261,26 +261,7 @@ class PanelUser(VerticalScroll):
         username = self.query_exactly_one(selector="#username").value
         user_exists = user.user_exists(username=username)
         
-        name = self.query_exactly_one(selector="#base_name").value
-        if name == "":
-            name = None
-        owner = self.query_exactly_one(selector="#base_owner").value
-        if owner == "":
-            owner = None
-        default_group = self.query_exactly_one(selector="#base_default_group").value
-        installation_data = self.query_exactly_one(selector="#base_installation_data").value
-        if installation_data == "":
-            installation_data = None
-        password = self.query_exactly_one(selector="#base_password").value
-        if password == "":
-            password = None
-        passphrase = self.query_exactly_one(selector="#base_passphrase").value
-        if passphrase == "":
-            passphrase = None
-
-        special = self.query_exactly_one(selector="#base_user_attribute_special").value
-        operations = self.query_exactly_one(selector="#base_user_attribute_operations").value
-        auditor = self.query_exactly_one(selector="#base_user_attribute_auditor").value
+        base_segment = get_traits_from_input(self, prefix="base", trait_cls=user.BaseUserTraits)
         tso_segment = get_traits_from_input(self, prefix="tso", trait_cls=user.TSOUserTraits)
         omvs_segment = get_traits_from_input(self, prefix="omvs", trait_cls=user.OMVSUserTraits)
         cics_segment = get_traits_from_input(self, prefix="cics", trait_cls=user.CICSUserTraits)
@@ -299,17 +280,7 @@ class PanelUser(VerticalScroll):
         result = user.update_user(
             username=username,
             create=not user_exists,
-            base=user.BaseUserTraits(
-                owner=owner,
-                name=name,
-                default_group=default_group,
-                password=password,
-                passphrase=passphrase,
-                special=special,
-                operations=operations,
-                auditor=auditor,
-                installation_data=installation_data
-                                        ),
+            base=base_segment,
             tso=tso_segment,
             omvs=omvs_segment,
             cics=cics_segment,
