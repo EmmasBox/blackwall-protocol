@@ -15,14 +15,14 @@ except:
 class BaseUserTraits(TraitsBase):
     #primary
     owner: str
-    default_group: str
-    name: str | None = None
-    installation_data: str | None = None
+    default_group: None = field(default=None)
+    name: str | None = field(default=None)
+    installation_data: str | None = field(default=None)
 
     #user attributes
-    special: bool | None = None
-    operations: bool | None = None
-    auditor: bool | None = None
+    special: bool | None = field(default=None)
+    operations: bool | None = field(default=None)
+    auditor: bool | None = field(default=None)
 
     password: str | None = field(default=None, metadata={
         "masked": True,
@@ -34,10 +34,12 @@ class BaseUserTraits(TraitsBase):
         "minimum": 12,
     })
     
-    default_group_authority: str | None = None
-    security_category: str | None = None
-    security_categories: str | None = None
-    class_authorization: str | None = None
+    default_group_authority: str | None = field(default=None)
+    security_category: str | None = field(default=None)
+    security_level: str | None = field(default=None)
+    security_label: str | None = field(default=None)
+    class_authorization: str | None = field(default=None)
+    universal_access: str | None = field(default=None)
 
 @dataclass
 class CICSUserTraits(TraitsBase):
