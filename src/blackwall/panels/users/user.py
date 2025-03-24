@@ -85,7 +85,18 @@ class PanelUserLevelAndCategory(VerticalGroup):
             yield Label("Security category:")
             yield Input(max_length=8,id="base_security_category",classes="field-short-generic")
             yield Label("Security label:")
-            yield Input(max_length=8,id="base_security_label",classes="field-short-generic",password=True)
+            yield Input(max_length=8,id="base_security_label",classes="field-short-generic")
+
+class PanelUserDatasetsAndUACC(VerticalGroup):
+    """User attributes component"""
+    def compose(self) -> ComposeResult:
+        with Collapsible(title="Datasets and UACC"):
+            yield Label("UACC:")
+            yield Select([("NONE", 1),("READ", 2),("EXECUTE", 3),("UPDATE", 4),("CONTROL", 5),("ALTER", 6)],id="universal_access",value=1,classes="uacc-select")
+            yield Label("model dataset:")
+            yield Input(max_length=255,id="base_model_data_set",classes="field-long-generic")
+            yield Label("Group dataset access:")
+            yield Input(max_length=8,id="base_group_data_set_access",classes="field-short-generic")
 
 def get_actual(field: Field) -> tuple[type,bool]:
     # UnionType is 'str | None'
@@ -219,6 +230,7 @@ class PanelUser(VerticalScroll):
         yield PanelUserInstalldata()
         yield PanelUserPassword()
         yield PanelUserPassphrase()
+        yield PanelUserDatasetsAndUACC()
         yield PanelUserAttributes()
         yield PanelUserLevelAndCategory()
         yield PanelUserSegments()
