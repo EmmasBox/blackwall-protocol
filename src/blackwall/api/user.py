@@ -14,7 +14,7 @@ except:
 @dataclass
 class BaseUserTraits(TraitsBase):
     #primary
-    owner: str
+    owner: str | None = field(default=None)
     default_group: None = field(default=None)
     name: str | None = field(default=None)
     installation_data: str | None = field(default=None)
@@ -186,107 +186,107 @@ class WorkattrUserTraits(TraitsBase):
     sysout_room: str | None = field(default=None, metadata={"label": "sysout room", "input_args": {"max_length": 60, "classes": "field-medium-generic"}})
     sysout_email: str | None = field(default=None, metadata={"label": "email", "input_args": {"max_length": 255,"classes": "field-long-generic"}})
 
-if racfu_enabled:
-    #User functions
-    def user_exists(username: str):
-        """Checks if a user exists, returns true or false"""
-        result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username.upper()})
-        return result.result["return_codes"]["racf_return_code"] == 0
-        
-    def user_get(username: str):
-        """Doesn't handle users that don't exist, recommend using user_exists() first"""
-        result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username})
-        return result.result
 
-    def update_user(
-            username: str, 
-            create: bool,
-            base: BaseUserTraits, 
-            cics: CICSUserTraits | None = None, 
-            dce: DCEUserTraits | None = None, 
-            dfp: DFPUserTraits | None = None, 
-            eim: EIMUserTraits | None = None, 
-            language: LanguageUserTraits | None = None, 
-            lnotes: LnotesUserTraits | None = None, 
-            mfa: MfaUserTraits | None = None, 
-            nds: NDSUserTraits | None = None, 
-            netview: NetviewUserTraits | None = None, 
-            omvs: OMVSUserTraits | None = None,
-            operparm: OperparmUserTraits | None = None, 
-            ovm: OvmUserTraits | None = None, 
-            proxy: ProxyUserTraits | None = None, 
-            tso: TSOUserTraits | None = None, 
-            workattr: WorkattrUserTraits | None = None, 
-            ):
-        """Update or creates a new user, returns true if the user was successfully created and false if an error code was given"""
-        traits = base.to_traits(prefix="base")
-        
-        if cics is not None:
-            traits.update(cics.to_traits("cics"))
+#User functions
+def user_exists(username: str):
+    """Checks if a user exists, returns true or false"""
+    result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username.upper()})
+    return result.result["return_codes"]["racf_return_code"] == 0
+    
+def user_get(username: str):
+    """Doesn't handle users that don't exist, recommend using user_exists() first"""
+    result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username})
+    return result.result
 
-        if dce is not None:
-            traits.update(dce.to_traits("dce"))
+def update_user(
+        username: str, 
+        create: bool,
+        base: BaseUserTraits, 
+        cics: CICSUserTraits | None = None, 
+        dce: DCEUserTraits | None = None, 
+        dfp: DFPUserTraits | None = None, 
+        eim: EIMUserTraits | None = None, 
+        language: LanguageUserTraits | None = None, 
+        lnotes: LnotesUserTraits | None = None, 
+        mfa: MfaUserTraits | None = None, 
+        nds: NDSUserTraits | None = None, 
+        netview: NetviewUserTraits | None = None, 
+        omvs: OMVSUserTraits | None = None,
+        operparm: OperparmUserTraits | None = None, 
+        ovm: OvmUserTraits | None = None, 
+        proxy: ProxyUserTraits | None = None, 
+        tso: TSOUserTraits | None = None, 
+        workattr: WorkattrUserTraits | None = None, 
+        ):
+    """Update or creates a new user, returns true if the user was successfully created and false if an error code was given"""
+    traits = base.to_traits(prefix="base")
+    
+    if cics is not None:
+        traits.update(cics.to_traits("cics"))
 
-        if dfp is not None:
-            traits.update(dfp.to_traits("dfp"))
+    if dce is not None:
+        traits.update(dce.to_traits("dce"))
 
-        if eim is not None:
-            traits.update(eim.to_traits("eim"))
+    if dfp is not None:
+        traits.update(dfp.to_traits("dfp"))
 
-        if language is not None:
-            traits.update(language.to_traits("language"))
+    if eim is not None:
+        traits.update(eim.to_traits("eim"))
 
-        if lnotes is not None:
-            traits.update(lnotes.to_traits("lnotes"))
+    if language is not None:
+        traits.update(language.to_traits("language"))
 
-        if mfa is not None:
-            traits.update(mfa.to_traits("mfa"))
+    if lnotes is not None:
+        traits.update(lnotes.to_traits("lnotes"))
 
-        if nds is not None:
-            traits.update(nds.to_traits("nds"))
+    if mfa is not None:
+        traits.update(mfa.to_traits("mfa"))
 
-        if netview is not None:
-            traits.update(netview.to_traits("netview"))
+    if nds is not None:
+        traits.update(nds.to_traits("nds"))
 
-        if omvs is not None:
-            traits.update(omvs.to_traits("omvs"))
+    if netview is not None:
+        traits.update(netview.to_traits("netview"))
 
-        if operparm is not None:
-            traits.update(operparm.to_traits("operparm"))
+    if omvs is not None:
+        traits.update(omvs.to_traits("omvs"))
 
-        if ovm is not None:
-            traits.update(ovm.to_traits("ovm"))
+    if operparm is not None:
+        traits.update(operparm.to_traits("operparm"))
 
-        if proxy is not None:
-            traits.update(proxy.to_traits("proxy"))
+    if ovm is not None:
+        traits.update(ovm.to_traits("ovm"))
 
-        if tso is not None:
-            traits.update(tso.to_traits("tso"))
-        
-        if workattr is not None:
-            traits.update(workattr.to_traits("workattr"))
+    if proxy is not None:
+        traits.update(proxy.to_traits("proxy"))
 
-        if create:
-            operation = "add"
-        else:
-            operation = "alter"
+    if tso is not None:
+        traits.update(tso.to_traits("tso"))
+    
+    if workattr is not None:
+        traits.update(workattr.to_traits("workattr"))
 
-        result = racfu(
-                {
-                    "operation": operation, 
-                    "admin_type": "user", 
-                    "profile_name": username,
-                    "traits":  traits
-                }
-            )
-        return result.result["return_codes"]["racf_return_code"]
+    if create:
+        operation = "add"
+    else:
+        operation = "alter"
 
-    def delete_user(username: str):
-        result = racfu(
-                {
-                    "operation": "delete", 
-                    "admin_type": "user", 
-                    "profile_name": username,
-                }
-            )
-        return result.result["return_codes"]["racf_return_code"] == 0
+    result = racfu(
+            {
+                "operation": operation, 
+                "admin_type": "user", 
+                "profile_name": username,
+                "traits":  traits
+            }
+        )
+    return result.result["return_codes"]["racf_return_code"]
+
+def delete_user(username: str):
+    result = racfu(
+            {
+                "operation": "delete", 
+                "admin_type": "user", 
+                "profile_name": username,
+            }
+        )
+    return result.result["return_codes"]["racf_return_code"] == 0
