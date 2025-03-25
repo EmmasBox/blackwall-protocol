@@ -5,6 +5,9 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.messages import OpenTab
 from blackwall.panels.users.user import PanelUser
+from blackwall.panels.dataset.dataset import PanelDataset
+from blackwall.panels.resource.resource import PanelResource
+from blackwall.panels.analysis.analysis import PanelAnalysis
 
 from importlib.resources import files
 message = files('blackwall.panels.welcome').joinpath('welcome_message.md').read_text()
@@ -22,16 +25,16 @@ class PanelWelcomeActions(VerticalGroup):
         yield Button("Analyse system health", classes="welcome-suggestion-button",action="create_analysis")
 
     async def action_create_dataset(self):
-        pass
+        self.post_message(OpenTab(title="Create dataset profile",content=PanelDataset()))
 
     async def action_create_resource(self):
-        pass
+        self.post_message(OpenTab(title="Create resource profile",content=PanelResource()))
     
     async def action_create_user(self):
         self.post_message(OpenTab(title="Create user",content=PanelUser()))
 
     async def action_create_analysis(self):
-        pass
+        self.post_message(OpenTab(title="Health check",content=PanelAnalysis()))
 
 
 class PanelWelcomeMain(HorizontalGroup):
