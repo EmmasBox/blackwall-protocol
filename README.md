@@ -1,7 +1,7 @@
 #### Stability notice
 This software is still in pre-alpha and under active development, do not use it on production systems. Features might not work yet and there are numerous bugs in the ones that do work to some extent.
 
-![pypi/v/blackwall](https://badgen.net/pypi/v/blackwall) ![pypi/dm/blackwall](https://badgen.net/pypi/v/blackwall) 
+![pypi/v/blackwall](https://badgen.net/pypi/v/blackwall) ![pypi/dm/blackwall](https://badgen.net/pypi/dm/blackwall) 
 
 ![Blackwall Logo](blackwall_banner.svg)
 # Blackwall Protocol
