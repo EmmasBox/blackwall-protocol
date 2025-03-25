@@ -26,6 +26,17 @@ class PanelDatasetAudit(VerticalGroup):
             yield RadioButton(label="UPDATE",id="base_audit_update")
             yield RadioButton(label="CONTROL",id="base_audit_control")
             yield RadioButton(label="ALTER",id="base_audit_alter")
+        
+class PanelDatasetSecurityLevelAndCategories(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Security level and category")
+        with Collapsible(title="Security"):
+            yield Label("Security level:")
+            yield Input(max_length=8,id="base_security_level",classes="field-short-generic")
+            yield Label("Security category:")
+            yield Input(max_length=8,id="base_security_category",classes="field-short-generic")
+            yield Label("Security label:")
+            yield Input(max_length=8,id="base_security_label",classes="field-short-generic")
 
 class PanelDatasetUACC(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -56,4 +67,5 @@ class PanelDataset(VerticalScroll):
         yield PanelDatasetInstallationData()
         yield PanelDatasetUACC()
         yield PanelDatasetAudit()
+        yield PanelDatasetSecurityLevelAndCategories()
         yield PanelDatasetActionButtons()
