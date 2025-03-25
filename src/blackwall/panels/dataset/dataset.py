@@ -18,7 +18,6 @@ class PanelDatasetInstallationData(VerticalGroup):
 
 class PanelDatasetAudit(VerticalGroup):
     def compose(self) -> ComposeResult:
-        yield Label("Audit:")
         with Collapsible(title="Auditing"):
             yield Label("Notify user:")
             yield Input(id="base_notify_userid",max_length=8,classes="field-short-generic") 
