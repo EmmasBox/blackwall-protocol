@@ -60,7 +60,7 @@ if racfu_enabled:
     def dataset_profile_exists(dataset: str):
         """Checks if a dataset profile exists, returns true or false"""
         result = racfu({"operation": "extract", "admin_type": "data-set", "profile_name": dataset.upper()})
-        return result.result["return_codes"]["racf_return_code"] == "0"
+        return result.result["return_codes"]["racf_return_code"] == 0
 
     def dataset_profile_get(dataset: str):
         """Doesn't handle dataset profiles that don't exist, recommend using dataset_profile_exists() first"""
