@@ -21,7 +21,7 @@ class PanelDatasetAudit(VerticalGroup):
         yield Label("Audit:")
         with Collapsible(title="Auditing"):
             yield Label("Notify user:")
-            yield Input(id="base_notify_userid",max_length=8,classes="notify-user") 
+            yield Input(id="base_notify_userid",max_length=8,classes="field-short-generic") 
             yield RadioButton(label="NONE",id="base_audit_none")
             yield RadioButton(label="READ",id="base_audit_read")
             yield RadioButton(label="UPDATE",id="base_audit_update")
