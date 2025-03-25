@@ -65,6 +65,6 @@ class PanelDataset(VerticalScroll):
         yield PanelDatasetName()
         yield PanelDatasetInstallationData()
         yield PanelDatasetUACC()
-        yield PanelDatasetAudit()
         yield PanelDatasetSecurityLevelAndCategories()
+        yield PanelDatasetAudit()
         yield PanelDatasetActionButtons()
