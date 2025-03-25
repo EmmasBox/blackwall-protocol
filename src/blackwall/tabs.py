@@ -2,6 +2,7 @@
 from textual.app import ComposeResult
 from textual.widgets import TabPane, TabbedContent
 from textual.containers import HorizontalGroup
+from textual.reactive import reactive
 
 from .panels.welcome.welcome import PanelWelcome
 from .panels.users.user import PanelUser, UserInfo
@@ -9,6 +10,8 @@ from .panels.search.search import PanelSearch
 from .panels.analysis.analysis import PanelAnalysis
 from .panels.dataset.dataset import PanelDataset
 from .panels.resource.resource import PanelResource
+
+from blackwall.messages import OpenTab
 
 class TabSystem(HorizontalGroup):
     BINDINGS = [
@@ -22,49 +25,38 @@ class TabSystem(HorizontalGroup):
     ]
 
     def compose(self) -> ComposeResult:
-        with TabbedContent():
-            yield TabPane("Welcome!",PanelWelcome())
+        yield TabbedContent()
+
+    def on_mount(self) -> None:
+        self.post_message(OpenTab("Welcome!",PanelWelcome()))
+
+    async def on_open_tab(self, message: OpenTab):
+        message.stop()
+        tabs = self.query_one(TabbedContent)
+        new_tab = TabPane(message.title,message.content)
+        await tabs.add_pane(new_tab)
+        tabs.active = new_tab.id
 
     #Add new tab
     async def action_open_user(self) -> None:
         """Add a new user administration tab."""
-        tabs = self.query_one(TabbedContent)
-        new_user_panel = PanelUser()
-        new_tab = TabPane("User management",new_user_panel)
-        await tabs.add_pane(new_tab)
-        #new_user_panel.user_info = UserInfo(
-        #    username="",
-        #    name="",
-        #)
-        tabs.active = new_tab.id
+        self.post_message(OpenTab("User management",PanelUser()))
 
     async def action_open_dataset(self) -> None:
         """Add a new dataset profile management tab."""
-        tabs = self.query_one(TabbedContent)
-        new_tab = TabPane("Dataset profile mangement",PanelDataset())
-        await tabs.add_pane(new_tab)
-        tabs.active = new_tab.id
+        self.post_message(OpenTab("Dataset profile mangement",PanelDataset()))
 
     async def action_open_resource(self) -> None:
         """Add a new general resource profile management tab."""
-        tabs = self.query_one(TabbedContent)
-        new_tab = TabPane("Resource management",PanelResource())
-        await tabs.add_pane(new_tab)
-        tabs.active = new_tab.id
+        self.post_message(OpenTab("Resource management",PanelResource()))
 
     def action_open_search(self) -> None:
         """Add a new search tab."""
-        tabs = self.query_one(TabbedContent)
-        new_tab = TabPane("Search",PanelSearch())
-        tabs.add_pane(new_tab)
-        tabs.active = new_tab.id
+        self.post_message(OpenTab("Search",PanelSearch()))
 
     def action_open_analysis(self) -> None:
         """Add a new analysis tab."""
-        tabs = self.query_one(TabbedContent)
-        new_tab = TabPane("Health check",PanelAnalysis())
-        tabs.add_pane(new_tab)
-        tabs.active = new_tab.id
+        self.post_message(OpenTab("Health check",PanelAnalysis()))
 
     #Remove current tab
     def action_remove(self) -> None:

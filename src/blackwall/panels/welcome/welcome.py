@@ -3,6 +3,9 @@ from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, Markdown, Collapsible
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
+from blackwall.messages import OpenTab
+from blackwall.panels.users.user import PanelUser
+
 from importlib.resources import files
 message = files('blackwall.panels.welcome').joinpath('welcome_message.md').read_text()
 
@@ -25,7 +28,7 @@ class PanelWelcomeActions(VerticalGroup):
         pass
     
     async def action_create_user(self):
-        pass
+        self.post_message(OpenTab(title="Create user",content=PanelUser()))
 
     async def action_create_analysis(self):
         pass
