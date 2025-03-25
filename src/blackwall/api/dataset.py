@@ -67,8 +67,23 @@ if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "data-set", "profile_name": dataset.upper()})
         return result.result
 
-    def update_dataset_profile():
-        pass
+    def update_dataset_profile(dataset: str, create: bool, base: BaseDatasetTraits):
+        traits = base.to_traits(prefix="base")
+        
+        if create:
+            operation = "add"
+        else:
+            operation = "alter"
+        
+        result = racfu(
+            {
+                "operation": operation, 
+                "admin_type": "data-set", 
+                "profile_name": dataset,
+                "traits":  traits
+            }
+        )
+        return result.result["return_codes"]["racf_return_code"]
 
     def delete_dataset_profile(dataset: str):
         result = racfu(
