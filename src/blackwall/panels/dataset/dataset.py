@@ -29,9 +29,8 @@ class PanelDatasetAudit(VerticalGroup):
         
 class PanelDatasetSecurityLevelAndCategories(VerticalGroup):
     def compose(self) -> ComposeResult:
-        yield Label("Security level and category")
         with Collapsible(title="Security"):
-            yield Label("Security level:")
+            yield Label("Security level and category")
             yield Input(max_length=8,id="base_security_level",classes="field-short-generic")
             yield Label("Security category:")
             yield Input(max_length=8,id="base_security_category",classes="field-short-generic")
