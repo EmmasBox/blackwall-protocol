@@ -1,6 +1,8 @@
 #### Stability notice
 This software is still in pre-alpha and under active development, do not use it on production systems. Features might not work yet and there are numerous bugs in the ones that do work to some extent.
 
+![pypi/v/blackwall](https://badgen.net/#pypi/v/blackwall) ![pypi/dm/blackwall](https://badgen.net/#pypi/v/blackwall) 
+
 ![Blackwall Logo](blackwall_banner.svg)
 # Blackwall Protocol
 Blackwall Protocol is a terminal based administration panel for RACF. The goal of Blackwall is to create a more modern and open source alternative to zSecure. Blackwall does not support ACF2 or Top Secret and never will, people are more than welcome to fork it and create their own versions however.
@@ -23,5 +25,10 @@ Blackwall Protocol is a terminal based administration panel for RACF. The goal o
 ## Installation
 As mentioned in dependencies before you install you will have to install Python and ZOAU yourself. You also manually need to make sure IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space are configured. Textual and RACFU are bundled with the program and thus do not need to be installed manually via pip.
 
-## VS Code
-If you plan to use this application via a VS Code terminal you must set minimum contrast ratio to 1, otherwise certain UI elements will not be displayed correctly causing a degraded user experience
+## Supported terminals
+
+| Terminal         | Supported | Notes |
+|------------------|-----------|-------|
+| VS Code          | Yes*          |You must set minimum contrast ratio to 1, otherwise certain UI elements will not be displayed correctly causing a degraded user experience       |
+| Windows Terminal | Yes          |       |
+| Blackbox         | Yes          |       |
