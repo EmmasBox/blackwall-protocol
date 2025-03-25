@@ -1,7 +1,7 @@
 from dataclasses import dataclass, fields, Field
 
 from textual.app import ComposeResult
-from textual.widgets import Button, Label, Select, Input, Collapsible
+from textual.widgets import Button, Label, Select, Input, Collapsible, RadioButton
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll, Horizontal, Right
 
 from blackwall.panels.panel_mode import PanelMode
@@ -19,7 +19,13 @@ class PanelDatasetInstallationData(VerticalGroup):
 class PanelDatasetAudit(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Audit:")
-        yield Select([("ALL", 1),("FAILURES", 2),("NONE", 3),("SUCCESS", 4)],value=2,classes="uacc-select")
+        with Collapsible(title="Auditing"):
+            yield Input(id="base_notify_userid",max_length=8,classes="notify-user") 
+            yield RadioButton(label="NONE",id="base_audit_none")
+            yield RadioButton(label="READ",id="base_audit_read")
+            yield RadioButton(label="UPDATE",id="base_audit_update")
+            yield RadioButton(label="CONTROL",id="base_audit_control")
+            yield RadioButton(label="ALTER",id="base_audit_alter")
 
 class PanelDatasetUACC(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -30,12 +36,6 @@ class PanelDatasetNotify(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Notify user:")
         yield Input(id="base_notify_userid",max_length=8,classes="notify-user") 
-
-class PanelDatasetAccessSettings(HorizontalGroup):
-    def compose(self) -> ComposeResult:
-        yield PanelDatasetUACC()
-        yield PanelDatasetAudit()
-        yield PanelDatasetNotify()
 
 class PanelDatasetActionButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -54,5 +54,6 @@ class PanelDataset(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield PanelDatasetName()
         yield PanelDatasetInstallationData()
-        yield PanelDatasetAccessSettings()
+        yield PanelDatasetUACC()
+        yield PanelDatasetAudit()
         yield PanelDatasetActionButtons()
