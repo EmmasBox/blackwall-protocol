@@ -1,6 +1,10 @@
+from dataclasses import dataclass, fields, Field
+
 from textual.app import ComposeResult
 from textual.widgets import Button, Label, Select, Input, Collapsible
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll, Horizontal, Right
+
+from blackwall.panels.panel_mode import PanelMode
 
 class PanelDatasetName(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -41,6 +45,10 @@ class PanelDatasetActionButtons(HorizontalGroup):
 class PanelDatasetVolume(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Input(id="base_volume")
+
+@dataclass
+class DatasetInfo:
+    mode: PanelMode = PanelMode.create
 
 class PanelDataset(VerticalScroll):
     def compose(self) -> ComposeResult:
