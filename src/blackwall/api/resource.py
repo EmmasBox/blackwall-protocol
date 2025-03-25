@@ -20,6 +20,7 @@ if racfu_enabled:
 
     def resource_profile_get(resource_class: str,resource: str):
         """Doesn't handle general resource profiles that don't exist, recommend using resource_profile_exists() first"""
+        #TODO reprogram this bad function
         result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource})
         return result.result
 

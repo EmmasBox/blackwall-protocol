@@ -63,6 +63,7 @@ if racfu_enabled:
         return result.result["return_codes"]["racf_return_code"] == 0
 
     def dataset_profile_get(dataset: str):
+        #TODO reprogram this bad function
         """Doesn't handle dataset profiles that don't exist, recommend using dataset_profile_exists() first"""
         result = racfu({"operation": "extract", "admin_type": "data-set", "profile_name": dataset.upper()})
         return result.result
