@@ -197,13 +197,8 @@ def get_traits_from_input(operator: str, widget: Widget, prefix: str, trait_cls:
     for field in fields(trait_cls):
         actual_type, optional = get_actual(field)
         allowed_in = field.metadata.get("allowed_in")
-        if allowed_in is not None:
-            valid_for_operator = operator in allowed_in
-
-            if not valid_for_operator:
-                continue    
-        else:
-            valid_for_operator = True
+        if allowed_in is not None and operator not in allowed_in:
+            continue
 
         input_id = f"#{prefix}_{field.name}"
         try:
@@ -269,22 +264,22 @@ class PanelUser(VerticalScroll):
         else:
             operator = "add"
         
-        base_segment = get_traits_from_input(self, operator, prefix="base", trait_cls=user.BaseUserTraits)
-        tso_segment = get_traits_from_input(self, operator, prefix="tso", trait_cls=user.TSOUserTraits)
-        omvs_segment = get_traits_from_input(self, operator, prefix="omvs", trait_cls=user.OMVSUserTraits)
-        cics_segment = get_traits_from_input(self, operator, prefix="cics", trait_cls=user.CICSUserTraits)
-        workattr_segment = get_traits_from_input(self, operator, prefix="workattr", trait_cls=user.WorkattrUserTraits)
-        language_segment = get_traits_from_input(self, operator, prefix="language", trait_cls=user.LanguageUserTraits)
-        dfp_segment = get_traits_from_input(self, operator, prefix="dfp", trait_cls=user.DFPUserTraits)
-        dce_segment = get_traits_from_input(self, operator, prefix="dce", trait_cls=user.DCEUserTraits)
-        proxy_segment = get_traits_from_input(self, operator, prefix="proxy", trait_cls=user.ProxyUserTraits)
-        operparm_segment = get_traits_from_input(self, operator, prefix="operparm", trait_cls=user.OperparmUserTraits)
-        ovm_segment = get_traits_from_input(self, operator, prefix="ovm", trait_cls=user.OvmUserTraits)
-        eim_segment = get_traits_from_input(self, operator, prefix="eim", trait_cls=user.EIMUserTraits)
-        nds_segment = get_traits_from_input(self, operator, prefix="nds", trait_cls=user.NDSUserTraits)
-        lnotes_segment = get_traits_from_input(self, operator, prefix="lnotes", trait_cls=user.LnotesUserTraits)
-        mfa_segment = get_traits_from_input(self, operator, prefix="mfa", trait_cls=user.MfaUserTraits)
-        netview_segment = get_traits_from_input(self, operator, prefix="netview", trait_cls=user.NetviewUserTraits)
+        base_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=user.BaseUserTraits)
+        tso_segment = get_traits_from_input(operator, self, prefix="tso", trait_cls=user.TSOUserTraits)
+        omvs_segment = get_traits_from_input(operator, self, prefix="omvs", trait_cls=user.OMVSUserTraits)
+        cics_segment = get_traits_from_input(operator, self, prefix="cics", trait_cls=user.CICSUserTraits)
+        workattr_segment = get_traits_from_input(operator, self, prefix="workattr", trait_cls=user.WorkattrUserTraits)
+        language_segment = get_traits_from_input(operator, self, prefix="language", trait_cls=user.LanguageUserTraits)
+        dfp_segment = get_traits_from_input(operator, self, prefix="dfp", trait_cls=user.DFPUserTraits)
+        dce_segment = get_traits_from_input(operator, self, prefix="dce", trait_cls=user.DCEUserTraits)
+        proxy_segment = get_traits_from_input(operator, self, prefix="proxy", trait_cls=user.ProxyUserTraits)
+        operparm_segment = get_traits_from_input(operator, self, prefix="operparm", trait_cls=user.OperparmUserTraits)
+        ovm_segment = get_traits_from_input(operator, self, prefix="ovm", trait_cls=user.OvmUserTraits)
+        eim_segment = get_traits_from_input(operator, self, prefix="eim", trait_cls=user.EIMUserTraits)
+        nds_segment = get_traits_from_input(operator, self, prefix="nds", trait_cls=user.NDSUserTraits)
+        lnotes_segment = get_traits_from_input(operator, self, prefix="lnotes", trait_cls=user.LnotesUserTraits)
+        mfa_segment = get_traits_from_input(operator, self, prefix="mfa", trait_cls=user.MfaUserTraits)
+        netview_segment = get_traits_from_input(operator, self, prefix="netview", trait_cls=user.NetviewUserTraits)
         result = user.update_user(
             username=username,
             create=not user_exists,
