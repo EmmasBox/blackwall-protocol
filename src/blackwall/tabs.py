@@ -14,11 +14,11 @@ from blackwall.messages import OpenTab
 
 class TabSystem(HorizontalGroup):
     BINDINGS = [
-        ("u", "open_user", "Open user tab"),
-        ("f", "open_search", "Open search tab"),
-        ("l", "open_analysis", "Open analysis tab"),
-        ("x", "open_dataset", "Open dataset profile tab"),
-        ("g", "open_resource", "Open resource profile tab"),
+        ("ctrl+u", "open_user", "Open user tab"),
+        ("ctrl+f", "open_search", "Open search tab"),
+        ("ctrl+a", "open_analysis", "Open analysis tab"),
+        ("ctrl+d", "open_dataset", "Open dataset profile tab"),
+        ("ctrl+g", "open_resource", "Open resource profile tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
     ]
