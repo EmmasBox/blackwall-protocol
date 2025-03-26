@@ -3,6 +3,7 @@ from collections.abc import Generator
 from dataclasses import dataclass, fields, Field
 from types import UnionType
 from typing import get_args
+from textual.lazy import Lazy
 from textual.widget import Widget
 from textual.reactive import reactive
 from textual.app import ComposeResult
@@ -55,7 +56,7 @@ class PanelUserInstalldata(HorizontalGroup):
 class PanelUserPassword(VerticalGroup):
     """Change/add password component"""
     def compose(self) -> ComposeResult:
-        with Collapsible(title="Password"):
+        with Lazy(widget=Collapsible(title="Password")):
             yield Label("Passwords can only be 8 characters long")
             yield Label("New password:")
             yield Input(max_length=8,id="base_password",classes="password",password=True)
@@ -63,7 +64,7 @@ class PanelUserPassword(VerticalGroup):
 class PanelUserPassphrase(VerticalGroup):
     """Change/add passphrase component"""
     def compose(self) -> ComposeResult:
-        with Collapsible(title="Passphrase"):
+        with Lazy(widget=Collapsible(title="Passphrase")):
             yield Label("Passphrases need to be between 12 and 100 characaters long")
             yield Label("New passphrase:")
             yield Input(max_length=100,id="base_passphrase",classes="passphrase",password=True)
@@ -71,7 +72,7 @@ class PanelUserPassphrase(VerticalGroup):
 class PanelUserAttributes(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
-        with Collapsible(title="User attributes"):
+        with Lazy(widget=Collapsible(title="User attributes")):
             yield RadioButton("Special",id="base_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option")
             yield RadioButton("Operations",id="base_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards")
             yield RadioButton("Auditor",id="base_auditor")
@@ -79,7 +80,7 @@ class PanelUserAttributes(VerticalGroup):
 class PanelUserLevelAndCategory(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
-        with Collapsible(title="Security level and category"):
+        with Lazy(widget=Collapsible(title="Security level and category")):
             yield Label("Security level:")
             yield Input(max_length=8,id="base_security_level",classes="field-short-generic")
             yield Label("Security category:")
@@ -90,7 +91,7 @@ class PanelUserLevelAndCategory(VerticalGroup):
 class PanelUserDatasetsAndUACC(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
-        with Collapsible(title="Datasets and UACC"):
+        with Lazy(widget=Collapsible(title="Datasets and UACC")):
             yield Label("UACC:")
             yield Select([("NONE", 1),("READ", 2),("EXECUTE", 3),("UPDATE", 4),("CONTROL", 5),("ALTER", 6)],id="universal_access",value=1,classes="uacc-select")
             yield Label("model dataset:")
@@ -114,7 +115,7 @@ def get_actual(field: Field) -> tuple[type,bool]:
     return actual_type, optional
 
 def generate_trait_inputs(title: str, prefix: str, traits_class: type[user.TraitsBase]) -> Generator:
-    with Collapsible(title=title):
+    with Lazy(widget=Collapsible(title=title)):
         for field in fields(traits_class):
             label = field.metadata.get("label")
             # only show an input field if it is labelled
@@ -137,7 +138,7 @@ def generate_trait_inputs(title: str, prefix: str, traits_class: type[user.Trait
 class PanelUserSegments(VerticalGroup):
     """Component where the user can add segments such as the OMVS segment"""
     def compose(self) -> ComposeResult:
-        with Collapsible(title="User segments"):
+        with Lazy(widget=Collapsible(title="User segments")):
             yield from generate_trait_inputs(title="TSO", prefix="tso", traits_class=user.TSOUserTraits)
             yield from generate_trait_inputs(title="OMVS", prefix="omvs", traits_class=user.OMVSUserTraits)
             yield from generate_trait_inputs(title="Work attributes", prefix="workattr", traits_class=user.WorkattrUserTraits)
