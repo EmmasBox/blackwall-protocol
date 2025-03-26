@@ -14,6 +14,7 @@ class PanelHistory(VerticalScroll):
     @on(CommandHistory)
     async def on_command_history(self, message: CommandHistory):
         log = self.query_one(expect_type=Log,selector="#command_log")
+        self.notify("test")
         log.clear()
         log.write(message.history)
 
