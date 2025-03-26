@@ -190,8 +190,9 @@ class WorkattrUserTraits(TraitsBase):
 #User functions
 def user_exists(username: str):
     """Checks if a user exists, returns true or false"""
-    result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username.upper()})
-    return result.result["return_codes"]["racf_return_code"] == 0
+    if racfu_enabled:
+        result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username.upper()})
+        return result.result["return_codes"]["racf_return_code"] == 0
     
 def user_get(username: str):
     """Doesn't handle users that don't exist, recommend using user_exists() first"""
