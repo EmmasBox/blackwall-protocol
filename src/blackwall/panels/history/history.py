@@ -12,7 +12,7 @@ class PanelHistory(VerticalScroll):
         yield Log()
 
     @on(CommandHistory)
-    def on_command_history(self, message: CommandHistory):
+    async def on_command_history(self, message: CommandHistory):
         log = self.query_one(Log)
         log.clear()
         log.write(message.history)
