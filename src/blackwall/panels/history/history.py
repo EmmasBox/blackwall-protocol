@@ -11,9 +11,10 @@ class PanelHistory(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield CommandHistoryWidget()
 
-    async def on_command_history(self, message: CommandHistory):
+    def on_command_history(self, message: CommandHistory):
         log = self.query_one(Log)
         log.clear()
+        self.notify(message.history)
         log.write(message.history)
 
 
