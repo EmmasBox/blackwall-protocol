@@ -197,13 +197,14 @@ def get_traits_from_input(add_mode: bool, widget: Widget, prefix: str, trait_cls
     for field in fields(trait_cls):
         actual_type, optional = get_actual(field)
         alowed_in = field.metadata.get("allowed_in")
-        if add_mode is True:
-            valid_for_operator = "add" in alowed_in
-        else:
-            valid_for_operator = "alter" in alowed_in
+        if alowed_in != None:
+            if add_mode is True:
+                valid_for_operator = "add" in alowed_in
+            else:
+                valid_for_operator = "alter" in alowed_in
 
-        if not valid_for_operator:
-            continue
+            if not valid_for_operator:
+                continue
 
         input_id = f"#{prefix}_{field.name}"
         try:
