@@ -125,13 +125,13 @@ def generate_trait_inputs(title: str, prefix: str, traits_class: type[user.Trait
 
                 input_id = f"{prefix}_{field.name}"
 
-                if actual_type == str:
+                if actual_type is str:
                     yield Label(f"{label}{'*' if not optional else ''}:")
                     yield Input(id=input_id, **input_args)
-                elif actual_type == int:
+                elif actual_type is int:
                     yield Label(f"{label}{'*' if not optional else ''}:")
                     yield Input(id=input_id, type="integer", **input_args)
-                elif actual_type == bool:
+                elif actual_type is bool:
                     yield RadioButton(label=label, id=input_id, **input_args)
 
 class PanelUserSegments(VerticalGroup):
