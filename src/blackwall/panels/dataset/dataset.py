@@ -104,7 +104,13 @@ class PanelDataset(VerticalScroll):
     def action_save_dataset_profile(self) -> None:
         dataset_name = self.query_exactly_one(selector="#dataset_name").value
         dataset_profile_exists = dataset.dataset_profile_exists(dataset=dataset_name)
-        base_segment = get_traits_from_input(self, prefix="base", trait_cls=dataset.BaseDatasetTraits)
+        
+        if dataset_profile_exists:
+            operator = "alter"
+        else:
+            operator = "add"
+
+        base_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=dataset.BaseDatasetTraits)
         result = dataset.update_dataset_profile(
             dataset=dataset_name,
             create=not dataset_profile_exists,
