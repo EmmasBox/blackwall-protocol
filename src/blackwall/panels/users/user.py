@@ -159,7 +159,7 @@ class PanelUserActionButtons(HorizontalGroup):
     """Action buttons"""
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
 
-    if edit_mode == True:
+    if edit_mode is True:
         delete_is_disabled = False
     else:
         delete_is_disabled = True
