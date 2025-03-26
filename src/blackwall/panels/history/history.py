@@ -11,7 +11,7 @@ class PanelHistory(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield CommandHistoryWidget()
 
-    async def on_open_tab(self, message: CommandHistory):
+    async def on_command_history(self, message: CommandHistory):
         log = self.query_one(Log)
         log.clear()
         log.write(message.history)
