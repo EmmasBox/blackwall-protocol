@@ -10,6 +10,7 @@ Blackwall Protocol is a terminal based administration panel for RACF. The goal o
 ## Features
 - Execute TSO commands
 - Create and modify users
+- Create and modify dataset profiles
 
 ## Dependencies
 ### Required dependencies:
