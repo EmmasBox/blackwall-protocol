@@ -63,6 +63,6 @@ class TSOCommandField(HorizontalGroup):
                 output = subprocess.run(f'tsocmd "{command}"' , shell=True, check=True, capture_output=True,encoding="utf-8")
                 command_history = command_history + generate_command_meta_header(command) + output.stdout
                 self.notify(f"command {command.upper()} successfully completed",severity="information")
-                self.post_message(CommandHistory(history=command_history))
+                self.post_message(CommandHistory(command_history))
             except BaseException as e:
                 self.notify(f"Command {command.upper()} failed: {e}",severity="error")
