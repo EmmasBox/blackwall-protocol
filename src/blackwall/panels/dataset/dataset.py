@@ -3,9 +3,8 @@ from types import UnionType
 from typing import get_args
 
 from textual.app import ComposeResult
-from textual.widget import Widget
 from textual.widgets import Button, Label, Select, Input, Collapsible, RadioButton
-from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll, Horizontal, Right
+from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.reactive import reactive
 
 from blackwall.panels.traits_ui import get_traits_from_input
@@ -104,7 +103,7 @@ class PanelDataset(VerticalScroll):
     def action_save_dataset_profile(self) -> None:
         dataset_name = self.query_exactly_one(selector="#dataset_name").value
         dataset_profile_exists = dataset.dataset_profile_exists(dataset=dataset_name)
-        
+
         if dataset_profile_exists:
             operator = "alter"
         else:
