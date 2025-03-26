@@ -75,8 +75,8 @@ class EIMUserTraits(TraitsBase):
 class KerbUserTraits(TraitsBase):
     encryption_algorithm: str | None = field(default=None, metadata={"label": "encryption algorithm", "input_args": {"max_length": 255,"classes": "field-long-generic"}})
     name: str | None = field(default=None, metadata={"label": "name", "input_args": {"max_length": 255,"classes": "field-long-generic"}})
-    key_from: str | None = field(default=None, metadata={"label": "key from", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
-    key_version: str | None = field(default=None, metadata={"label": "key version", "input_args": {"max_length": 3,"classes": "field-short-generic"}})
+    key_from: str | None = field(default=None, metadata={"allowed_in": {"extract"}, "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    key_version: str | None = field(default=None, metadata={"allowed_in": {"extract"}, "input_args": {"max_length": 3,"classes": "field-short-generic"}})
     max_ticket_life: int | None = field(default=None, metadata={"label": "max ticket life", "input_args": {"max_length": 16,"classes": "field-medium-generic"}})
 
 @dataclass
