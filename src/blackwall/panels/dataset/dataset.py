@@ -82,15 +82,15 @@ def get_traits_from_input(widget: Widget, prefix: str, trait_cls: user.TraitsBas
         except:
             field_value = None
 
-        if actual_type == str:
+        if actual_type is str:
             if field_value == "":
                 field_value = None
-        elif actual_type == int:
+        elif actual_type is int:
             if field_value == "" or field_value == 0 or field_value is None:
                 field_value = None
             else:
                 field_value = int(field_value)
-        elif actual_type == bool:
+        elif actual_type is bool:
             if field_value is False:
                 field_value = None
         setattr(value, field.name, field_value)
