@@ -2,7 +2,6 @@
 from textual.app import ComposeResult
 from textual.widgets import TabPane, TabbedContent
 from textual.containers import HorizontalGroup
-from textual.reactive import reactive
 
 from .panels.welcome.welcome import PanelWelcome
 from .panels.users.user import PanelUser, UserInfo
