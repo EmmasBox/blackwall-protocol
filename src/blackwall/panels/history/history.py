@@ -9,11 +9,11 @@ from blackwall.messages import CommandHistory
 
 class PanelHistory(VerticalScroll):
     def compose(self) -> ComposeResult:
-        yield Log().write(command_history)
+        yield Log(id="command_log")
 
     @on(CommandHistory)
     async def on_command_history(self, message: CommandHistory):
-        log = self.query_one(Log)
+        log = self.query_one(expect_type=Log,selector="#command_log")
         log.clear()
         log.write(message.history)
 
