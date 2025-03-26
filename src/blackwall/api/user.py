@@ -114,8 +114,8 @@ class NetviewUserTraits(TraitsBase):
 @dataclass
 class OMVSUserTraits(TraitsBase):
     uid: int | None = field(default=None, metadata={"label": "uid", "input_args": {"classes": "field-long-generic"}})
-    auto_uid: bool | None = field(default=None, metadata={"label": "auto uid"})
-    shared: bool | None = field(default=None, metadata={"label": "shared"})
+    auto_uid: bool | None = field(default=None, metadata={"label": "auto uid", "invalid_values": {False}})
+    shared: bool | None = field(default=None, metadata={"label": "shared", "invalid_values": {False}})
     home_directory: str | None = field(default=None, metadata={"label": "home directory", "input_args": {"classes": "field-long-generic"}})
     default_shell: str | None = field(default=None, metadata={"label": "default shell", "input_args": {"classes": "field-long-generic"}})
     max_address_space_size: int | None = field(default=None, metadata={"label": "max address space size", "input_args": {"classes": "field-long-generic"}})

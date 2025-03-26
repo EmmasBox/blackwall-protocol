@@ -50,6 +50,7 @@ def get_traits_from_input(operator: str, widget: Widget, prefix: str, trait_cls:
     for field in fields(trait_cls):
         actual_type, optional = get_actual(field)
         allowed_in = field.metadata.get("allowed_in")
+        invalid_values = field.metadata.get("invalid_values")
         if allowed_in is not None and operator not in allowed_in:
             continue
 
@@ -67,6 +68,9 @@ def get_traits_from_input(operator: str, widget: Widget, prefix: str, trait_cls:
                 field_value = None
             else:
                 field_value = int(field_value)
+
+        if invalid_values is not None and field_value in invalid_values: 
+            field_value = None
 
         setattr(value, field.name, field_value)
     return value
