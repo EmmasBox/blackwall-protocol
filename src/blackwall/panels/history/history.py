@@ -13,7 +13,6 @@ class PanelHistory(VerticalScroll):
 
     @on(CommandHistory)
     def on_command_history(self, message: CommandHistory):
-        message.stop()
         log = self.query_one(Log)
         log.clear()
         log.write(message.history)
