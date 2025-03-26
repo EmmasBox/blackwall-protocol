@@ -12,9 +12,9 @@ class PanelHistory(VerticalScroll):
         yield CommandHistoryWidget()
 
     def on_command_history(self, message: CommandHistory):
+        message.stop()
         log = self.query_one(Log)
         log.clear()
-        self.notify(message.history)
         log.write(message.history)
 
 
