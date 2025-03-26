@@ -71,7 +71,7 @@ def get_actual(field: Field) -> tuple[type,bool]:
         actual_type = field.type
     return actual_type, optional
 
-def get_traits_from_input(widget: Widget, prefix: str, trait_cls: user.TraitsBase):
+def get_traits_from_input(widget: Widget, prefix: str, trait_cls: dataset.TraitsBase):
     value = trait_cls()
     for field in fields(trait_cls):
         actual_type, optional = get_actual(field)
