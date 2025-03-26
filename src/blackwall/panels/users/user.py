@@ -197,7 +197,7 @@ def get_traits_from_input(operator: str, widget: Widget, prefix: str, trait_cls:
     for field in fields(trait_cls):
         actual_type, optional = get_actual(field)
         allowed_in = field.metadata.get("allowed_in")
-        if allowed_in is set:
+        if allowed_in is not None:
             valid_for_operator = operator in allowed_in
 
             if not valid_for_operator:
