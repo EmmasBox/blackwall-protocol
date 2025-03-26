@@ -59,7 +59,7 @@ class TabSystem(HorizontalGroup):
         """Add a new analysis tab."""
         self.post_message(OpenTab("Health check",PanelAnalysis()))
 
-    def action_open_history(self)
+    def action_open_history(self) -> None:
         """Add a new history tab."""
         self.post_message(OpenTab("Command history",PanelHistory()))
 
