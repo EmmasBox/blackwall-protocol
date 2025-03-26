@@ -9,7 +9,7 @@ from blackwall.messages import CommandHistory
 
 class PanelHistory(VerticalScroll):
     def compose(self) -> ComposeResult:
-        yield Log()
+        yield Log().write(command_history)
 
     @on(CommandHistory)
     async def on_command_history(self, message: CommandHistory):
