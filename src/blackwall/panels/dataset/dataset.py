@@ -1,5 +1,6 @@
 from dataclasses import dataclass, fields, Field
 from types import UnionType
+from typing import get_args
 
 from textual.app import ComposeResult
 from textual.widget import Widget
