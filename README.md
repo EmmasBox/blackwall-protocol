@@ -13,13 +13,17 @@ Blackwall Protocol is a terminal based administration panel for RACF. The goal o
 
 ## Dependencies
 ### Required dependencies:
+#### System dependencies
 - z/OS 2.4 or later
+- OpenSSH installed and configured on z/OS (for connecting to z/OS Unix, OMVS in ISPF won't work)
 - Python 3.13 or later
+#### Python packages
 - Textual (For UI, bundled with the program)
 - [RACFU](https://github.com/ambitus/racfu) (To communicate with RACF, bundled with the program)
   - RACFU being a dependency also indirectly also means you need the IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space configured
 
 ### Optional dependencies:
+#### Python packages
 - [ZOAU 1.3.4.x or later](https://www.ibm.com/docs/en/zoau/1.3.x) (For gathering system information like LPAR name, not required but highly recommended)
 
 ## Installation
