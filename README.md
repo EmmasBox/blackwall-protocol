@@ -32,10 +32,28 @@ As mentioned in dependencies before you install you will have to install Python 
 ```
 pip install blackwall
 ```
-or if your environment is airgapped download the .whl package and run the pip command in the folder with the .whl file like so:
+or if your environment is airgapped upload the .whl package to the machine through other means and run the pip command in the folder with the .whl file like so:
 ```
 pip install blackwall-<REPLACE WITH VERSION>-py3-none-any.whl 
 ```
+
+## Required permission
+Make sure each user that is supposed to use this software has access to the following RACF profiles:
+IRR.RADMIN.LISTUSER
+IRR.RADMIN.LISTGRP
+IRR.RADMIN.RLIST
+IRR.RADMIN.LISTDSD
+IRR.RADMIN.SETROPTS.LIST
+IRR.IRRSMO00.PRECHECK
+
+| Profile             | Reason |
+|---------------------|--------|
+| IRR.RADMIN.LISTUSER | Needed to extract user information       |
+| IRR.RADMIN.LISTGRP  | Needed to extract group information       |
+| IRR.RADMIN.RLIST    | Needed to extract general resource profile information       |
+| IRR.RADMIN.LISTDSD   | Needed to extract dataset profile information     |
+| IRR.RADMIN.SETROPTS.LIST | Needed to extract RACF system settings     |
+| IRR.IRRSMO00.PRECHECK    | Needed to create new profiles in RACF and modify things     |
 
 ## Supported terminals
 Not all terminals are capable of displaying advanced TUI applications. Below is a list of terminals that have been tested and whether they work or not.
