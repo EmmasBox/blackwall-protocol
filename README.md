@@ -40,14 +40,14 @@ pip install blackwall-<REPLACE WITH VERSION>-py3-none-any.whl
 ## Required permissions
 Make sure each user that is supposed to use this software has access to the following RACF profiles:
 
-| Profile             | Reason |
-|---------------------|--------|
-| IRR.RADMIN.LISTUSER | Needed to extract user information       |
-| IRR.RADMIN.LISTGRP  | Needed to extract group information       |
-| IRR.RADMIN.RLIST    | Needed to extract general resource profile information       |
-| IRR.RADMIN.LISTDSD   | Needed to extract dataset profile information     |
-| IRR.RADMIN.SETROPTS.LIST | Needed to extract RACF system settings     |
-| IRR.IRRSMO00.PRECHECK    | Needed to create new profiles in RACF and modify things     |
+| Profile             | Access | Reason |
+|---------------------|--------|--------|
+| IRR.RADMIN.LISTUSER | Read   |Needed to extract user information       |
+| IRR.RADMIN.LISTGRP  | Read   |Needed to extract group information       |
+| IRR.RADMIN.RLIST    | Read   |Needed to extract general resource profile information       |
+| IRR.RADMIN.LISTDSD   | Read   |Needed to extract dataset profile information     |
+| IRR.RADMIN.SETROPTS.LIST | Read   |Needed to extract RACF system settings     |
+| IRR.IRRSMO00.PRECHECK    | Update   |Needed to create new profiles in RACF and modify things     |
 
 ## Supported terminals
 Not all terminals are capable of displaying advanced TUI applications. Below is a list of terminals that have been tested and whether they work or not.
