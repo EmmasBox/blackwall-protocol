@@ -76,43 +76,45 @@ except:
     print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")    
     racfu_enabled = False
 
-if racfu_enabled:
-    #Dataset functions
-    def dataset_profile_exists(dataset: str):
-        """Checks if a dataset profile exists, returns true or false"""
+
+#Dataset functions
+def dataset_profile_exists(dataset: str):
+    """Checks if a dataset profile exists, returns true or false"""
+    if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "data-set", "profile_name": dataset.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
 
-    def dataset_profile_get(dataset: str):
-        #TODO reprogram this bad function
-        """Doesn't handle dataset profiles that don't exist, recommend using dataset_profile_exists() first"""
+def dataset_profile_get(dataset: str):
+    #TODO reprogram this bad function
+    """Doesn't handle dataset profiles that don't exist, recommend using dataset_profile_exists() first"""
+    if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "data-set", "profile_name": dataset.upper()})
         return result.result
 
-    def update_dataset_profile(dataset: str, create: bool, base: BaseDatasetTraits):
-        traits = base.to_traits(prefix="base")
-        
-        if create:
-            operation = "add"
-        else:
-            operation = "alter"
-        
-        result = racfu(
+def update_dataset_profile(dataset: str, create: bool, base: BaseDatasetTraits):
+    traits = base.to_traits(prefix="base")
+    
+    if create:
+        operation = "add"
+    else:
+        operation = "alter"
+    
+    result = racfu(
+        {
+            "operation": operation, 
+            "admin_type": "data-set", 
+            "profile_name": dataset,
+            "traits":  traits
+        }
+    )
+    return result.result["return_codes"]["racf_return_code"]
+
+def delete_dataset_profile(dataset: str):
+    result = racfu(
             {
-                "operation": operation, 
+                "operation": "delete", 
                 "admin_type": "data-set", 
-                "profile_name": dataset,
-                "traits":  traits
+                "profile_name": dataset.upper(),
             }
         )
-        return result.result["return_codes"]["racf_return_code"]
-
-    def delete_dataset_profile(dataset: str):
-        result = racfu(
-                {
-                    "operation": "delete", 
-                    "admin_type": "data-set", 
-                    "profile_name": dataset.upper(),
-                }
-            )
-        return result.result["return_codes"]["racf_return_code"] == 0
+    return result.result["return_codes"]["racf_return_code"] == 0
