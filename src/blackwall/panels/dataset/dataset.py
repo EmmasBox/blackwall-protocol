@@ -8,6 +8,8 @@ from textual.widgets import Button, Label, Select, Input, Collapsible, RadioButt
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll, Horizontal, Right
 from textual.reactive import reactive
 
+from blackwall.panels.traits_ui import get_traits_from_input
+
 from blackwall.panels.panel_mode import PanelMode
 
 from blackwall.api import dataset
@@ -61,46 +63,6 @@ class PanelDatasetNotify(VerticalGroup):
 class PanelDatasetVolume(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Input(id="base_volume")
-
-def get_actual(field: Field) -> tuple[type,bool]:
-    # UnionType is 'str | None'
-    if isinstance(field.type, UnionType):
-        # parse out actual type out of optional type
-        # will be tuple (type(str), type(None))
-        args = get_args(field.type)
-        # the field is optional if type args contains 'type(None)'
-        optional = type(None) in args
-        # the actual type is the first non-'type(None)' in args
-        actual_type = next((t for t in args if t is not type(None)), field.type)
-    else:
-        optional = False
-        actual_type = field.type
-    return actual_type, optional
-
-def get_traits_from_input(widget: Widget, prefix: str, trait_cls: dataset.TraitsBase):
-    value = trait_cls()
-    for field in fields(trait_cls):
-        actual_type, optional = get_actual(field)
-
-        input_id = f"#{prefix}_{field.name}"
-        try:
-            field_value = widget.query_exactly_one(selector=input_id).value
-        except:
-            field_value = None
-
-        if actual_type is str:
-            if field_value == "":
-                field_value = None
-        elif actual_type is int:
-            if field_value == "" or field_value == 0 or field_value is None:
-                field_value = None
-            else:
-                field_value = int(field_value)
-        elif actual_type is bool:
-            if field_value is False:
-                field_value = None
-        setattr(value, field.name, field_value)
-    return value
 
 class PanelDatasetActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
