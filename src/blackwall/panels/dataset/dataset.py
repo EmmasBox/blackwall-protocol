@@ -143,10 +143,23 @@ class PanelDataset(VerticalScroll):
         dataset_name = self.query_exactly_one(selector="#dataset_name").value
         dataset_profile_exists = dataset.dataset_profile_exists(dataset=dataset_name)
         base_segment = get_traits_from_input(self, prefix="base", trait_cls=dataset.BaseDatasetTraits)
-        dataset.update_dataset_profile(
+        result = dataset.update_dataset_profile(
             dataset=dataset_name,
             create=not dataset_profile_exists,
             base=base_segment
             )
+        
+        if not dataset_profile_exists:
+            if (result == 0 or result == 4):
+                self.notify(f"Dataset profile {dataset_name} created, return code: {result}",severity="information")
+                #self.set_edit_mode()
+            else:
+                self.notify(f"Unable to create dataset profile, return code: {result}",severity="error")
+        else:
+            if (result == 0 or result == 4):
+                self.notify(f"Dataset profile {dataset_name} updated, return code: {result}",severity="information")
+            else:
+                self.notify(f"Unable to update dataset profile, return code: {result}",severity="error")
+
     def action_delete_dataset_profile(self) -> None:
         pass
