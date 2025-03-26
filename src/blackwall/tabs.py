@@ -9,6 +9,7 @@ from .panels.search.search import PanelSearch
 from .panels.analysis.analysis import PanelAnalysis
 from .panels.dataset.dataset import PanelDataset
 from .panels.resource.resource import PanelResource
+from .panels.history.history import PanelHistory
 
 from blackwall.messages import OpenTab
 
@@ -19,6 +20,7 @@ class TabSystem(HorizontalGroup):
         ("ctrl+a", "open_analysis", "Open analysis tab"),
         ("ctrl+d", "open_dataset", "Open dataset profile tab"),
         ("ctrl+g", "open_resource", "Open resource profile tab"),
+        ("ctrl+h", "open_history", "Open history tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
     ]
@@ -56,6 +58,10 @@ class TabSystem(HorizontalGroup):
     def action_open_analysis(self) -> None:
         """Add a new analysis tab."""
         self.post_message(OpenTab("Health check",PanelAnalysis()))
+
+    def action_open_history(self)
+        """Add a new history tab."""
+        self.post_message(OpenTab("Command history",PanelHistory()))
 
     #Remove current tab
     def action_remove(self) -> None:
