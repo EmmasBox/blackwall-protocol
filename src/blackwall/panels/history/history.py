@@ -4,17 +4,18 @@ from textual import on
 from textual.app import ComposeResult
 from textual.widgets import Log
 from textual.containers import VerticalScroll
-from textual.events import Click
+
+from blackwall.messages import CommandHistory
 
 class PanelHistory(VerticalScroll):
     def compose(self) -> ComposeResult:
-        yield CommandHistoryWidget()
+        yield Log()
 
-    @on(Click)
-    def on_click(self):
+    @on(CommandHistory)
+    def on_command_history(self, message: CommandHistory):
         log = self.query_one(Log)
         log.clear()
-        log.write(command_history)
+        log.write(message.history)
 
 
 
