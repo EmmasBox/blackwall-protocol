@@ -37,14 +37,8 @@ or if your environment is airgapped upload the .whl package to the machine throu
 pip install blackwall-<REPLACE WITH VERSION>-py3-none-any.whl 
 ```
 
-## Required permission
+## Required permissions
 Make sure each user that is supposed to use this software has access to the following RACF profiles:
-IRR.RADMIN.LISTUSER
-IRR.RADMIN.LISTGRP
-IRR.RADMIN.RLIST
-IRR.RADMIN.LISTDSD
-IRR.RADMIN.SETROPTS.LIST
-IRR.IRRSMO00.PRECHECK
 
 | Profile             | Reason |
 |---------------------|--------|
