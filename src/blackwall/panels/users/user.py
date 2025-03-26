@@ -205,6 +205,8 @@ def get_traits_from_input(add_mode: bool, widget: Widget, prefix: str, trait_cls
 
             if not valid_for_operator:
                 continue
+        else:
+            valid_for_operator = True
 
         input_id = f"#{prefix}_{field.name}"
         try:
