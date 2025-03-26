@@ -16,6 +16,11 @@ class PanelDatasetName(VerticalGroup):
         yield Label("Profile name:")
         yield Input(id="dataset_name")
 
+class PanelDatasetOwner(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Owner:")
+        yield Input(id="base_owner")
+
 class PanelDatasetInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Installation data:")
@@ -126,6 +131,7 @@ class DatasetInfo:
 class PanelDataset(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield PanelDatasetName()
+        yield PanelDatasetOwner()
         yield PanelDatasetInstallationData()
         yield PanelDatasetUACC()
         yield PanelDatasetSecurityLevelAndCategories()
