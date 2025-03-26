@@ -64,5 +64,6 @@ class TSOCommandField(HorizontalGroup):
                 command_history = command_history + generate_command_meta_header(command) + output.stdout
                 self.notify(f"command {command.upper()} successfully completed",severity="information")
                 self.post_message(CommandHistory(command_history))
+                log = self.query_one(expect_type=Log,selector="#command_log").write(command_history)
             except BaseException as e:
                 self.notify(f"Command {command.upper()} failed: {e}",severity="error")
