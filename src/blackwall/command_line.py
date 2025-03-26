@@ -7,7 +7,7 @@ from textual.suggester import SuggestFromList
 from textual import on
 from textual.events import ScreenResume
 from textual.widgets import Input, Log, Label
-from textual.containers import HorizontalGroup
+from textual.containers import HorizontalGroup, VerticalGroup
 from textual.screen import Screen
 
 import subprocess
@@ -31,13 +31,16 @@ def generate_command_meta_header(command):
     \n
     """
 
-class CommandHistoryScreen(Screen):
-    BINDINGS = [("escape", "app.pop_screen", "Pop screen")]
-
-    
+class CommandHistoryWidget(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Command history: ")
         yield Log()
+
+class CommandHistoryScreen(Screen):
+    BINDINGS = [("escape", "app.pop_screen", "Pop screen")]
+
+    def compose(self) -> ComposeResult:
+        yield CommandHistoryWidget()
 
     @on(ScreenResume)
     def on_resume(self):
