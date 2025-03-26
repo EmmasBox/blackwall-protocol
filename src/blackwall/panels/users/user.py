@@ -27,7 +27,7 @@ class PanelUserName(HorizontalGroup):
 
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
 
-    if edit_mode == True:
+    if edit_mode is True:
         is_disabled = True
     else:
         is_disabled = False
