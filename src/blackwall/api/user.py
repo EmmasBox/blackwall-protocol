@@ -90,11 +90,11 @@ class LnotesUserTraits(TraitsBase):
 
 @dataclass
 class MfaUserTraits(TraitsBase):
-    factor: str | None = field(default=None, metadata={"label": "factor"})
-    active: bool | None = field(default=None, metadata={"label": "mfa active"})
-    tags: str | None = field(default=None, metadata={"label": "tags"})
-    password_fallback: bool | None = field(default=None, metadata={"label": "password fallback"})
-    mfa_policy: str | None = field(default=None, metadata={"label": "MFA policy"})
+    factor: str | None = field(default=None, metadata={"label": "factor", "allowed_in": {"alter","extract"}})
+    active: bool | None = field(default=None, metadata={"label": "mfa active", "allowed_in": {"alter","extract"}})
+    tags: str | None = field(default=None, metadata={"label": "tags", "allowed_in": {"alter"}})
+    password_fallback: bool | None = field(default=None, metadata={"label": "password fallback", "allowed_in": {"alter","extract"}})
+    mfa_policy: str | None = field(default=None, metadata={"label": "MFA policy", "allowed_in": {"alter","extract"}})
 
 @dataclass
 class NDSUserTraits(TraitsBase):
