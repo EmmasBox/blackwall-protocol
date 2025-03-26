@@ -4,14 +4,14 @@ from textual import on
 from textual.app import ComposeResult
 from textual.widgets import Log
 from textual.containers import VerticalScroll
-from textual.events import Enter
+from textual.events import Click
 
 class PanelHistory(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield CommandHistoryWidget()
 
-    @on(Enter)
-    def on_enter(self):
+    @on(Click)
+    def on_click(self):
         log = self.query_one(Log)
         log.clear()
         log.write(command_history)
