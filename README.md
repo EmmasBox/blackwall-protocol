@@ -29,6 +29,14 @@ Blackwall Protocol is a terminal based administration panel for RACF. The goal o
 ## Installation
 As mentioned in dependencies before you install you will have to install Python and ZOAU yourself. You also manually need to make sure IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space are configured. Textual and RACFU are bundled with the program and thus do not need to be installed manually via pip.
 
+```
+pip install blackwall
+```
+or if your environment is airgapped download the .whl package and run the pip command in the folder with the .whl file like so:
+```
+pip install blackwall-<REPLACE WITH VERSION>-py3-none-any.whl 
+```
+
 ## Supported terminals
 Not all terminals are capable of displaying advanced TUI applications. Below is a list of terminals that have been tested and whether they work or not.
 | Terminal         | Supported | Notes |
