@@ -25,14 +25,14 @@
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
      inkscape:zoom="1.8243355"
-     inkscape:cx="394.11611"
+     inkscape:cx="394.66425"
      inkscape:cy="217.61348"
      inkscape:window-width="3440"
      inkscape:window-height="1371"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer2" />
+     inkscape:current-layer="layer1" />
   <defs
      id="defs1">
     <linearGradient
@@ -91,56 +91,56 @@
      height="81.121254"
      x="9.4393883"
      y="9.4393864"
-     inkscape:label="background" />
+     inkscape:label="background"
+     sodipodi:insensitive="true" />
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1"
-     sodipodi:insensitive="true">
+     id="layer1">
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.2889px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.264583"
-       x="7.7064891"
-       y="23.493"
+       x="7.5614591"
+       y="25.52342"
        id="text5"
        inkscape:label="tag_line"><tspan
          sodipodi:role="line"
          id="tspan5"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.2889px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;text-anchor:start;stroke-width:0.264583"
-         x="7.7064891"
-         y="23.493">Secure today's </tspan><tspan
+         x="7.5614591"
+         y="25.52342">Secure today's </tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.2889px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;text-anchor:start;stroke-width:0.264583"
-         x="7.7064891"
-         y="37.604126"
+         x="7.5614591"
+         y="39.634544"
          id="tspan6">mainframe systems</tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.2889px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;text-anchor:start;stroke-width:0.264583"
-         x="7.7064891"
-         y="51.715252"
+         x="7.5614591"
+         y="53.74567"
          id="tspan11">with tomorrow's security </tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.2889px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;text-anchor:start;stroke-width:0.264583"
-         x="7.7064891"
-         y="65.826378"
+         x="7.5614591"
+         y="67.856796"
          id="tspan12">using Blackwall_</tspan><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.2889px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;text-anchor:start;stroke-width:0.264583"
-         x="7.7064891"
-         y="79.9375"
+         x="7.5614591"
+         y="81.967918"
          id="tspan7" /></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.264583"
-       x="7.8052664"
-       y="77.322197"
+       x="7.6602364"
+       y="79.352615"
        id="text10"
        inkscape:label="disclaimer"><tspan
          sodipodi:role="line"
          id="tspan10"
          style="font-size:8.46667px;stroke-width:0.264583"
-         x="7.8052664"
-         y="77.322197">An open source project</tspan></text>
+         x="7.6602364"
+         y="79.352615">An open source project</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
