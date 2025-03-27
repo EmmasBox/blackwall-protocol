@@ -24,15 +24,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="1.29"
-     inkscape:cx="495.34884"
-     inkscape:cy="150.3876"
-     inkscape:window-width="1920"
-     inkscape:window-height="1011"
+     inkscape:zoom="1.8243355"
+     inkscape:cx="551.43366"
+     inkscape:cy="168.8286"
+     inkscape:window-width="3440"
+     inkscape:window-height="1371"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="svg1" />
+     inkscape:current-layer="layer2" />
   <defs
      id="defs1">
     <linearGradient
@@ -66,27 +66,6 @@
        height="74.137931"
        id="rect8" />
     <linearGradient
-       id="linearGradient4"
-       inkscape:collect="always">
-      <stop
-         style="stop-color:#c00000;stop-opacity:1;"
-         offset="0"
-         id="stop4" />
-      <stop
-         style="stop-color:#000000;stop-opacity:1;"
-         offset="1"
-         id="stop5" />
-    </linearGradient>
-    <linearGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4"
-       id="linearGradient5"
-       x1="159.10178"
-       y1="48.390537"
-       x2="240.54175"
-       y2="48.390537"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient12"
        id="linearGradient13"
@@ -116,25 +95,8 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
-    <path
-       id="path1"
-       style="stroke-width:0.268776;fill:url(#linearGradient5)"
-       d="m 240.26881,56.653467 c -0.54616,2.669001 -1.35166,5.243534 -2.38901,7.69612 -1.03736,2.452588 -2.30657,4.783228 -3.78017,6.964441 -1.4736,2.181214 -3.15159,4.213002 -5.00647,6.067887 -1.85489,1.854885 -3.88668,3.532866 -6.06789,5.006466 -2.18122,1.473599 -4.51186,2.742816 -6.96444,3.780173 -2.45259,1.037356 -5.02712,1.842852 -7.69612,2.389009 -2.669,0.546156 -5.43247,0.832974 -8.26293,0.832974 -2.83046,0 -5.59393,-0.286818 -8.26293,-0.832974 -2.669,-0.546157 -5.24353,-1.351653 -7.69612,-2.389009 -2.45259,-1.037357 -4.78323,-2.306574 -6.96444,-3.780173 -2.18122,-1.473599 -4.21301,-3.151581 -6.06789,-5.006466 -1.85489,-1.854885 -3.53287,-3.886674 -5.00647,-6.067888 -1.4736,-2.181215 -2.74282,-4.511854 -3.78017,-6.96444 -1.03736,-2.452586 -1.84285,-5.027119 -2.38901,-7.69612 M 159.10178,48.391 c 0,-22.643675 18.35633,-41.0004627 41,-41.0004627 22.64367,0 40.43997,18.3567877 40.43997,41.0004627"
-       sodipodi:nodetypes="csssssssssssssccsc"
-       inkscape:label="logo_main" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87778px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.264583"
-       x="199.75827"
-       y="55.925331"
-       id="text1"
-       inkscape:label="logo_text"><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87778px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.264583"
-         x="199.75827"
-         y="55.925331"
-         id="tspan3">Blackwall Protocol</tspan></text>
+     id="layer1"
+     sodipodi:insensitive="true">
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.2889px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.264583"
@@ -179,5 +141,29 @@
          style="font-size:8.46667px;stroke-width:0.264583"
          x="7.8052664"
          y="77.322197">An open source project</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="LOGO"
+     transform="translate(-0.29005995,-2.9078602)">
+    <path
+       id="path1"
+       style="fill:#a11616;fill-opacity:1;stroke:#000000"
+       d="m 150.63007,48.421856 3.18716,-5.520326 3.18717,-5.520327 3.18716,-5.520326 3.18716,-5.520326 3.18716,-5.520326 3.18717,-5.520327 3.18716,-5.5203258 6.37432,3e-7 6.37433,3e-7 6.37432,3e-7 6.37432,3e-7 6.37433,3e-7 6.37432,3e-7 6.37433,3e-7 6.37432,3e-7 3.18716,5.5203264 3.18716,5.520327 3.18716,5.520326 3.18716,5.520327 3.18717,5.520326 3.18716,5.520327 3.18716,5.520326 z m 95.61486,11.040657 -3.18717,5.520326 -3.18716,5.520327 -3.18716,5.520326 -3.18716,5.520326 -3.18717,5.520326 -3.18716,5.520327 -3.18716,5.520326 h -6.37432 l -6.37433,-1e-6 h -6.37432 l -6.37433,-10e-7 h -6.37432 -6.37432 l -6.37433,-10e-7 h -6.37432 l -3.18716,-5.520327 -3.18716,-5.520326 -3.18716,-5.520327 -3.18717,-5.520326 -3.18716,-5.520327 -3.18716,-5.520326 -3.18716,-5.520327 z"
+       sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccc"
+       transform="matrix(0.85284974,0,0,0.85284974,30.533301,6.9032821)" />
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87778px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.264583"
+       x="199.97581"
+       y="56.432938"
+       id="text1"
+       inkscape:label="logo_text"><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87778px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.264583"
+         x="199.97581"
+         y="56.432938"
+         id="tspan3">Blackwall Protocol</tspan></text>
   </g>
 </svg>
