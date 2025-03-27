@@ -63,3 +63,4 @@ Not all terminals are capable of displaying advanced TUI applications. Below is 
 | Blackbox         | Yes          |       |
 | TSO OMVS in z/OS | No          |       |
 | Default terminal on Raspbian | No          |       |
+| Kitty | Yes          |       |
