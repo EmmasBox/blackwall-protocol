@@ -19,8 +19,8 @@ Blackwall Protocol is a terminal based administration panel for RACF. The goal o
 - OpenSSH installed and configured on z/OS (for connecting to z/OS Unix, OMVS in ISPF won't work)
 - Python 3.13 or later
 #### Python packages
-- Textual (For UI, bundled with the program)
-- [RACFU](https://github.com/ambitus/racfu) (To communicate with RACF, bundled with the program)
+- Textual (For UI)
+- [RACFU](https://github.com/ambitus/racfu) (To communicate with RACF)
   - RACFU being a dependency also indirectly also means you need the IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space configured
 
 ### Optional dependencies:
@@ -28,12 +28,14 @@ Blackwall Protocol is a terminal based administration panel for RACF. The goal o
 - [ZOAU 1.3.4.x or later](https://www.ibm.com/docs/en/zoau/1.3.x) (For gathering system information like LPAR name, not required but highly recommended)
 
 ## Installation
-As mentioned in dependencies before you install you will have to install Python and ZOAU yourself before installing Blackwall. You also manually need to make sure IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space are configured. Textual and RACFU are bundled with the program and thus do not need to be installed manually via pip.
+As mentioned in dependencies before you install you will have to install Python and ZOAU yourself before installing Blackwall. You also manually need to make sure IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space are configured. 
 
+If you your environment is not airgapped pip will install Blackwall and it's dependencies automatically:
 ```
 pip install blackwall
 ```
-or if your environment is airgapped upload the .whl package to the machine through other means and run the pip command in the folder with the .whl file like so:
+Since your environment is airgapped you will also have to download and install [Textual](https://pypi.org/project/textual/) and [RACFU](https://pypi.org/project/racfu/) manually by downloading the wheel/whl files and uploading them to the mainframe, make sure you get the correct minimum versions.
+After you've [downloaded Blackwall](https://pypi.org/project/blackwall/) upload the .whl package to the machine through Zowe Explorer or SSH and run the pip command in the folder with the .whl file like so:
 ```
 pip install blackwall-<REPLACE WITH VERSION>-py3-none-any.whl 
 ```
