@@ -64,3 +64,4 @@ Not all terminals are capable of displaying advanced TUI applications. Below is 
 | TSO OMVS in z/OS | No          |       |
 | Default terminal on Raspbian | No          |       |
 | Kitty | Yes          |       |
+| Alacritty | Yes          |       |
