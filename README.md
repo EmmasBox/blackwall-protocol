@@ -55,7 +55,7 @@ Make sure each user that is supposed to use this software has access to the foll
 It's probably best to create a group with each of the required resources, this group can be named after the program.
 
 ## Supported terminals
-Not all terminals are capable of displaying advanced TUI applications. Below is a list of terminals that have been tested and whether they work or not.
+Not all terminals are capable of displaying advanced TUI applications. Below is a list of terminals that have been tested on whether they work or not. Terminals not in list might work.
 | Terminal         | Supported | Notes |
 |------------------|-----------|-------|
 | VS Code          | Yes*          |You must set minimum contrast ratio to 1, otherwise certain UI elements will not be displayed correctly causing a degraded user experience       |
