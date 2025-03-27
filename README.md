@@ -34,7 +34,7 @@ If you your environment is not airgapped pip will install Blackwall and it's dep
 ```
 pip install blackwall
 ```
-Since your environment is airgapped you will also have to download and install [Textual](https://pypi.org/project/textual/) and [RACFU](https://pypi.org/project/racfu/) manually by downloading the wheel/whl files and uploading them to the mainframe, make sure you get the correct minimum versions.
+If your environment is airgapped you will also have to download and install [Textual](https://pypi.org/project/textual/) and [RACFU](https://pypi.org/project/racfu/) manually by downloading the wheel/whl files and uploading them to the mainframe, make sure you get the correct minimum versions.
 After you've [downloaded Blackwall](https://pypi.org/project/blackwall/) upload the .whl package to the machine through Zowe Explorer or SSH and run the pip command in the folder with the .whl file like so:
 ```
 pip install blackwall-<REPLACE WITH VERSION>-py3-none-any.whl 
