@@ -24,7 +24,7 @@ class PanelResourceClassName(HorizontalGroup):
 class PanelResourceInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Installation data:")
-        yield Input(max_length=254,id="installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a dataset profile. You can use installation data to describe whatever you want, such as owning department or what kind of data it protects")
+        yield Input(max_length=255,id="installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a dataset profile. You can use installation data to describe whatever you want, such as owning department or what kind of data it protects")
 
 class PanelResourceActionButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:
