@@ -32,15 +32,15 @@ class PanelDatasetAudit(VerticalGroup):
             yield Label("Notify user:")
             yield Input(id="base_notify_userid",max_length=8,classes="field-short-generic") 
             yield Label("Audit NONE:")
-            yield Input(id="base_audit_none")
+            yield Input(id="base_audit_none",classes="field-medium-generic")
             yield Label("Audit READ:")
-            yield Input(id="base_audit_read")
+            yield Input(id="base_audit_read",classes="field-medium-generic")
             yield Label("Audit UPDATE:")
-            yield Input(id="base_audit_update")
+            yield Input(id="base_audit_update",classes="field-medium-generic")
             yield Label("Audit CONTROL:")
-            yield Input(id="base_audit_control")
+            yield Input(id="base_audit_control",classes="field-medium-generic")
             yield Label("Audit ALTER:")
-            yield Input(id="base_audit_alter")
+            yield Input(id="base_audit_alter",classes="field-medium-generic")
         
 class PanelDatasetSecurityLevelAndCategories(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -60,7 +60,7 @@ class PanelDatasetUACC(VerticalGroup):
 class PanelDatasetNotify(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Notify user:")
-        yield Input(id="base_notify_userid",max_length=8,classes="notify-user") 
+        yield Input(id="base_notify_userid",max_length=8,classes="field-short-generic")
 
 class PanelDatasetVolume(HorizontalGroup):
     def compose(self) -> ComposeResult:
