@@ -19,7 +19,7 @@ Blackwall Protocol is a terminal based administration panel for RACF. The goal o
 - OpenSSH installed and configured on z/OS (for connecting to z/OS Unix, OMVS in ISPF won't work)
 - Python 3.13 or later
 #### Python packages
-- Textual (For UI)
+- Textual 3.0.0 or later (For UI)
 - [RACFU](https://github.com/ambitus/racfu) (To communicate with RACF)
   - RACFU being a dependency also indirectly also means you need the IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space configured
 
