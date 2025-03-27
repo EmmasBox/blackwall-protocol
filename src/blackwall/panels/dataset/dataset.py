@@ -31,11 +31,16 @@ class PanelDatasetAudit(VerticalGroup):
         with Collapsible(title="Auditing"):
             yield Label("Notify user:")
             yield Input(id="base_notify_userid",max_length=8,classes="field-short-generic") 
-            yield RadioButton(label="NONE",id="base_audit_none")
-            yield RadioButton(label="READ",id="base_audit_read")
-            yield RadioButton(label="UPDATE",id="base_audit_update")
-            yield RadioButton(label="CONTROL",id="base_audit_control")
-            yield RadioButton(label="ALTER",id="base_audit_alter")
+            yield Label("Audit NONE:")
+            yield Input(id="base_audit_none")
+            yield Label("Audit READ:")
+            yield Input(id="base_audit_read")
+            yield Label("Audit UPDATE:")
+            yield Input(id="base_audit_update")
+            yield Label("Audit CONTROL:")
+            yield Input(id="base_audit_control")
+            yield Label("Audit ALTER:")
+            yield Input(id="base_audit_alter")
         
 class PanelDatasetSecurityLevelAndCategories(VerticalGroup):
     def compose(self) -> ComposeResult:
