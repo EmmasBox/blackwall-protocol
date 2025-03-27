@@ -5,7 +5,9 @@ This software is still in pre-alpha and under active development, do not use it 
 
 ![Blackwall Logo](blackwall_banner.svg)
 # Blackwall Protocol
-Blackwall Protocol is a terminal based administration panel for RACF. The goal of Blackwall is to create a more modern and open source alternative to zSecure. Blackwall does not support ACF2 or Top Secret and never will, people are more than welcome to fork it and create their own versions however.
+Blackwall Protocol is a terminal based administration panel for RACF. Blackwall is meant to be easier to install and use than many previous attempts at creating mainframe security administration software. Previous attempts from major companies to make software like this are very clunky to use because they're built around 3270 protocols, which are quite limited compared to a modern SSH session connecting to a Unix environment. Blackwall incorporates dynamic and true color, tool tips, dynamic UI, dynamically re-sizable windows, and tabs to give a better user experience. The tab driven design of Blackwall allows security administrators and engineers to have a lot of stuff open at once, this is a major advantage over other programs in this space. Blackwall however is not just a fancy text based user interface for people new to the mainframe, it also allows you to submit TSO and RACF commands from an always visible command line, input can then be viewed either through a tab or a separate screen. This command line is very handy if the action you want to perform is very simple, pulling up a new tab for that can be very overkill. The Blackwall command line also comes with rudimentary command autocompletion, to further speed up power users. Blackwall is designed to be used for everyone, both power users and seasoned security specialists.
+
+Blackwall does not support ACF2 or Top Secret and never will, people are more than welcome to fork it and create their own versions however.
 
 ## Features
 - Execute TSO commands
