@@ -50,10 +50,10 @@ class Blackwall(App):
     #UI elements
     def compose(self):
         #display system and LPAR name
+        yield Header()
+        if zoau_enabled:
+            yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}")
+        yield TSOCommandField()
         with Container():
-            if zoau_enabled:
-                yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}")
-            yield TSOCommandField()
-            yield Header()
             yield TabSystem()
-            yield Footer()
+        yield Footer()
