@@ -2,7 +2,6 @@
 from textual.app import ComposeResult
 from textual.widgets import TabPane, TabbedContent
 from textual.containers import HorizontalGroup
-
 from .panels.welcome.welcome import PanelWelcome
 from .panels.users.user import PanelUser, UserInfo
 from .panels.search.search import PanelSearch
@@ -24,9 +23,12 @@ class TabSystem(HorizontalGroup):
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
     ]
+    def __init__(self, *children, name = None, id = None, classes = None, disabled = False, markup = True):
+        super().__init__(*children, name=name, id=id, classes=classes, disabled=disabled, markup=markup)
+        self.tabs = TabbedContent()
 
     def compose(self) -> ComposeResult:
-        yield TabbedContent()
+        yield self.tabs
 
     def on_mount(self) -> None:
         self.post_message(OpenTab("Welcome!",PanelWelcome()))
@@ -36,7 +38,13 @@ class TabSystem(HorizontalGroup):
         tabs = self.query_one(TabbedContent)
         new_tab = TabPane(message.title,message.content)
         await tabs.add_pane(new_tab)
-        tabs.active = new_tab.id
+        #Workaround, because switching tabs does not work when pressing a button I've had to disable the current tab and then re-enable it
+        old_tab = tabs.active
+        tabs.disable_tab(old_tab)
+        def focus_tab():
+            tabs.active = new_tab.id
+            tabs.enable_tab(old_tab)
+        self.call_after_refresh(focus_tab)
 
     #Add new tab
     async def action_open_user(self) -> None:
