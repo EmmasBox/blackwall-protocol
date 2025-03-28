@@ -35,6 +35,7 @@ def generate_command_meta_header(command):
 
 class CommandHistoryWidget(VerticalGroup):
     def compose(self) -> ComposeResult:
+        yield Label("Press escape to exit command history")
         yield Label("Command history: ")
         yield Log()
 
