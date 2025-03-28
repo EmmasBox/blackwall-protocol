@@ -67,3 +67,9 @@ Not all terminals are capable of displaying advanced TUI applications. Below is 
 | Default terminal on Raspbian | No          |       |
 | Kitty | Yes          |       |
 | Alacritty | Yes          |       |
+
+## Running Blackwall Protocol
+Once you have installed Blackwall and have the required permissions you can start Blackwall simply by typing the blackwall command in an SSH session, through a supported terminal:
+```
+>blackwall
+```
