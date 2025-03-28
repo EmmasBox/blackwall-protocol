@@ -13,7 +13,7 @@ authors = [
 ]
 readme = "README.md"
 license = {file = "LICENSE"}
-keywords = ["RACF", "security", "mainframe"]
+keywords = ["RACF", "security", "mainframe", "zos", "TUI"]
 
 [project.scripts]
 blackwall = "blackwall.main:main"
