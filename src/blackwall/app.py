@@ -1,6 +1,6 @@
 
 from textual.app import App, SystemCommand
-from textual.widgets import Header, Footer, ListView, Label
+from textual.widgets import Header, Footer, Label
 from textual.containers import Container
 from textual.screen import Screen
 
@@ -56,5 +56,4 @@ class Blackwall(App):
             yield TSOCommandField()
             yield Header()
             yield TabSystem()
-            yield ListView()
             yield Footer()
