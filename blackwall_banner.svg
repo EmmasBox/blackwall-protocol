@@ -24,15 +24,15 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="1.8243355"
-     inkscape:cx="394.66425"
-     inkscape:cy="217.61348"
-     inkscape:window-width="3440"
-     inkscape:window-height="1371"
+     inkscape:zoom="1.78"
+     inkscape:cx="689.32584"
+     inkscape:cy="225.8427"
+     inkscape:window-width="1920"
+     inkscape:window-height="1011"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
+     inkscape:current-layer="layer2" />
   <defs
      id="defs1">
     <linearGradient
@@ -96,7 +96,8 @@
   <g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
+     id="layer1"
+     sodipodi:insensitive="true">
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.2889px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.264583"
@@ -127,7 +128,7 @@
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.2889px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;text-anchor:start;stroke-width:0.264583"
          x="7.5614591"
-         y="81.967918"
+         y="81.967926"
          id="tspan7" /></text>
     <text
        xml:space="preserve"
@@ -148,22 +149,24 @@
      inkscape:label="LOGO"
      transform="translate(-0.29005995,-2.9078602)">
     <path
-       id="path1"
-       style="fill:#a11616;fill-opacity:1;stroke:#000000;stroke-width:1.40704739;stroke-dasharray:none"
-       d="m 150.63007,48.421856 3.18716,-5.520326 3.18717,-5.520327 3.18716,-5.520326 3.18716,-5.520326 3.18716,-5.520326 3.18717,-5.520327 3.18716,-5.5203258 6.37432,3e-7 6.37433,3e-7 6.37432,3e-7 6.37432,3e-7 6.37433,3e-7 6.37432,3e-7 6.37433,3e-7 6.37432,3e-7 3.18716,5.5203264 3.18716,5.520327 3.18716,5.520326 3.18716,5.520327 3.18717,5.520326 3.18716,5.520327 3.18716,5.520326 z m 95.61486,11.040657 -3.18717,5.520326 -3.18716,5.520327 -3.18716,5.520326 -3.18716,5.520326 -3.18717,5.520326 -3.18716,5.520327 -3.18716,5.520326 h -6.37432 l -6.37433,-1e-6 h -6.37432 l -6.37433,-10e-7 h -6.37432 -6.37432 l -6.37433,-10e-7 h -6.37432 l -3.18716,-5.520327 -3.18716,-5.520326 -3.18716,-5.520327 -3.18717,-5.520326 -3.18716,-5.520327 -3.18716,-5.520326 -3.18716,-5.520327 z"
-       sodipodi:nodetypes="cccccccccccccccccccccccccccccccccccccccccccccccc"
-       transform="matrix(0.85284974,0,0,0.85284974,30.533301,6.9032821)" />
+       d="m 170.83846,57.615632 c -2.51048,4.673657 -2.54979,4.638184 -4.75682,9.41648 l 2.71818,4.707722 2.71818,4.70824 2.71818,4.707723 2.71818,4.70824 2.71818,4.707723 h 5.43637 5.43636 5.43636 5.43636 5.43584 5.43636 5.43636 5.43636 l 2.71818,-4.707723 2.71818,-4.70824 2.71818,-4.707723 2.71818,-4.70824 2.71818,-4.707722 c -1.87296,-3.802923 -1.81355,-3.891329 -4.75681,-9.41648 h -10.19318 -10.19317 -10.19266 -10.19318 -10.19318 z"
+       style="fill:#3a3a3a;fill-opacity:1;stroke:#000000;stroke-width:1.40705"
+       id="path3" />
+    <path
+       d="m 179.67976,14.500329 -2.71818,4.70824 -2.71818,4.70824 -2.71818,4.707723 -2.71818,4.70824 -2.71818,4.707723 c 4.04107,8.058973 1.77324,3.541676 4.75682,9.415962 h 10.19317 10.19318 10.19318 10.19266 10.19317 10.19318 l 4.75681,-9.415962 -2.71818,-4.707723 -2.71818,-4.70824 -2.71818,-4.707723 -2.71818,-4.70824 -2.71818,-4.70824 h -5.43636 -5.43636 -5.43584 -5.43636 -5.43636 -5.43636 -5.43636 z"
+       style="fill:#a11616;stroke:#000000;stroke-width:1.40705"
+       id="path2" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87778px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.264583"
-       x="199.68576"
-       y="56.432938"
+       x="200.87489"
+       y="56.135654"
        id="text1"
        inkscape:label="logo_text"><tspan
          sodipodi:role="line"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87778px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.264583"
-         x="199.68576"
-         y="56.432938"
+         x="200.87489"
+         y="56.135654"
          id="tspan3">Blackwall Protocol</tspan></text>
   </g>
 </svg>
