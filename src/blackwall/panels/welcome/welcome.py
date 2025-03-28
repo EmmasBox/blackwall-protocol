@@ -22,7 +22,7 @@ class PanelWelcomeActions(VerticalGroup):
         yield Button("Create user", classes="welcome-suggestion-button",action="create_user")
         yield Button("Create dataset profile", classes="welcome-suggestion-button",action="create_dataset")
         yield Button("Create general resource profile", classes="welcome-suggestion-button",action="create_resource")
-        yield Button("Analyse system health", classes="welcome-suggestion-button",action="create_analysis")
+        yield Button("Analyse system health", classes="welcome-suggestion-button",action="create_analysis",disabled=True)
 
     async def action_create_dataset(self):
         self.post_message(OpenTab(title="Create dataset profile",content=PanelDataset()))
