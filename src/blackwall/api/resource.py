@@ -180,6 +180,19 @@ class CDTINFOResourceTraits(TraitsBase):
     security_label_required: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     default_universal_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
+@dataclass
+class TMEResourceTraits(TraitsBase):
+    child: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    group: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    parent: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    resource: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    role: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+
+    children: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    groups: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    resources: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    roles: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
+
 #Checks if RACFU can be imported
 try:
     from racfu import racfu # type: ignore
