@@ -204,6 +204,19 @@ class SSIGNONResourceTraits(TraitsBase):
     mask_legacy_pass_ticket_key: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     encrypt_legacy_pass_ticket_key: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
 
+@dataclass
+class CfdefResourceTraits(TraitsBase):
+    custom_field_data_type: str | None = field(default=None,metadata={"allowed_in": {"add","extract"}})
+    valid_first_characters: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    help_text: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    list_heading_text: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    mixed_case_allowed: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    min_numeric_value: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    max_field_length: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    max_numeric_value: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    valid_other_characters: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    validation_rexx_exec: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+
 #Checks if RACFU can be imported
 try:
     from racfu import racfu # type: ignore
@@ -225,8 +238,93 @@ if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource})
         return result.result
 
-    def update_resource_profile(resource_class: str,resource: str):
-        pass
+    def update_resource_profile(
+            resource_class: str,
+            resource: str, 
+            create: bool, 
+            base: BaseResourceTraits,
+            stdata: STDATAResourceTraits,
+            cdtinfo: CDTINFOResourceTraits,
+            kerb: KerbResourceTraits,
+            tme: TMEResourceTraits,
+            ssignon: SSIGNONResourceTraits,
+            proxy: ProxyResourceTraits,
+            icsf: ICSFResourceTraits,
+            ictx: ICTXResourceTraits,
+            svfmr: SVFMRResourceTraits,
+            sigver: SIGVERResourceTraits,
+            mfapolicy: MFAPolicyResourceTraits,
+            session: SessionResourceTraits,
+            idtparms: IDTPARMSResourceTraits,
+            jes: JESResourceTraits,
+            dlfdata: DLFDataResourceTraits,
+            cfdef: CfdefResourceTraits
+            ):
+        traits = base.to_traits(prefix="base")
+
+        if stdata is not None:
+            traits.update(stdata.to_traits("stdata"))
+
+        if cdtinfo is not None:
+            traits.update(cdtinfo.to_traits("cdtinfo"))
+
+        if ssignon is not None:
+            traits.update(ssignon.to_traits("ssignon"))
+
+        if sigver is not None:
+            traits.update(sigver.to_traits("sigver"))
+
+        if svfmr is not None:
+            traits.update(svfmr.to_traits("svfmr"))
+
+        if tme is not None:
+            traits.update(tme.to_traits("tme"))
+
+        if kerb is not None:
+            traits.update(kerb.to_traits("kerb"))
+
+        if proxy is not None:
+            traits.update(proxy.to_traits("proxy"))
+
+        if icsf is not None:
+            traits.update(icsf.to_traits("icsf"))
+
+        if ictx is not None:
+            traits.update(ictx.to_traits("ictx"))
+
+        if mfapolicy is not None:
+            traits.update(mfapolicy.to_traits("mfapolicy"))
+
+        if session is not None:
+            traits.update(session.to_traits("session"))
+
+        if idtparms is not None:
+            traits.update(idtparms.to_traits("idtparms"))
+
+        if jes is not None:
+            traits.update(jes.to_traits("jes"))
+
+        if dlfdata is not None:
+            traits.update(dlfdata.to_traits("dlfdata"))
+
+        if cfdef is not None:
+            traits.update(cfdef.to_traits("cfdef"))
+    
+        if create:
+            operation = "add"
+        else:
+            operation = "alter"
+        
+        result = racfu(
+            {
+                "operation": operation, 
+                "admin_type": "resource", 
+                "profile_name": resource,
+                "class_name": resource_class,
+                "traits":  traits
+            }
+        )
+        return result.result["return_codes"]["racf_return_code"]
 
     def delete_resource_profile(resource_class: str,resource: str):
         result = racfu(
