@@ -33,7 +33,7 @@
 }
 
 .installation-data {
-    width: 120;
+    width: 150;
     margin-bottom: 1;
 }
 
@@ -56,11 +56,11 @@
 # Resource panel
 .class-field {
     width: 16;
-    margin-right: 0;
+    max-width: 16;
 }
 
 .resource-name-field {
-    margin-left: 0;
+    width: 160;
 }
 
 # Search panel
