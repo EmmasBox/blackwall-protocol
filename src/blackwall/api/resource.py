@@ -74,6 +74,15 @@ class EIMResourceTraits(TraitsBase):
     local_registry: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     options: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
+@dataclass
+class JESResourceTraits(TraitsBase):
+    icsf_key_label: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+
+@dataclass
+class SVFMRResourceTraits(TraitsBase):
+    parameter_list_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    script_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+
 #Checks if RACFU can be imported
 try:
     from racfu import racfu # type: ignore
