@@ -57,10 +57,12 @@
 .class-field {
     width: 16;
     max-width: 16;
+    margin-bottom: 1;
 }
 
 .resource-name-field {
     width: 160;
+    margin-bottom: 1;
 }
 
 # Search panel

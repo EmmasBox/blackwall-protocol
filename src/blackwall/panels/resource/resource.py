@@ -6,20 +6,12 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from blackwall.api import resource
 from blackwall.panels.panel_mode import PanelMode
 
-class PanelResourceClass(VerticalGroup):
-    def compose(self) -> ComposeResult:
-        yield Label("Class:")
-        yield Input(max_length=8,classes="class-field")
-
-class PanelResourceName(VerticalGroup):
+class PanelResourceClassName(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Profile name:")
         yield Input(max_length=255,classes="resource-name-field")
-
-class PanelResourceClassName(HorizontalGroup):
-    def compose(self) -> ComposeResult:
-        yield PanelResourceClass()
-        yield PanelResourceName()
+        yield Label("Class:")
+        yield Input(max_length=8,classes="class-field")
 
 class PanelResourceInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
