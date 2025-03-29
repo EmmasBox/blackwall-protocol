@@ -105,6 +105,12 @@ class MFAPolicyResourceTraits(TraitsBase):
     reuse_token: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
 @dataclass
+class SIGVERResourceTraits(TraitsBase):
+    fail_program_load_condition: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    log_signature_verification_events: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    signature_required: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+
+@dataclass
 class CDTINFOResourceTraits(TraitsBase):
     case_allowed: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     default_racroute_return_code: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
