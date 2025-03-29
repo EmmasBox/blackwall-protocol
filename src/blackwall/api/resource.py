@@ -105,6 +105,13 @@ class ICSFResourceTraits(TraitsBase):
     key_usage_options: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
 
 @dataclass
+class ICTXResourceTraits(TraitsBase):
+    identity_map_timeout: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    use_identity_map: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    require_identity_mapping: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    cache_application_provided_identity_map: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+
+@dataclass
 class SVFMRResourceTraits(TraitsBase):
     parameter_list_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     script_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
