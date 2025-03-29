@@ -64,6 +64,18 @@ class BaseResourceTraits(TraitsBase):
     terminal_access_allowed_days: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
 
 @dataclass
+class KerbResourceTraits(TraitsBase):
+    validate_addresses: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    default_ticket_life: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    encryption_algorithm: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    encryption_algorithms: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    realm_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    key_version: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    max_ticket_life: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    min_ticket_life: list[str] | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    password: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+
+@dataclass
 class DLFDataResourceTraits(TraitsBase):
     job_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     job_names: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
