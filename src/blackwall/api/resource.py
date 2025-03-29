@@ -20,17 +20,19 @@ class BaseResourceTraits(TraitsBase):
     notify_userid: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     security_label: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     security_level: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    single_data_set_tape_volume: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    single_data_set_tape_volume: bool | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     time_zone: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     universal_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    warn_on_insufficient_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    warn_on_insufficient_access: bool | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     terminal_access_allowed_day: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     terminal_access_allowed_time: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+
+    tape_vtoc: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
     #add fields
     model_profile: str | None = field(default=None,metadata={"allowed_in": {"add"}})
     model_profile_class: str | None = field(default=None,metadata={"allowed_in": {"add"}})
-    model_profile_generic: str | None = field(default=None,metadata={"allowed_in": {"add"}})
+    model_profile_generic: bool | None = field(default=None,metadata={"allowed_in": {"add"}})
     model_profile_volume: str | None = field(default=None,metadata={"allowed_in": {"add"}})
 
     #alter fields
@@ -42,17 +44,17 @@ class BaseResourceTraits(TraitsBase):
     volume: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
 
     #extraction fields
-    access_list: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    access_count: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    access_list: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    access_count: int | None = field(default=None,metadata={"allowed_in": {"extract"}})
     access_type: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
     access_id: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    alter_access_count: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    control_access_count: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    read_access_count: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    update_access_count: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    security_categories: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    alter_access_count: int | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    control_access_count: int | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    read_access_count: int | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    update_access_count: int | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    security_categories: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
     create_date: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    is_generic: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    is_generic: bool | None = field(default=None,metadata={"allowed_in": {"extract"}})
     last_change_date: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
     last_reference_date: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
     member_class_names: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
