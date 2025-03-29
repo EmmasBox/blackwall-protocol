@@ -112,6 +112,12 @@ class ICTXResourceTraits(TraitsBase):
     cache_application_provided_identity_map: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
 @dataclass
+class IDTPARMSResourceTraits(TraitsBase):
+    signature_algorithm: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    identity_token_timeout: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    use_for_any_application: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+
+@dataclass
 class SVFMRResourceTraits(TraitsBase):
     parameter_list_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     script_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
