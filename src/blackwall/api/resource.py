@@ -97,6 +97,30 @@ class ProxyResourceTraits(TraitsBase):
     bind_password: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     ldap_host: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
+@dataclass
+class CDTINFOResourceTraits(TraitsBase):
+    case_allowed: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    default_racroute_return_code: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    valid_first_character: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    valid_first_characters: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    generic_profile_checking: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    generic_profile_sharing: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    grouping_class_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    key_qualifiers: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    manditory_access_control_processing: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    max_length: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    max_length_entityx: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    member_class_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    operations: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    valid_other_character: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    valid_other_characters: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    posit_number: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    profiles_allowed: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    raclist_allowed: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    send_enf_signal_on_profile_creation: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    security_label_required: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    default_universal_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+
 #Checks if RACFU can be imported
 try:
     from racfu import racfu # type: ignore
