@@ -118,6 +118,13 @@ class IDTPARMSResourceTraits(TraitsBase):
     use_for_any_application: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
 @dataclass
+class SessionResourceTraits(TraitsBase):
+    security_checking_level: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    session_key_interval: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    locked: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    session_key: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+
+@dataclass
 class SVFMRResourceTraits(TraitsBase):
     parameter_list_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     script_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
