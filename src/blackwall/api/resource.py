@@ -61,6 +61,19 @@ class BaseResourceTraits(TraitsBase):
     volumes: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
     terminal_access_allowed_days: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
 
+@dataclass
+class DLFDataResourceTraits(TraitsBase):
+    job_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    job_names: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    retain_object_after_use: bool | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+
+@dataclass
+class EIMResourceTraits(TraitsBase):
+    domain_distinguished_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    kerberos_registry: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    local_registry: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    options: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+
 #Checks if RACFU can be imported
 try:
     from racfu import racfu # type: ignore
