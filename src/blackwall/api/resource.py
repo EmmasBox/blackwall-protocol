@@ -83,6 +83,20 @@ class SVFMRResourceTraits(TraitsBase):
     parameter_list_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     script_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
+@dataclass
+class STDATAResourceTraits(TraitsBase):
+    group: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    privileged: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    trace: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    trusted: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    userid: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+
+@dataclass
+class ProxyResourceTraits(TraitsBase):
+    bind_distinguished_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    bind_password: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    ldap_host: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+
 #Checks if RACFU can be imported
 try:
     from racfu import racfu # type: ignore
