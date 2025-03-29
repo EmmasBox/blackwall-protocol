@@ -98,6 +98,13 @@ class ProxyResourceTraits(TraitsBase):
     ldap_host: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
 @dataclass
+class MFAPolicyResourceTraits(TraitsBase):
+    factor: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    factors: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    token_timeout: int | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    reuse_token: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+
+@dataclass
 class CDTINFOResourceTraits(TraitsBase):
     case_allowed: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     default_racroute_return_code: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
