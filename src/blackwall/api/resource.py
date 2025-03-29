@@ -1,7 +1,65 @@
 #General resource API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
-from dataclasses import dataclass, fields
+from dataclasses import dataclass, field
 from .traits_base import TraitsBase
+
+@dataclass
+class BaseResourceTraits(TraitsBase):
+    #add+alter fields
+    owner: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    audit_alter: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    audit_control: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    audit_none: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    audit_read: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    audit_read: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    audit_update: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    security_category: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    installation_data: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    level: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    member_class_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    notify_userid: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    security_label: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    security_level: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    single_data_set_tape_volume: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    time_zone: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    universal_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    warn_on_insufficient_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    terminal_access_allowed_day: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    terminal_access_allowed_time: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+
+    #add fields
+    model_profile: str | None = field(default=None,metadata={"allowed_in": {"add"}})
+    model_profile_class: str | None = field(default=None,metadata={"allowed_in": {"add"}})
+    model_profile_generic: str | None = field(default=None,metadata={"allowed_in": {"add"}})
+    model_profile_volume: str | None = field(default=None,metadata={"allowed_in": {"add"}})
+
+    #alter fields
+    global_audit_alter: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
+    global_audit_control: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
+    global_audit_none: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
+    global_audit_read: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
+    global_audit_update: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
+    volume: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
+
+    #extraction fields
+    access_list: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    access_count: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    access_type: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    access_id: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    alter_access_count: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    control_access_count: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    read_access_count: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    update_access_count: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    security_categories: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    create_date: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    is_generic: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    last_change_date: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    last_reference_date: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    member_class_names: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    auditing: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    global_auditing: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    volumes: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    terminal_access_allowed_days: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
 
 #Checks if RACFU can be imported
 try:
