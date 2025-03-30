@@ -9,7 +9,7 @@ from typing import Iterable
 try:
     from zoautil_py import zsystem # type: ignore
     zoau_enabled = True
-except:
+except ImportError:
     print("##BLKWL_ERROR_1 Warning: could not find ZOAU, certain features will be disabled such as diplaying system and LPAR names")    
     zoau_enabled = False
 

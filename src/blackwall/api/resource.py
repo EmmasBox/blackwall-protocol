@@ -221,7 +221,7 @@ class CfdefResourceTraits(TraitsBase):
 try:
     from racfu import racfu # type: ignore
     racfu_enabled = True
-except:
+except ImportError:
     print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")    
     racfu_enabled = False
 
