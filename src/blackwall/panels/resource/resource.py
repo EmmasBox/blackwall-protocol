@@ -23,16 +23,16 @@ class PanelResourceInstallationData(VerticalGroup):
         yield Label("Installation data:")
         yield Input(max_length=255,id="installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a dataset profile. You can use installation data to describe whatever you want, such as owning department or what kind of data it protects")
 
-class PanelResourceActionButtons(HorizontalGroup):
-    def compose(self) -> ComposeResult:
-        yield Button("Save",classes="action-button")
-        yield Button("Delete",classes="action-button")
-
 class PanelResourceSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Lazy(widget=Collapsible(title="Resource profile segments")):
             yield from generate_trait_inputs(title="stdata", prefix="stdata", traits_class=resource.STDATAResourceTraits)
             yield from generate_trait_inputs(title="CDT info", prefix="cdtinfo", traits_class=resource.CDTINFOResourceTraits)
+
+class PanelResourceActionButtons(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield Button("Save",classes="action-button")
+        yield Button("Delete",classes="action-button")
 
 class PanelResource(VerticalScroll):
     def compose(self) -> ComposeResult:
