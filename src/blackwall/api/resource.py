@@ -158,8 +158,8 @@ class SIGVERResourceTraits(TraitsBase):
 
 @dataclass
 class CDTINFOResourceTraits(TraitsBase):
-    case_allowed: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    default_racroute_return_code: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    case_allowed: str | None = field(default=None,metadata={"label": "Case allowed:", "allowed_in": {"add","alter","extract"}})
+    default_racroute_return_code: str | None = field(default=None,metadata={"label": "Default racroute return code:", "allowed_in": {"add","alter","extract"}})
     valid_first_character: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     valid_first_characters: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
     generic_profile_checking: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})

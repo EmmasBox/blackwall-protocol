@@ -2,9 +2,14 @@ from textual.reactive import reactive
 from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, RadioButton, Collapsible
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
+from textual.lazy import Lazy
 
 from blackwall.api import resource
 from blackwall.panels.panel_mode import PanelMode
+
+from ..traits_ui import generate_trait_inputs, get_traits_from_input
+
+from blackwall.api import resource
 
 class PanelResourceClassName(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -23,8 +28,15 @@ class PanelResourceActionButtons(HorizontalGroup):
         yield Button("Save",classes="action-button")
         yield Button("Delete",classes="action-button")
 
+class PanelResourceSegments(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        with Lazy(widget=Collapsible(title="Resource profile segments")):
+            yield from generate_trait_inputs(title="stdata", prefix="stdata", traits_class=resource.STDATAResourceTraits)
+            yield from generate_trait_inputs(title="CDT info", prefix="cdtinfo", traits_class=resource.CDTINFOResourceTraits)
+
 class PanelResource(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield PanelResourceClassName()
         yield PanelResourceInstallationData()
+        yield PanelResourceSegments()
         yield PanelResourceActionButtons()
