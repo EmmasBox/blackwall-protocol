@@ -1,10 +1,6 @@
 
-from collections.abc import Generator
-from dataclasses import dataclass, fields, Field
-from types import UnionType
-from typing import get_args
+from dataclasses import dataclass
 from textual.lazy import Lazy
-from textual.widget import Widget
 from textual.reactive import reactive
 from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, RadioButton, Collapsible, Select
