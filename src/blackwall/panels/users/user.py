@@ -27,13 +27,13 @@ class PanelUserName(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
 
     if edit_mode is True:
-        is_disabled = True
+        username_is_disabled = True
     else:
-        is_disabled = False
+        username_is_disabled = False
 
     def compose(self) -> ComposeResult:
         yield Label("Username*: ")
-        yield Input(max_length=8,id="username",classes="username",tooltip="Username is what the user uses to log on with, this is required. While very few characters can be used at least 4 character long usernames are recommended to avoid collisions",disabled=self.is_disabled).data_bind(value=PanelUserName.username)
+        yield Input(max_length=8,id="username",classes="username",tooltip="Username is what the user uses to log on with, this is required. While very few characters can be used at least 4 character long usernames are recommended to avoid collisions",disabled=self.username_is_disabled).data_bind(value=PanelUserName.username)
         yield Label("name: ")
         yield Input(max_length=20,id="base_name",classes="name",tooltip="For personal users this is typically used for names i.e. Song So Mi, for system users it can be the name of the subsystem that it is used for").data_bind(value=PanelUserName.name)
 
