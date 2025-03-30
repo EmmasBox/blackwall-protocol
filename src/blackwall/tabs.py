@@ -9,6 +9,7 @@ from .panels.analysis.analysis import PanelAnalysis
 from .panels.dataset.dataset import PanelDataset
 from .panels.resource.resource import PanelResource
 from .panels.history.history import PanelHistory
+from .panels.setropts.setropts import PanelSetropts
 
 from blackwall.messages import OpenTab
 
@@ -20,6 +21,7 @@ class TabSystem(HorizontalGroup):
         ("ctrl+d", "open_dataset", "Open dataset profile tab"),
         ("ctrl+g", "open_resource", "Open resource profile tab"),
         ("ctrl+h", "open_history", "Open history tab"),
+        ("ctrl+o", "open_options", "Open RACF options tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
     ]
@@ -70,6 +72,10 @@ class TabSystem(HorizontalGroup):
     def action_open_history(self) -> None:
         """Add a new history tab."""
         self.post_message(OpenTab("Command history",PanelHistory()))
+
+    def action_open_options(self) -> None:
+        """Add a new RACF options tab."""
+        self.post_message(OpenTab("RACF options",PanelSetropts()))
 
     #Remove current tab
     def action_remove(self) -> None:
