@@ -7,7 +7,7 @@ from textual.lazy import Lazy
 from blackwall.api import resource
 from blackwall.panels.panel_mode import PanelMode
 
-from ..traits_ui import generate_trait_inputs, get_traits_from_input
+from ..traits_ui import generate_trait_section, get_traits_from_input
 
 from blackwall.api import resource
 
@@ -26,8 +26,8 @@ class PanelResourceInstallationData(VerticalGroup):
 class PanelResourceSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Lazy(widget=Collapsible(title="Resource profile segments")):
-            yield from generate_trait_inputs(title="stdata", prefix="stdata", traits_class=resource.STDATAResourceTraits)
-            yield from generate_trait_inputs(title="CDT info", prefix="cdtinfo", traits_class=resource.CDTINFOResourceTraits)
+            yield from generate_trait_section(title="stdata", prefix="stdata", traits_class=resource.STDATAResourceTraits)
+            yield from generate_trait_section(title="CDT info", prefix="cdtinfo", traits_class=resource.CDTINFOResourceTraits)
 
 class PanelResourceActionButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:

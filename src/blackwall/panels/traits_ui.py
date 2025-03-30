@@ -24,26 +24,29 @@ def get_actual(field: Field) -> tuple[type,bool]:
         actual_type = field.type
     return actual_type, optional
 
-def generate_trait_inputs(title: str, prefix: str, traits_class: type[TraitsBase]) -> Generator:
+def generate_trait_inputs(prefix: str, traits_class: type[TraitsBase]) -> Generator:
+    for field in fields(traits_class):
+        label = field.metadata.get("label")
+        # only show an input field if it is labelled
+        if label is not None:
+            actual_type, optional = get_actual(field)
+
+            input_args = field.metadata.get("input_args", {})
+
+            input_id = f"{prefix}_{field.name}"
+
+            if actual_type is str:
+                yield Label(f"{label}{'*' if not optional else ''}:")
+                yield Input(id=input_id, **input_args)
+            elif actual_type is int:
+                yield Label(f"{label}{'*' if not optional else ''}:")
+                yield Input(id=input_id, type="integer", **input_args)
+            elif actual_type is bool:
+                yield RadioButton(label=label, id=input_id, **input_args)
+
+def generate_trait_section(title: str, prefix: str, traits_class: type[TraitsBase]) -> Generator:
     with Lazy(widget=Collapsible(title=title)):
-        for field in fields(traits_class):
-            label = field.metadata.get("label")
-            # only show an input field if it is labelled
-            if label is not None:
-                actual_type, optional = get_actual(field)
-
-                input_args = field.metadata.get("input_args", {})
-
-                input_id = f"{prefix}_{field.name}"
-
-                if actual_type is str:
-                    yield Label(f"{label}{'*' if not optional else ''}:")
-                    yield Input(id=input_id, **input_args)
-                elif actual_type is int:
-                    yield Label(f"{label}{'*' if not optional else ''}:")
-                    yield Input(id=input_id, type="integer", **input_args)
-                elif actual_type is bool:
-                    yield RadioButton(label=label, id=input_id, **input_args)
+        yield from generate_trait_inputs(prefix=prefix,traits_class=traits_class)
 
 def get_traits_from_input(operator: str, widget: Widget, prefix: str, trait_cls: TraitsBase):
     value = trait_cls()

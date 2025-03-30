@@ -9,7 +9,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from blackwall.api import user
 from blackwall.panels.panel_mode import PanelMode
 
-from ..traits_ui import generate_trait_inputs, get_traits_from_input
+from ..traits_ui import generate_trait_section, get_traits_from_input
 
 class PanelUserInfo(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
@@ -101,22 +101,22 @@ class PanelUserSegments(VerticalGroup):
     """Component where the user can add segments such as the OMVS segment"""
     def compose(self) -> ComposeResult:
         with Lazy(widget=Collapsible(title="User segments")):
-            yield from generate_trait_inputs(title="TSO", prefix="tso", traits_class=user.TSOUserTraits)
-            yield from generate_trait_inputs(title="OMVS", prefix="omvs", traits_class=user.OMVSUserTraits)
-            yield from generate_trait_inputs(title="Work attributes", prefix="workattr", traits_class=user.WorkattrUserTraits)
-            yield from generate_trait_inputs(title="CICS", prefix="cics", traits_class=user.CICSUserTraits)
-            yield from generate_trait_inputs(title="KERB", prefix="kerb", traits_class=user.KerbUserTraits)
-            yield from generate_trait_inputs(title="Language", prefix="language", traits_class=user.LanguageUserTraits)
-            yield from generate_trait_inputs(title="OPERPARM", prefix="operparm", traits_class=user.OperparmUserTraits)
-            yield from generate_trait_inputs(title="OVM", prefix="ovm", traits_class=user.OvmUserTraits)
-            yield from generate_trait_inputs(title="NDS", prefix="nds", traits_class=user.NDSUserTraits)
-            yield from generate_trait_inputs(title="Netview", prefix="netview", traits_class=user.NetviewUserTraits)
-            yield from generate_trait_inputs(title="MFA", prefix="mfa", traits_class=user.MfaUserTraits)
-            yield from generate_trait_inputs(title="DCE", prefix="dce", traits_class=user.DCEUserTraits)
-            yield from generate_trait_inputs(title="DFP", prefix="dfp", traits_class=user.DFPUserTraits)
-            yield from generate_trait_inputs(title="EIM", prefix="eim", traits_class=user.EIMUserTraits)
-            yield from generate_trait_inputs(title="Proxy", prefix="proxy", traits_class=user.ProxyUserTraits)
-            yield from generate_trait_inputs(title="Lotus Notes", prefix="lnotes", traits_class=user.LnotesUserTraits)
+            yield from generate_trait_section(title="TSO", prefix="tso", traits_class=user.TSOUserTraits)
+            yield from generate_trait_section(title="OMVS", prefix="omvs", traits_class=user.OMVSUserTraits)
+            yield from generate_trait_section(title="Work attributes", prefix="workattr", traits_class=user.WorkattrUserTraits)
+            yield from generate_trait_section(title="CICS", prefix="cics", traits_class=user.CICSUserTraits)
+            yield from generate_trait_section(title="KERB", prefix="kerb", traits_class=user.KerbUserTraits)
+            yield from generate_trait_section(title="Language", prefix="language", traits_class=user.LanguageUserTraits)
+            yield from generate_trait_section(title="OPERPARM", prefix="operparm", traits_class=user.OperparmUserTraits)
+            yield from generate_trait_section(title="OVM", prefix="ovm", traits_class=user.OvmUserTraits)
+            yield from generate_trait_section(title="NDS", prefix="nds", traits_class=user.NDSUserTraits)
+            yield from generate_trait_section(title="Netview", prefix="netview", traits_class=user.NetviewUserTraits)
+            yield from generate_trait_section(title="MFA", prefix="mfa", traits_class=user.MfaUserTraits)
+            yield from generate_trait_section(title="DCE", prefix="dce", traits_class=user.DCEUserTraits)
+            yield from generate_trait_section(title="DFP", prefix="dfp", traits_class=user.DFPUserTraits)
+            yield from generate_trait_section(title="EIM", prefix="eim", traits_class=user.EIMUserTraits)
+            yield from generate_trait_section(title="Proxy", prefix="proxy", traits_class=user.ProxyUserTraits)
+            yield from generate_trait_section(title="Lotus Notes", prefix="lnotes", traits_class=user.LnotesUserTraits)
 
 class PanelUserActionButtons(HorizontalGroup):
     """Action buttons"""
