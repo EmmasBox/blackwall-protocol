@@ -166,7 +166,7 @@ class CDTINFOResourceTraits(TraitsBase):
     generic_profile_sharing: str | None = field(default=None,metadata={"label": "Generic profile sharing:","allowed_in": {"add","alter","extract"}})
     grouping_class_name: str | None = field(default=None,metadata={"label": "Grouping class name:","allowed_in": {"add","alter","extract"}})
     key_qualifiers: str | None = field(default=None,metadata={"label": "Key qualifiers:","allowed_in": {"add","alter","extract"}})
-    manditory_access_control_processing: str | None = field("label": "Mandatory access control processing:", default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    manditory_access_control_processing: str | None = field(default=None,metadata={"label": "Mandatory access control processing:","allowed_in": {"add","alter","extract"}})
     max_length: int | None = field(default=None,metadata={"label": "Max length:", "allowed_in": {"add","alter","extract"}})
     max_length_entityx: int | None = field(default=None,metadata={"label": "Max length entityx:", "allowed_in": {"add","alter","extract"}})
     member_class_name: str | None = field(default=None,metadata={"label": "Member class name:","allowed_in": {"add","alter","extract"}})
