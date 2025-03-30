@@ -89,7 +89,7 @@ class BaseSetroptsTraits(TraitsBase):
     program_control: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
 
 def update_racf_options(base: BaseSetroptsTraits):
-    """Modify system options"""
+    """Modify RACF options"""
     if racfu_enabled:
         traits = base.to_traits(prefix="base")
         
