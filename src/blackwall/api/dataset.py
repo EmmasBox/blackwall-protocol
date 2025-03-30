@@ -68,6 +68,15 @@ class BaseDatasetTraits(TraitsBase):
     resident_volume: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
     resident_volumes: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
 
+@dataclass
+class DFPDatasetTraits(TraitsBase):
+    owner: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    ckds_data_key: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+
+@dataclass
+class TMEDatasetTraits(TraitsBase):
+    roles: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+
 #Checks if RACFU can be imported
 try:
     from racfu import racfu # type: ignore
