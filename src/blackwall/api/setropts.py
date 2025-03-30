@@ -88,6 +88,12 @@ class BaseSetroptsTraits(TraitsBase):
     password_expiration_warning: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     program_control: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
 
+def racf_options_get():
+    """Can be used to extract RACF options"""
+    #TODO reprogram this bad function
+    result = racfu({"operation": "extract", "admin_type": "racf-options"})
+    return result.result
+
 def update_racf_options(base: BaseSetroptsTraits):
     """Modify RACF options"""
     if racfu_enabled:
