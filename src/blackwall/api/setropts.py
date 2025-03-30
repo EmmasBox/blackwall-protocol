@@ -2,6 +2,15 @@
 from dataclasses import dataclass, field
 from .traits_base import TraitsBase
 
+#Checks if RACFU can be imported
+try:
+    from racfu import racfu # type: ignore
+    racfu_enabled = True
+except:
+    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")    
+    racfu_enabled = False
+
+
 @dataclass
 class BaseSetroptsTraits(TraitsBase):
     add_creator_to_access_list: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
@@ -80,3 +89,16 @@ class BaseSetroptsTraits(TraitsBase):
     password_expiration_warning: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     program_control: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
 
+def update_racf_options(base: BaseSetroptsTraits):
+    """Modify system options"""
+    if racfu_enabled:
+        traits = base.to_traits(prefix="base")
+        
+        result = racfu(
+            {
+                "operation": "alter", 
+                "admin_type": "racf-options", 
+                "traits":  traits
+            }
+        )
+        return result.result["return_codes"]["racf_return_code"]
