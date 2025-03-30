@@ -10,7 +10,6 @@ except:
     print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")    
     racfu_enabled = False
 
-
 @dataclass
 class BaseSetroptsTraits(TraitsBase):
     add_creator_to_access_list: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
