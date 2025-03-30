@@ -17,7 +17,8 @@ import json
 from .subcommands import Subcommands
 from .command_line import TSOCommandField
 from .command_line import CommandHistoryScreen
-from .theme import cynosure_theme
+from .theme_cynosure import cynosure_theme
+from .theme_3270 import ibm_3270_theme
 
 from .tabs import TabSystem
 
@@ -40,6 +41,7 @@ class Blackwall(App):
         self.title = "Blackwall Protocol"
         self.sub_title = "Mainframe Security Administration"
         self.register_theme(cynosure_theme)
+        self.register_theme(ibm_3270_theme)
         self.theme = "cynosure"
         self.install_screen(CommandHistoryScreen(), name="history")
 

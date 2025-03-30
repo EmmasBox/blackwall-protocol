@@ -1,3 +1,4 @@
+import random
 
 from textual.app import ComposeResult
 from textual.widgets import TabPane, TabbedContent
@@ -12,6 +13,16 @@ from .panels.history.history import PanelHistory
 from .panels.setropts.setropts import PanelSetropts
 
 from blackwall.messages import OpenTab
+
+people_list = [
+    "🧔",
+    "🙋",
+    "🙎",
+    "🙍",
+    "🙅",
+    "🙆",
+]
+
 
 class TabSystem(HorizontalGroup):
     BINDINGS = [
@@ -51,11 +62,11 @@ class TabSystem(HorizontalGroup):
     #Add new tab
     async def action_open_user(self) -> None:
         """Add a new user administration tab."""
-        self.post_message(OpenTab("User management",PanelUser()))
+        self.post_message(OpenTab(f"{random.choice(people_list)} User management",PanelUser()))
 
     async def action_open_dataset(self) -> None:
         """Add a new dataset profile management tab."""
-        self.post_message(OpenTab("Dataset profile mangement",PanelDataset()))
+        self.post_message(OpenTab("🗂️ Dataset profile mangement",PanelDataset()))
 
     async def action_open_resource(self) -> None:
         """Add a new general resource profile management tab."""
@@ -63,7 +74,7 @@ class TabSystem(HorizontalGroup):
 
     def action_open_search(self) -> None:
         """Add a new search tab."""
-        self.post_message(OpenTab("Search",PanelSearch()))
+        self.post_message(OpenTab("🔎 Search",PanelSearch()))
 
     def action_open_analysis(self) -> None:
         """Add a new analysis tab."""
