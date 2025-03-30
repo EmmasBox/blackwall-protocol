@@ -15,5 +15,5 @@ class PanelSetroptsActionButtons(HorizontalGroup):
 
 class PanelSetropts(VerticalScroll):
     def compose(self) -> ComposeResult:
-        yield PanelSetroptsFields()
+        #yield PanelSetroptsFields()
         yield PanelSetroptsActionButtons()
