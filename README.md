@@ -67,7 +67,7 @@ Not all terminals are capable of displaying advanced TUI applications. Below is 
 | Default terminal on Raspbian | No          |       |
 | Kitty | Yes          |       |
 | Alacritty | Yes          |       |
-| Default MacOS terminal | Yes*          | You may have to change the terminal settings, see this guide for more information: https://textual.textualize.io/FAQ/#why-doesnt-textual-look-good-on-macos       |
+| Default MacOS terminal | Yes*          | You may have to change the terminal settings, see this guide for more information: https://textual.textualize.io/FAQ/#why-doesnt-textual-look-good-on-macos. Colours might not look correct due to it being limited to 256, we reocmmend installating another temrinal on MacOS       |
 
 ## Running Blackwall Protocol
 Once you have installed Blackwall and have the required permissions you can start Blackwall simply by typing the blackwall command in an SSH session, through a supported terminal:
