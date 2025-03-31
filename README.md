@@ -52,7 +52,7 @@ Make sure each user that is supposed to use this software has access to the foll
 | FACILITY |IRR.RADMIN.RLIST    | Read   |Needed to extract general resource profile information       |
 | FACILITY |IRR.RADMIN.LISTDSD   | Read   |Needed to extract dataset profile information     |
 | FACILITY |IRR.RADMIN.SETROPTS.LIST | Read   |Needed to extract RACF system settings     |
-| XFACILIT |IRR.IRRSMO00.PRECHECK    | Update   |Needed to create new profiles in RACF and modify things     |
+| XFACILIT |IRR.IRRSMO00.PRECHECK    | Read   |Needed to create new profiles in RACF and modify things     |
 
 It's probably best to create a group with each of the required resources, this group can be named after the program.
 
