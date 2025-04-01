@@ -14,6 +14,7 @@ except ImportError:
 @dataclass
 class BaseSetroptsTraits(TraitsBase):
     add_creator_to_access_list: str | None = field(default=None,metadata={"label": "Add creator to access list", "allowed_in": {"alter","extract"}})
+    #Note type in documentation wrong
     automatic_data_set_protection: bool | None = field(default=None,metadata={"label": "Automatic dataset protection", "allowed_in": {"alter","extract"}})
     application_logon_auditing: str | None = field(default=None,metadata={"label": "Application logon auditing", "allowed_in": {"alter","extract"}})
     audit_classes: str | None = field(default=None,metadata={"label": "Audit classes", "allowed_in": {"alter","extract"}})
