@@ -56,6 +56,7 @@ if racfu_enabled:
         pass
 
     def update_group(group: str,create: bool, base: BaseGroupTraits, tme: TMEGroupTraits, omvs: OMVSGroupTraits, dfp: DFPGroupTraits, ovm: OVMGroupTraits):
+        """Creates or updates an existing group"""
         traits = base.to_traits(prefix="base")
         
         if tme is not None:
@@ -87,6 +88,7 @@ if racfu_enabled:
     
 
     def delete_group(group: str):
+        """Deletes a group"""
         result = racfu(
             {
                 "operation": "delete", 
