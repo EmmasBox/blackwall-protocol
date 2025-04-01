@@ -1,5 +1,6 @@
 
 from dataclasses import dataclass, field
+from typing import Any
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
@@ -88,11 +89,13 @@ class BaseSetroptsTraits(TraitsBase):
     password_expiration_warning: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     program_control: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
 
-def get_racf_options():
+def get_racf_options() -> dict[str, Any]:
     if racfu_enabled:
         """Can be used to extract RACF options"""
-        result = racfu({"operation": "extract", "admin_type": "racf-options"})
+        result = racfu({"operation": "extract", "admin_type": "racf-options"}) # type: ignore
         return result.result
+    else:
+        return {}
 
 def update_racf_options(base: BaseSetroptsTraits):
     """Modify RACF options"""
@@ -106,4 +109,4 @@ def update_racf_options(base: BaseSetroptsTraits):
                 "traits":  traits
             }
         )
-        return result.result["return_codes"]["racf_return_code"]
+        return result.result["return_codes"]["racf_return_code"] # type: ignore
