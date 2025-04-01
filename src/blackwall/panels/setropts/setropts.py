@@ -5,7 +5,7 @@ from textual.app import ComposeResult
 from textual.widgets import Button, Label
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll, Right
 
-from blackwall.api import setropts
+from blackwall.api.setropts import BaseSetroptsTraits, get_racf_options
 from blackwall.panels.traits_ui import generate_trait_inputs, set_traits_in_input
 from blackwall.panels.panel_mode import PanelMode
 
@@ -41,7 +41,7 @@ class PanelSetroptsFields(VerticalGroup):
         elif self.edit_mode is PanelMode.edit:
             inputs_disabled = False
 
-        yield from generate_trait_inputs(prefix="base",traits_class=setropts.BaseSetroptsTraits,disabled=inputs_disabled)
+        yield from generate_trait_inputs(prefix="base",traits_class=BaseSetroptsTraits,disabled=inputs_disabled)
 
 
 class PanelSetroptsActionButtons(HorizontalGroup):
@@ -58,8 +58,9 @@ class PanelSetropts(VerticalScroll):
         mode_section.edit_mode = value.mode
 
     def on_mount(self) -> None:
-        racf_options = setropts.get_racf_options()
-        set_traits_in_input(self,traits=racf_options["profile"]["base"],prefix="base",)
+        racf_options = get_racf_options()
+        base_traits = BaseSetroptsTraits.from_dict(prefix="base",source=racf_options["profile"]["base"])
+        set_traits_in_input(self,traits=base_traits,prefix="base",)
 
     def compose(self) -> ComposeResult:
         yield PanelSetroptsMode(switch_action="switch")
