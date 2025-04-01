@@ -1,6 +1,6 @@
 #Group API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
@@ -14,32 +14,32 @@ except:
 @dataclass
 class BaseGroupTraits(TraitsBase):
     owner: str
-    installation_data: str | None = None
+    installation_data: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    data_set_model: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     superior_group: str
-    terminal_universal_access: str | None = None
-    universal: str | None = None
+    terminal_universal_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    universal: str | None = field(default=None,metadata={"allowed_in": {"add","extract"}})
 
 @dataclass
 class DFPGroupTraits(TraitsBase):
-    data_application: str | None = None
-    data_class: str | None = None
-    management_class: str | None = None
-    storage_class: str | None = None
+    data_application: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    data_class: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    management_class: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    storage_class: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
 @dataclass
 class OMVSGroupTraits(TraitsBase):
-    auto_gid: str | None = None
-    gid: str | None = None
-    shared: str | None = None
+    auto_gid: str | None = field(default=None,metadata={"allowed_in": {"add","alter"},"invalid_values": {False}})
+    gid: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    shared: str | None = field(default=None,metadata={"allowed_in": {"add","alter"},"invalid_values": {False}})
 
 @dataclass
 class OVMGroupTraits(TraitsBase):
-    gid: str | None = None
-    home_directory: str | None = None
+    gid: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
 @dataclass
 class TMEGroupTraits(TraitsBase):
-    roles: str | None = None
+    roles: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
 if racfu_enabled:
     #Group functions
