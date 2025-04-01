@@ -50,22 +50,24 @@ class PanelSetroptsActionButtons(HorizontalGroup):
 
 class PanelSetropts(VerticalScroll):
     setropts_info: reactive[SetroptsInfo] = reactive(SetroptsInfo())
+    base_traits: reactive[BaseSetroptsTraits] = reactive(BaseSetroptsTraits())
 
     def watch_setropts_info(self, value: SetroptsInfo):
         mode_section = self.query_exactly_one(PanelSetroptsMode)
         mode_section = self.query_exactly_one(PanelSetroptsFields)
         #valid modes: edit and read
         mode_section.edit_mode = value.mode
-
+  
     def on_mount(self) -> None:
         racf_options = get_racf_options()
-        base_traits = BaseSetroptsTraits.from_dict(prefix="base",source=racf_options["profile"]["base"])
-        set_traits_in_input(self,traits=base_traits,prefix="base",)
+        self.base_traits = BaseSetroptsTraits.from_dict(prefix="base",source=racf_options["profile"]["base"])
+        set_traits_in_input(self,traits=self.base_traits,prefix="base")
 
     def compose(self) -> ComposeResult:
         yield PanelSetroptsMode(switch_action="switch")
         yield PanelSetroptsFields()
         yield PanelSetroptsActionButtons()
+        set_traits_in_input(self,traits=self.base_traits,prefix="base")
 
     def action_switch(self) -> None:
         if self.setropts_info.mode is PanelMode.read:
