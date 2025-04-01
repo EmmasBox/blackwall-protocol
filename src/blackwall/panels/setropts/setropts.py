@@ -49,6 +49,9 @@ class PanelSetroptsFields(VerticalGroup):
     def watch_base_traits(self):
         set_traits_in_input(self,traits=self.base_traits,prefix="base")
 
+    def watch_edit_mode(self):
+        set_traits_in_input(self,traits=self.base_traits,prefix="base")
+
 
 class PanelSetroptsActionButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:
