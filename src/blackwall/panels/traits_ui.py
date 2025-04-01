@@ -84,10 +84,9 @@ def get_traits_from_input(operator: str, widget: Widget, prefix: str, trait_cls:
 def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
     for field in fields(type(traits)):
         actual_type, optional = get_actual(field)
-
-        input_id = f"#{prefix}_{field.name}"
-        if actual_type is str or actual_type is bool:
-            try:
+        label = field.metadata.get("label")
+        # only show an input field if it is labelled
+        if label is not None:
+            input_id = f"#{prefix}_{field.name}"
+            if actual_type is str or actual_type is bool:
                 widget.query_exactly_one(selector=input_id).value = getattr(traits,field.name)
-            except:
-                pass
