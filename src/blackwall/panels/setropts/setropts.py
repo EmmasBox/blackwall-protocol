@@ -34,7 +34,7 @@ class PanelSetroptsMode(Right):
         await self.app.run_action(self.switch_action,default_namespace=self.parent)
 
 class PanelSetroptsFields(VerticalGroup):
-    edit_mode: reactive[PanelMode] = reactive(PanelMode.read,recompose=True)
+    edit_mode: reactive[PanelMode] = reactive(PanelMode.read)
     def compose(self) -> ComposeResult:
         if self.edit_mode is PanelMode.read:
             inputs_disabled = True
