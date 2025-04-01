@@ -34,17 +34,11 @@ class PanelSetroptsMode(Right):
         await self.app.run_action(self.switch_action,default_namespace=self.parent)
 
 class PanelSetroptsFields(VerticalGroup):
-    edit_mode: reactive[PanelMode] = reactive(PanelMode.read,recompose=True)
+    edit_mode: reactive[PanelMode] = reactive(PanelMode.read)
     base_traits: reactive[BaseSetroptsTraits] = reactive(BaseSetroptsTraits())
 
     def compose(self) -> ComposeResult:
-        if self.edit_mode is PanelMode.read:
-            inputs_disabled = True
-        elif self.edit_mode is PanelMode.edit:
-            inputs_disabled = False
-
-        yield from generate_trait_inputs(prefix="base",traits_class=BaseSetroptsTraits,disabled=inputs_disabled)
-        set_traits_in_input(self,traits=self.base_traits,prefix="base")
+        yield from generate_trait_inputs(prefix="base",traits_class=BaseSetroptsTraits)
 
     def watch_base_traits(self):
         set_traits_in_input(self,traits=self.base_traits,prefix="base")
@@ -69,11 +63,11 @@ class PanelSetropts(VerticalScroll):
   
     def on_mount(self) -> None:
         racf_options = get_racf_options()
-        self.base_traits = BaseSetroptsTraits.from_dict(prefix="base",source=racf_options["profile"]["base"])
+        self.query_one(PanelSetroptsFields).base_traits = BaseSetroptsTraits.from_dict(prefix="base",source=racf_options["profile"]["base"])
 
     def compose(self) -> ComposeResult:
         yield PanelSetroptsMode(switch_action="switch")
-        yield PanelSetroptsFields().data_bind(PanelSetropts.base_traits)
+        yield PanelSetroptsFields()
         yield PanelSetroptsActionButtons()
 
     def action_switch(self) -> None:

@@ -88,5 +88,7 @@ def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
         # only show an input field if it is labelled
         if label is not None:
             input_id = f"#{prefix}_{field.name}"
+            field_value = getattr(traits,field.name)
             if actual_type is str or actual_type is bool:
-                widget.query_exactly_one(selector=input_id).value = getattr(traits,field.name)
+                if field_value is not None:
+                    widget.query_exactly_one(selector=input_id).value = field_value
