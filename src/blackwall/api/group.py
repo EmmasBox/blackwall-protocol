@@ -46,7 +46,7 @@ if racfu_enabled:
     def group_profile_exists(group: str):
         """Checks if a group exists, returns true or false"""
         result = racfu({"operation": "extract", "admin_type": "group", "profile_name": group})
-        return result.result["return_codes"]["racf_return_code"] == "0"
+        return result.result["return_codes"]["racf_return_code"] == 0
     
     def group_get(group: str):
         pass
@@ -87,7 +87,4 @@ if racfu_enabled:
     
 
     def group_delete(group: str):
-        pass
-
-    def group_update(group: str):
         pass
