@@ -49,7 +49,7 @@ class PanelSetroptsActionButtons(HorizontalGroup):
         yield Button("Save",classes="action-button")
 
 class PanelSetropts(VerticalScroll):
-    setropts_info: reactive[SetroptsInfo] = reactive(SetroptsInfo())
+    setropts_info: reactive[SetroptsInfo] = reactive(SetroptsInfo(), recompose=True)
     base_traits: reactive[BaseSetroptsTraits] = reactive(BaseSetroptsTraits())
 
     def watch_setropts_info(self, value: SetroptsInfo):
