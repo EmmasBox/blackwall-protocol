@@ -86,5 +86,12 @@ if racfu_enabled:
         return result.result["return_codes"]["racf_return_code"]
     
 
-    def group_delete(group: str):
-        pass
+    def delete_group(group: str):
+        result = racfu(
+            {
+                "operation": "delete", 
+                "admin_type": "group", 
+                "profile_name": group
+            }
+        )
+        return result.result["return_codes"]["racf_return_code"]
