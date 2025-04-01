@@ -59,7 +59,7 @@ class PanelSetropts(VerticalScroll):
 
     def on_mount(self) -> None:
         racf_options = setropts.get_racf_options()
-        set_traits_in_input(self,traits=racf_options,prefix="base",)
+        set_traits_in_input(self,traits=racf_options["profile"]["base"],prefix="base",)
 
     def compose(self) -> ComposeResult:
         yield PanelSetroptsMode(switch_action="switch")
