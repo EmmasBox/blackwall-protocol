@@ -86,7 +86,7 @@ def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
         actual_type, optional = get_actual(field)
 
         input_id = f"#{prefix}_{field.name}"
-        if actual_type is str:
+        if actual_type is str or actual_type is bool:
             try:
                 widget.query_exactly_one(selector=input_id).value = getattr(traits,field.name)
             except:
