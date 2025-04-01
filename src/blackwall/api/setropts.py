@@ -17,7 +17,7 @@ class BaseSetroptsTraits(TraitsBase):
     application_logon_auditing: str | None = field(default=None,metadata={"label": "Application logon auditing", "allowed_in": {"alter","extract"}})
     audit_classes: str | None = field(default=None,metadata={"label": "Audit classes", "allowed_in": {"alter","extract"}})
     uncataloged_data_set_access: str | None = field(default=None,metadata={"label": "Uncataloged dataset access", "allowed_in": {"alter","extract"}})
-    active_classes: str | None = field(default=None,metadata={"label": "Active classes", "allowed_in": {"alter","extract"}})
+    active_classes: list[str] | None = field(default=None,metadata={"label": "Active classes", "allowed_in": {"alter","extract"}})
     statistics_classes: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     log_racf_command_violations: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     security_label_compatibility_mode: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
@@ -88,11 +88,11 @@ class BaseSetroptsTraits(TraitsBase):
     password_expiration_warning: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     program_control: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
 
-def racf_options_get():
-    """Can be used to extract RACF options"""
-    #TODO reprogram this bad function
-    result = racfu({"operation": "extract", "admin_type": "racf-options"})
-    return result.result
+def get_racf_options():
+    if racfu_enabled:
+        """Can be used to extract RACF options"""
+        result = racfu({"operation": "extract", "admin_type": "racf-options"})
+        return result.result
 
 def update_racf_options(base: BaseSetroptsTraits):
     """Modify RACF options"""

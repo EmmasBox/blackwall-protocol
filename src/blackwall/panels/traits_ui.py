@@ -6,7 +6,7 @@ from typing import get_args
 
 from textual.lazy import Lazy
 from textual.widget import Widget
-from textual.widgets import Input, Label, RadioButton, Collapsible
+from textual.widgets import Input, Label, RadioButton, Collapsible, ListView
 from blackwall.api.traits_base import TraitsBase
 
 def get_actual(field: Field) -> tuple[type,bool]:
@@ -24,7 +24,7 @@ def get_actual(field: Field) -> tuple[type,bool]:
         actual_type = field.type
     return actual_type, optional
 
-def generate_trait_inputs(prefix: str, traits_class: type[TraitsBase]) -> Generator:
+def generate_trait_inputs(prefix: str, traits_class: type[TraitsBase],disabled: bool = False) -> Generator:
     for field in fields(traits_class):
         label = field.metadata.get("label")
         # only show an input field if it is labelled
@@ -37,12 +37,15 @@ def generate_trait_inputs(prefix: str, traits_class: type[TraitsBase]) -> Genera
 
             if actual_type is str:
                 yield Label(f"{label}{'*' if not optional else ''}:")
-                yield Input(id=input_id, **input_args)
+                yield Input(id=input_id, disabled=disabled, **input_args)
             elif actual_type is int:
                 yield Label(f"{label}{'*' if not optional else ''}:")
-                yield Input(id=input_id, type="integer", **input_args)
+                yield Input(id=input_id, type="integer", disabled=disabled, **input_args)
+            elif actual_type is list:
+                yield Label(f"{label}{'*' if not optional else ''}:")
+                yield ListView(id=input_id, disabled=disabled, **input_args)
             elif actual_type is bool:
-                yield RadioButton(label=label, id=input_id, **input_args)
+                yield RadioButton(label=label, id=input_id, disabled=disabled, **input_args)
 
 def generate_trait_section(title: str, prefix: str, traits_class: type[TraitsBase]) -> Generator:
     with Lazy(widget=Collapsible(title=title)):
@@ -77,3 +80,11 @@ def get_traits_from_input(operator: str, widget: Widget, prefix: str, trait_cls:
 
         setattr(value, field.name, field_value)
     return value
+
+def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
+    for field in fields(type(traits)):
+        actual_type, optional = get_actual(field)
+
+        input_id = f"#{prefix}_{field.name}"
+        if actual_type is str:
+            widget.query_exactly_one(selector=input_id).value = getattr(traits,field.name)

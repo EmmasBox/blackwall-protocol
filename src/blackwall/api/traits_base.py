@@ -1,6 +1,6 @@
 from abc import ABC
 from dataclasses import dataclass, fields
-from typing import Any
+from typing import Any, Self
 
 @dataclass
 class TraitsBase(ABC):
@@ -14,3 +14,14 @@ class TraitsBase(ABC):
                 traits[f"{prefix}:{field.name}"] = value
 
         return traits
+
+    @classmethod
+    def from_dict(cls, prefix: str, source: dict[str, Any]) -> Self:
+        kwargs = {}
+        for field in fields(cls):
+            key = f"{prefix}:{field.name}"
+            value = source.get(key)
+            if value is not None:
+                kwargs[field.name] = value
+        return cls(**kwargs)
+    
