@@ -81,6 +81,17 @@ def get_traits_from_input(operator: str, widget: Widget, prefix: str, trait_cls:
         setattr(value, field.name, field_value)
     return value
 
+def toggle_inputs(widget: Widget, prefix: str, traits: TraitsBase, disabled: bool):
+    for field in fields(type(traits)):
+        actual_type, optional = get_actual(field)
+        label = field.metadata.get("label")
+        # Only toggle a field if it has a label
+        if label is not None:
+            input_id = f"#{prefix}_{field.name}"
+            if (actual_type is str or actual_type is int or actual_type is bool):
+                widget.query_exactly_one(selector=input_id).disabled = disabled
+
+
 def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
     for field in fields(type(traits)):
         actual_type, optional = get_actual(field)
