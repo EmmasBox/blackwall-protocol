@@ -42,7 +42,7 @@ def generate_trait_inputs(prefix: str, traits_class: type[TraitsBase],disabled: 
                 yield Label(f"{label}{'*' if not optional else ''}:")
                 yield Input(id=input_id, type="integer", disabled=disabled, **input_args)
             elif actual_type == list[str]:
-                with Lazy(widget=Collapsible(title=label)):
+                with Collapsible(title=label):
                     yield ListView(id=input_id, disabled=disabled, **input_args)
             elif actual_type is bool:
                 yield RadioButton(label=label, id=input_id, disabled=disabled, **input_args)
