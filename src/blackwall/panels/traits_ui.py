@@ -94,5 +94,6 @@ def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
                     widget.query_exactly_one(selector=input_id).value = field_value
             elif actual_type == list[str]:
                 list_widget = widget.query_exactly_one(selector=input_id)
-                for item in field_value:
-                    list_widget.append(ListItem(Label(item)))
+                if field_value is not None:
+                    for item in field_value:
+                        list_widget.append(ListItem(Label(item)))
