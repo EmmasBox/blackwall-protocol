@@ -6,7 +6,7 @@ from textual.widgets import Button, Label
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll, Right
 
 from blackwall.api.setropts import BaseSetroptsTraits, get_racf_options
-from blackwall.panels.traits_ui import generate_trait_inputs, set_traits_in_input
+from blackwall.panels.traits_ui import generate_trait_inputs, set_traits_in_input, toggle_inputs
 from blackwall.panels.panel_mode import PanelMode
 
 @dataclass
@@ -44,6 +44,11 @@ class PanelSetroptsFields(VerticalGroup):
         set_traits_in_input(self,traits=self.base_traits,prefix="base")
 
     def watch_edit_mode(self):
+        if self.edit_mode is PanelMode.read:
+            toggle_inputs(self,prefix="base",traits=self.base_traits,disabled=True)
+        elif self.edit_mode is PanelMode.edit:
+            toggle_inputs(self,prefix="base",traits=self.base_traits,disabled=False)
+
         set_traits_in_input(self,traits=self.base_traits,prefix="base")
 
 
