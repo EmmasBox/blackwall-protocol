@@ -71,7 +71,7 @@ class BaseSetroptsTraits(TraitsBase):
     raclist: list[str] | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     log_real_data_set_name: bool | None = field(default=None,metadata={"label": "Log real dataset names", "allowed_in": {"alter","extract"}})
     refresh: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
-    tape_data_set_security_retention_period: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
+    tape_data_set_security_retention_period: int | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     max_incorrect_password_attempts: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     password_rules: bool | None = field(default=None,metadata={"label": "Password rules", "allowed_in": {"alter","extract"}})
     rvary_status_password_format: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
