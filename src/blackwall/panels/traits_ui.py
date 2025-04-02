@@ -91,7 +91,6 @@ def toggle_inputs(widget: Widget, prefix: str, traits: TraitsBase, disabled: boo
             if (actual_type is str or actual_type is int or actual_type is bool):
                 widget.query_exactly_one(selector=input_id).disabled = disabled
 
-
 def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
     for field in fields(type(traits)):
         actual_type, optional = get_actual(field)
