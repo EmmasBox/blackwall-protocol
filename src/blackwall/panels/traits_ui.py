@@ -41,7 +41,7 @@ def generate_trait_inputs(prefix: str, traits_class: type[TraitsBase],disabled: 
             elif actual_type is int:
                 yield Label(f"{label}{'*' if not optional else ''}:")
                 yield Input(id=input_id, type="integer", disabled=disabled, **input_args)
-            elif actual_type is list:
+            elif actual_type == list[str]:
                 yield Label(f"{label}{'*' if not optional else ''}:")
                 yield ListView(id=input_id, disabled=disabled, **input_args)
             elif actual_type is bool:
@@ -92,7 +92,7 @@ def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
             if (actual_type is str or actual_type is int or actual_type is bool):
                 if field_value is not None:
                     widget.query_exactly_one(selector=input_id).value = field_value
-            elif actual_type is list[str]:
+            elif actual_type == list[str]:
                 list_widget = widget.query_exactly_one(selector=input_id)
                 for item in field_value:
                     list_widget.append(ListItem(Label(item)))
