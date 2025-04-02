@@ -35,7 +35,7 @@ class BaseSetroptsTraits(TraitsBase):
     list_of_groups_access_checking: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     password_history: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     revoke_inactive_userids_interval: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
-    record_user_verification_statistics: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
+    record_user_verification_statistics: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     max_password_change_interval: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     jes_batch: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     jes_early_verification: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
