@@ -6,7 +6,7 @@ from typing import get_args
 
 from textual.lazy import Lazy
 from textual.widget import Widget
-from textual.widgets import Input, Label, RadioButton, Collapsible, ListView
+from textual.widgets import Input, Label, RadioButton, Collapsible, ListView, ListItem
 from blackwall.api.traits_base import TraitsBase
 
 def get_actual(field: Field) -> tuple[type,bool]:
@@ -89,6 +89,10 @@ def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
         if label is not None:
             input_id = f"#{prefix}_{field.name}"
             field_value = getattr(traits,field.name)
-            if actual_type is str or actual_type is bool:
+            if (actual_type is str or actual_type is bool):
                 if field_value is not None:
                     widget.query_exactly_one(selector=input_id).value = field_value
+            elif actual_type is list[str]:
+                list_widget = widget.query_exactly_one(selector=input_id)
+                for item in field_value:
+                    list_widget.append(ListItem(Label(item)))
