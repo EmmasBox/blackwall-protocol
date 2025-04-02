@@ -19,7 +19,7 @@ class BaseSetroptsTraits(TraitsBase):
     application_logon_auditing: str | None = field(default=None,metadata={"label": "Application logon auditing", "allowed_in": {"alter","extract"}})
     audit_classes: str | None = field(default=None,metadata={"label": "Audit classes", "allowed_in": {"alter","extract"}})
     uncataloged_data_set_access: str | None = field(default=None,metadata={"label": "Uncataloged dataset access", "allowed_in": {"alter","extract"}})
-    active_classes: list[str] | None = field(default=None,metadata={"label": "Active classes", "allowed_in": {"alter","extract"}})
+    active_classes: list[str] | None = field(default=None,metadata={"label": "Active classes", "input_args": {"classes": "list-view-generic"}, "allowed_in": {"alter","extract"}})
     statistics_classes: list[str] | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     log_racf_command_violations: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     security_label_compatibility_mode: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})

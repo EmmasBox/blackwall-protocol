@@ -25,6 +25,10 @@
     margin-bottom: 1;
 }
 
+.list-view-generic {
+    height: 50;
+}
+
 .action-button {
     margin-top: 1;
     margin-bottom: 1;
