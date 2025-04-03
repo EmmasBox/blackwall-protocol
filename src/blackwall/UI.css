@@ -45,6 +45,7 @@
 # Setropts
 .setropts-warning {
     margin: 1;
+    max-width: 60;
 }
 
 .setropts-mode-label {
