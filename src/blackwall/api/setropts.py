@@ -99,6 +99,34 @@ def get_racf_options() -> dict[str, Any]:
     else:
         return {}
 
+def raclist(class_name):
+    """RACLIST class"""
+    if racfu_enabled:
+        result = racfu(
+            {
+                "operation": "alter", 
+                "admin_type": "racf-options", 
+                "traits": {
+                    "base:raclist": class_name
+                }
+            }
+        )
+        return result.result["return_codes"]["racf_return_code"] # type: ignore
+
+def refresh_RACF():
+    """Refresh RACF"""
+    if racfu_enabled:
+        result = racfu(
+            {
+                "operation": "alter", 
+                "admin_type": "racf-options", 
+                "traits": {
+                    "base:refresh": True
+                }
+            }
+        )
+        return result.result["return_codes"]["racf_return_code"] # type: ignore
+
 def update_racf_options(base: BaseSetroptsTraits):
     """Modify RACF options"""
     if racfu_enabled:
