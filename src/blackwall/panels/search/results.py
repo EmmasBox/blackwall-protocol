@@ -7,6 +7,10 @@ USER_COLUMNS = [
     ("User", "Owner", "dfltgrp", "SOA", "RIRP", "UID", "Shell", "Home", "Last logon", "Created"),
 ]
 
+GROUP_COLUMNS = [
+    ("Group", "Connected users", "Created"),
+]
+
 DATASET_COLUMNS = [
     ("Dataset", "UACC", "Owner", "Created"),
 ]
@@ -26,6 +30,10 @@ class PanelResultsMixedType(VerticalScroll):
         user_table = self.query_exactly_one(selector="#results_user_table")
         user_table.zebra_stripes = True
         user_table.add_columns(*USER_COLUMNS[0])
+
+        group_table = self.query_exactly_one(selector="#results_group_table")
+        group_table.zebra_stripes = True
+        group_table.add_columns(*GROUP_COLUMNS[0])
 
         dataset_table = self.query_exactly_one(selector="#results_dataset_table")
         dataset_table.zebra_stripes = True
