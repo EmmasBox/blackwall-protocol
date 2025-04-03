@@ -3,6 +3,7 @@ from textual.app import ComposeResult
 from textual.widgets import Button, Input, Label, RadioButton, RadioSet, TabbedContent, TabPane
 from textual.containers import HorizontalGroup, VerticalScroll
 
+from blackwall.messages import OpenTab
 from blackwall.panels.search.results import PanelResultsMixedType
 
 class SearchSelector(HorizontalGroup):
@@ -18,9 +19,7 @@ class SearchSelector(HorizontalGroup):
 
 class SearchField(HorizontalGroup):
     def action_search(self) -> None:
-        # This is really stupid but it works *insert shrug emoji*
-        tabs = self.parent.parent.parent.parent.parent.query_one(TabbedContent)
-        tabs.add_pane(TabPane("Results",PanelResultsMixedType()))
+        self.post_message(OpenTab("Results",PanelResultsMixedType()))
 
     def compose(self) -> ComposeResult:
         yield Label("Search:")
