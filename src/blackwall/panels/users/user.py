@@ -155,7 +155,7 @@ class UserInfo:
     installation_data: str = ""
 
 class PanelUser(VerticalScroll):
-    user_info: reactive[UserInfo] = reactive(UserInfo)
+    user_info: reactive[UserInfo] = reactive(UserInfo())
 
     def compose(self) -> ComposeResult:
         yield PanelUserInfo()
