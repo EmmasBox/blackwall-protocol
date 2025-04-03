@@ -31,7 +31,7 @@ class PanelSetroptsMode(VerticalGroup):
         elif self.edit_mode is PanelMode.edit:
             readable_mode = "edit"
         
-        yield Label(f"Mode: {readable_mode}")
+        yield Label(f"Mode: {readable_mode}",classes="setropts-mode-label")
         yield Button("Switch",tooltip="Toggle between read and edit mode",action="switch",classes="action-button")
 
     async def action_switch(self):
