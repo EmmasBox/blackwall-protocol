@@ -19,6 +19,12 @@ class BaseGroupTraits(TraitsBase):
     superior_group: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     terminal_universal_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     universal: str | None = field(default=None,metadata={"allowed_in": {"add","extract"}})
+    subgroups: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    subgroup: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    connected_users: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    connected_user_authority: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    connected_userid: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    create_date: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
 
 @dataclass
 class DFPGroupTraits(TraitsBase):
