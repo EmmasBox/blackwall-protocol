@@ -25,8 +25,9 @@
     margin-bottom: 1;
 }
 
-.list-view-generic {
-    height: 50;
+.generic-checkbox {
+    width: 80;
+    margin-bottom: 1;
 }
 
 .action-button {
