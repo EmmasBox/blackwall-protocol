@@ -16,7 +16,7 @@ class BaseGroupTraits(TraitsBase):
     owner: str
     installation_data: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     data_set_model: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    superior_group: str
+    superior_group: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     terminal_universal_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     universal: str | None = field(default=None,metadata={"allowed_in": {"add","extract"}})
 
