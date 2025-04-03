@@ -24,12 +24,10 @@ class PanelResultsMixedType(VerticalScroll):
 
     def on_mount(self) -> None:
         user_table = self.query_exactly_one(selector="#results_user_table")
-        user_table.cursor_type = next(cursors)
         user_table.zebra_stripes = True
         user_table.add_columns(*USER_COLUMNS[0])
 
         dataset_table = self.query_exactly_one(selector="#results_dataset_table")
-        dataset_table.cursor_type = next(cursors)
         dataset_table.zebra_stripes = True
         dataset_table.add_columns(*DATASET_COLUMNS[0])
 
