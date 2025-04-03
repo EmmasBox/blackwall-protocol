@@ -330,13 +330,16 @@ def update_resource_profile(
     )
     return result.result["return_codes"]["racf_return_code"]
 
-def delete_resource_profile(resource_class: str,resource: str):
-    result = racfu(
-            {
-                "operation": "delete", 
-                "admin_type": "resource", 
-                "profile_name": resource,
-                "class_name": resource_class
-            }
-        )
-    return result.result["return_codes"]["racf_return_code"] == 0
+def delete_resource_profile(resource_class: str,resource: str) -> int:
+    if racfu_enabled:
+        result = racfu(
+                {
+                    "operation": "delete", 
+                    "admin_type": "resource", 
+                    "profile_name": resource,
+                    "class_name": resource_class
+                }
+            )
+        return result.result["return_codes"]["racf_return_code"] == 0
+    else:
+        return 8
