@@ -13,7 +13,11 @@ from blackwall.panels.panel_mode import PanelMode
 class SetroptsInfo:
     mode: PanelMode = PanelMode.read
 
-class PanelSetroptsMode(Right):
+class PanelSetroptsNotice(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Warning this panel controls and displays RACF system options. It is not recommended to touch this unless you absolutely know what you are doing")
+
+class PanelSetroptsMode(VerticalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.read,recompose=True)
 
     def __init__(self, switch_action: str):
@@ -71,6 +75,7 @@ class PanelSetropts(VerticalScroll):
         self.query_one(PanelSetroptsFields).base_traits = BaseSetroptsTraits.from_dict(prefix="base",source=racf_options["profile"]["base"])
 
     def compose(self) -> ComposeResult:
+        yield PanelSetroptsNotice()
         yield PanelSetroptsMode(switch_action="switch")
         yield PanelSetroptsFields()
         yield PanelSetroptsActionButtons()
