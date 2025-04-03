@@ -14,6 +14,7 @@ DATASET_COLUMNS = [
 class PanelResultsMixedType(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield DataTable(id="results_user_table")
+        yield DataTable(id="results_group_table")
         yield DataTable(id="results_dataset_table")
         yield DataTable(id="results_resource_table")
 
