@@ -49,7 +49,7 @@ class TMEGroupTraits(TraitsBase):
 
 if racfu_enabled:
     #Group functions
-    def group_profile_exists(group: str):
+    def group_profile_exists(group: str) -> bool:
         """Checks if a group exists, returns true or false"""
         result = racfu({"operation": "extract", "admin_type": "group", "profile_name": group})
         return result.result["return_codes"]["racf_return_code"] == 0

@@ -87,11 +87,13 @@ except ImportError:
 
 
 #Dataset functions
-def dataset_profile_exists(dataset: str):
+def dataset_profile_exists(dataset: str) -> bool:
     """Checks if a dataset profile exists, returns true or false"""
     if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "data-set", "profile_name": dataset.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
+    else:
+        return False
 
 def dataset_profile_get(dataset: str):
     #TODO reprogram this bad function
