@@ -17,7 +17,6 @@ class BaseSetroptsTraits(TraitsBase):
     #Note type in documentation wrong
     automatic_data_set_protection: bool | None = field(default=None,metadata={"label": "Automatic dataset protection", "allowed_in": {"alter","extract"}})
     application_logon_auditing: str | None = field(default=None,metadata={"label": "Application logon auditing", "allowed_in": {"alter","extract"}})
-    audit_classes: str | None = field(default=None,metadata={"label": "Audit classes", "allowed_in": {"alter","extract"}})
     uncataloged_data_set_access: str | None = field(default=None,metadata={"label": "Uncataloged dataset access", "allowed_in": {"alter","extract"}})
     log_racf_command_violations: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     security_label_compatibility_mode: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
@@ -90,6 +89,7 @@ class BaseSetroptsTraits(TraitsBase):
     generic_profile_checking_classes: list[str] | None = field(default=None,metadata={"label": "Generic profile checking classes", "allowed_in": {"alter","extract"}})
     raclist: list[str] | None = field(default=None,metadata={"label": "Raclisted classes", "allowed_in": {"alter","extract"}})
     global_access_classes: list[str] | None = field(default=None,metadata={"label": "Global access classes", "allowed_in": {"alter","extract"}})
+    audit_classes: list[str] | None = field(default=None,metadata={"label": "Audit classes", "allowed_in": {"alter","extract"}})
 
 def get_racf_options() -> dict[str, Any]:
     if racfu_enabled:
