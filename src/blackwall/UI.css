@@ -57,6 +57,11 @@
     
 }
 
+.logo-image {
+    width: auto;
+    height: auto;
+}
+
 .welcome-suggestion-header {
     margin-left: 1;
 }
