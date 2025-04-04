@@ -58,6 +58,8 @@
 }
 
 .logo-image {
+    max-width: 80;
+    max-height: 80;
     width: auto;
     height: auto;
 }
