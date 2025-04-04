@@ -3,6 +3,8 @@ from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, Markdown, Collapsible
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
+from textual_image.widget import Image
+
 from blackwall.messages import OpenTab
 from blackwall.panels.users.user import PanelUser
 from blackwall.panels.dataset.dataset import PanelDataset
@@ -11,6 +13,10 @@ from blackwall.panels.analysis.analysis import PanelAnalysis
 
 from importlib.resources import files
 message = files('blackwall.panels.welcome').joinpath('welcome_message.md').read_text()
+
+class PanelWelcomeLogo(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield Image("OMP_CBTTape_original-color.png")
 
 class PanelWelcomeMessage(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -40,6 +46,7 @@ class PanelWelcomeActions(VerticalGroup):
 class PanelWelcomeMain(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield PanelWelcomeMessage()
+        yield PanelWelcomeLogo()
         yield PanelWelcomeActions()
 
 class PanelWelcome(VerticalScroll):
