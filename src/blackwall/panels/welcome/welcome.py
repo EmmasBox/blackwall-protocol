@@ -11,12 +11,17 @@ from blackwall.panels.dataset.dataset import PanelDataset
 from blackwall.panels.resource.resource import PanelResource
 from blackwall.panels.analysis.analysis import PanelAnalysis
 
+from pathlib import Path
+
 from importlib.resources import files
 message = files('blackwall.panels.welcome').joinpath('welcome_message.md').read_text()
 
+
+
 class PanelWelcomeLogo(VerticalGroup):
     def compose(self) -> ComposeResult:
-        yield Image("OMP_CBTTape_original-color.png")
+        image = Path('OMP_CBTTape_original-color.png')
+        yield Image(image, classes="logo-image")
 
 class PanelWelcomeMessage(VerticalGroup):
     def compose(self) -> ComposeResult:
