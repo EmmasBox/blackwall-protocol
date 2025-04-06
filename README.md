@@ -57,17 +57,18 @@ Make sure each user that is supposed to use this software has access to the foll
 It's probably best to create a group with each of the required resources, this group can be named after the program.
 
 ## Supported terminals
-Not all terminals are capable of displaying advanced TUI applications. Below is a list of terminals that have been tested on whether they work or not. Terminals not in list might work.
+Not all terminals are capable of displaying advanced TUI applications. Below is a list of terminals that have been tested on whether they work or not. Terminals not in list might work. Asterisks indicate that additional customization might be necessary to get the terminal to work with Blackwall properly.
 | Terminal         | Supported | Notes |
 |------------------|-----------|-------|
-| VS Code          | Yes*          |You must set minimum contrast ratio to 1, otherwise certain UI elements will not be displayed correctly causing a degraded user experience       |
-| Windows Terminal | Yes          |       |
-| Blackbox         | Yes          |       |
+| VS Code          | Yes*          |You must set terminal.integrated.minimumContrastRatio to 1 and enable terminal.integrated.enableImages, otherwise certain UI elements will not be displayed correctly causing a degraded user experience       |
+| Windows Terminal | Yes          |Included with Windows 11 and can be installed manually on the Windows 10 through the MS app store       |
+| Windows Console | No          |       |
+| Blackbox         | Yes*          |You must manually enable "Sixel Support", otherwise images cannot be displayed properly       |
 | TSO OMVS in z/OS | No          |       |
 | Default terminal on Raspbian | No          |       |
 | Kitty | Yes          |       |
-| Alacritty | Yes          |       |
-| Default MacOS terminal | Yes*          | You may have to change the terminal settings, see this guide for more information: https://textual.textualize.io/FAQ/#why-doesnt-textual-look-good-on-macos. Colours might not look correct due to it being limited to 256, we reocmmend installating another temrinal on MacOS       |
+| Alacritty | No          |       |
+| Default MacOS terminal | No          |    | 
 
 ## Running Blackwall Protocol
 Once you have installed Blackwall and have the required permissions you can start Blackwall simply by typing the blackwall command in an SSH session, through a supported terminal:
