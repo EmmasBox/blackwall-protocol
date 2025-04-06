@@ -3,7 +3,7 @@ from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, Markdown, Collapsible
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
-from textual_image.widget import Image
+from textual_image.widget import SixelImage
 
 from blackwall.messages import OpenTab
 from blackwall.panels.users.user import PanelUser
@@ -21,7 +21,7 @@ message = files('blackwall.panels.welcome').joinpath('welcome_message.md').read_
 class PanelWelcomeLogo(VerticalGroup):
     def compose(self) -> ComposeResult:
         image = Path('OMP_CBTTape_original-color.png')
-        yield Image(image, classes="logo-image")
+        yield SixelImage(image, classes="logo-image")
 
 class PanelWelcomeMessage(VerticalGroup):
     def compose(self) -> ComposeResult:
