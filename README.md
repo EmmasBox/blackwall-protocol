@@ -13,6 +13,7 @@ Blackwall does not support ACF2 or Top Secret and never will, people are more th
 - Execute TSO commands
 - Create and modify users
 - Create and modify dataset profiles
+- Create and modify general resource profiles
 
 ## Dependencies
 ### Required dependencies:
