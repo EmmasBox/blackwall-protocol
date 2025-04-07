@@ -30,13 +30,37 @@ class PanelResourceSegments(VerticalGroup):
             yield from generate_trait_section(title="CDT info", prefix="cdtinfo", traits_class=resource.CDTINFOResourceTraits)
 
 class PanelResourceActionButtons(HorizontalGroup):
+    edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
+
+    if edit_mode is True:
+        delete_is_disabled = False
+    else:
+        delete_is_disabled = True
+        
+    def __init__(self, save_action: str, delete_action: str):
+        super().__init__()
+        self.save_action = save_action
+        self.delete_action = delete_action
+    
     def compose(self) -> ComposeResult:
-        yield Button("Save",classes="action-button")
-        yield Button("Delete",classes="action-button")
+        yield Button("Save",action="save",classes="action-button")
+        yield Button("Delete",action="delete",classes="action-button",disabled=self.delete_is_disabled)
+
+    async def action_save(self):
+        await self.app.run_action(self.save_action,default_namespace=self.parent)
+
+    async def action_delete(self):
+        await self.app.run_action(self.delete_action,default_namespace=self.parent)
 
 class PanelResource(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield PanelResourceClassName()
         yield PanelResourceInstallationData()
         yield PanelResourceSegments()
-        yield PanelResourceActionButtons()
+        yield PanelResourceActionButtons(save_action="save_resource_profile", delete_action="delete_resource_profile")
+
+        def action_save_resource_profile(self) -> None:
+            pass
+
+        def action_delete_resource_profile(self) -> None:
+            pass
