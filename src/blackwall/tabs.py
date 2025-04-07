@@ -11,6 +11,7 @@ from .panels.dataset.dataset import PanelDataset
 from .panels.resource.resource import PanelResource
 from .panels.history.history import PanelHistory
 from .panels.setropts.setropts import PanelSetropts
+from .panels.group.group import PanelGroups
 
 from blackwall.messages import OpenTab
 
@@ -30,7 +31,8 @@ class TabSystem(HorizontalGroup):
         ("ctrl+f", "open_search", "Open search tab"),
         ("ctrl+a", "open_analysis", "Open analysis tab"),
         ("ctrl+d", "open_dataset", "Open dataset profile tab"),
-        ("ctrl+g", "open_resource", "Open resource profile tab"),
+        ("ctrl+g", "open_groups", "Open group profile tab"),
+        ("ctrl+r", "open_resource", "Open resource profile tab"),
         ("ctrl+h", "open_history", "Open history tab"),
         ("ctrl+o", "open_options", "Open RACF options tab"),
         ("r", "remove", "Remove active tab"),
@@ -71,6 +73,10 @@ class TabSystem(HorizontalGroup):
     async def action_open_resource(self) -> None:
         """Add a new general resource profile management tab."""
         self.post_message(OpenTab("Resource management",PanelResource()))
+
+    def action_open_groups(self) -> None:
+        """Add a new group management tab."""
+        self.post_message(OpenTab("Group management",PanelGroups()))
 
     def action_open_search(self) -> None:
         """Add a new search tab."""
