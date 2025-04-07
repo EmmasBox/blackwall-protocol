@@ -262,7 +262,8 @@ def update_resource_profile(
         idtparms: IDTPARMSResourceTraits,
         jes: JESResourceTraits,
         dlfdata: DLFDataResourceTraits,
-        cfdef: CfdefResourceTraits
+        cfdef: CfdefResourceTraits,
+        eim: EIMResourceTraits,
         ):
     traits = base.to_traits(prefix="base")
 
@@ -313,6 +314,9 @@ def update_resource_profile(
 
     if cfdef is not None:
         traits.update(cfdef.to_traits("cfdef"))
+
+    if eim is not None:
+        traits.update(eim.to_traits("eim"))
 
     if create:
         operation = "add"
