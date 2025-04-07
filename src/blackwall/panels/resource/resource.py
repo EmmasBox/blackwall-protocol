@@ -26,8 +26,8 @@ class PanelResourceInstallationData(VerticalGroup):
 class PanelResourceSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Lazy(widget=Collapsible(title="Resource profile segments")):
-            yield from generate_trait_section(title="stdata", prefix="stdata", traits_class=resource.STDATAResourceTraits)
-            yield from generate_trait_section(title="CDT info", prefix="cdtinfo", traits_class=resource.CDTINFOResourceTraits)
+            yield from generate_trait_section(title="Started task data", prefix="stdata", traits_class=resource.STDATAResourceTraits)
+            yield from generate_trait_section(title="Class Descriptor Table (CDT) info", prefix="cdtinfo", traits_class=resource.CDTINFOResourceTraits)
 
 class PanelResourceActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
