@@ -28,6 +28,7 @@ Blackwall does not support ACF2 or Top Secret and never will, people are more th
 ### Optional dependencies:
 #### Python packages
 - [ZOAU 1.3.4.x or later](https://www.ibm.com/docs/en/zoau/1.3.x) (For gathering system information like LPAR name, not required but highly recommended)
+- [textual-image](https://github.com/lnqs/textual-image), [pillow](https://github.com/python-pillow/Pillow), and [zlib](https://github.com/zopencommunity/zlibport) (For image support)
 
 ## Installation
 As mentioned in the dependencies section, before you install you will have to install Python and ZOAU yourself before installing Blackwall. You also need to make sure IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space are configured correctly. 
@@ -67,7 +68,7 @@ Not all terminals are capable of displaying advanced TUI applications. Below is 
 | TSO OMVS in z/OS | No          |       |
 | Default terminal on Raspbian | No          |       |
 | Kitty | Yes          |       |
-| Alacritty | No          |       |
+| Alacritty | Yes*          |Alacritty is only supported if you don't utilize the image support       |
 | Default MacOS terminal | No          |    | 
 
 ## Running Blackwall Protocol
