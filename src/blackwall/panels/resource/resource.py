@@ -68,24 +68,23 @@ class PanelResource(VerticalScroll):
                 operator = "add"
 
             base_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.BaseResourceTraits)
-            kerb_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.KerbResourceTraits)
-            dlfdata_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.DLFDataResourceTraits)
-            eim_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.EIMResourceTraits)
-            jes_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.JESResourceTraits)
-            icsf_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.ICSFResourceTraits)
-            ictx_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.ICTXResourceTraits)
-            idtparm_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.IDTPARMSResourceTraits)
-            session_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.SessionResourceTraits)
-            svfmr_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.SVFMRResourceTraits)
-            stdata_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.STDATAResourceTraits)
-            proxy_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.ProxyResourceTraits)
-            mfapolicy_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.MFAPolicyResourceTraits)
-            sigver_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.SIGVERResourceTraits)
-            cdtinfo_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.CDTINFOResourceTraits)
-            tme_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.TMEResourceTraits)
-            cdtinfo_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.CDTINFOResourceTraits)
-            ssignon_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.SSIGNONResourceTraits)
-            cfdef_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.CfdefResourceTraits)
+            kerb_segment = get_traits_from_input(operator,self, prefix="kerb", trait_cls=resource.KerbResourceTraits)
+            dlfdata_segment = get_traits_from_input(operator,self, prefix="dlfdata", trait_cls=resource.DLFDataResourceTraits)
+            eim_segment = get_traits_from_input(operator,self, prefix="eim", trait_cls=resource.EIMResourceTraits)
+            jes_segment = get_traits_from_input(operator,self, prefix="jes", trait_cls=resource.JESResourceTraits)
+            icsf_segment = get_traits_from_input(operator,self, prefix="icsf", trait_cls=resource.ICSFResourceTraits)
+            ictx_segment = get_traits_from_input(operator,self, prefix="ictx", trait_cls=resource.ICTXResourceTraits)
+            idtparms_segment = get_traits_from_input(operator,self, prefix="idtparms", trait_cls=resource.IDTPARMSResourceTraits)
+            session_segment = get_traits_from_input(operator,self, prefix="session", trait_cls=resource.SessionResourceTraits)
+            svfmr_segment = get_traits_from_input(operator,self, prefix="svfmr", trait_cls=resource.SVFMRResourceTraits)
+            stdata_segment = get_traits_from_input(operator,self, prefix="stdata", trait_cls=resource.STDATAResourceTraits)
+            proxy_segment = get_traits_from_input(operator,self, prefix="proxy", trait_cls=resource.ProxyResourceTraits)
+            mfapolicy_segment = get_traits_from_input(operator,self, prefix="mfapolicy", trait_cls=resource.MFAPolicyResourceTraits)
+            sigver_segment = get_traits_from_input(operator,self, prefix="sigver", trait_cls=resource.SIGVERResourceTraits)
+            tme_segment = get_traits_from_input(operator,self, prefix="tme", trait_cls=resource.TMEResourceTraits)
+            cdtinfo_segment = get_traits_from_input(operator,self, prefix="cdtinfo", trait_cls=resource.CDTINFOResourceTraits)
+            ssignon_segment = get_traits_from_input(operator,self, prefix="ssignon", trait_cls=resource.SSIGNONResourceTraits)
+            cfdef_segment = get_traits_from_input(operator,self, prefix="cfdef", trait_cls=resource.CfdefResourceTraits)
 
             result = resource.update_resource_profile(
                 resource=resource_profile_name,
@@ -99,7 +98,7 @@ class PanelResource(VerticalScroll):
                 jes=jes_segment,
                 icsf=icsf_segment,
                 ictx=ictx_segment,
-                idtparms=idtparm_segment,
+                idtparms=idtparms_segment,
                 session=session_segment,
                 svfmr=svfmr_segment,
                 stdata=stdata_segment,
