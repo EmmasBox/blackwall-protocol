@@ -14,6 +14,7 @@ Blackwall does not support ACF2 or Top Secret and never will, people are more th
 - Create and modify users
 - Create and modify dataset profiles
 - Create and modify general resource profiles
+- Modify and list system options
 
 ## Dependencies
 ### Required dependencies:
