@@ -3,8 +3,6 @@ from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, Markdown, Collapsible
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
-from textual_image.widget import SixelImage
-
 from blackwall.messages import OpenTab
 from blackwall.panels.users.user import PanelUser
 from blackwall.panels.dataset.dataset import PanelDataset
@@ -16,12 +14,14 @@ from pathlib import Path
 from importlib.resources import files
 message = files('blackwall.panels.welcome').joinpath('welcome_message.md').read_text()
 
-
-
 class PanelWelcomeLogo(VerticalGroup):
     def compose(self) -> ComposeResult:
-        image = Path('OMP_CBTTape_original-color.png')
-        yield SixelImage(image, classes="logo-image")
+        try:
+            from textual_image.widget import SixelImage
+            image = Path('OMP_CBTTape_original-color.png')
+            yield SixelImage(image, classes="logo-image")
+        except ImportError:
+            pass 
 
 class PanelWelcomeMessage(VerticalGroup):
     def compose(self) -> ComposeResult:

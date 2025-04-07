@@ -5,8 +5,7 @@ dynamic = ["version"]
 requires-python = ">= 3.11"
 dependencies = [
   "racfu",
-  "textual-image",
-  "textual>=3.0.1"
+  "textual>=3.0.1",
 ]
 authors = [
   {name = "Emma Skovgaard"},
@@ -15,6 +14,12 @@ authors = [
 readme = "README.md"
 license = {file = "LICENSE"}
 keywords = ["RACF", "security", "mainframe", "zos", "TUI"]
+
+[project.optional-dependencies]
+images = [
+  "qrcode>=8.1",
+  "textual-image",
+]
 
 [project.scripts]
 blackwall = "blackwall.main:main"

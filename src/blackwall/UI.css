@@ -73,6 +73,12 @@
     margin: 1;
 }
 
+# Audit mode
+.qrcode-image {
+    width: 24;
+    height: auto;
+}
+
 # Dataset panel
 
 # Resource panel
