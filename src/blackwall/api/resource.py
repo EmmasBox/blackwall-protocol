@@ -113,9 +113,9 @@ class ICTXResourceTraits(TraitsBase):
 
 @dataclass
 class IDTPARMSResourceTraits(TraitsBase):
-    signature_algorithm: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    identity_token_timeout: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    use_for_any_application: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    signature_algorithm: str | None = field(default=None,metadata={"label": "Signature algorithm", "allowed_in": {"add","alter","extract"}})
+    identity_token_timeout: int | None = field(default=None,metadata={"label": "Identity token timeout","allowed_in": {"add","alter","extract"}})
+    use_for_any_application: str | None = field(default=None,metadata={"label": "Use for any application","allowed_in": {"add","alter","extract"}})
 
 @dataclass
 class SessionResourceTraits(TraitsBase):
@@ -158,20 +158,20 @@ class SIGVERResourceTraits(TraitsBase):
 
 @dataclass
 class CDTINFOResourceTraits(TraitsBase):
-    case_allowed: str | None = field(default=None,metadata={"label": "Case allowed:", "allowed_in": {"add","alter","extract"}})
-    default_racroute_return_code: str | None = field(default=None,metadata={"label": "Default racroute return code:", "allowed_in": {"add","alter","extract"}})
-    valid_first_character: str | None = field(default=None,metadata={"label": "Valid first character:","allowed_in": {"add","alter","extract"}})
+    case_allowed: str | None = field(default=None,metadata={"label": "Case allowed", "allowed_in": {"add","alter","extract"}})
+    default_racroute_return_code: str | None = field(default=None,metadata={"label": "Default racroute return code", "allowed_in": {"add","alter","extract"}})
+    valid_first_character: str | None = field(default=None,metadata={"label": "Valid first character","allowed_in": {"add","alter","extract"}})
     valid_first_characters: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    generic_profile_checking: str | None = field(default=None,metadata={"label": "Generic profile checking:","allowed_in": {"add","alter","extract"}})
-    generic_profile_sharing: str | None = field(default=None,metadata={"label": "Generic profile sharing:","allowed_in": {"add","alter","extract"}})
-    grouping_class_name: str | None = field(default=None,metadata={"label": "Grouping class name:","allowed_in": {"add","alter","extract"}})
-    key_qualifiers: str | None = field(default=None,metadata={"label": "Key qualifiers:","allowed_in": {"add","alter","extract"}})
-    manditory_access_control_processing: str | None = field(default=None,metadata={"label": "Mandatory access control processing:","allowed_in": {"add","alter","extract"}})
-    max_length: int | None = field(default=None,metadata={"label": "Max length:", "allowed_in": {"add","alter","extract"}})
-    max_length_entityx: int | None = field(default=None,metadata={"label": "Max length entityx:", "allowed_in": {"add","alter","extract"}})
+    generic_profile_checking: str | None = field(default=None,metadata={"label": "Generic profile checking","allowed_in": {"add","alter","extract"}})
+    generic_profile_sharing: str | None = field(default=None,metadata={"label": "Generic profile sharing","allowed_in": {"add","alter","extract"}})
+    grouping_class_name: str | None = field(default=None,metadata={"label": "Grouping class name","allowed_in": {"add","alter","extract"}})
+    key_qualifiers: str | None = field(default=None,metadata={"label": "Key qualifiers","allowed_in": {"add","alter","extract"}})
+    manditory_access_control_processing: str | None = field(default=None,metadata={"label": "Mandatory access control processing","allowed_in": {"add","alter","extract"}})
+    max_length: int | None = field(default=None,metadata={"label": "Max length", "allowed_in": {"add","alter","extract"}})
+    max_length_entityx: int | None = field(default=None,metadata={"label": "Max length entityx", "allowed_in": {"add","alter","extract"}})
     member_class_name: str | None = field(default=None,metadata={"label": "Member class name:","allowed_in": {"add","alter","extract"}})
     operations: str | None = field(default=None,metadata={"label": "Operations:","allowed_in": {"add","alter","extract"}})
-    valid_other_character: str | None = field(default=None,metadata={"label": "Valid other characters:","allowed_in": {"add","alter","extract"}})
+    valid_other_character: str | None = field(default=None,metadata={"label": "Valid other character","allowed_in": {"add","alter","extract"}})
     valid_other_characters: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
     posit_number: int | None = field(default=None,metadata={"label": "Posit number:","allowed_in": {"add","alter","extract"}})
     profiles_allowed: str | None = field(default=None,metadata={"label": "Profiles allowed:","allowed_in": {"add","alter","extract"}})
