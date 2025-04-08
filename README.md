@@ -46,7 +46,7 @@ pip install blackwall-<REPLACE WITH VERSION>-py3-none-any.whl
 ```
 
 ### Optional: installing Blackwall with image support
-Blackwall has built in support for Sixels and can use them to display your company logo, among other things. This is vastly more complicated to install and does decrease performance, which is why it doesn't come with Blackwall by default. Make sure you have access to zlib on the system, this can be installed with zopen. 
+Blackwall has built in support for Sixels and can use them to display your company logo, among other things. This is vastly more complicated to install and does decrease performance, which is why it doesn't come with Blackwall by default. Make sure you have access to zlib on the system, this can be installed through [zOpen](https://zopen.community). 
 
 First install pillow with the followign command:
 ```
