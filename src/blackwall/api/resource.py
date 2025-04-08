@@ -131,11 +131,11 @@ class SVFMRResourceTraits(TraitsBase):
 
 @dataclass
 class STDATAResourceTraits(TraitsBase):
+    userid: str | None = field(default=None,metadata={"label": "User ID","allowed_in": {"add","alter","extract"}})
     group: str | None = field(default=None,metadata={"label": "Group","allowed_in": {"add","alter","extract"}})
     privileged: bool | None = field(default=None,metadata={"label": "Privileged","allowed_in": {"add","alter","extract"}})
     trace: bool | None = field(default=None,metadata={"label": "Trace","allowed_in": {"add","alter","extract"}})
     trusted: bool | None = field(default=None,metadata={"label": "Trusted","allowed_in": {"add","alter","extract"}})
-    userid: str | None = field(default=None,metadata={"label": "User ID","allowed_in": {"add","alter","extract"}})
 
 @dataclass
 class ProxyResourceTraits(TraitsBase):
