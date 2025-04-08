@@ -235,7 +235,7 @@ def resource_profile_exists(resource_class: str,resource: str) -> bool:
     else:
         return False
 
-def resource_profile_get(resource_class: str,resource: str):
+def get_resource_profile(resource_class: str,resource: str):
     if racfu_enabled:
         """Doesn't handle general resource profiles that don't exist, recommend using resource_profile_exists() first"""
         #TODO reprogram this bad function

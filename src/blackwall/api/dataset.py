@@ -95,7 +95,7 @@ def dataset_profile_exists(dataset: str) -> bool:
     else:
         return False
 
-def dataset_profile_get(dataset: str):
+def get_dataset_profile(dataset: str):
     #TODO reprogram this bad function
     """Doesn't handle dataset profiles that don't exist, recommend using dataset_profile_exists() first"""
     if racfu_enabled:
