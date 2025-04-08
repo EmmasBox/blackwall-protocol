@@ -1,5 +1,5 @@
 #### Stability notice
-This software is still in pre-alpha and under active development, do not use it on production systems. Features might not work yet, performance might be unsatisfactory and there are numerous bugs in the features that do work to some extent.
+This software is still in pre-alpha and under active development, do not use it on production systems. Features might not work yet, performance might be unsatisfactory and there are numerous bugs in the features that do work to some extent. Current version may not be indicative of the quality in future stable releases.
 
 ![pypi/v/blackwall](https://badgen.net/pypi/v/blackwall) ![pypi/dm/blackwall](https://badgen.net/pypi/dm/blackwall) 
 
