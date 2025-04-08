@@ -23,7 +23,7 @@ Blackwall does not support ACF2 or Top Secret and never will, people are more th
 - OpenSSH installed and configured on z/OS (for connecting to z/OS Unix, OMVS in ISPF won't work)
 - Python 3.11 or later
 #### Python packages
-- Textual 3.0.0 or later (For UI)
+- Textual 3.0.1 or later (For UI)
 - [RACFU](https://github.com/ambitus/racfu) (To communicate with RACF)
   - RACFU being a dependency also indirectly also means you need the IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space configured
 
