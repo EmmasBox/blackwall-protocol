@@ -106,10 +106,10 @@ class ICSFResourceTraits(TraitsBase):
 
 @dataclass
 class ICTXResourceTraits(TraitsBase):
-    identity_map_timeout: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    use_identity_map: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    require_identity_mapping: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    cache_application_provided_identity_map: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    identity_map_timeout: int | None = field(default=None,metadata={"label": "Identity map timeout","allowed_in": {"add","alter","extract"}})
+    use_identity_map: bool | None = field(default=None,metadata={"label": "Use identity map","allowed_in": {"add","alter","extract"}})
+    require_identity_mapping: bool | None = field(default=None,metadata={"label": "Require identity mapping","allowed_in": {"add","alter","extract"}})
+    cache_application_provided_identity_map: bool | None = field(default=None,metadata={"label": "Cache application provided identity map","allowed_in": {"add","alter","extract"}})
 
 @dataclass
 class IDTPARMSResourceTraits(TraitsBase):
@@ -148,7 +148,7 @@ class MFAPolicyResourceTraits(TraitsBase):
     factor: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     factors: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
     token_timeout: int | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    reuse_token: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    reuse_token: bool | None = field(default=None,metadata={"label": "Re-use token","allowed_in": {"add","alter","extract"}})
 
 @dataclass
 class SIGVERResourceTraits(TraitsBase):
