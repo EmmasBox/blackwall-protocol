@@ -28,6 +28,7 @@ class PanelResourceSegments(VerticalGroup):
         with Lazy(widget=Collapsible(title="Resource profile segments")):
             yield from generate_trait_section(title="Started task data", prefix="stdata", traits_class=resource.STDATAResourceTraits)
             yield from generate_trait_section(title="ICSF", prefix="icsf", traits_class=resource.ICSFResourceTraits)
+            yield from generate_trait_section(title="ICTX", prefix="ictx", traits_class=resource.ICTXResourceTraits)
             yield from generate_trait_section(title="JES", prefix="jes", traits_class=resource.JESResourceTraits)
             yield from generate_trait_section(title="Class Descriptor Table (CDT) info", prefix="cdtinfo", traits_class=resource.CDTINFOResourceTraits)
 
