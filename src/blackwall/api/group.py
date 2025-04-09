@@ -51,13 +51,16 @@ if racfu_enabled:
     #Group functions
     def group_profile_exists(group: str) -> bool:
         """Checks if a group exists, returns true or false"""
-        result = racfu({"operation": "extract", "admin_type": "group", "profile_name": group})
+        result = racfu({"operation": "extract", "admin_type": "group", "profile_name": group.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
     
-    def group_get(group: str):
-        pass
+    def get_group(group: str):
+        """Doesn't handle dataset profiles that don't exist, recommend using dataset_profile_exists() first"""
+        if racfu_enabled:
+            result = racfu({"operation": "extract", "admin_type": "group", "profile_name": group.upper()})
+            return result.result
 
-    def group_get_connections(group: str):
+    def get_group_connections(group: str):
         """Get information on group connections"""
         pass
 
