@@ -196,9 +196,8 @@ def user_exists(username: str) -> bool:
     else:
         return False
     
-def user_get(username: str):
+def get_user(username: str):
     """Doesn't handle users that don't exist, recommend using user_exists() first"""
-    #TODO reprogram this bad function
     result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username})
     return result.result
 
