@@ -14,11 +14,11 @@ except ImportError:
     zoau_enabled = False
 
 import json
-from .subcommands import Subcommands
 from .command_line import TSOCommandField
 from .command_line import CommandHistoryScreen
 from .theme_cynosure import cynosure_theme
 from .theme_3270 import ibm_3270_theme
+from .audit_mode import AuditQRCode
 
 from .tabs import TabSystem
 
@@ -45,10 +45,6 @@ class Blackwall(App):
         self.theme = "cynosure"
         self.install_screen(CommandHistoryScreen(), name="history")
 
-    def get_system_commands(self, screen: Screen) -> Iterable[SystemCommand]:
-        yield from super().get_system_commands(screen)  
-        yield Subcommands()
-
     #UI elements
     def compose(self):
         #display system and LPAR name
@@ -58,4 +54,5 @@ class Blackwall(App):
         yield TSOCommandField()
         with Container():
             yield TabSystem()
+        #yield AuditQRCode()
         yield Footer()
