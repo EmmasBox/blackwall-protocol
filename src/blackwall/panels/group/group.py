@@ -21,8 +21,8 @@ class PanelInstallationData(VerticalGroup):
 
 class PanelSubgroup(VerticalGroup):
     def compose(self) -> ComposeResult:
-        yield Label("Subgroup:")
-        yield Input(max_length=8,id="base_installation_data",classes="field-short-generic",tooltip="")
+        yield Label("Superior group:")
+        yield Input(max_length=8,id="base_superior_group",classes="field-short-generic",tooltip="")
 
 class PanelGroupActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
