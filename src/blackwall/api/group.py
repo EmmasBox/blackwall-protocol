@@ -55,7 +55,7 @@ if racfu_enabled:
         return result.result["return_codes"]["racf_return_code"] == 0
     
     def get_group(group: str):
-        """Doesn't handle dataset profiles that don't exist, recommend using dataset_profile_exists() first"""
+        """Doesn't handle group profiles that don't exist, recommend using group_profile_exists() first"""
         if racfu_enabled:
             result = racfu({"operation": "extract", "admin_type": "group", "profile_name": group.upper()})
             return result.result
