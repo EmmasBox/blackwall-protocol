@@ -12,7 +12,17 @@ from blackwall.panels.panel_mode import PanelMode
 class PanelName(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Group name:")
-        yield Input(id="group_name",classes="field-short-generic ")
+        yield Input(id="group_name",max_length=8,classes="field-short-generic")
+
+class PanelInstallationData(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Installation data:")
+        yield Input(max_length=255,id="base_installation_data",classes="installation-data",tooltip="")
+
+class PanelSubgroup(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Subgroup:")
+        yield Input(max_length=8,id="base_installation_data",classes="field-short-generic",tooltip="")
 
 class PanelGroupActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
@@ -40,4 +50,6 @@ class PanelGroupActionButtons(HorizontalGroup):
 class PanelGroups(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield PanelName()
+        yield PanelSubgroup()
+        yield PanelInstallationData()
         yield PanelGroupActionButtons(save_action="",delete_action="")
