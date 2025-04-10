@@ -18,11 +18,6 @@ class PanelGroupSubgroup(HorizontalGroup):
         yield Label("Superior group:")
         yield Input(max_length=8,id="base_superior_group",classes="field-short-generic",tooltip="")
 
-class PanelGroupNameAndSubgroup(HorizontalGroup):
-    def compose(self) -> ComposeResult:
-        yield PanelGroupName()
-        yield PanelGroupSubgroup()
-
 class PanelGroupInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Installation data:")
@@ -53,6 +48,7 @@ class PanelGroupActionButtons(HorizontalGroup):
 
 class PanelGroups(VerticalScroll):
     def compose(self) -> ComposeResult:
-        yield PanelGroupNameAndSubgroup()
+        yield PanelGroupName()
+        yield PanelGroupSubgroup()
         yield PanelGroupInstallationData()
         yield PanelGroupActionButtons(save_action="",delete_action="")
