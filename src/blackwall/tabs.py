@@ -74,7 +74,7 @@ class TabSystem(HorizontalGroup):
         """Add a new general resource profile management tab."""
         self.post_message(OpenTab("Resource management",PanelResource()))
 
-    def action_open_groups(self) -> None:
+    async def action_open_groups(self) -> None:
         """Add a new group management tab."""
         self.post_message(OpenTab("Group management",PanelGroup()))
 

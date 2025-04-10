@@ -47,7 +47,7 @@ class PanelWelcomeActions(VerticalGroup):
         self.post_message(OpenTab(title="Create user",content=PanelUser()))
 
     async def action_create_group(self):
-        self.post_message(OpenTab(title="Create user",content=PanelGroup()))
+        self.post_message(OpenTab(title="Create group",content=PanelGroup()))
 
     async def action_create_analysis(self):
         self.post_message(OpenTab(title="Health check",content=PanelAnalysis()))
