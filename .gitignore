@@ -1,8 +1,8 @@
-#Ignore config files
+# Ignore config files
 *.tml
 *.toml
 
-#ignore logs, reports, and notes
+# Ignore logs, reports, and notes
 *.log
 *.csv
 *.txt
@@ -11,7 +11,7 @@
 *.xlsm
 *.xlsx
 
-#Python
+# Python
 !pyproject.toml
 .venv
 __pycache__
@@ -19,5 +19,15 @@ build
 *.egg-info
 dist
 
-#Editor
+# Editor
 .vscode
+
+# Vim swap files
+[._]*.s[a-v][a-z]
+[._]*.sw[a-p]
+[._]s[a-rt-v][a-z]
+[._]ss[a-gi-z]
+[._]sw[a-p]
+
+# Vim backup files
+*~
