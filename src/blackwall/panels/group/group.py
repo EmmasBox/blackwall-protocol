@@ -4,25 +4,29 @@ from textual.reactive import reactive
 from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, Collapsible
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
-from textual.lazy import Lazy
 
 from blackwall.api import group
 from blackwall.panels.panel_mode import PanelMode
 
-class PanelName(VerticalGroup):
+class PanelGroupName(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Group name:")
         yield Input(id="group_name",max_length=8,classes="field-short-generic")
 
-class PanelInstallationData(VerticalGroup):
-    def compose(self) -> ComposeResult:
-        yield Label("Installation data:")
-        yield Input(max_length=255,id="base_installation_data",classes="installation-data",tooltip="")
-
-class PanelSubgroup(VerticalGroup):
+class PanelGroupSubgroup(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Superior group:")
         yield Input(max_length=8,id="base_superior_group",classes="field-short-generic",tooltip="")
+
+class PanelGroupNameAndSubgroup(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield PanelGroupName()
+        yield PanelGroupSubgroup()
+
+class PanelGroupInstallationData(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Installation data:")
+        yield Input(max_length=255,id="base_installation_data",classes="installation-data",tooltip="")
 
 class PanelGroupActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
@@ -47,9 +51,8 @@ class PanelGroupActionButtons(HorizontalGroup):
     async def action_delete(self):
         await self.app.run_action(self.delete_action,default_namespace=self.parent)
 
-class PanelGroups(VerticalGroup):
+class PanelGroups(VerticalScroll):
     def compose(self) -> ComposeResult:
-        yield PanelName()
-        yield PanelSubgroup()
-        yield PanelInstallationData()
+        yield PanelGroupNameAndSubgroup()
+        yield PanelGroupInstallationData()
         yield PanelGroupActionButtons(save_action="",delete_action="")
