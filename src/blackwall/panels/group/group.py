@@ -8,13 +8,10 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from blackwall.api import group
 from blackwall.panels.panel_mode import PanelMode
 
-class PanelGroupName(HorizontalGroup):
+class PanelGroupNameAndSubgroup(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Group name:")
         yield Input(id="group_name",max_length=8,classes="field-short-generic")
-
-class PanelGroupSubgroup(HorizontalGroup):
-    def compose(self) -> ComposeResult:
         yield Label("Superior group:")
         yield Input(max_length=8,id="base_superior_group",classes="field-short-generic",tooltip="")
 
@@ -48,7 +45,6 @@ class PanelGroupActionButtons(HorizontalGroup):
 
 class PanelGroups(VerticalScroll):
     def compose(self) -> ComposeResult:
-        yield PanelGroupName()
-        yield PanelGroupSubgroup()
+        yield PanelGroupNameAndSubgroup()
         yield PanelGroupInstallationData()
         yield PanelGroupActionButtons(save_action="",delete_action="")
