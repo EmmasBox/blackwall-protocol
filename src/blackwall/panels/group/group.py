@@ -11,14 +11,14 @@ from blackwall.panels.panel_mode import PanelMode
 class PanelGroupNameAndSubgroup(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Group name:")
-        yield Input(id="group_name",max_length=8,classes="field-short-generic")
+        yield Input(id="group_name",max_length=8,classes="field-short-generic",tooltip="1-8 character long alphanumeric name used to identify the group")
         yield Label("Superior group:")
         yield Input(max_length=8,id="base_superior_group",classes="field-short-generic",tooltip="")
 
 class PanelGroupInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Installation data:")
-        yield Input(max_length=255,id="base_installation_data",classes="installation-data",tooltip="")
+        yield Input(max_length=255,id="base_installation_data",classes="installation-data",tooltip="Optional used defined data. This can be used to put in a description about what the group is used for. Can't be more than 255 characters long.")
 
 class PanelGroupActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
