@@ -8,6 +8,7 @@ from blackwall.panels.users.user import PanelUser
 from blackwall.panels.dataset.dataset import PanelDataset
 from blackwall.panels.resource.resource import PanelResource
 from blackwall.panels.analysis.analysis import PanelAnalysis
+from blackwall.panels.group.group import PanelGroup
 
 from pathlib import Path
 
@@ -31,6 +32,7 @@ class PanelWelcomeActions(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Try out the program:",classes="welcome-suggestion-header")
         yield Button("Create user", classes="welcome-suggestion-button",action="create_user")
+        yield Button("Create group", classes="welcome-suggestion-button",action="create_group")
         yield Button("Create dataset profile", classes="welcome-suggestion-button",action="create_dataset")
         yield Button("Create general resource profile", classes="welcome-suggestion-button",action="create_resource")
         yield Button("Analyse system health", classes="welcome-suggestion-button",action="create_analysis",disabled=True)
@@ -43,6 +45,9 @@ class PanelWelcomeActions(VerticalGroup):
     
     async def action_create_user(self):
         self.post_message(OpenTab(title="Create user",content=PanelUser()))
+
+    async def action_create_group(self):
+        self.post_message(OpenTab(title="Create user",content=PanelGroup()))
 
     async def action_create_analysis(self):
         self.post_message(OpenTab(title="Health check",content=PanelAnalysis()))

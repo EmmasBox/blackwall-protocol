@@ -11,7 +11,7 @@ from .panels.dataset.dataset import PanelDataset
 from .panels.resource.resource import PanelResource
 from .panels.history.history import PanelHistory
 from .panels.setropts.setropts import PanelSetropts
-from .panels.group.group import PanelGroups
+from .panels.group.group import PanelGroup
 
 from blackwall.messages import OpenTab
 
@@ -76,7 +76,7 @@ class TabSystem(HorizontalGroup):
 
     def action_open_groups(self) -> None:
         """Add a new group management tab."""
-        self.post_message(OpenTab("Group management",PanelGroups()))
+        self.post_message(OpenTab("Group management",PanelGroup()))
 
     def action_open_search(self) -> None:
         """Add a new search tab."""

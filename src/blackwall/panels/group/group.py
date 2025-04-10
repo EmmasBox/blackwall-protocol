@@ -52,7 +52,7 @@ class PanelGroupActionButtons(HorizontalGroup):
     async def action_delete(self):
         await self.app.run_action(self.delete_action,default_namespace=self.parent)
 
-class PanelGroups(VerticalScroll):
+class PanelGroup(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield PanelGroupNameAndSubgroup()
         yield PanelGroupInstallationData()
