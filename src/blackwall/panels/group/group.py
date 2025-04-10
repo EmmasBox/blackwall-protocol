@@ -8,6 +8,8 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from blackwall.api import group
 from blackwall.panels.panel_mode import PanelMode
 
+from ..traits_ui import generate_trait_section
+
 class PanelGroupNameAndSubgroup(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Group name:")
@@ -19,6 +21,13 @@ class PanelGroupInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Installation data:")
         yield Input(max_length=255,id="base_installation_data",classes="installation-data",tooltip="Optional used defined data. This can be used to put in a description about what the group is used for. Can't be more than 255 characters long.")
+
+class PanelGroupSegments(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield from generate_trait_section(title="DFP", prefix="dfp", traits_class=group.DFPGroupTraits)
+        yield from generate_trait_section(title="omvs", prefix="omvs", traits_class=group.OMVSGroupTraits)
+        yield from generate_trait_section(title="ovm", prefix="ovm", traits_class=group.OVMGroupTraits)
+        yield from generate_trait_section(title="TME", prefix="tme", traits_class=group.TMEGroupTraits)
 
 class PanelGroupActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
@@ -47,4 +56,5 @@ class PanelGroups(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield PanelGroupNameAndSubgroup()
         yield PanelGroupInstallationData()
+        yield PanelGroupSegments()
         yield PanelGroupActionButtons(save_action="",delete_action="")
