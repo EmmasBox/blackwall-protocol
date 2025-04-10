@@ -28,15 +28,15 @@ class BaseGroupTraits(TraitsBase):
 
 @dataclass
 class DFPGroupTraits(TraitsBase):
-    data_application: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    data_class: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    management_class: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    storage_class: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    data_application: str | None = field(default=None,metadata={"label": "Data application", "allowed_in": {"add","alter","extract"}})
+    data_class: str | None = field(default=None,metadata={"label": "Data class", "allowed_in": {"add","alter","extract"}})
+    management_class: str | None = field(default=None,metadata={"label": "Management class", "allowed_in": {"add","alter","extract"}})
+    storage_class: str | None = field(default=None,metadata={"label": "Storage class", "allowed_in": {"add","alter","extract"}})
 
 @dataclass
 class OMVSGroupTraits(TraitsBase):
     auto_gid: str | None = field(default=None,metadata={"allowed_in": {"add","alter"},"invalid_values": {False}})
-    gid: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    gid: int | None = field(default=None,metadata={"label": "GID", "allowed_in": {"add","alter","extract"}})
     shared: str | None = field(default=None,metadata={"allowed_in": {"add","alter"},"invalid_values": {False}})
 
 @dataclass
