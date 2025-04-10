@@ -22,7 +22,7 @@ class PanelGroupInstallationData(VerticalGroup):
         yield Label("Installation data:")
         yield Input(max_length=255,id="base_installation_data",classes="installation-data",tooltip="Optional used defined data. This can be used to put in a description about what the group is used for. Can't be more than 255 characters long.")
 
-class PanelGroupSegments(HorizontalGroup):
+class PanelGroupSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield from generate_trait_section(title="DFP", prefix="dfp", traits_class=group.DFPGroupTraits)
         yield from generate_trait_section(title="omvs", prefix="omvs", traits_class=group.OMVSGroupTraits)
