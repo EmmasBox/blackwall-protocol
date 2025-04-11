@@ -104,6 +104,14 @@ def get_racf_options() -> dict[str, Any]:
         return result.result
     else:
         return {}
+    
+def get_active_classes() -> list[str]:
+    if racfu_enabled:
+        """Returns a list of active classes on the system"""
+        result = racfu({"operation": "extract", "admin_type": "racf-options"}) # type: ignore
+        return result.result["profile"]["base"]["base:active_classes"] # type: ignore
+    else:
+        return []
 
 def refresh_RACF():
     """Refresh RACF"""
