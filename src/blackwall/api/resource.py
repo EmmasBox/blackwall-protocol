@@ -230,7 +230,7 @@ except ImportError:
 def resource_profile_exists(resource_class: str,resource: str) -> bool:
     if racfu_enabled:
         """Checks if a general resource profile exists, returns true or false"""
-        result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource})
+        result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource}) # type: ignore
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return False
