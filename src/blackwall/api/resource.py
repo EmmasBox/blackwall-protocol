@@ -238,8 +238,7 @@ def resource_profile_exists(resource_class: str,resource: str) -> bool:
 def get_resource_profile(resource_class: str,resource: str):
     if racfu_enabled:
         """Doesn't handle general resource profiles that don't exist, recommend using resource_profile_exists() first"""
-        #TODO reprogram this bad function
-        result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource})
+        result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource}) # type: ignore
         return result.result
 
 def update_resource_profile(
@@ -323,7 +322,7 @@ def update_resource_profile(
     else:
         operation = "alter"
     
-    result = racfu(
+    result = racfu( # type: ignore
         {
             "operation": operation, 
             "admin_type": "resource", 
@@ -336,7 +335,7 @@ def update_resource_profile(
 
 def delete_resource_profile(resource_class: str,resource: str) -> int:
     if racfu_enabled:
-        result = racfu(
+        result = racfu( # type: ignore
                 {
                     "operation": "delete", 
                     "admin_type": "resource", 
