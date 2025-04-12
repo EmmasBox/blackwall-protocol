@@ -18,7 +18,7 @@ keywords = ["RACF", "security", "mainframe", "zos", "TUI"]
 [project.optional-dependencies]
 images = [
   "qrcode>=8.1",
-  "textual-image",
+  "textual-image>=0.8.2",
 ]
 
 [project.scripts]
