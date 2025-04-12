@@ -20,7 +20,7 @@ message = files('blackwall.panels.welcome').joinpath('welcome_message.md').read_
 logo_allowed = get_user_setting(section="display",setting="logo")
 site_logo_path = get_site_setting(section="welcome",setting="logo_path")
 
-if site_logo_path is str and Path(f"{site_logo_path}").exists():
+if Path(f"{site_logo_path}").exists():
     logo_path = f"{site_logo_path}"
 else:
     logo_path = "OMP_CBTTape_original-color.png"
