@@ -81,26 +81,26 @@ class TabSystem(HorizontalGroup):
     async def action_open_dataset(self) -> None:
         """Add a new dataset profile management tab."""
         self.post_message(OpenTab(f"{get_emoji("📁")} Dataset profile mangement",PanelDataset()))
-
+    
     async def action_open_resource(self) -> None:
         """Add a new general resource profile management tab."""
-        self.post_message(OpenTab("Resource management",PanelResource()))
-
+        self.post_message(OpenTab(f"{get_emoji("☕")} Resource management",PanelResource()))
+    
     async def action_open_groups(self) -> None:
         """Add a new group management tab."""
-        self.post_message(OpenTab("Group management",PanelGroup()))
+        self.post_message(OpenTab(f"{get_emoji("👥")}Group management",PanelGroup()))
 
     def action_open_search(self) -> None:
         """Add a new search tab."""
         self.post_message(OpenTab(f"{get_emoji("🔎")} Search",PanelSearch()))
-
+    
     def action_open_analysis(self) -> None:
         """Add a new analysis tab."""
-        self.post_message(OpenTab("Health check",PanelAnalysis()))
-
+        self.post_message(OpenTab(f"{get_emoji("📊")} Health check",PanelAnalysis()))
+    
     def action_open_history(self) -> None:
         """Add a new history tab."""
-        self.post_message(OpenTab("Command history",PanelHistory()))
+        self.post_message(OpenTab(f"{get_emoji("📃")}Command history",PanelHistory()))
 
     def action_open_options(self) -> None:
         """Add a new RACF options tab."""
