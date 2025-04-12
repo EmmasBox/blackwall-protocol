@@ -80,7 +80,7 @@ class TabSystem(HorizontalGroup):
 
     async def action_open_dataset(self) -> None:
         """Add a new dataset profile management tab."""
-        self.post_message(OpenTab(f"{get_emoji("🗂️")} Dataset profile mangement",PanelDataset()))
+        self.post_message(OpenTab(f"{get_emoji("📁")} Dataset profile mangement",PanelDataset()))
 
     async def action_open_resource(self) -> None:
         """Add a new general resource profile management tab."""
