@@ -88,7 +88,7 @@ class TabSystem(HorizontalGroup):
     
     async def action_open_groups(self) -> None:
         """Add a new group management tab."""
-        self.post_message(OpenTab(f"{get_emoji("👥")}Group management",PanelGroup()))
+        self.post_message(OpenTab(f"{get_emoji("👥")} Group management",PanelGroup()))
 
     def action_open_search(self) -> None:
         """Add a new search tab."""
@@ -100,7 +100,7 @@ class TabSystem(HorizontalGroup):
     
     def action_open_history(self) -> None:
         """Add a new history tab."""
-        self.post_message(OpenTab(f"{get_emoji("📃")}Command history",PanelHistory()))
+        self.post_message(OpenTab(f"{get_emoji("📃")} Command history",PanelHistory()))
 
     def action_open_options(self) -> None:
         """Add a new RACF options tab."""
