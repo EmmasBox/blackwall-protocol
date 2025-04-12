@@ -13,6 +13,8 @@ from .panels.history.history import PanelHistory
 from .panels.setropts.setropts import PanelSetropts
 from .panels.group.group import PanelGroup
 
+from blackwall.settings import get_user_setting
+
 from blackwall.messages import OpenTab
 
 people_list = [
@@ -24,6 +26,16 @@ people_list = [
     "🙆",
 ]
 
+emoji_allowed = get_user_setting(section="display",setting="emojis")
+
+def get_emoji(emoji: str | list[str]) -> str:
+    if emoji_allowed is not False:
+        if emoji is type(str):
+            return emoji
+        else:
+            return random.choice(emoji)
+    else:
+        return ""
 
 class TabSystem(HorizontalGroup):
     BINDINGS = [
@@ -64,11 +76,11 @@ class TabSystem(HorizontalGroup):
     #Add new tab
     async def action_open_user(self) -> None:
         """Add a new user administration tab."""
-        self.post_message(OpenTab(f"{random.choice(people_list)} User management",PanelUser()))
+        self.post_message(OpenTab(f"{get_emoji(people_list)} User management",PanelUser()))
 
     async def action_open_dataset(self) -> None:
         """Add a new dataset profile management tab."""
-        self.post_message(OpenTab("🗂️ Dataset profile mangement",PanelDataset()))
+        self.post_message(OpenTab(f"{get_emoji("🗂️")} Dataset profile mangement",PanelDataset()))
 
     async def action_open_resource(self) -> None:
         """Add a new general resource profile management tab."""
@@ -80,7 +92,7 @@ class TabSystem(HorizontalGroup):
 
     def action_open_search(self) -> None:
         """Add a new search tab."""
-        self.post_message(OpenTab("🔎 Search",PanelSearch()))
+        self.post_message(OpenTab(f"{get_emoji("🔎")} Search",PanelSearch()))
 
     def action_open_analysis(self) -> None:
         """Add a new analysis tab."""
