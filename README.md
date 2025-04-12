@@ -22,6 +22,7 @@ Blackwall does not support ACF2 or Top Secret. Users are welcome to fork the cod
 - Create and modify dataset profiles
 - Create and modify general resource profiles
 - Modify and list system options
+- Settings customization through toml files
 
 ## Planned features
 
