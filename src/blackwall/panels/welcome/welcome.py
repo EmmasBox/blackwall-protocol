@@ -10,19 +10,34 @@ from blackwall.panels.resource.resource import PanelResource
 from blackwall.panels.analysis.analysis import PanelAnalysis
 from blackwall.panels.group.group import PanelGroup
 
+from blackwall.settings import get_user_setting, get_site_setting
+
 from pathlib import Path
 
 from importlib.resources import files
 message = files('blackwall.panels.welcome').joinpath('welcome_message.md').read_text()
 
+logo_allowed = get_user_setting(section="display",setting="logo")
+site_logo_path = get_site_setting(section="welcome",setting="logo_path")
+
+if site_logo_path is str and Path(f"{site_logo_path}").exists():
+    logo_path = f"{site_logo_path}"
+else:
+    logo_path = "OMP_CBTTape_original-color.png"
+
 class PanelWelcomeLogo(VerticalGroup):
+    def __init__(self, logo_path: Path | str):
+        super().__init__()
+        self.logo_path = logo_path
+
     def compose(self) -> ComposeResult:
-        try:
-            from textual_image.widget import SixelImage
-            image = Path('OMP_CBTTape_original-color.png')
-            yield SixelImage(image, classes="logo-image")
-        except ImportError:
-            pass 
+        if logo_allowed is not False:
+            try:
+                from textual_image.widget import SixelImage
+                image = Path(f'{logo_path}')
+                yield SixelImage(image, classes="logo-image")
+            except ImportError:
+                pass 
 
 class PanelWelcomeMessage(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -56,7 +71,7 @@ class PanelWelcomeActions(VerticalGroup):
 class PanelWelcomeMain(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield PanelWelcomeMessage()
-        yield PanelWelcomeLogo()
+        yield PanelWelcomeLogo(logo_path=logo_path)
         yield PanelWelcomeActions()
 
 class PanelWelcome(VerticalScroll):
