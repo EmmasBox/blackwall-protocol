@@ -51,7 +51,7 @@ def generate_trait_section(title: str, prefix: str, traits_class: type[TraitsBas
     with Lazy(widget=Collapsible(title=title)):
         yield from generate_trait_inputs(prefix=prefix,traits_class=traits_class)
 
-def get_traits_from_input(operator: str, widget: Widget, prefix: str, trait_cls: type[TraitsBase]):
+def get_traits_from_input[T : TraitsBase](operator: str, widget: Widget, prefix: str, trait_cls: type[T]) -> T:
     value = trait_cls()
     for field in fields(trait_cls):
         actual_type, optional = get_actual(field)
