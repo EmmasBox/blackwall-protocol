@@ -90,9 +90,9 @@ class PanelGroup(VerticalScroll):
             if (result == 0 or result == 4):
                 self.notify(f"Group {group_exists} created, return code: {result}",severity="information")
             else:
-                self.notify(f"Unable to create user, return code: {result}",severity="error")
+                self.notify(f"Unable to create group, return code: {result}",severity="error")
         else:
             if (result == 0 or result == 4):
                 self.notify(f"Group {group_exists} updated, return code: {result}",severity="information")
             else:
-                self.notify(f"Unable to update user, return code: {result}",severity="error")
+                self.notify(f"Unable to update group, return code: {result}",severity="error")
