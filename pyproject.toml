@@ -29,6 +29,7 @@ Repository = "https://github.com/EmmasBox/blackwall-protocol"
 Source = "https://github.com/EmmasBox/blackwall-protocol"
 Issues = "https://github.com/EmmasBox/blackwall-protocol/issues"
 Pypi = "https://pypi.org/project/blackwall/"
+Documentation = "https://emmasbox.github.io/blackwall-protocol-docs/"
 
 [build-system]
 requires = ["setuptools >= 61.0", "setuptools-scm >= 8.2"]
