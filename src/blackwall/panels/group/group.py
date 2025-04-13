@@ -8,7 +8,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from blackwall.api import group
 from blackwall.panels.panel_mode import PanelMode
 
-from ..traits_ui import generate_trait_section
+from ..traits_ui import generate_trait_section, get_traits_from_input
 
 class PanelGroupNameAndSubgroup(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -57,4 +57,42 @@ class PanelGroup(VerticalScroll):
         yield PanelGroupNameAndSubgroup()
         yield PanelGroupInstallationData()
         yield PanelGroupSegments()
-        yield PanelGroupActionButtons(save_action="",delete_action="")
+        yield PanelGroupActionButtons(save_action="save_group",delete_action="delete_group")
+
+    def action_delete_group(self) -> None:
+        pass
+
+    def action_save_group(self) -> None:
+        group_name = self.query_exactly_one(selector="#group_name").value
+        group_exists = group.group_profile_exists(group=group_name)
+
+        if group_exists:
+            operator = "alter"
+        else:
+            operator = "add"
+
+        base_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=group.BaseGroupTraits)
+        dfp_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=group.DFPGroupTraits)
+        tme_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=group.TMEGroupTraits)
+        omvs_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=group.OMVSGroupTraits)
+        ovm_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=group.OVMGroupTraits)
+        result = group.update_group(
+            group=group_name,
+            create=not group_exists,
+            base=base_segment,
+            dfp=dfp_segment,
+            omvs=omvs_segment,
+            ovm=ovm_segment,
+            tme=tme_segment
+        )
+
+        if not group_exists:
+            if (result == 0 or result == 4):
+                self.notify(f"Group {group_exists} created, return code: {result}",severity="information")
+            else:
+                self.notify(f"Unable to create user, return code: {result}",severity="error")
+        else:
+            if (result == 0 or result == 4):
+                self.notify(f"Group {group_exists} updated, return code: {result}",severity="information")
+            else:
+                self.notify(f"Unable to update user, return code: {result}",severity="error")
