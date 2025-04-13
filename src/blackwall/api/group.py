@@ -13,7 +13,7 @@ except ImportError:
 
 @dataclass
 class BaseGroupTraits(TraitsBase):
-    owner: str
+    owner: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     installation_data: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     data_set_model: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     superior_group: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})

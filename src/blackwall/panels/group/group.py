@@ -16,6 +16,8 @@ class PanelGroupNameAndSubgroup(HorizontalGroup):
         yield Input(id="group_name",max_length=8,classes="field-short-generic",tooltip="1-8 character long alphanumeric name used to identify the group")
         yield Label("Superior group:")
         yield Input(max_length=8,id="base_superior_group",classes="field-short-generic",tooltip="")
+        yield Label("Owner:")
+        yield Input(max_length=8,id="base_owner",classes="field-short-generic",tooltip="")
 
 class PanelGroupInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
