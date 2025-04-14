@@ -3,6 +3,8 @@ from textual.app import ComposeResult
 from textual.widgets import Label, DataTable
 from textual.containers import VerticalGroup, VerticalScroll
 
+from blackwall.panels.search.search_backend import QueryType
+
 USER_COLUMNS = [
     ("User", "Owner", "dfltgrp", "SOA", "RIRP", "UID", "Shell", "Home", "Last logon", "Created"),
 ]
@@ -67,15 +69,16 @@ class PanelResultsResources(VerticalScroll):
         yield DataTable(id="results_dataset_table")        
 
 class PanelResultsMixedType(VerticalScroll):
-    def __init__(self, user_dict: dict, group_dict: dict, dataset_dict: dict, resource_dict: dict):
+    def __init__(self, results: dict[QueryType,dict]):
         super().__init__()
-        self.user_dict = user_dict
-        self.group_dict = group_dict
-        self.dataset_dict = dataset_dict
-        self.resource_dict = resource_dict
+        self.results = results
 
     def compose(self) -> ComposeResult:
-        yield PanelResultsUsers(user_dict=self.user_dict)
-        yield PanelResultsGroup(group_dict=self.group_dict)
-        yield PanelResultsDatasets(dataset_dict=self.dataset_dict)
-        yield PanelResultsResources(resource_dict=self.resource_dict)
+        if QueryType.User in self.results:
+            yield PanelResultsUsers(user_dict=self.results[QueryType.User])
+        if QueryType.Group in self.results:
+            yield PanelResultsGroup(group_dict=self.results[QueryType.Group])
+        if QueryType.Dataset in self.results:
+            yield PanelResultsDatasets(dataset_dict=self.results[QueryType.Dataset])
+        if QueryType.Resource in self.results:
+            yield PanelResultsResources(resource_dict=self.results[QueryType.Resource])

@@ -6,6 +6,8 @@ from textual.containers import HorizontalGroup, VerticalScroll
 from blackwall.messages import OpenTab
 from blackwall.panels.search.results import PanelResultsMixedType
 
+from blackwall.panels.search.search_backend import search_database_query_one, QueryType
+
 class SearchSelector(HorizontalGroup):
     def compose(self) -> ComposeResult:
         with RadioSet(id="type-selector",classes="search-selector"):
@@ -20,11 +22,13 @@ class SearchSelector(HorizontalGroup):
 
 class SearchField(HorizontalGroup):
     def action_search(self) -> None:
-        self.post_message(OpenTab("Results",PanelResultsMixedType()))
+        search_query = self.query_exactly_one(selector="#search_field").value
+        results = search_database_query_one(query=search_query, class_name=None,query_types=QueryType.all())
+        self.post_message(OpenTab("Results",PanelResultsMixedType(results)))
 
     def compose(self) -> ComposeResult:
         yield Label("Search:")
-        yield Input(name="Search",classes="search-field")
+        yield Input(name="Search",id="search_field",classes="search-field")
         yield Button("Search",action="search")
 
 class PanelSearch(VerticalScroll):
