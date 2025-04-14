@@ -11,6 +11,7 @@ class SearchSelector(HorizontalGroup):
         with RadioSet(id="type-selector",classes="search-selector"):
             yield RadioButton("Any",value=True)
             yield RadioButton("User")
+            yield RadioButton("Group")
             yield RadioButton("Dataset profile")
             yield RadioButton("Resource profile")
         with RadioSet(id="filter-selector",classes="search-selector"):
