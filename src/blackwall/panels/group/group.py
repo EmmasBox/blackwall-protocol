@@ -24,6 +24,11 @@ class PanelGroupInstallationData(VerticalGroup):
         yield Label("Installation data:")
         yield Input(max_length=255,id="base_installation_data",classes="installation-data",tooltip="Optional used defined data. This can be used to put in a description about what the group is used for. Can't be more than 255 characters long.")
 
+class PanelGroupDatasetModel(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Dataset model:")
+        yield Input(id="base_data_set_model",classes="field-long-generic")
+
 class PanelGroupSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield from generate_trait_section(title="DFP", prefix="dfp", traits_class=group.DFPGroupTraits)
@@ -55,6 +60,7 @@ class PanelGroup(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield PanelGroupNameAndSubgroup()
         yield PanelGroupInstallationData()
+        yield PanelGroupDatasetModel()
         yield PanelGroupSegments()
         yield PanelGroupActionButtons(save_action="save_group",delete_action="delete_group")
 
