@@ -64,7 +64,7 @@ if racfu_enabled:
         """Get information on group connections"""
         pass
 
-    def update_group(group: str,create: bool, base: BaseGroupTraits, tme: TMEGroupTraits, omvs: OMVSGroupTraits, dfp: DFPGroupTraits, ovm: OVMGroupTraits):
+    def update_group(group: str,create: bool, base: BaseGroupTraits, tme: TMEGroupTraits | None = None, omvs: OMVSGroupTraits | None = None, dfp: DFPGroupTraits | None = None, ovm: OVMGroupTraits | None = None):
         """Creates or updates an existing group"""
         traits = base.to_traits(prefix="base")
         

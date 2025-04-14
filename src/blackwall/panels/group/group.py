@@ -27,9 +27,6 @@ class PanelGroupInstallationData(VerticalGroup):
 class PanelGroupSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield from generate_trait_section(title="DFP", prefix="dfp", traits_class=group.DFPGroupTraits)
-        yield from generate_trait_section(title="omvs", prefix="omvs", traits_class=group.OMVSGroupTraits)
-        yield from generate_trait_section(title="ovm", prefix="ovm", traits_class=group.OVMGroupTraits)
-        yield from generate_trait_section(title="TME", prefix="tme", traits_class=group.TMEGroupTraits)
 
 class PanelGroupActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
@@ -75,17 +72,11 @@ class PanelGroup(VerticalScroll):
 
         base_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=group.BaseGroupTraits)
         dfp_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=group.DFPGroupTraits)
-        tme_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=group.TMEGroupTraits)
-        omvs_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=group.OMVSGroupTraits)
-        ovm_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=group.OVMGroupTraits)
         result = group.update_group(
             group=group_name,
             create=not group_exists,
             base=base_segment,
-            dfp=dfp_segment,
-            omvs=omvs_segment,
-            ovm=ovm_segment,
-            tme=tme_segment
+            dfp=dfp_segment
         )
 
         if not group_exists:
