@@ -115,7 +115,7 @@ Not all terminals are capable of displaying advanced TUI applications. Below is 
 ------------------|-----------|-------
  Alacritty        | Yes*      | Alacritty is only supported if you don't utilize the image support.
  Blackbox         | Yes*      | You must manually enable "Sixel Support" to display images.
- Kitty            | Yes       | -
+ Kitty            | Yes       | May have issues with displaying multiple images at the same time.
  MacOS terminal   | No        | -
  Raspbian         | No        | -
  TSO OMVS in z/OS | No        | -
