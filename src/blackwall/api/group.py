@@ -28,10 +28,10 @@ class BaseGroupTraits(TraitsBase):
 
 @dataclass
 class DFPGroupTraits(TraitsBase):
-    data_application: str | None = field(default=None,metadata={"label": "Data application", "allowed_in": {"add","alter","extract"}})
-    data_class: str | None = field(default=None,metadata={"label": "Data class", "allowed_in": {"add","alter","extract"}})
-    management_class: str | None = field(default=None,metadata={"label": "Management class", "allowed_in": {"add","alter","extract"}})
-    storage_class: str | None = field(default=None,metadata={"label": "Storage class", "allowed_in": {"add","alter","extract"}})
+    data_application: str | None = field(default=None,metadata={"label": "Data application", "allowed_in": {"add","alter","extract"}, "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    data_class: str | None = field(default=None,metadata={"label": "Data class", "allowed_in": {"add","alter","extract"}, "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    management_class: str | None = field(default=None,metadata={"label": "Management class", "allowed_in": {"add","alter","extract"}, "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    storage_class: str | None = field(default=None,metadata={"label": "Storage class", "allowed_in": {"add","alter","extract"}, "input_args": {"max_length": 8,"classes": "field-short-generic"}})
 
 @dataclass
 class OMVSGroupTraits(TraitsBase):
