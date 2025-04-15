@@ -22,6 +22,8 @@ from .audit_mode import AuditQRCode
 
 from .tabs import TabSystem
 
+from blackwall.settings import get_site_setting
+
 #system information
 if zoau_enabled:
     zsystem_info = json.loads(zsystem.zinfo()) # type: ignore
@@ -39,7 +41,11 @@ class Blackwall(App):
     #This portion handles the text in the header bar
     def on_mount(self) -> None:
         self.title = "Blackwall Protocol"
-        self.sub_title = "Mainframe Security Administration"
+        site_company = get_site_setting(section="meta",setting="company")
+        if site_company is not None and site_company != "":
+            self.sub_title = f"{site_company} Security Administration"
+        else:
+            self.sub_title = "Mainframe Security Administration"
         self.register_theme(cynosure_theme)
         self.register_theme(ibm_3270_theme)
         self.theme = "cynosure"
