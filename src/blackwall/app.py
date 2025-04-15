@@ -43,7 +43,7 @@ class Blackwall(App):
         self.title = "Blackwall Protocol"
         site_company = get_site_setting(section="meta",setting="company")
         if site_company is not None and site_company != "":
-            self.sub_title = f"{site_company} Security Administration"
+            self.sub_title = f"Mainframe Security Administration at {site_company}"
         else:
             self.sub_title = "Mainframe Security Administration"
         self.register_theme(cynosure_theme)
