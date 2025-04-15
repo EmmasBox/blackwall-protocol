@@ -57,6 +57,5 @@ def search_database_query_one(query: str, query_types: set[QueryType], class_nam
     
     return results
 
-def search_database_query_multiple(query: str, query_type: str):
-    if query_type == "any":
-        pass
+def search_database_query_multiple(query: str, query_types: set[QueryType], class_name: str | None = None):
+    pass
