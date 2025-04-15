@@ -1,4 +1,4 @@
-#### Stability notice
+#### Stability notice 🚧
 
 This software is still in a **pre-alpha state** and under active development. **Do not use it on production systems!**
 Some features might not work yet, performance might be unsatisfactory, and there are numerous bugs in the features that are implemented.
