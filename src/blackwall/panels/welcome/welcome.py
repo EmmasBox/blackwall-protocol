@@ -57,17 +57,17 @@ class PanelWelcomeActions(VerticalGroup):
     async def action_search(self):
         self.post_message(OpenTab(title="Search",content=PanelSearch()))
 
-    async def action_create_dataset(self):
-        self.post_message(OpenTab(title="Create dataset profile",content=PanelDataset()))
-
-    async def action_create_resource(self):
-        self.post_message(OpenTab(title="Create resource profile",content=PanelResource()))
-    
     async def action_create_user(self):
         self.post_message(OpenTab(title="Create user",content=PanelUser()))
 
     async def action_create_group(self):
         self.post_message(OpenTab(title="Create group",content=PanelGroup()))
+
+    async def action_create_dataset(self):
+        self.post_message(OpenTab(title="Create dataset profile",content=PanelDataset()))
+
+    async def action_create_resource(self):
+        self.post_message(OpenTab(title="Create resource profile",content=PanelResource()))
 
     async def action_create_analysis(self):
         self.post_message(OpenTab(title="Health check",content=PanelAnalysis()))
