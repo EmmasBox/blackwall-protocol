@@ -22,7 +22,7 @@ from .audit_mode import AuditQRCode
 
 from .tabs import TabSystem
 
-from blackwall.settings import get_site_setting
+from blackwall.settings import get_site_setting, get_user_setting
 
 #system information
 if zoau_enabled:
@@ -56,7 +56,9 @@ class Blackwall(App):
         #display system and LPAR name
         yield Header()
         if zoau_enabled:
-            yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}")
+            system_label = get_user_setting(section="display",setting="system_label")
+            if system_label is not False:
+                yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}")
         yield TSOCommandField()
         with Container():
             yield TabSystem()
