@@ -14,8 +14,6 @@ import subprocess
 
 from blackwall.commands_definition import commands
 
-from blackwall.messages import CommandHistory
-
 command_history = ""
 
 def generate_command_meta_header(command):
@@ -64,6 +62,5 @@ class TSOCommandField(HorizontalGroup):
                 output = subprocess.run(f'tsocmd "{command}"', text=False, shell=True, check=True, capture_output=True)
                 command_history = command_history + generate_command_meta_header(command) + output.stdout.decode("utf-8", errors="ignore")
                 self.notify(f"command {command.upper()} successfully completed",severity="information")
-                self.post_message(CommandHistory(command_history))
             except BaseException as e:
                 self.notify(f"Command {command.upper()} failed: {e}",severity="error")
