@@ -9,6 +9,7 @@ from blackwall.panels.dataset.dataset import PanelDataset
 from blackwall.panels.resource.resource import PanelResource
 from blackwall.panels.analysis.analysis import PanelAnalysis
 from blackwall.panels.group.group import PanelGroup
+from blackwall.panels.search.search import PanelSearch
 
 from blackwall.settings import get_user_setting, get_site_setting
 
@@ -46,11 +47,15 @@ class PanelWelcomeMessage(VerticalGroup):
 class PanelWelcomeActions(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Try out the program:",classes="welcome-suggestion-header")
+        yield Button("Search RACF", classes="welcome-suggestion-button",action="search")
         yield Button("Create user", classes="welcome-suggestion-button",action="create_user")
         yield Button("Create group", classes="welcome-suggestion-button",action="create_group")
         yield Button("Create dataset profile", classes="welcome-suggestion-button",action="create_dataset")
         yield Button("Create general resource profile", classes="welcome-suggestion-button",action="create_resource")
         yield Button("Analyse system health", classes="welcome-suggestion-button",action="create_analysis",disabled=True)
+
+    async def action_search(self):
+        self.post_message(OpenTab(title="Search",content=PanelSearch()))
 
     async def action_create_dataset(self):
         self.post_message(OpenTab(title="Create dataset profile",content=PanelDataset()))
