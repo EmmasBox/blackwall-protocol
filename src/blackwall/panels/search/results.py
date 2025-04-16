@@ -29,7 +29,7 @@ class PanelResultsUsers(VerticalScroll):
     def on_mount(self) -> None:
         user_table = self.query_exactly_one(selector="#results_user_table")
         user_table.zebra_stripes = True
-        user_table.add_columns(*USER_COLUMNS[0])   
+        user_table.add_columns(*USER_COLUMNS[0]) 
 
 class PanelResultsGroup(VerticalScroll):
     def __init__(self, group_dict: dict):

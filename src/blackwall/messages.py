@@ -6,8 +6,4 @@ class OpenTab(Message):
         super().__init__()
         self.title =  title
         self.content = content
-
-class CommandHistory(Message):
-    def __init__(self, history: str):
-        super().__init__()
-        self.history =  history
+        
