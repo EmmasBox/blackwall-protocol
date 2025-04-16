@@ -1,10 +1,7 @@
 
-from textual.app import App, SystemCommand
+from textual.app import App
 from textual.widgets import Header, Footer, Label
 from textual.containers import Container
-from textual.screen import Screen
-
-from typing import Iterable
 
 try:
     from zoautil_py import zsystem # type: ignore
