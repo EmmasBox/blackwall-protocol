@@ -2,6 +2,7 @@
 from textual.app import App
 from textual.widgets import Header, Footer, Label
 from textual.containers import Container
+from textual.signal import Signal
 
 try:
     from zoautil_py import zsystem # type: ignore
@@ -20,6 +21,10 @@ from .audit_mode import AuditQRCode
 from .tabs import TabSystem
 
 from blackwall.settings import get_site_setting, get_user_setting
+from blackwall.messages import SubmitCommand
+from blackwall.submit_command import execute_command
+
+command_history = ""
 
 #system information
 if zoau_enabled:
@@ -34,7 +39,7 @@ class Blackwall(App):
     BINDINGS = [
         ("h", "push_screen('history')", "Switch to command history view")
     ]
-
+    
     #This portion handles the text in the header bar
     def on_mount(self) -> None:
         self.title = "Blackwall Protocol"
@@ -47,6 +52,20 @@ class Blackwall(App):
         self.register_theme(ibm_3270_theme)
         self.theme = "cynosure"
         self.install_screen(CommandHistoryScreen(), name="history")
+        self.command_output_change = Signal(self,name="command_output_change")
+        self.command_output = ""
+
+    async def on_submit_command(self, message: SubmitCommand) -> None:
+        if message.command != "":
+            try:
+                output = execute_command(message.command)
+                if output is not None:
+                    self.command_output = self.command_output + output
+                    self.command_output_change.publish(data=self.command_output)
+                    self.notify(f"command {message.command.upper()} successfully completed",severity="information")
+            except BaseException as e:
+                self.notify(f"Command {message.command.upper()} failed: {e}",severity="error")
+                
 
     #UI elements
     def compose(self):
