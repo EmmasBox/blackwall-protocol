@@ -50,7 +50,14 @@ class Blackwall(App):
             self.sub_title = "Mainframe Security Administration"
         self.register_theme(cynosure_theme)
         self.register_theme(ibm_3270_theme)
-        self.theme = "cynosure"
+        user_theme = get_user_setting(section="display",setting="theme")
+        if user_theme is not None or user_theme == "":
+            try:
+                self.theme = user_theme
+            except ImportError:
+                print("Couldn't find user theme")
+        else:
+            self.theme = "cynosure"
         self.install_screen(CommandHistoryScreen(), name="history")
         self.command_output_change = Signal(self,name="command_output_change")
         self.command_output = ""
