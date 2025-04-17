@@ -12,6 +12,7 @@ from textual.signal import Signal
 from blackwall.commands_definition import commands
 
 from blackwall.messages import SubmitCommand
+from blackwall.settings import get_user_setting
 
 class CommandHistoryWidget(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -45,4 +46,6 @@ class TSOCommandField(HorizontalGroup):
         command_line = self.query_exactly_one(selector="#cli")
         command = command_line.value
         self.post_message(SubmitCommand(command))
-        command_line.value = ""
+        clear_on_submission = get_user_setting(section="commands",setting="clear_on_submission")
+        if clear_on_submission is not False:
+            command_line.value = ""
