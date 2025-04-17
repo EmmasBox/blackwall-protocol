@@ -37,7 +37,7 @@ class Blackwall(App):
     CSS_PATH = "UI.css"
 
     BINDINGS = [
-        ("v", "push_screen('history')", "Switch to command history view")
+        ("h", "push_screen('history')", "Switch to command history view")
     ]
     
     #This portion handles the text in the header bar

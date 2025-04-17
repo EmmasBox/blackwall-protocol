@@ -45,7 +45,7 @@ class TabSystem(HorizontalGroup):
         ("ctrl+d", "open_dataset", "Open dataset profile tab"),
         ("ctrl+g", "open_groups", "Open group profile tab"),
         ("ctrl+r", "open_resource", "Open resource profile tab"),
-        ("ctrl+h", "open_history", "Open history tab"),
+        ("ctrl+l", "open_history", "Open history tab"),
         ("ctrl+o", "open_options", "Open RACF options tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
