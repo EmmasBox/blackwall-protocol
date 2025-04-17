@@ -8,6 +8,3 @@ from textual.containers import VerticalScroll
 class PanelHistory(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield Log(id="command_log")
-
-
-

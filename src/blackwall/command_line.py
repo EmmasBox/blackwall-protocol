@@ -29,6 +29,7 @@ class CommandHistoryScreen(Screen):
     def on_resume(self):
         on_change: Signal[str] = self.app.command_output_change # type: ignore
         on_change.subscribe(node=self,callback=self.write_to_log)
+        self.write_to_log(self.app.command_output) # type: ignore
     
     def write_to_log(self, output: str):
         log = self.query_one(Log)
