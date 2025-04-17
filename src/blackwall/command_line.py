@@ -43,6 +43,6 @@ class TSOCommandField(HorizontalGroup):
     @on(Input.Submitted)
     def submit_command(self) -> None:
         command_line = self.query_exactly_one(selector="#cli")
-        command_line.value = ""
         command = command_line.value
         self.post_message(SubmitCommand(command))
+        command_line.value = ""
