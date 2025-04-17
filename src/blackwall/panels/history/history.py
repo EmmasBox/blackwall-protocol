@@ -1,4 +1,4 @@
-from blackwall.command_line import command_history, CommandHistoryWidget
+from blackwall.command_line import CommandHistoryWidget
 
 from textual import on
 from textual.app import ComposeResult

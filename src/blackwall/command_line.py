@@ -1,5 +1,4 @@
 
-from typing import TYPE_CHECKING
 from textual.app import ComposeResult
 
 from textual.suggester import SuggestFromList
