@@ -1,14 +1,11 @@
 
 from textual.app import ComposeResult
-
 from textual.suggester import SuggestFromList
 from textual import on
-
 from textual.widgets import Input
 from textual.containers import HorizontalGroup
 
 from blackwall.commands_definition import commands
-
 from blackwall.messages import SubmitCommand
 from blackwall.settings import get_user_setting
 
