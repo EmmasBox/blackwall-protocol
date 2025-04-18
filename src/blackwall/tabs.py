@@ -1,8 +1,9 @@
-import random
 
 from textual.app import ComposeResult
 from textual.widgets import TabPane, TabbedContent
 from textual.containers import HorizontalGroup
+
+from blackwall.emoji import get_emoji
 from .panels.welcome.welcome import PanelWelcome
 from .panels.users.user import PanelUser, UserInfo
 from .panels.search.search import PanelSearch
@@ -12,8 +13,6 @@ from .panels.resource.resource import PanelResource
 from .panels.history.history import PanelHistory
 from .panels.setropts.setropts import PanelSetropts
 from .panels.group.group import PanelGroup
-
-from blackwall.settings import get_user_setting
 
 from blackwall.messages import OpenTab
 
@@ -25,17 +24,6 @@ people_list = [
     "🙅",
     "🙆",
 ]
-
-emoji_allowed = get_user_setting(section="display",setting="emojis")
-
-def get_emoji(emoji: str | list[str]) -> str:
-    if emoji_allowed is not False:
-        if emoji is type(str):
-            return emoji
-        else:
-            return random.choice(emoji)
-    else:
-        return ""
 
 class TabSystem(HorizontalGroup):
     BINDINGS = [
