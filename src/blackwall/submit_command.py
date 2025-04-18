@@ -21,7 +21,7 @@ def generate_command_meta_header(command: str) -> str:
     if local_tz is not None:
         local_tzname = local_tz.tzname(local_now)
         if local_tzname is not None:
-            date_time = date_time + local_tzname
+            date_time = date_time + " " + local_tzname
     
     return f"""
     --------------------------------------------------------------------------------------------------
