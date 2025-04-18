@@ -6,7 +6,7 @@ import subprocess
 from blackwall.settings import get_user_setting
 
 def generate_command_meta_header(command: str) -> str:
-    date_format = get_user_setting(section="commands",setting="date_format")
+    date_format = get_user_setting(section="locale",setting="date_format")
 
     now = datetime.now() # current date and time
     if (date_format == "dmy" or date_format is None):
