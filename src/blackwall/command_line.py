@@ -7,7 +7,6 @@ from textual import on
 from textual.widgets import Input
 from textual.containers import HorizontalGroup
 
-
 from blackwall.commands_definition import commands
 
 from blackwall.messages import SubmitCommand
