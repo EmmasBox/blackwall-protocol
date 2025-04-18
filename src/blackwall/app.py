@@ -13,7 +13,7 @@ except ImportError:
 
 import json
 from .command_line import TSOCommandField
-from .command_line import CommandHistoryScreen
+from .screens.history.history import CommandHistoryScreen
 from .theme_cynosure import cynosure_theme
 from .theme_3270 import ibm_3270_theme
 from .audit_mode import AuditQRCode
