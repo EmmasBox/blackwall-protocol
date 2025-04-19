@@ -73,7 +73,6 @@ class Blackwall(App):
             except BaseException as e:
                 self.notify(f"Command {message.command.upper()} failed: {e}",severity="error")
                 
-
     #UI elements
     def compose(self):
         #display system and LPAR name
