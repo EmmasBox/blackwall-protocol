@@ -34,7 +34,7 @@ class CommandLine(HorizontalGroup):
     def action_cycle_up(self) -> None:
         command_line = self.query_exactly_one(selector="#cli")
         command_line.value = self.command_history_list[self.current_command_history_entry] # type: ignore
-        if self.current_command_history_entry < len(self.command_history_list):
+        if self.current_command_history_entry < len(self.command_history_list) -1:
             self.current_command_history_entry = self.current_command_history_entry + 1
 
     def action_cycle_down(self) -> None:
