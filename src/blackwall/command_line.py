@@ -9,7 +9,7 @@ from blackwall.commands_definition import commands
 from blackwall.messages import SubmitCommand
 from blackwall.settings import get_user_setting
 
-class TSOCommandField(HorizontalGroup):
+class CommandLine(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Input(id="cli",max_length=250,placeholder="Submit a TSO/RACF command...",classes="commands",suggester=SuggestFromList(commands,case_sensitive=False),tooltip="Use this command field to submit TSO and RACF commands. You can view the output in the command history panel")
 
