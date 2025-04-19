@@ -16,6 +16,7 @@ class CommandLine(HorizontalGroup):
     ]
 
     command_history_list = []
+    current_command_history_entry = -1
 
     def compose(self) -> ComposeResult:
         yield Input(id="cli",max_length=250,placeholder="Submit a TSO/RACF command...",classes="commands",suggester=SuggestFromList(commands,case_sensitive=False),tooltip="Use this command field to submit TSO and RACF commands. You can view the output in the command history panel")
@@ -32,7 +33,8 @@ class CommandLine(HorizontalGroup):
 
     def action_cycle_up(self) -> None:
         command_line = self.query_exactly_one(selector="#cli")
-        pass
+        command_line.value = self.command_history_list[self.current_command_history_entry] # type: ignore
+        self.current_command_history_entry = self.current_command_history_entry + 1
 
     def action_cycle_down(self) -> None:
         command_line = self.query_exactly_one(selector="#cli")
