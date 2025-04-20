@@ -14,6 +14,6 @@ class PanelCommandOutput(VerticalScroll):
         self.write_to_log(self.app.command_output) # type: ignore
 
     def write_to_log(self, output: str):
-        log = self.get_child_by_id("#tab_command_log",Log)
+        log = self.get_child_by_id("tab_command_log",Log)
         log.clear()
         log.write(output)
