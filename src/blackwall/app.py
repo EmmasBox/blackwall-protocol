@@ -1,6 +1,6 @@
 
 from textual.app import App
-from textual.widgets import Header, Footer, Label, Input
+from textual.widgets import Header, Footer, Label, Input, TabbedContent
 from textual.containers import Container
 from textual.signal import Signal
 
@@ -38,7 +38,8 @@ class Blackwall(App):
 
     BINDINGS = [
         ("h", "push_screen('command_output')", "Switch to command output screen"),
-        ("ctrl+home", "go_home", "Focus command line")
+        ("ctrl+home", "go_to_cli", "Focus command line"),
+        ("shift+home", "go_to_tabs", "Focus the tab system")
     ]
     
     #This portion handles the text in the header bar
@@ -63,9 +64,14 @@ class Blackwall(App):
         self.command_output_change = Signal(self,name="command_output_change")
         self.command_output = ""
 
-    async def action_go_home(self) -> None:
+    async def action_go_to_cli(self) -> None:
         """Focuses the command line"""
         cli = self.get_child_by_type(CommandLine).get_child_by_type(Input)
+        cli.focus()
+
+    async def action_go_to_tabs(self) -> None:
+        """Focuses the tab widget"""
+        cli = self.get_child_by_type(TabSystem).get_child_by_type(TabbedContent)
         cli.focus()
 
     async def on_submit_command(self, message: SubmitCommand) -> None:
