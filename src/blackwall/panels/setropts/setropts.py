@@ -53,7 +53,7 @@ class PanelSetroptsFields(VerticalGroup):
         elif self.edit_mode is PanelMode.edit:
             toggle_inputs(self,prefix="base",traits=self.base_traits,disabled=False)
 
-        set_traits_in_input(self,traits=self.base_traits,prefix="base")
+        #set_traits_in_input(self,traits=self.base_traits,prefix="base")
 
 
 class PanelSetroptsActionButtons(HorizontalGroup):
