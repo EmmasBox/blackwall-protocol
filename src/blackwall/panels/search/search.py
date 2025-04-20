@@ -1,6 +1,6 @@
 
 from textual.app import ComposeResult
-from textual.widgets import Button, Input, Label, RadioButton, RadioSet, TabbedContent, TabPane
+from textual.widgets import Button, Input, Label, RadioButton, RadioSet
 from textual.containers import HorizontalGroup, VerticalScroll
 
 from blackwall.messages import OpenTab
