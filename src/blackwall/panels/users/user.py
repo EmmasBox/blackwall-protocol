@@ -171,7 +171,7 @@ class PanelUser(VerticalScroll):
         yield PanelUserActionButtons(save_action="save_user", delete_action="delete_user")
     
     def watch_user_info(self, value: UserInfo):
-        user_name_panel = self.query_exactly_one(PanelUserName)
+        user_name_panel = self.get_child_by_type(PanelUserName)
         #valid modes: create, edit, and read
         user_name_panel.mode = value.mode
         user_name_panel.username = value.username
@@ -181,7 +181,7 @@ class PanelUser(VerticalScroll):
         user_name_panel.installation_data = value.installation_data
 
     def set_edit_mode(self):
-        user_name_panel = self.query_exactly_one(PanelUserName)
+        user_name_panel = self.get_child_by_type(PanelUserName)
         user_name_panel.mode = PanelMode.edit
         self.query_exactly_one("#username",Input).disabled = True
         self.query_exactly_one("#delete",Button).disabled = False
