@@ -5,7 +5,7 @@ import subprocess
 
 from blackwall.settings import get_user_setting
 
-def generate_command_meta_header(command: str) -> str:
+def generate_command_meta_header(command_type: str,command: str) -> str:
     date_format = get_user_setting(section="locale",setting="date_format")
 
     now = datetime.now() # current date and time
@@ -25,7 +25,7 @@ def generate_command_meta_header(command: str) -> str:
     sep = "─" * 100
     return f"""
     ┌{sep}┐ 
-     Command '{command}' 
+     {command_type} command '{command}' 
      Executed on {date_time}
     └{sep}┘ 
     \n
@@ -33,4 +33,4 @@ def generate_command_meta_header(command: str) -> str:
 
 def execute_command(command: str) -> str | None:
     output = subprocess.run(f'tsocmd "{command}"', text=False, shell=True, check=True, capture_output=True)
-    return generate_command_meta_header(command) + output.stdout.decode("utf-8", errors="ignore")
+    return generate_command_meta_header("TSO",command) + output.stdout.decode("utf-8", errors="ignore")
