@@ -85,7 +85,6 @@ except ImportError:
     print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")    
     racfu_enabled = False
 
-
 #Dataset functions
 def dataset_profile_exists(dataset: str) -> bool:
     """Checks if a dataset profile exists, returns true or false"""
