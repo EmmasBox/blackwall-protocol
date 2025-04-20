@@ -104,7 +104,7 @@ def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
                     widget.get_child_by_id(input_id).value = field_value
             elif actual_type == list[str]:
                 collapsible_widget = widget.query_exactly_one(f"#{input_id}",expect_type=Collapsible)
-                list_widget = collapsible_widget.get_child_by_type(ListView)
+                list_widget = collapsible_widget.get_child_by_type(Collapsible.Contents).get_child_by_type(ListView)
                 if field_value is not None:
                     for item in field_value:
                         list_widget.append(ListItem(Label(item)))
