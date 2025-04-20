@@ -68,7 +68,7 @@ class PanelGroup(VerticalScroll):
         pass
 
     def action_save_group(self) -> None:
-        group_name = self.query_exactly_one(selector="#group_name").value
+        group_name = self.query_exactly_one("#group_name",Input).value
         group_exists = group.group_profile_exists(group=group_name)
 
         if group_exists:
