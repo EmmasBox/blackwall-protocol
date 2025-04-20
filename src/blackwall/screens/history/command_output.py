@@ -18,6 +18,7 @@ class CommandOutputScreen(Screen):
 
     def compose(self) -> ComposeResult:
         yield CommandOutputWidget()
+    
     #command_output_change
     @on(ScreenResume)
     def on_resume(self):
