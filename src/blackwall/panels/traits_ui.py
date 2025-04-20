@@ -42,13 +42,13 @@ def generate_trait_inputs(prefix: str, traits_class: type[TraitsBase],disabled: 
                 yield Label(f"{label}{'*' if not optional else ''}:")
                 yield Input(id=input_id, type="integer", disabled=disabled, **input_args)
             elif actual_type == list[str]:
-                with Collapsible(title=label):
-                    yield ListView(id=input_id, disabled=disabled, **input_args)
+                with Collapsible(title=label,id=input_id):
+                    yield ListView(disabled=disabled, **input_args)
             elif actual_type is bool:
                 yield RadioButton(label=label, id=input_id, disabled=disabled, **input_args)
 
 def generate_trait_section(title: str, prefix: str, traits_class: type[TraitsBase]) -> Generator:
-    with Lazy(widget=Collapsible(title=title)):
+    with Collapsible(title=title):
         yield from generate_trait_inputs(prefix=prefix,traits_class=traits_class)
 
 def get_traits_from_input[T : TraitsBase](operator: str, widget: Widget, prefix: str, trait_cls: type[T]) -> T:
@@ -107,7 +107,9 @@ def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
                 if field_value is not None:
                     widget.get_child_by_id(input_id).value = field_value
             elif actual_type == list[str]:
-                list_widget = widget.get_child_by_id(input_id)
+
+                collapsible_widget = widget.get_child_by_id(input_id,expect_type=Collapsible)
+                list_widget = collapsible_widget.get_child_by_type(ListView)
                 if field_value is not None:
                     for item in field_value:
                         list_widget.append(ListItem(Label(item)))
