@@ -38,7 +38,7 @@ class Blackwall(App):
 
     BINDINGS = [
         ("h", "push_screen('command_output')", "Switch to command output screen"),
-        ("alt+r", "push_screen('refresh')", "Switch to refresh screen"),
+        ("shift+r", "push_screen('refresh')", "Switch to refresh screen"),
         ("ctrl+home", "go_to_cli", "Focus command line")
     ]
     
