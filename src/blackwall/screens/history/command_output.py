@@ -10,7 +10,7 @@ from textual.widgets import Log, Label
 class CommandOutputWidget(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Command history: ")
-        yield Log(id="command_history_log")
+        yield Log(id="command_output_screen_log")
         yield Label("Press 'Esc' to exit command history")
 
 class CommandOutputScreen(Screen):
@@ -26,6 +26,6 @@ class CommandOutputScreen(Screen):
         self.write_to_log(self.app.command_output) # type: ignore
     
     def write_to_log(self, output: str):
-        log = self.query_one("#command_history_log",Log)
+        log = self.get_child_by_id("command_output_screen_log",Log)
         log.clear()
         log.write(output)
