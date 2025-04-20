@@ -98,7 +98,7 @@ class PanelDatasetActionButtons(HorizontalGroup):
     
     def compose(self) -> ComposeResult:
         yield Button("Save",action="save",classes="action-button")
-        yield Button("Delete",action="delete",classes="action-button",disabled=self.delete_is_disabled)
+        yield Button("Delete",action="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
 
     async def action_save(self):
         await self.app.run_action(self.save_action,default_namespace=self.parent)
