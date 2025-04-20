@@ -183,16 +183,16 @@ class PanelUser(VerticalScroll):
     def set_edit_mode(self):
         user_name_panel = self.query_exactly_one(PanelUserName)
         user_name_panel.mode = PanelMode.edit
-        self.query_exactly_one(selector="#username").disabled = True
-        self.query_exactly_one(selector="#delete").disabled = False
-        self.query_exactly_one(selector="#save").label = "Save"
+        self.query_exactly_one("#username",Input).disabled = True
+        self.query_exactly_one("#delete",Button).disabled = False
+        self.query_exactly_one("#save",Button).label = "Save"
         self.notify("Switched to edit mode",severity="information")
 
     def action_delete_user(self) -> None:
         pass
 
     def action_save_user(self) -> None:
-        username = self.query_exactly_one(selector="#username").value
+        username = self.query_exactly_one("#username",Input).value
         user_exists = user.user_exists(username=username)
 
         if user_exists:
