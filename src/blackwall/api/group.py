@@ -47,36 +47,41 @@ class OVMGroupTraits(TraitsBase):
 class TMEGroupTraits(TraitsBase):
     roles: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
-if racfu_enabled:
-    #Group functions
-    def group_exists(group: str) -> bool:
+#Group functions
+def group_exists(group: str) -> bool:
+    if racfu_enabled:
         """Checks if a group exists, returns true or false"""
         result = racfu({"operation": "extract", "admin_type": "group", "profile_name": group.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
-    
-    def get_group(group: str):
-        """Doesn't handle group profiles that don't exist, recommend using group_exists() first"""
-        if racfu_enabled:
-            result = racfu({"operation": "extract", "admin_type": "group", "profile_name": group.upper()})
-            return result.result
+    else:
+        return False
 
-    def get_group_connections(group: str):
-        """Get information on group connections"""
-        pass
+def get_group(group: str) -> dict:
+    """Doesn't handle group profiles that don't exist, recommend using group_exists() first"""
+    if racfu_enabled:
+        result = racfu({"operation": "extract", "admin_type": "group", "profile_name": group.upper()})
+        return result.result
+    else:
+        return {}
 
-    def update_group(group: str,create: bool, base: BaseGroupTraits, tme: TMEGroupTraits | None = None, omvs: OMVSGroupTraits | None = None, dfp: DFPGroupTraits | None = None, ovm: OVMGroupTraits | None = None):
+def get_group_connections(group: str):
+    """Get information on group connections"""
+    pass
+
+def update_group(group: str,create: bool, base: BaseGroupTraits, tme: TMEGroupTraits | None = None, omvs: OMVSGroupTraits | None = None, dfp: DFPGroupTraits | None = None, ovm: OVMGroupTraits | None = None):
+    if racfu_enabled:
         """Creates or updates an existing group"""
         traits = base.to_traits(prefix="base")
         
         if tme is not None:
             traits.update(tme.to_traits("tme"))
-    
+
         if dfp is not None:
             traits.update(dfp.to_traits("dfp"))
 
         if omvs is not None:
             traits.update(omvs.to_traits("omvs"))
-    
+
         if ovm is not None:
             traits.update(ovm.to_traits("ovm"))
 
@@ -94,9 +99,9 @@ if racfu_enabled:
             }
         )
         return result.result["return_codes"]["racf_return_code"]
-    
 
-    def delete_group(group: str):
+def delete_group(group: str):
+    if racfu_enabled:
         """Deletes a group"""
         result = racfu(
             {
