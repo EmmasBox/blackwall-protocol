@@ -24,10 +24,10 @@ def generate_command_meta_header(command: str) -> str:
             date_time = date_time + " " + local_tzname
     sep = "─" * 100
     return f"""
-    {sep}
+    ESC[1;31m{sep}ESC[1;0m
     Command '{command}' 
     Executed on {date_time}
-    {sep}
+    ESC[1;31m{sep}ESC[1;0m
     \n
     """
 
