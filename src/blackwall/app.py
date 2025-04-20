@@ -1,6 +1,6 @@
 
 from textual.app import App
-from textual.widgets import Header, Footer, Label
+from textual.widgets import Header, Footer, Label, Input
 from textual.containers import Container
 from textual.signal import Signal
 
@@ -65,7 +65,7 @@ class Blackwall(App):
 
     async def action_go_home(self) -> None:
         """Focuses the command line"""
-        cli = self.get_child_by_type(CommandLine)
+        cli = self.get_child_by_type(CommandLine).get_child_by_type(Input)
         cli.focus()
         self.notify("Focused CLI")
 
