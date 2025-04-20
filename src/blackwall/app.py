@@ -13,7 +13,7 @@ except ImportError:
 
 import json
 from .command_line import CommandLine
-from .screens.history.history import CommandHistoryScreen
+from .screens.history.command_output import CommandOutputScreen
 from .theme_cynosure import cynosure_theme
 from .theme_3270 import ibm_3270_theme
 from .audit_mode import AuditQRCode
@@ -58,7 +58,7 @@ class Blackwall(App):
                 print("Couldn't find user theme")
         else:
             self.theme = "cynosure"
-        self.install_screen(CommandHistoryScreen(), name="history")
+        self.install_screen(CommandOutputScreen(), name="history")
         self.command_output_change = Signal(self,name="command_output_change")
         self.command_output = ""
 

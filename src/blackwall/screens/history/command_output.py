@@ -7,17 +7,17 @@ from textual.events import ScreenResume
 from textual.containers import VerticalGroup
 from textual.widgets import Log, Label
 
-class CommandHistoryWidget(VerticalGroup):
+class CommandOutputWidget(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Command history: ")
-        yield Log()
+        yield Log(id="command_history_log")
         yield Label("Press 'Esc' to exit command history")
 
-class CommandHistoryScreen(Screen):
+class CommandOutputScreen(Screen):
     BINDINGS = [("escape", "app.pop_screen", "Pop screen")]
 
     def compose(self) -> ComposeResult:
-        yield CommandHistoryWidget()
+        yield CommandOutputWidget()
     #command_output_change
     @on(ScreenResume)
     def on_resume(self):
@@ -26,6 +26,6 @@ class CommandHistoryScreen(Screen):
         self.write_to_log(self.app.command_output) # type: ignore
     
     def write_to_log(self, output: str):
-        log = self.query_one(Log)
+        log = self.query_one("#command_history_log",Log)
         log.clear()
         log.write(output)
