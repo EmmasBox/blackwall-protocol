@@ -4,20 +4,15 @@ from textual.app import ComposeResult
 from textual.screen import Screen
 from textual.signal import Signal
 from textual.events import ScreenResume
-from textual.containers import VerticalGroup
 from textual.widgets import Log, Label
-
-class CommandOutputWidget(VerticalGroup):
-    def compose(self) -> ComposeResult:
-        yield Label("Command history: ")
-        yield Log(id="command_output_screen_log")
-        yield Label("Press 'Esc' to exit command history")
-
+        
 class CommandOutputScreen(Screen):
     BINDINGS = [("escape", "app.pop_screen", "Pop screen")]
 
     def compose(self) -> ComposeResult:
-        yield CommandOutputWidget()
+        yield Label("Command history: ")
+        yield Log(id="command_output_screen_log")
+        yield Label("Press 'Esc' to exit command history")
     
     #command_output_change
     @on(ScreenResume)
