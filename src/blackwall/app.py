@@ -71,7 +71,7 @@ class Blackwall(App):
 
     async def action_go_to_tabs(self) -> None:
         """Focuses the tab widget"""
-        tab_system = self.get_child_by_type(Container).get_child_by_type(TabSystem).query_exactly_one("tab_system",TabbedContent)
+        tab_system = self.get_child_by_type(Container).get_child_by_type(TabSystem).get_child_by_id("tab_system",TabbedContent)
         tab_system.focus()
 
     async def on_submit_command(self, message: SubmitCommand) -> None:
