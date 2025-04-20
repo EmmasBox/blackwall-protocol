@@ -65,8 +65,8 @@ class PanelSetropts(VerticalScroll):
     base_traits: reactive[BaseSetroptsTraits] = reactive(BaseSetroptsTraits())
 
     def watch_setropts_info(self, value: SetroptsInfo):
-        mode_section = self.query_exactly_one(PanelSetroptsMode)
-        mode_section = self.query_exactly_one(PanelSetroptsFields)
+        mode_section = self.get_child_by_type(PanelSetroptsMode)
+        mode_section = self.get_child_by_type(PanelSetroptsFields)
         #valid modes: edit and read
         mode_section.edit_mode = value.mode
   
