@@ -154,7 +154,7 @@ class MFAPolicyResourceTraits(TraitsBase):
 class SIGVERResourceTraits(TraitsBase):
     fail_program_load_condition: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     log_signature_verification_events: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    signature_required: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    signature_required: bool | None = field(default=None,metadata={"label": "Signature required","allowed_in": {"add","alter","extract"}})
 
 @dataclass
 class CDTINFOResourceTraits(TraitsBase):
