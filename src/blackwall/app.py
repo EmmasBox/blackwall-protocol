@@ -38,7 +38,7 @@ class Blackwall(App):
 
     BINDINGS = [
         ("h", "push_screen('command_output')", "Switch to command output screen"),
-        
+        ("ctrl+home", "go_home", "Focus command line")
     ]
     
     #This portion handles the text in the header bar
@@ -62,6 +62,11 @@ class Blackwall(App):
         self.install_screen(CommandOutputScreen(), name="command_output")
         self.command_output_change = Signal(self,name="command_output_change")
         self.command_output = ""
+
+    async def action_go_home(self) -> None:
+        """Focuses the command line"""
+        cli = self.get_child_by_type(CommandLine)
+        cli.focus()
 
     async def on_submit_command(self, message: SubmitCommand) -> None:
         if message.command != "":
