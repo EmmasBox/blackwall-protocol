@@ -22,13 +22,12 @@ def generate_command_meta_header(command: str) -> str:
         local_tzname = local_tz.tzname(local_now)
         if local_tzname is not None:
             date_time = date_time + " " + local_tzname
-    
+    sep = "─" * 100
     return f"""
-    __________________________________________________________________________________________________
-
+    {sep}
     Command '{command}' 
     Executed on {date_time}
-    __________________________________________________________________________________________________
+    {sep}
     \n
     """
 
