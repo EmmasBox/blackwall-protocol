@@ -68,7 +68,7 @@ class PanelGroup(VerticalScroll):
         pass
 
     def action_save_group(self) -> None:
-        group_name = self.query_exactly_one("#group_name",Input).value
+        group_name = self.get_child_by_type(PanelGroupNameAndSubgroup).get_child_by_id("group_name",Input).value
         group_exists = group.group_exists(group=group_name)
 
         if group_exists:
