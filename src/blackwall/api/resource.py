@@ -71,7 +71,7 @@ class KerbResourceTraits(TraitsBase):
     encryption_algorithms: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
     realm_name: str | None = field(default=None,metadata={"label": "Realm name","allowed_in": {"add","alter","extract"}})
     key_version: str | None = field(default=None,metadata={"label": "Key version","allowed_in": {"extract"}})
-    max_ticket_life: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    max_ticket_life: int | None = field(default=None,metadata={"label": "Max ticket life","allowed_in": {"add","alter","extract"}})
     min_ticket_life: list[str] | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     password: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
 
