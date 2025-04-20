@@ -23,7 +23,7 @@ class CommandLine(HorizontalGroup):
 
     @on(Input.Submitted)
     def submit_command(self) -> None:
-        command_line = self.query_exactly_one(selector="#cli")
+        command_line = self.query_exactly_one("#cli",Input)
         command = command_line.value
         self.post_message(SubmitCommand(command))
         clear_on_submission = get_user_setting(section="commands",setting="clear_on_submission")
@@ -33,14 +33,14 @@ class CommandLine(HorizontalGroup):
 
     def action_cycle_up(self) -> None:
         if len(self.command_history_list) > 0:
-            command_line = self.query_exactly_one(selector="#cli")
-            command_line.value = self.command_history_list[self.current_command_history_entry] # type: ignore
+            command_line = self.query_exactly_one("#cli",Input)
+            command_line.value = self.command_history_list[self.current_command_history_entry]
             if self.current_command_history_entry < len(self.command_history_list) -1:
                 self.current_command_history_entry = self.current_command_history_entry + 1
 
     def action_cycle_down(self) -> None:
         if len(self.command_history_list) > 0:
-            command_line = self.query_exactly_one(selector="#cli")
-            command_line.value = self.command_history_list[self.current_command_history_entry] # type: ignore
+            command_line = self.query_exactly_one("#cli",Input)
+            command_line.value = self.command_history_list[self.current_command_history_entry]
             if self.current_command_history_entry > -1:
                 self.current_command_history_entry = self.current_command_history_entry - 1
