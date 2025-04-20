@@ -25,8 +25,8 @@ def generate_command_meta_header(command: str) -> str:
     sep = "─" * 100
     return f"""
     ┌{sep}┐ 
-    Command '{command}' 
-    Executed on {date_time}
+     Command '{command}' 
+     Executed on {date_time}
     └{sep}┘ 
     \n
     """
