@@ -1,5 +1,6 @@
 
 from dataclasses import dataclass
+from time import time
 from textual.reactive import reactive
 from textual.app import ComposeResult
 from textual.widgets import Button, Label
@@ -69,10 +70,15 @@ class PanelSetropts(VerticalScroll):
         mode_section.edit_mode = value.mode
   
     def on_mount(self) -> None:
+        start = time()
         racf_options = get_racf_options()
+        end = time()
+        elapsed = end - start
+        self.get_child_by_id("timer", Label).renderable = f"Took: {elapsed}s"
         self.query_one(PanelSetroptsFields).base_traits = BaseSetroptsTraits.from_dict(prefix="base",source=racf_options["profile"]["base"])
 
     def compose(self) -> ComposeResult:
+        yield Label(id="timer")
         yield PanelSetroptsNotice()
         yield PanelSetroptsMode(switch_action="switch")
         yield PanelSetroptsFields()
