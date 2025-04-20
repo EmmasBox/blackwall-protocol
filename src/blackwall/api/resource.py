@@ -83,10 +83,10 @@ class DLFDataResourceTraits(TraitsBase):
 
 @dataclass
 class EIMResourceTraits(TraitsBase):
-    domain_distinguished_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    kerberos_registry: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    local_registry: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    options: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    domain_distinguished_name: str | None = field(default=None,metadata={"label": "Domain distinguished name","allowed_in": {"add","alter","extract"}})
+    kerberos_registry: str | None = field(default=None,metadata={"label": "Kerberos registry","allowed_in": {"add","alter","extract"}})
+    local_registry: str | None = field(default=None,metadata={"label": "Local registry","allowed_in": {"add","alter","extract"}})
+    options: str | None = field(default=None,metadata={"label": "Options","allowed_in": {"add","alter","extract"}})
 
 @dataclass
 class JESResourceTraits(TraitsBase):
