@@ -15,7 +15,7 @@ class SetroptsInfo:
 
 class PanelSetroptsNotice(VerticalGroup):
     def compose(self) -> ComposeResult:
-        yield Label("Warning: this panel controls and displays RACF system options. It is not recommended to touch this unless you absolutely know what you are doing",classes="setropts-warning")
+        yield Label("Warning: this panel controls and displays RACF system options. It is not recommended to touch this unless you absolutely know what you are doing!",classes="setropts-warning")
 
 class PanelSetroptsMode(VerticalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.read,recompose=True)
