@@ -70,7 +70,7 @@ class PanelSetropts(VerticalScroll):
   
     def on_mount(self) -> None:
         racf_options = get_racf_options()
-        self.query_one(PanelSetroptsFields).base_traits = BaseSetroptsTraits.from_dict(prefix="base",source=racf_options["profile"]["base"])
+        self.get_child_by_type(PanelSetroptsFields).base_traits = BaseSetroptsTraits.from_dict(prefix="base",source=racf_options["profile"]["base"])
 
     def compose(self) -> ComposeResult:
         yield PanelSetroptsNotice()
