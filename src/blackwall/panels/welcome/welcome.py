@@ -54,7 +54,7 @@ class PanelWelcomeActions(VerticalGroup):
         yield Button("Create dataset profile", classes="welcome-suggestion-button",action="create_dataset")
         yield Button("Create general resource profile", classes="welcome-suggestion-button",action="create_resource")
         yield Button("View system options", classes="welcome-suggestion-button",action="view_options")
-        yield Button("Analyse system health", classes="welcome-suggestion-button",action="create_analysis",disabled=True)
+        #yield Button("Analyse system health", classes="welcome-suggestion-button",action="create_analysis")
 
     async def action_search(self):
         self.post_message(OpenTab(title="Search",content=PanelSearch()))
