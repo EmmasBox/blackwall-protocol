@@ -225,7 +225,6 @@ except ImportError:
     print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")    
     racfu_enabled = False
 
-
 #General resource profile function
 def resource_profile_exists(resource_class: str,resource: str) -> bool:
     """Checks if a general resource profile exists, returns true or false"""
