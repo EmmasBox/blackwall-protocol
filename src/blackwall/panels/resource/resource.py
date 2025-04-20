@@ -37,7 +37,7 @@ class PanelResourceSegments(VerticalGroup):
             yield from generate_trait_section(title="Session", prefix="session", traits_class=resource.SessionResourceTraits)
             yield from generate_trait_section(title="SVFMR", prefix="svfmr", traits_class=resource.SVFMRResourceTraits)
             yield from generate_trait_section(title="Proxy", prefix="proxy", traits_class=resource.ProxyResourceTraits)
-            yield from generate_trait_section(title="MFA policy", prefix="mfapolicy", traits_class=resource.MFAPolicyResourceTraits)
+            yield from generate_trait_section(title="MF policy", prefix="mfpolicy", traits_class=resource.MFPolicyResourceTraits)
             yield from generate_trait_section(title="SIGVER", prefix="sigver", traits_class=resource.SIGVERResourceTraits)
             yield from generate_trait_section(title="tme", prefix="tme", traits_class=resource.TMEResourceTraits)
             yield from generate_trait_section(title="SSIGNON", prefix="ssignon", traits_class=resource.SSIGNONResourceTraits)
@@ -100,7 +100,7 @@ class PanelResource(VerticalScroll):
         svfmr_segment = get_traits_from_input(operator,self, prefix="svfmr", trait_cls=resource.SVFMRResourceTraits)
         stdata_segment = get_traits_from_input(operator,self, prefix="stdata", trait_cls=resource.STDATAResourceTraits)
         proxy_segment = get_traits_from_input(operator,self, prefix="proxy", trait_cls=resource.ProxyResourceTraits)
-        mfapolicy_segment = get_traits_from_input(operator,self, prefix="mfapolicy", trait_cls=resource.MFAPolicyResourceTraits)
+        mfpolicy_segment = get_traits_from_input(operator,self, prefix="mfpolicy", trait_cls=resource.MFPolicyResourceTraits)
         sigver_segment = get_traits_from_input(operator,self, prefix="sigver", trait_cls=resource.SIGVERResourceTraits)
         tme_segment = get_traits_from_input(operator,self, prefix="tme", trait_cls=resource.TMEResourceTraits)
         cdtinfo_segment = get_traits_from_input(operator,self, prefix="cdtinfo", trait_cls=resource.CDTINFOResourceTraits)
@@ -124,7 +124,7 @@ class PanelResource(VerticalScroll):
             svfmr=svfmr_segment,
             stdata=stdata_segment,
             proxy=proxy_segment,
-            mfapolicy=mfapolicy_segment,
+            mfpolicy=mfpolicy_segment,
             sigver=sigver_segment,
             tme=tme_segment,
             ssignon=ssignon_segment,

@@ -144,7 +144,7 @@ class ProxyResourceTraits(TraitsBase):
     ldap_host: str | None = field(default=None,metadata={"label": "LDAP host","allowed_in": {"add","alter","extract"}})
 
 @dataclass
-class MFAPolicyResourceTraits(TraitsBase):
+class MFPolicyResourceTraits(TraitsBase):
     factor: str | None = field(default=None,metadata={"label": "Factor","allowed_in": {"add","alter","extract"}})
     factors: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
     token_timeout: int | None = field(default=None,metadata={"label": "Token timeout","allowed_in": {"extract"}})
@@ -259,7 +259,7 @@ def update_resource_profile(
         ictx: ICTXResourceTraits | None = None,
         svfmr: SVFMRResourceTraits | None = None,
         sigver: SIGVERResourceTraits | None = None,
-        mfapolicy: MFAPolicyResourceTraits | None = None,
+        mfpolicy: MFPolicyResourceTraits | None = None,
         session: SessionResourceTraits | None = None,
         idtparms: IDTPARMSResourceTraits | None = None,
         jes: JESResourceTraits | None = None,
@@ -299,8 +299,8 @@ def update_resource_profile(
     if ictx is not None:
         traits.update(ictx.to_traits("ictx"))
 
-    if mfapolicy is not None:
-        traits.update(mfapolicy.to_traits("mfapolicy"))
+    if mfpolicy is not None:
+        traits.update(mfpolicy.to_traits("mfpolicy"))
 
     if session is not None:
         traits.update(session.to_traits("session"))
