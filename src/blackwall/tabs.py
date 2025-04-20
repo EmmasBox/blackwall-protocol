@@ -57,7 +57,8 @@ class TabSystem(HorizontalGroup):
         old_tab = tabs.active
         tabs.disable_tab(old_tab)
         def focus_tab():
-            tabs.active = new_tab.id
+            if new_tab.id is not None:
+                tabs.active = new_tab.id
             tabs.enable_tab(old_tab)
         self.call_after_refresh(focus_tab)
 
