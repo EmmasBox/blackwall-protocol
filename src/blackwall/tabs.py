@@ -10,7 +10,7 @@ from .panels.search.search import PanelSearch
 from .panels.analysis.analysis import PanelAnalysis
 from .panels.dataset.dataset import PanelDataset
 from .panels.resource.resource import PanelResource
-from .panels.history.history import PanelHistory
+from .panels.command_output.command_output import PanelCommandOutput
 from .panels.setropts.setropts import PanelSetropts
 from .panels.group.group import PanelGroup
 
@@ -33,7 +33,7 @@ class TabSystem(HorizontalGroup):
         ("ctrl+d", "open_dataset", "Open dataset profile tab"),
         ("ctrl+g", "open_groups", "Open group profile tab"),
         ("ctrl+r", "open_resource", "Open resource profile tab"),
-        ("ctrl+l", "open_history", "Open history tab"),
+        ("ctrl+l", "open_command_output", "Open command output tab"),
         ("ctrl+o", "open_options", "Open RACF options tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
@@ -86,9 +86,9 @@ class TabSystem(HorizontalGroup):
         """Add a new analysis tab."""
         self.post_message(OpenTab(f"{get_emoji("📊")} Health check",PanelAnalysis()))
     
-    def action_open_history(self) -> None:
+    def action_open_command_output(self) -> None:
         """Add a new history tab."""
-        self.post_message(OpenTab(f"{get_emoji("📃")} Command history",PanelHistory()))
+        self.post_message(OpenTab(f"{get_emoji("📃")} Command history",PanelCommandOutput()))
 
     def action_open_options(self) -> None:
         """Add a new RACF options tab."""
