@@ -13,7 +13,7 @@ except ImportError:
 
 import json
 from .command_line import CommandLine
-from .screens.history.command_output import CommandOutputScreen
+from .screens.command_output.command_output import CommandOutputScreen
 from .theme_cynosure import cynosure_theme
 from .theme_3270 import ibm_3270_theme
 
@@ -37,6 +37,7 @@ class Blackwall(App):
 
     BINDINGS = [
         ("h", "push_screen('command_output')", "Switch to command output screen"),
+        ("h", "push_screen('command_output')", "Switch to command output screen"),
         ("ctrl+home", "go_to_cli", "Focus command line")
     ]
     
@@ -58,6 +59,7 @@ class Blackwall(App):
                 print("Couldn't find user theme")
         else:
             self.theme = "cynosure"
+        self.install_screen(CommandOutputScreen(), name="command_output")
         self.install_screen(CommandOutputScreen(), name="command_output")
         self.command_output_change = Signal(self,name="command_output_change")
         self.command_output = ""
