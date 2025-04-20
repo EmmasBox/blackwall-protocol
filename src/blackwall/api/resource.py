@@ -195,11 +195,11 @@ class TMEResourceTraits(TraitsBase):
 
 @dataclass
 class SSIGNONResourceTraits(TraitsBase):
-    enhanced_pass_ticket_label: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    enhanced_pass_ticket_type: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    enhanced_pass_ticket_timeout: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    enhanced_pass_ticket_replay: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    legacy_pass_ticket_label: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    enhanced_pass_ticket_label: str | None = field(default=None,metadata={"label": "Enchaned pass ticket label","allowed_in": {"add","alter","extract"}})
+    enhanced_pass_ticket_type: str | None = field(default=None,metadata={"label": "Enchaned pass ticket type","allowed_in": {"add","alter","extract"}})
+    enhanced_pass_ticket_timeout: str | None = field(default=None,metadata={"label": "Enchaned pass ticket timeout","allowed_in": {"add","alter","extract"}})
+    enhanced_pass_ticket_replay: str | None = field(default=None,metadata={"label": "Enchanced pass ticket replay","allowed_in": {"add","alter","extract"}})
+    legacy_pass_ticket_label: str | None = field(default=None,metadata={"label": "Legacy pass ticket label","allowed_in": {"add","alter","extract"}})
 
     mask_legacy_pass_ticket_key: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     encrypt_legacy_pass_ticket_key: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
