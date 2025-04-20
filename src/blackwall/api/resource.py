@@ -182,11 +182,11 @@ class CDTINFOResourceTraits(TraitsBase):
 
 @dataclass
 class TMEResourceTraits(TraitsBase):
-    child: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    group: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    parent: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    resource: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    role: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    child: str | None = field(default=None,metadata={"label": "Child","allowed_in": {"add","alter","extract"}})
+    group: str | None = field(default=None,metadata={"label": "Group","allowed_in": {"add","alter","extract"}})
+    parent: str | None = field(default=None,metadata={"label": "Parent","allowed_in": {"add","alter","extract"}})
+    resource: str | None = field(default=None,metadata={"label": "Resource","allowed_in": {"add","alter","extract"}})
+    role: str | None = field(default=None,metadata={"label": "Role","allowed_in": {"add","alter","extract"}})
 
     children: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
     groups: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
