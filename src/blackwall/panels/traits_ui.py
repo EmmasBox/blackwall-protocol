@@ -92,6 +92,10 @@ def toggle_inputs(widget: Widget, prefix: str, traits: TraitsBase, disabled: boo
                 widget.query_exactly_one(selector=input_id).disabled = disabled
 
 def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
+    try:
+        widget = widget.get_child_by_type(Collapsible)
+    except:
+        pass
     for field in fields(type(traits)):
         actual_type, optional = get_actual(field)
         label = field.metadata.get("label")
