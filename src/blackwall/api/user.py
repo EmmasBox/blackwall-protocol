@@ -158,7 +158,7 @@ class OvmUserTraits(TraitsBase):
 @dataclass
 class ProxyUserTraits(TraitsBase):
     bind_distinguished_name: str | None = field(default=None, metadata={"label": "bind distinguished name"})
-    bind_password: str | None = field(default=None, metadata={"label": "bind password"})
+    bind_password: str | None = field(default=None, metadata={"label": "bind password","input_args": {"password": True}})
     ldap_host: str | None = field(default=None, metadata={"label": "LDAP host"})
 
 @dataclass
