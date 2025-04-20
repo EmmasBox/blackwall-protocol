@@ -37,7 +37,8 @@ class Blackwall(App):
     CSS_PATH = "UI.css"
 
     BINDINGS = [
-        ("h", "push_screen('history')", "Switch to command output screen")
+        ("h", "push_screen('command_output')", "Switch to command output screen"),
+        
     ]
     
     #This portion handles the text in the header bar
@@ -58,7 +59,7 @@ class Blackwall(App):
                 print("Couldn't find user theme")
         else:
             self.theme = "cynosure"
-        self.install_screen(CommandOutputScreen(), name="history")
+        self.install_screen(CommandOutputScreen(), name="command_output")
         self.command_output_change = Signal(self,name="command_output_change")
         self.command_output = ""
 
