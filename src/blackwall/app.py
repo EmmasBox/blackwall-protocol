@@ -67,6 +67,7 @@ class Blackwall(App):
         """Focuses the command line"""
         cli = self.get_child_by_type(CommandLine)
         cli.focus()
+        self.notify("Focused CLI")
 
     async def on_submit_command(self, message: SubmitCommand) -> None:
         if message.command != "":
