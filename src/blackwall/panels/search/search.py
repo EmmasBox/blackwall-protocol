@@ -22,7 +22,7 @@ class SearchSelector(HorizontalGroup):
 
 class SearchField(HorizontalGroup):
     def action_search(self) -> None:
-        search_query = self.query_exactly_one(selector="#search_field").value
+        search_query = self.query_exactly_one("#search_field",Input).value
         results = search_database_query_one(query=search_query, class_name=None,query_types=QueryType.all())
         self.post_message(OpenTab("Results",PanelResultsMixedType(results)))
 
