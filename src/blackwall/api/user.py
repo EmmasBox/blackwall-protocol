@@ -5,7 +5,7 @@ from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
 try:
-    from racfu import racfu # type: ignore
+    from racfu import racfu 
     racfu_enabled = True
 except ImportError:
     print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")    
@@ -285,12 +285,13 @@ def update_user(
     return result.result["return_codes"]["racf_return_code"]
 
 def delete_user(username: str):
-    """Deletes a user"""
-    result = racfu(
-            {
-                "operation": "delete", 
-                "admin_type": "user", 
-                "profile_name": username,
-            }
-        )
-    return result.result["return_codes"]["racf_return_code"] == 0
+    if racfu_enabled:
+        """Deletes a user"""
+        result = racfu(
+                {
+                    "operation": "delete", 
+                    "admin_type": "user", 
+                    "profile_name": username,
+                }
+            )
+        return result.result["return_codes"]["racf_return_code"] == 0
