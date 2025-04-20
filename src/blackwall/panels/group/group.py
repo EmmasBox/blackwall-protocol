@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from textual.reactive import reactive
 from textual.app import ComposeResult
-from textual.widgets import Input, Label, Button, Collapsible
+from textual.widgets import Input, Label, Button
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.api import group
