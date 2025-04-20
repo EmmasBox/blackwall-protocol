@@ -16,7 +16,6 @@ from .command_line import CommandLine
 from .screens.history.command_output import CommandOutputScreen
 from .theme_cynosure import cynosure_theme
 from .theme_3270 import ibm_3270_theme
-from .audit_mode import AuditQRCode
 
 from .tabs import TabSystem
 
@@ -91,5 +90,4 @@ class Blackwall(App):
         yield CommandLine()
         with Container():
             yield TabSystem()
-        #yield AuditQRCode()
         yield Footer()
