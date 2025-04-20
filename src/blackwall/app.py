@@ -39,7 +39,7 @@ class Blackwall(App):
     BINDINGS = [
         ("h", "push_screen('command_output')", "Switch to command output screen"),
         ("ctrl+home", "go_to_cli", "Focus command line"),
-        ("ctrl+j", "go_to_tabs", "Focus the tab system")
+        ("shift+home", "go_to_tabs", "Focus the tab system")
     ]
     
     #This portion handles the text in the header bar
@@ -73,6 +73,7 @@ class Blackwall(App):
         """Focuses the tab widget"""
         tab_system = self.get_child_by_type(Container).get_child_by_type(TabSystem).get_child_by_id("tab_system",TabbedContent)
         tab_system.focus()
+        self.notify("focused tabs")
 
     async def on_submit_command(self, message: SubmitCommand) -> None:
         """Executes command from message"""
