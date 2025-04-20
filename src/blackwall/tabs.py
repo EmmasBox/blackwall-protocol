@@ -97,7 +97,7 @@ class TabSystem(HorizontalGroup):
     #Remove current tab
     def action_remove(self) -> None:
         """Remove active tab."""
-        tabs = self.query_one(TabbedContent)
+        tabs = self.get_child_by_id("tab_system",TabbedContent)
         active_pane = tabs.active_pane
         if active_pane is not None:
             tabs.remove_pane(active_pane.id)
@@ -105,4 +105,4 @@ class TabSystem(HorizontalGroup):
     #Clear all tabs
     def action_clear(self) -> None:
         """Clear the tabs."""
-        self.query_one(TabbedContent).clear_panes()
+        self.get_child_by_id("tab_system",TabbedContent).clear_panes()
