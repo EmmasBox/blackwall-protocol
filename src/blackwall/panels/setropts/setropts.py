@@ -56,7 +56,7 @@ class PanelSetroptsFields(VerticalGroup):
             toggle_inputs(self,prefix="base",traits=self.base_traits,disabled=False)
 
 
-class PanelSetroptsActionButtons(HorizontalGroup):
+class PanelSetroptsActionButtons(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Changing system settings can be dangerous")
         yield Button("Save",variant="warning",classes="action-button")
