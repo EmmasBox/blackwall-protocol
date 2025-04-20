@@ -139,9 +139,9 @@ class STDATAResourceTraits(TraitsBase):
 
 @dataclass
 class ProxyResourceTraits(TraitsBase):
-    bind_distinguished_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    bind_password: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    ldap_host: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    bind_distinguished_name: str | None = field(default=None,metadata={"label": "Bind distinguished name","allowed_in": {"add","alter","extract"}})
+    bind_password: str | None = field(default=None,metadata={"label": "Bind password","allowed_in": {"add","alter"},"input_args": {"password": True}})
+    ldap_host: str | None = field(default=None,metadata={"label": "LDAP host","allowed_in": {"add","alter","extract"}})
 
 @dataclass
 class MFAPolicyResourceTraits(TraitsBase):
