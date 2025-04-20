@@ -285,6 +285,7 @@ def update_user(
     return result.result["return_codes"]["racf_return_code"]
 
 def delete_user(username: str):
+    """Deletes a user"""
     result = racfu(
             {
                 "operation": "delete", 
