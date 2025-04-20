@@ -16,6 +16,6 @@ class RefreshScreen(Screen):
                 yield Button("Refresh system",id="command_output_screen_log",action="refresh")
                 yield Label("Press 'Esc' to exit refresh screen")
     
-    def action_refresh(self):
+    def action_refresh(self) -> None:
         return_code = refresh_RACF()
         self.notify(f"Refresh issued, return code: {return_code}")
