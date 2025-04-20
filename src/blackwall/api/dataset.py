@@ -95,36 +95,40 @@ def dataset_profile_exists(dataset: str) -> bool:
     else:
         return False
 
-def get_dataset_profile(dataset: str):
+def get_dataset_profile(dataset: str) -> dict:
     """Doesn't handle dataset profiles that don't exist, recommend using dataset_profile_exists() first"""
     if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "data-set", "profile_name": dataset.upper()})
         return result.result
+    else:
+        return {}
 
 def update_dataset_profile(dataset: str, create: bool, base: BaseDatasetTraits):
-    traits = base.to_traits(prefix="base")
-    
-    if create:
-        operation = "add"
-    else:
-        operation = "alter"
-    
-    result = racfu(
-        {
-            "operation": operation, 
-            "admin_type": "data-set", 
-            "profile_name": dataset,
-            "traits":  traits
-        }
-    )
-    return result.result["return_codes"]["racf_return_code"]
-
-def delete_dataset_profile(dataset: str):
-    result = racfu(
+    if racfu_enabled:
+        traits = base.to_traits(prefix="base")
+        
+        if create:
+            operation = "add"
+        else:
+            operation = "alter"
+        
+        result = racfu(
             {
-                "operation": "delete", 
+                "operation": operation, 
                 "admin_type": "data-set", 
-                "profile_name": dataset.upper(),
+                "profile_name": dataset,
+                "traits":  traits
             }
         )
-    return result.result["return_codes"]["racf_return_code"] == 0
+        return result.result["return_codes"]["racf_return_code"]
+
+def delete_dataset_profile(dataset: str):
+    if racfu_enabled:
+        result = racfu(
+                {
+                    "operation": "delete", 
+                    "admin_type": "data-set", 
+                    "profile_name": dataset.upper(),
+                }
+            )
+        return result.result["return_codes"]["racf_return_code"] == 0
