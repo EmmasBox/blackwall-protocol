@@ -12,9 +12,10 @@ class RefreshScreen(Screen):
     def compose(self) -> ComposeResult:
         with Middle():
             with Center():
-                yield Label("Refresh: ")
+                yield Label("Here you can issue a refresh of the system")
                 yield Button("Refresh system",id="command_output_screen_log",action="refresh")
                 yield Label("Press 'Esc' to exit refresh screen")
     
     def action_refresh(self):
-        refresh_RACF()
+        return_code = refresh_RACF()
+        self.notify(f"Refresh issued, return code: {return_code}")
