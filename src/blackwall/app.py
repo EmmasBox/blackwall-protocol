@@ -39,7 +39,7 @@ class Blackwall(App):
     BINDINGS = [
         ("h", "push_screen('command_output')", "Switch to command output screen"),
         ("ctrl+home", "go_to_cli", "Focus command line"),
-        ("^+home", "go_to_tabs", "Focus the tab system")
+        ("ctrl+j", "go_to_tabs", "Focus the tab system")
     ]
     
     #This portion handles the text in the header bar
