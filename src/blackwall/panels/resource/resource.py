@@ -31,7 +31,7 @@ class PanelResourceSegments(VerticalGroup):
             yield from generate_trait_section(title="ICTX", prefix="ictx", traits_class=resource.ICTXResourceTraits)
             yield from generate_trait_section(title="JES", prefix="jes", traits_class=resource.JESResourceTraits)
             yield from generate_trait_section(title="Kerberos", prefix="kerb", traits_class=resource.KerbResourceTraits)
-            yield from generate_trait_section(title="DLF", prefix="dlf", traits_class=resource.DLFDataResourceTraits)
+            yield from generate_trait_section(title="DLF data", prefix="dlfdata", traits_class=resource.DLFDataResourceTraits)
             yield from generate_trait_section(title="EIM", prefix="eim", traits_class=resource.EIMResourceTraits)
             yield from generate_trait_section(title="IDTPARMS", prefix="idtparms", traits_class=resource.IDTPARMSResourceTraits)
             yield from generate_trait_section(title="Session", prefix="session", traits_class=resource.SessionResourceTraits)
