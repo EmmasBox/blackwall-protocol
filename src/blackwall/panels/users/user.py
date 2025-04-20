@@ -173,12 +173,8 @@ class PanelUser(VerticalScroll):
     def watch_user_info(self, value: UserInfo):
         user_name_panel = self.get_child_by_type(PanelUserName)
         #valid modes: create, edit, and read
-        user_name_panel.mode = value.mode
         user_name_panel.username = value.username
         user_name_panel.name = value.name
-        user_name_panel.owner = value.owner
-        user_name_panel.dfltgrp = value.dfltgrp
-        user_name_panel.installation_data = value.installation_data
 
     def set_edit_mode(self):
         user_name_panel = self.get_child_by_type(PanelUserName)
