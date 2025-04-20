@@ -188,7 +188,7 @@ class PanelUser(VerticalScroll):
         pass
 
     def action_save_user(self) -> None:
-        username = self.query_exactly_one("#username",Input).value
+        username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
         user_exists = user.user_exists(username=username)
 
         if user_exists:
