@@ -98,6 +98,7 @@ class BaseSetroptsTraits(TraitsBase):
     audit_classes: list[str] | None = field(default=None,metadata={"label": "Audit classes", "allowed_in": {"alter","extract"}})
 
 def get_racf_options() -> dict[str, Any]:
+    """Returns a dict with all of the RACF options"""
     if racfu_enabled:
         """Can be used to extract RACF options"""
         result = racfu({"operation": "extract", "admin_type": "racf-options"}) # type: ignore
@@ -106,6 +107,7 @@ def get_racf_options() -> dict[str, Any]:
         return {}
     
 def get_active_classes() -> list[str]:
+    """Returns a string list with all of the active classes on the system"""
     if racfu_enabled:
         """Returns a list of active classes on the system"""
         result = racfu({"operation": "extract", "admin_type": "racf-options"}) # type: ignore
