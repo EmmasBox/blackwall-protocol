@@ -137,7 +137,7 @@ class PanelUserActionButtons(HorizontalGroup):
             yield Button("Create", tooltip="This will update the user, or create it if the user doesn't exist",action="save",classes="action-button",id="save")
         elif self.edit_mode == PanelMode.edit:
             yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save",classes="action-button",id="save")
-        yield Button("Delete", tooltip="This will delete the user permanently from the RACF database",id="delete",action="delete",classes="action-button",disabled=self.delete_is_disabled)
+        yield Button("Delete", tooltip="This will delete the user permanently from the RACF database",id="delete",action="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
 
     async def action_save(self):
         await self.app.run_action(self.save_action,default_namespace=self.parent)
