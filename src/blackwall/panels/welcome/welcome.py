@@ -1,6 +1,6 @@
 
 from textual.app import ComposeResult
-from textual.widgets import Input, Label, Button, Markdown, Collapsible
+from textual.widgets import Label, Button, Markdown
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.messages import OpenTab
