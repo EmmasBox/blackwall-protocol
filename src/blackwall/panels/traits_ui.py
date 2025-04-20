@@ -97,13 +97,13 @@ def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
         label = field.metadata.get("label")
         # only show an input field if it is labelled
         if label is not None:
-            input_id = f"#{prefix}_{field.name}"
+            input_id = f"{prefix}_{field.name}"
             field_value = getattr(traits,field.name)
             if (actual_type is str or actual_type is int or actual_type is bool):
                 if field_value is not None:
-                    widget.query_exactly_one(selector=input_id).value = field_value
+                    widget.get_child_by_id(input_id).value = field_value
             elif actual_type == list[str]:
-                list_widget = widget.query_exactly_one(selector=input_id)
+                list_widget = widget.get_child_by_id(input_id)
                 if field_value is not None:
                     for item in field_value:
                         list_widget.append(ListItem(Label(item)))
