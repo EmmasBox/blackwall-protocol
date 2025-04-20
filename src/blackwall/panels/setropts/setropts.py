@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from textual.reactive import reactive
 from textual.app import ComposeResult
 from textual.widgets import Button, Label
-from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll, Right
+from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.api.setropts import BaseSetroptsTraits, get_racf_options
 from blackwall.panels.traits_ui import generate_trait_inputs, set_traits_in_input, toggle_inputs
@@ -30,6 +30,8 @@ class PanelSetroptsMode(VerticalGroup):
             readable_mode = "read"
         elif self.edit_mode is PanelMode.edit:
             readable_mode = "edit"
+        else:
+            readable_mode = "read"
         
         yield Label(f"Mode: {readable_mode}",classes="setropts-mode-label")
         yield Button("Switch",tooltip="Toggle between read and edit mode",action="switch",classes="action-button")
@@ -85,6 +87,7 @@ class PanelSetropts(VerticalScroll):
         elif self.setropts_info.mode is PanelMode.edit:
             self.setropts_info = SetroptsInfo(mode=PanelMode.read) 
             readable_mode = "read"
+        else:
+            readable_mode = "read"
 
-        
         self.notify(f"Switched to {readable_mode}")
