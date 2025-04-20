@@ -1,6 +1,6 @@
 
 from textual.app import App
-from textual.widgets import Header, Footer, Label, Input, TabbedContent, TabPane
+from textual.widgets import Header, Footer, Label, Input
 from textual.containers import Container
 from textual.signal import Signal
 
