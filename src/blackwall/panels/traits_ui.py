@@ -4,7 +4,6 @@ from dataclasses import fields, Field
 from types import UnionType
 from typing import get_args
 
-from textual.lazy import Lazy
 from textual.widget import Widget
 from textual.widgets import Input, Label, RadioButton, Collapsible, ListView, ListItem
 from blackwall.api.traits_base import TraitsBase
