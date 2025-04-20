@@ -122,7 +122,7 @@ class PanelDataset(VerticalScroll):
         yield PanelDatasetActionButtons(save_action="save_dataset_profile", delete_action="delete_dataset_profile")
 
     def action_save_dataset_profile(self) -> None:
-        dataset_name = self.query_exactly_one("#dataset_name",Input).value
+        dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("dataset_name",Input).value
         dataset_profile_exists = dataset.dataset_profile_exists(dataset=dataset_name)
 
         if dataset_profile_exists:
