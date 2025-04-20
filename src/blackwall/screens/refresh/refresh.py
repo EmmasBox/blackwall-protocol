@@ -15,8 +15,9 @@ class RefreshScreen(Screen):
             self.notify(f"Refresh successfully issued, return code: {return_code}",severity="information")
         else:
             self.notify(f"Refresh failed, return code: {return_code}",severity="error")
-
+    
     def compose(self) -> ComposeResult:
+        self.styles.opacity = "50%"
         with Middle():
             with Center():
                 yield Label("Here you can issue a refresh of the system")
