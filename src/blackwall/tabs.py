@@ -40,7 +40,7 @@ class TabSystem(HorizontalGroup):
     ]
     def __init__(self, *children, name = None, id = None, classes = None, disabled = False, markup = True):
         super().__init__(*children, name=name, id=id, classes=classes, disabled=disabled, markup=markup)
-        self.tabs = TabbedContent()
+        self.tabs = TabbedContent(id="tab_system")
 
     def compose(self) -> ComposeResult:
         yield self.tabs
@@ -50,7 +50,7 @@ class TabSystem(HorizontalGroup):
 
     async def on_open_tab(self, message: OpenTab):
         message.stop()
-        tabs = self.query_one(TabbedContent)
+        tabs = self.get_child_by_id("tab_system",TabbedContent)
         new_tab = TabPane(message.title,message.content)
         await tabs.add_pane(new_tab)
         #Workaround, because switching tabs does not work when pressing a button I've had to disable the current tab and then re-enable it
