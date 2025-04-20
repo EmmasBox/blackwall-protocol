@@ -1,6 +1,6 @@
 
 from textual.app import App
-from textual.widgets import Header, Footer, Label, Input, TabbedContent
+from textual.widgets import Header, Footer, Label, Input, TabbedContent, TabPane
 from textual.containers import Container
 from textual.signal import Signal
 
@@ -71,7 +71,7 @@ class Blackwall(App):
 
     async def action_go_to_tabs(self) -> None:
         """Focuses the tab widget"""
-        tab_system = self.get_child_by_type(Container).get_child_by_type(TabSystem).get_child_by_id("tab_system",TabbedContent)
+        tab_system = self.get_child_by_type(Container).get_child_by_type(TabSystem).get_child_by_id("tab_system",TabbedContent).get_child_by_type(TabPane)
         tab_system.focus()
         self.notify("focused tabs")
 
