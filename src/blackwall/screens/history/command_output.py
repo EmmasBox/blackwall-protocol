@@ -12,7 +12,7 @@ class CommandOutputScreen(Screen):
     def compose(self) -> ComposeResult:
         yield Label("Command history: ")
         yield Log(id="command_output_screen_log")
-        yield Label("Press 'Esc' to exit command history")
+        yield Label("Press 'Esc' to exit command output screen")
     
     #command_output_change
     @on(ScreenResume)
