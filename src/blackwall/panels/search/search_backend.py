@@ -19,21 +19,21 @@ class QueryType(Enum):
 def is_id(query: str):
     return len(query) <= 8 and query.isalnum()
 
-def search_user(query: str):
+def search_user(query: str) -> dict | None:
     if is_id(query):
         if user_exists(query):
             return get_user(query)
         
-def search_group(query: str):
+def search_group(query: str) -> dict | None:
     if is_id(query):
         if group_exists(query):
             return get_group(query)
 
-def search_dataset(query: str) -> dict:
+def search_dataset(query: str) -> dict | None:
     if dataset_profile_exists(query):
         return get_dataset_profile(query)
 
-def search_resource(query: str, class_name: str | None):
+def search_resource(query: str, class_name: str | None) -> dict | None:
     if class_name is str:
         if resource_profile_exists(resource=query,resource_class=class_name):
             return get_resource_profile(resource=query,resource_class=class_name)
