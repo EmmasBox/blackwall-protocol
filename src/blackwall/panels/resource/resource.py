@@ -79,8 +79,8 @@ class PanelResource(VerticalScroll):
         yield PanelResourceActionButtons(save_action="save_resource_profile", delete_action="delete_resource_profile")
 
     def action_save_resource_profile(self) -> None:
-        resource_profile_name = self.query_exactly_one(selector="#resource_profile_name").value
-        resource_profile_class = self.query_exactly_one(selector="#resource_profile_class").value
+        resource_profile_name = self.query_exactly_one("#resource_profile_name",Input).value
+        resource_profile_class = self.query_exactly_one("#resource_profile_class",Input).value
         resource_profile_exists = resource.resource_profile_exists(resource=resource_profile_name,resource_class=resource_profile_class)
 
         if resource_profile_exists:
