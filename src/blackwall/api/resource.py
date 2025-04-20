@@ -77,9 +77,9 @@ class KerbResourceTraits(TraitsBase):
 
 @dataclass
 class DLFDataResourceTraits(TraitsBase):
-    job_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    job_name: str | None = field(default=None,metadata={"label": "Job name","allowed_in": {"add","alter","extract"}})
     job_names: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    retain_object_after_use: bool | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    retain_object_after_use: bool | None = field(default=None,metadata={"label": "Retain object after use","allowed_in": {"add","alter"}})
 
 @dataclass
 class EIMResourceTraits(TraitsBase):
