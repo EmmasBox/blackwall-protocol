@@ -69,6 +69,7 @@ class Blackwall(App):
         cli.focus()
 
     async def on_submit_command(self, message: SubmitCommand) -> None:
+        """Executes command from message"""
         if message.command != "":
             try:
                 output = execute_command(message.command)
