@@ -206,16 +206,16 @@ class SSIGNONResourceTraits(TraitsBase):
 
 @dataclass
 class CfdefResourceTraits(TraitsBase):
-    custom_field_data_type: str | None = field(default=None,metadata={"allowed_in": {"add","extract"}})
-    valid_first_characters: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    help_text: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    list_heading_text: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    custom_field_data_type: str | None = field(default=None,metadata={"label": "Custom field data type","allowed_in": {"add","extract"}})
+    valid_first_characters: str | None = field(default=None,metadata={"label": "Valid first characters","allowed_in": {"add","alter","extract"}})
+    help_text: str | None = field(default=None,metadata={"label": "Help text","allowed_in": {"add","alter","extract"}})
+    list_heading_text: str | None = field(default=None,metadata={"label": "List heading text","allowed_in": {"add","alter","extract"}})
     mixed_case_allowed: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    min_numeric_value: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    max_field_length: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    max_numeric_value: int | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    valid_other_characters: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    validation_rexx_exec: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    min_numeric_value: int | None = field(default=None,metadata={"label": "Min numeric value","allowed_in": {"add","alter","extract"}})
+    max_field_length: int | None = field(default=None,metadata={"label": "Max field length","allowed_in": {"add","alter","extract"}})
+    max_numeric_value: int | None = field(default=None,metadata={"label": "Max numeric value","allowed_in": {"add","alter","extract"}})
+    valid_other_characters: str | None = field(default=None,metadata={"label": "Valid other characters","allowed_in": {"add","alter","extract"}})
+    validation_rexx_exec: str | None = field(default=None,metadata={"label": "Validation rexx exec","allowed_in": {"add","alter","extract"}})
 
 #Checks if RACFU can be imported
 try:
