@@ -27,7 +27,7 @@ class PanelResultsUsers(VerticalScroll):
         yield DataTable(id="results_user_table")     
 
     def on_mount(self) -> None:
-        user_table = self.query_exactly_one("#results_user_table",DataTable)
+        user_table = self.get_child_by_id("#results_user_table",DataTable)
         user_table.zebra_stripes = True
         user_table.add_columns(*USER_COLUMNS[0]) 
 
@@ -41,7 +41,7 @@ class PanelResultsGroup(VerticalScroll):
         yield DataTable(id="results_group_table")    
 
     def on_mount(self) -> None:
-        group_table = self.query_exactly_one("#results_group_table",DataTable)
+        group_table = self.get_child_by_id("#results_group_table",DataTable)
         group_table.zebra_stripes = True
         group_table.add_columns(*GROUP_COLUMNS[0])
 
@@ -55,7 +55,7 @@ class PanelResultsDatasets(VerticalScroll):
         yield DataTable(id="results_dataset_table")        
 
     def on_mount(self) -> None:
-        dataset_table = self.query_exactly_one("#results_dataset_table",DataTable)
+        dataset_table = self.get_child_by_id("#results_dataset_table",DataTable)
         dataset_table.zebra_stripes = True
         dataset_table.add_columns(*DATASET_COLUMNS[0])
 
