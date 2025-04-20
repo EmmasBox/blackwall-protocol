@@ -20,5 +20,5 @@ class RefreshScreen(Screen):
         with Middle():
             with Center():
                 yield Label("Here you can issue a refresh of the system")
-                yield Button("Refresh system",id="command_output_screen_log",action="refresh")
+                yield Button("Refresh system",id="refresh_button",action="refresh")
                 yield Label("Press 'Esc' to exit refresh screen")
