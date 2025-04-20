@@ -107,8 +107,7 @@ def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
                 if field_value is not None:
                     widget.get_child_by_id(input_id).value = field_value
             elif actual_type == list[str]:
-
-                collapsible_widget = widget.get_child_by_id(input_id,expect_type=Collapsible)
+                collapsible_widget = widget.query_exactly_one(f"#{input_id}",expect_type=Collapsible)
                 list_widget = collapsible_widget.get_child_by_type(ListView)
                 if field_value is not None:
                     for item in field_value:
