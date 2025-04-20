@@ -126,8 +126,8 @@ class SessionResourceTraits(TraitsBase):
 
 @dataclass
 class SVFMRResourceTraits(TraitsBase):
-    parameter_list_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    script_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    parameter_list_name: str | None = field(default=None,metadata={"label": "Parameter list name","allowed_in": {"add","alter","extract"}})
+    script_name: str | None = field(default=None,metadata={"label": "Script name","allowed_in": {"add","alter","extract"}})
 
 @dataclass
 class STDATAResourceTraits(TraitsBase):
@@ -145,9 +145,9 @@ class ProxyResourceTraits(TraitsBase):
 
 @dataclass
 class MFAPolicyResourceTraits(TraitsBase):
-    factor: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    factor: str | None = field(default=None,metadata={"label": "Factor","allowed_in": {"add","alter","extract"}})
     factors: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    token_timeout: int | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    token_timeout: int | None = field(default=None,metadata={"label": "Token timeout","allowed_in": {"extract"}})
     reuse_token: bool | None = field(default=None,metadata={"label": "Re-use token","allowed_in": {"add","alter","extract"}})
 
 @dataclass
