@@ -8,4 +8,4 @@ To get started start a new tab by pressing one of the buttons on the right, they
 
 ## Share the love
 
-If you enjoy Blackwall Protocol please star it on https://github.com/EmmasBox/blackwall-protocol. Blackwall is made possible thanks to the CBTTape project.
+If you enjoy Blackwall Protocol please star it on <https://github.com/EmmasBox/blackwall-protocol>. Blackwall is made possible thanks to the CBTTape project.
