@@ -66,6 +66,19 @@ class PanelDatasetVolume(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Input(id="base_volume")
 
+class PanelDatasetSettings(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        with Collapsible(title="Settings"):
+            yield RadioButton(id="base_erase_data_sets_on_delete",label="Erase dataset on deletion")
+            yield Label("Model profile volume:")
+            yield Input(id="base_model_profile_volume",max_length=8,classes="field-short-generic")
+            yield Label("Model profile class:")
+            yield Input(id="base_model_profile_class",max_length=8,classes="field-short-generic")
+            yield Label("Model profile generic:")
+            yield Input(id="base_model_profile_generic",max_length=255,classes="field-long-generic")
+            yield Label("Model profile:")
+            yield Input(id="base_model_profile",max_length=255,classes="field-long-generic")
+
 class PanelDatasetActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
 
@@ -99,6 +112,7 @@ class PanelDataset(VerticalScroll):
         yield PanelDatasetOwner()
         yield PanelDatasetInstallationData()
         yield PanelDatasetUACC()
+        yield PanelDatasetSettings()
         yield PanelDatasetSecurityLevelAndCategories()
         yield PanelDatasetAudit()
         yield PanelDatasetActionButtons(save_action="save_dataset_profile", delete_action="delete_dataset_profile")
