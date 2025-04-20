@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from time import time
 from textual.reactive import reactive
 from textual.app import ComposeResult
-from textual.widgets import Button, Label
+from textual.widgets import Button, Label, Input
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll, Right
 
 from blackwall.api.setropts import BaseSetroptsTraits, get_racf_options
@@ -74,11 +74,11 @@ class PanelSetropts(VerticalScroll):
         racf_options = get_racf_options()
         end = time()
         elapsed = end - start
-        self.get_child_by_id("timer", Label).renderable = f"Took: {elapsed}s"
+        self.get_child_by_id("timer", Input).value = f"Took: {elapsed}s"
         self.query_one(PanelSetroptsFields).base_traits = BaseSetroptsTraits.from_dict(prefix="base",source=racf_options["profile"]["base"])
 
     def compose(self) -> ComposeResult:
-        yield Label(id="timer")
+        yield Input(id="timer", disabled=True)
         yield PanelSetroptsNotice()
         yield PanelSetroptsMode(switch_action="switch")
         yield PanelSetroptsFields()
