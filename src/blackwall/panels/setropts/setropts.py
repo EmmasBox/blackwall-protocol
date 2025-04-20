@@ -58,7 +58,8 @@ class PanelSetroptsFields(VerticalGroup):
 
 class PanelSetroptsActionButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:
-        yield Button("Save",classes="action-button")
+        yield Label("Changing system settings can be dangerous")
+        yield Button("Save",variant="warning",classes="action-button")
 
 class PanelSetropts(VerticalScroll):
     setropts_info: reactive[SetroptsInfo] = reactive(SetroptsInfo())
