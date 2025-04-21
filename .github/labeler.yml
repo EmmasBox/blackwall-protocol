@@ -1,0 +1,42 @@
+documentation:
+- changed-files:
+    - any-glob-to-any-file: '**/README.md'
+    - any-glob-to-any-file: '**/CONTRIBUTING.md'
+    - any-glob-to-any-file: '**/CODE_OF_CONDUCT.md'
+    - any-glob-to-any-file: '**/LICENSE**'
+
+build:
+- changed-files:
+    - any-glob-to-any-file: '**/python-publish.yml'
+    - any-glob-to-any-file: 'pyproject.toml'
+    - any-glob-to-any-file: '.github/**'
+
+commands:
+- changed-files:
+    - any-glob-to-any-file: '**/**command.py'
+    - any-glob-to-any-file: '**/**command**.py'
+
+user management:
+- changed-files:
+    - any-glob-to-any-file: '**/**user.py'
+    - any-glob-to-any-file: '**/**user**.py'
+
+group management:
+- changed-files:
+    - any-glob-to-any-file: '**/**group.py'
+    - any-glob-to-any-file: '**/**group**.py'
+
+dataset management:
+- changed-files:
+    - any-glob-to-any-file: '**/**dataset.py'
+    - any-glob-to-any-file: '**/**dataset**.py'
+
+general resource management:
+- changed-files:
+    - any-glob-to-any-file: '**/**resource.py'
+    - any-glob-to-any-file: '**/**resource**.py'
+
+certificate management:
+- changed-files:
+    - any-glob-to-any-file: '**/**certificate.py'
+    - any-glob-to-any-file: '**/**certificate**.py'
