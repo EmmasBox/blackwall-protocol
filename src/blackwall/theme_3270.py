@@ -20,7 +20,6 @@ ibm_3270_theme = Theme(
         "border": "#17f9e1",
         "border-blurred": "#17f9e1",
         "footer-foreground": "#000000",
-        "footer-key-foreground": "#000000",
         "footer-description-foreground": "#000000",
     },
 )
