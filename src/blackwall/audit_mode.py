@@ -2,7 +2,6 @@
 from textual.app import ComposeResult
 from textual.widgets import Label
 from textual.containers import Container
-import io
 from datetime import datetime
 
 try:
