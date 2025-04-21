@@ -1,5 +1,5 @@
 documentation:
-  - changed-files:
+  - changed-files: 
     - any-glob-to-any-file: '*.md'
 
 build:
@@ -46,3 +46,7 @@ SETROPTS management:
 bug:
   - all:
     - head-branch: ['^bug', 'bugs', 'bug', '^bugs']
+
+security:
+  - all:
+    - head-branch: ['^cve', 'cve', '^vulnerabilities','vulnerabilities','^vulnerability','vulnerability']
