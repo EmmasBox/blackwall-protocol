@@ -79,14 +79,6 @@ class DFPDatasetTraits(TraitsBase):
 class TMEDatasetTraits(TraitsBase):
     roles: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
 
-#Checks if RACFU can be imported
-try:
-    from racfu import racfu # type: ignore
-    racfu_enabled = True
-except ImportError:
-    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")    
-    racfu_enabled = False
-
 #Dataset functions
 def dataset_profile_exists(dataset: str) -> bool:
     """Checks if a dataset profile exists, returns true or false"""
