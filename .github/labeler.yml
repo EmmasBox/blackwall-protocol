@@ -1,47 +1,47 @@
 documentation:
 - changed-files:
-    - any-glob-to-any-file: '*.md'
-    - any-glob-to-any-file: 'LICENSE'
+  - any-glob-to-any-file: '*.md'
+  - any-glob-to-any-file: 'LICENSE'
 
 build:
 - changed-files:
-    - any-glob-to-any-file: 'pyproject.toml'
-    - any-glob-to-any-file: .github/*
+  - any-glob-to-any-file: 'pyproject.toml'
+  - any-glob-to-any-file: .github/*
 
 commands:
 - changed-files:
-    - any-glob-to-any-file: 'src/**/*command.py'
-    - any-glob-to-any-file: 'src/**/*command*.py'
+  - any-glob-to-any-file: 'src/**/*command.py'
+  - any-glob-to-any-file: 'src/**/*command*.py'
 
 user management:
 - changed-files:
-    - any-glob-to-any-file: 'src/**/*user.py'
-    - any-glob-to-any-file: 'src/**/*user*.py'
+  - any-glob-to-any-file: 'src/**/*user.py'
+  - any-glob-to-any-file: 'src/**/*user*.py'
 
 group management:
 - changed-files:
-    - any-glob-to-any-file: 'src/**/*group.py'
-    - any-glob-to-any-file: 'src/**/*group*.py'
+  - any-glob-to-any-file: 'src/**/*group.py'
+  - any-glob-to-any-file: 'src/**/*group*.py'
 
 dataset management:
 - changed-files:
-    - any-glob-to-any-file: 'src/**dataset.py'
-    - any-glob-to-any-file: 'src/**dataset*.py'
+  - any-glob-to-any-file: 'src/**dataset.py'
+  - any-glob-to-any-file: 'src/**dataset*.py'
 
 general resource management:
 - changed-files:
-    - any-glob-to-any-file: 'src/**/*resource.py'
-    - any-glob-to-any-file: 'src/**/*resource*.py'
+  - any-glob-to-any-file: 'src/**/*resource.py'
+  - any-glob-to-any-file: 'src/**/*resource*.py'
 
 certificate management:
 - changed-files:
-    - any-glob-to-any-file: 'src/**/*certificate.py'
-    - any-glob-to-any-file: 'src/**/*certificate*.py'
+  - any-glob-to-any-file: 'src/**/*certificate.py'
+  - any-glob-to-any-file: 'src/**/*certificate*.py'
 
 SETROPTS management:
 - changed-files:
-    - any-glob-to-any-file: 'src/**/*setropts.py'
-    - any-glob-to-any-file: 'src/**/*setropts*.py'
+  - any-glob-to-any-file: 'src/**/*setropts.py'
+  - any-glob-to-any-file: 'src/**/*setropts*.py'
 
 bug:
- - head-branch: ['^bug', 'bugs', 'bug', '^bugs']
+  - head-branch: ['^bug', 'bugs', 'bug', '^bugs']
