@@ -49,4 +49,4 @@ bug:
 
 security:
   - all:
-    - head-branch: ['^cve', 'cve', '^vulnerabilities','vulnerabilities','^vulnerability','vulnerability']
+    - head-branch: ['^cve', 'cve', '^cwe', 'cwe', '^vulnerabilities','vulnerabilities','^vulnerability','vulnerability']
