@@ -45,3 +45,6 @@ SETROPTS management:
 - changed-files:
     - any-glob-to-any-file: 'src/**/*setropts.py'
     - any-glob-to-any-file: 'src/**/*setropts*.py'
+
+bug:
+ - head-branch: ['^bug', 'bugs', 'bug', '^bugs']
