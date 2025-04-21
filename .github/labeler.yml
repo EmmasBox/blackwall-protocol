@@ -37,3 +37,8 @@ certificate management:
 - changed-files:
     - any-glob-to-any-file: 'src/**/*certificate.py'
     - any-glob-to-any-file: 'src/**/*certificate*.py'
+
+SETROPTS management:
+- changed-files:
+    - any-glob-to-any-file: 'src/**/*setropts.py'
+    - any-glob-to-any-file: 'src/**/*setropts*.py'
