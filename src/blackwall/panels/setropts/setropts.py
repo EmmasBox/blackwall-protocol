@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from textual.reactive import reactive
 from textual.app import ComposeResult
 from textual.widgets import Button, Label
-from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
+from textual.containers import VerticalGroup, VerticalScroll
 
 from blackwall.api.setropts import BaseSetroptsTraits, get_racf_options
 from blackwall.panels.traits_ui import generate_trait_inputs, set_traits_in_input, toggle_inputs
