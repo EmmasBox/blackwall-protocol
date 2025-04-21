@@ -4,12 +4,14 @@ from dataclasses import dataclass, field
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
-try:
+import importlib.util
+
+racfu_enabled = importlib.util.find_spec('racfu')
+
+if racfu_enabled:
     from racfu import racfu # type: ignore
-    racfu_enabled = True
-except ImportError:
-    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")    
-    racfu_enabled = False
+else:
+    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
 
 @dataclass
 class BaseDatasetTraits(TraitsBase):

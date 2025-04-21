@@ -3,6 +3,16 @@
 from dataclasses import dataclass, field
 from .traits_base import TraitsBase
 
+#Checks if RACFU can be imported
+import importlib.util
+
+racfu_enabled = importlib.util.find_spec('racfu')
+
+if racfu_enabled:
+    from racfu import racfu # type: ignore
+else:
+    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
+
 @dataclass
 class BaseResourceTraits(TraitsBase):
     #add+alter fields
@@ -216,14 +226,6 @@ class CfdefResourceTraits(TraitsBase):
     max_numeric_value: int | None = field(default=None,metadata={"label": "Max numeric value","allowed_in": {"add","alter","extract"}})
     valid_other_characters: str | None = field(default=None,metadata={"label": "Valid other characters","allowed_in": {"add","alter","extract"}})
     validation_rexx_exec: str | None = field(default=None,metadata={"label": "Validation rexx exec","allowed_in": {"add","alter","extract"}})
-
-#Checks if RACFU can be imported
-try:
-    from racfu import racfu # type: ignore
-    racfu_enabled = True
-except ImportError:
-    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")    
-    racfu_enabled = False
 
 #General resource profile function
 def resource_profile_exists(resource_class: str,resource: str) -> bool:

@@ -4,13 +4,6 @@ from textual.widgets import Header, Footer, Label, Input
 from textual.containers import Container
 from textual.signal import Signal
 
-try:
-    from zoautil_py import zsystem # type: ignore
-    zoau_enabled = True
-except ImportError:
-    print("##BLKWL_ERROR_1 Warning: could not find ZOAU, certain features will be disabled such as diplaying system and LPAR names")    
-    zoau_enabled = False
-
 import json
 from .command_line import CommandLine
 from .screens.command_output.command_output import CommandOutputScreen
@@ -23,6 +16,15 @@ from .tabs import TabSystem
 from blackwall.settings import get_site_setting, get_user_setting
 from blackwall.messages import SubmitCommand
 from blackwall.submit_command import execute_command
+
+import importlib.util
+
+zoau_enabled = importlib.util.find_spec('zoautil_py')
+
+if zoau_enabled:
+    from zoautil_py import zsystem # type: ignore
+else:
+    print("##BLKWL_ERROR_1 Warning: could not find ZOAU, certain features will be disabled such as diplaying system and LPAR names")    
 
 command_history = ""
 

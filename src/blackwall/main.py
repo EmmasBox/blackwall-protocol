@@ -5,12 +5,16 @@ from os import environ
 if "TEXTUAL_COLOR_SYSTEM" not in environ:
     environ["TEXTUAL_COLOR_SYSTEM"] = "truecolor"
 
-try:
-    import textual_image.renderable  # noqa: F401
-except ImportError:
-    print("##BLKWL_ERROR_3 Warning: could not find textual-image")    
-
 from .app import Blackwall
+
+import importlib.util
+
+spec = importlib.util.find_spec('textual_image')
+
+if spec:
+    import textual_image.renderable  # noqa: F401
+else:
+    print("##BLKWL_ERROR_3 Warning: could not find textual-image")    
 
 def main():
     Blackwall().run()
