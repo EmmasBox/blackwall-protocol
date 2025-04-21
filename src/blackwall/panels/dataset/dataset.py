@@ -5,6 +5,7 @@ from textual.widgets import Button, Label, Select, Input, Collapsible, RadioButt
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.reactive import reactive
 
+from blackwall.emoji import get_emoji
 from blackwall.panels.traits_ui import get_traits_from_input
 
 from blackwall.panels.panel_mode import PanelMode
@@ -97,7 +98,7 @@ class PanelDatasetActionButtons(HorizontalGroup):
         self.delete_action = delete_action
     
     def compose(self) -> ComposeResult:
-        yield Button("Save",action="save",classes="action-button")
+        yield Button(f"{get_emoji("💾")} Save",action="save",classes="action-button")
         yield Button("Delete",action="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
 
     async def action_save(self):

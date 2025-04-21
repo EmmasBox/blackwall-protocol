@@ -1,6 +1,5 @@
 documentation:
-  - changed-files:
-    - any-glob-to-any-file: '*.md'
+  - changed-files: '*.md'
 
 build:
   - changed-files:
