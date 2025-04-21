@@ -6,3 +6,8 @@ build:
   - changed-files:
     - any-glob-to-any-file: 'pyproject.toml'
     - any-glob-to-any-file: .github/*
+
+commands:
+  - changed-files:
+    - any-glob-to-any-file: 'src/**/*command.py'
+    - any-glob-to-any-file: 'src/**/*command*.py'
