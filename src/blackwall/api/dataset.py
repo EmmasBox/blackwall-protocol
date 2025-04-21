@@ -3,6 +3,7 @@
 from dataclasses import dataclass, field
 from .traits_base import TraitsBase
 
+#Checks if RACFU can be imported
 import importlib.util
 
 racfu_enabled = importlib.util.find_spec('racfu')
