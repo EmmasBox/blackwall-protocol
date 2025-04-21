@@ -103,6 +103,7 @@ def get_dataset_profile(dataset: str) -> dict:
         return {}
 
 def update_dataset_profile(dataset: str, create: bool, base: BaseDatasetTraits):
+    """Creates or updates a dataset profile"""
     if racfu_enabled:
         traits = base.to_traits(prefix="base")
         
