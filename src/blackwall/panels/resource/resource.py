@@ -7,6 +7,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.lazy import Lazy
 
 from blackwall.api import resource
+from blackwall.emoji import get_emoji
 from blackwall.panels.panel_mode import PanelMode
 
 from ..traits_ui import generate_trait_section, get_traits_from_input
@@ -58,7 +59,7 @@ class PanelResourceActionButtons(HorizontalGroup):
         self.delete_action = delete_action
     
     def compose(self) -> ComposeResult:
-        yield Button("Save",action="save",classes="action-button")
+        yield Button(f"{get_emoji("💾")} Save",action="save",classes="action-button")
         yield Button("Delete",action="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
 
     async def action_save(self):
