@@ -1,12 +1,14 @@
 documentation:
-- changed-files:
-  - any-glob-to-any-file: '*.md'
-  - any-glob-to-any-file: 'LICENSE'
+- all:
+  - changed-files:
+    - any-glob-to-any-file: '*.md'
+    - any-glob-to-any-file: 'LICENSE'
 
 build:
-- changed-files:
-  - any-glob-to-any-file: 'pyproject.toml'
-  - any-glob-to-any-file: .github/*
+- all:
+  - changed-files:
+    - any-glob-to-any-file: 'pyproject.toml'
+    - any-glob-to-any-file: .github/*
 
 commands:
 - changed-files:
@@ -25,13 +27,14 @@ group management:
 
 dataset management:
 - changed-files:
-  - any-glob-to-any-file: 'src/**dataset.py'
-  - any-glob-to-any-file: 'src/**dataset*.py'
+  - any-glob-to-any-file: 'src/**/*dataset.py'
+  - any-glob-to-any-file: 'src/**/*dataset*.py'
 
 general resource management:
-- changed-files:
-  - any-glob-to-any-file: 'src/**/*resource.py'
-  - any-glob-to-any-file: 'src/**/*resource*.py'
+- all:
+  - changed-files:
+    - any-glob-to-any-file: 'src/**/*resource.py'
+    - any-glob-to-any-file: 'src/**/*resource*.py'
 
 certificate management:
 - changed-files:
@@ -44,4 +47,5 @@ SETROPTS management:
   - any-glob-to-any-file: 'src/**/*setropts*.py'
 
 bug:
+- all:
   - head-branch: ['^bug', 'bugs', 'bug', '^bugs']
