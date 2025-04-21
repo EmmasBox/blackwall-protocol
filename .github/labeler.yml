@@ -5,7 +5,7 @@ documentation:
 build:
   - changed-files:
     - any-glob-to-any-file: 'pyproject.toml'
-    - any-glob-to-any-file: .github/*
+    - any-glob-to-any-file: .github/**
 
 commands:
   - changed-files:
