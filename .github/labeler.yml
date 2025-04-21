@@ -16,7 +16,7 @@ commands:
 user management:
 - changed-files:
     - any-glob-to-any-file: 'src/**/*user.py'
-    - any-glob-to-any-file: 'src/**/*user**.py'
+    - any-glob-to-any-file: 'src/**/*user*.py'
 
 group management:
 - changed-files:
