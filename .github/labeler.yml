@@ -1,7 +1,8 @@
 documentation:
-  - changed-files: '*.md'
+  - changed-files: 
+    - any-glob-to-any-file: '*.md'
 
 build:
   - changed-files:
-    - all-glob-to-any-file: 'pyproject.toml'
+    - any-glob-to-any-file: 'pyproject.toml'
     - any-glob-to-any-file: .github/*
