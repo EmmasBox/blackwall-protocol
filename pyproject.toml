@@ -39,3 +39,6 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools.package-data]
 blackwall = ["*.css", "*.tcss", "*.md"]
+
+[tool.bandit]
+exclude_dirs = [".github"]
