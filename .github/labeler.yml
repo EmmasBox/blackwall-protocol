@@ -1,15 +1,12 @@
 documentation:
 - changed-files:
     - any-glob-to-any-file: '*.md'
-    - any-glob-to-any-file: 'LICENSE*'
+    - any-glob-to-any-file: 'LICENSE'
 
 build:
 - changed-files:
     - any-glob-to-any-file: 'pyproject.toml'
-    - any-glob-to-any-file: '.github/*.yml'
-    - any-glob-to-any-file: '.github/*.yaml'
-    - any-glob-to-any-file: '.github/workflows/*.yml'
-    - any-glob-to-any-file: '.github/workflows/*.yaml'
+    - any-glob-to-any-file: .github/*
 
 commands:
 - changed-files:
@@ -45,3 +42,6 @@ SETROPTS management:
 - changed-files:
     - any-glob-to-any-file: 'src/**/*setropts.py'
     - any-glob-to-any-file: 'src/**/*setropts*.py'
+
+bug:
+ - head-branch: ['^bug', 'bugs', 'bug', '^bugs']
