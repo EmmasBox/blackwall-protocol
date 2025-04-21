@@ -4,19 +4,23 @@ from textual.widgets import Label
 from textual.containers import Container
 from datetime import datetime
 
-try:
-    from textual_image.widget import SixelImage
-    image_enabled = True
-except ImportError:
-    print("##BLKWL_ERROR_3 Warning: could not find textual-image")    
-    image_enabled = False
+import importlib.util
 
-try:
-    import qrcode
-    qrcode_enabled = True
-except ImportError:
-    print("##BLKWL_ERROR_4 Warning: could not find qrcode")    
-    qrcode_enabled = False
+#Checks if textual_image can be imported
+image_enabled = importlib.util.find_spec('textual_image')
+
+if image_enabled:
+    from textual_image.widget import SixelImage
+else:
+    print("##BLKWL_ERROR_3 Warning: could not find textual-image")    
+
+#Checks if qrcode can be imported
+qrcode_enabled = importlib.util.find_spec('qrcode')
+
+if qrcode_enabled:
+    from qrcode import qrcode # type: ignore
+else:
+    print("##BLKWL_ERROR_4 Warning: could not find qrcode")   
 
 class AuditQRCode(Container):
     def compose(self) -> ComposeResult:
