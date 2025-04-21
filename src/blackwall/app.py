@@ -19,14 +19,12 @@ from blackwall.submit_command import execute_command
 
 import importlib.util
 
-zoau_spec = importlib.util.find_spec('zoautil_py')
+zoau_enabled = importlib.util.find_spec('zoautil_py')
 
-if zoau_spec:
+if zoau_enabled:
     from zoautil_py import zsystem # type: ignore
-    zoau_enabled = True
 else:
     print("##BLKWL_ERROR_1 Warning: could not find ZOAU, certain features will be disabled such as diplaying system and LPAR names")    
-    zoau_enabled = False
 
 command_history = ""
 
