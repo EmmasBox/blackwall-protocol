@@ -6,7 +6,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 try:
     from zoautil_py import zsystem # type: ignore
     zoau_enabled = True
-except:
+except ImportError:
     print("##BLKWL_ERROR_1 Warning: could not find ZOAU, disabling APF health checks")    
     zoau_enabled = False
 
