@@ -1,7 +1,7 @@
 
 from textual.app import ComposeResult
 from textual.widgets import Button, Label, RadioButton, RadioSet, Log
-from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll, Horizontal
+from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 try:
     from zoautil_py import zsystem # type: ignore
