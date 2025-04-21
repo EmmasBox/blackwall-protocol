@@ -123,6 +123,7 @@ def update_dataset_profile(dataset: str, create: bool, base: BaseDatasetTraits):
         return result.result["return_codes"]["racf_return_code"]
 
 def delete_dataset_profile(dataset: str):
+    """Deletes a dataset profile"""
     if racfu_enabled:
         result = racfu(
                 {
