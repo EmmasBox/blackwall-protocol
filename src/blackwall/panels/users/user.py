@@ -10,6 +10,7 @@ from blackwall.api import user
 from blackwall.panels.panel_mode import PanelMode
 
 from ..traits_ui import generate_trait_section, get_traits_from_input
+from blackwall.emoji import get_emoji
 
 class PanelUserInfo(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
@@ -136,7 +137,7 @@ class PanelUserActionButtons(HorizontalGroup):
         if self.edit_mode == PanelMode.create:
             yield Button("Create", tooltip="This will update the user, or create it if the user doesn't exist",action="save",classes="action-button",id="save")
         elif self.edit_mode == PanelMode.edit:
-            yield Button("Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save",classes="action-button",id="save")
+            yield Button(f"{get_emoji("💾")} Save", tooltip="This will update the user, or create it if the user doesn't exist",action="save",classes="action-button",id="save")
         yield Button("Delete", tooltip="This will delete the user permanently from the RACF database",id="delete",action="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
 
     async def action_save(self):
