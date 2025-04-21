@@ -6,7 +6,10 @@ documentation:
 build:
 - changed-files:
     - any-glob-to-any-file: 'pyproject.toml'
-    - any-glob-to-any-file: '.github/**'
+    - any-glob-to-any-file: '.github/*.yml'
+    - any-glob-to-any-file: '.github/*.yaml'
+    - any-glob-to-any-file: '.github/workflows/*.yml'
+    - any-glob-to-any-file: '.github/workflows/*.yaml'
 
 commands:
 - changed-files:
