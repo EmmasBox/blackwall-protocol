@@ -62,7 +62,7 @@ def get_traits_from_input[T : TraitsBase](operator: str, widget: Widget, prefix:
         input_id = f"#{prefix}_{field.name}"
         try:
             field_value = widget.query_exactly_one(input_id).value
-        except:
+        except ValueError:
             field_value = None
 
         if actual_type is str:
