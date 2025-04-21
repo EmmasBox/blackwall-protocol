@@ -3,11 +3,15 @@ from textual.app import ComposeResult
 from textual.widgets import Button, Label, RadioButton, RadioSet, Log
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
-try:
+import importlib.util
+
+zoau_spec = importlib.util.find_spec('zoautil_py')
+
+if zoau_spec:
     from zoautil_py import zsystem # type: ignore
     zoau_enabled = True
-except ImportError:
-    print("##BLKWL_ERROR_1 Warning: could not find ZOAU, disabling APF health checks")    
+else:
+    print("##BLKWL_ERROR_1 Warning: could not find ZOAU, certain features will be disabled such as diplaying system and LPAR names")    
     zoau_enabled = False
 
 class AnalysisSelector(VerticalGroup):
