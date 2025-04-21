@@ -18,7 +18,7 @@ else:
 qrcode_enabled = importlib.util.find_spec('qrcode')
 
 if qrcode_enabled:
-    from qrcode import qrcode # type: ignore
+    import qrcode # type: ignore
 else:
     print("##BLKWL_ERROR_4 Warning: could not find qrcode")   
 
@@ -29,7 +29,9 @@ class AuditQRCode(Container):
         local_now = now.astimezone()
         local_tz = local_now.tzinfo
         local_tzname = local_tz.tzname(local_now)
-        img = qrcode.make(f"{date_time} {local_tzname}")
-        pil_image = img.get_image()
+        
         yield Label("Audit mode")
-        yield SixelImage(pil_image, classes="qrcode-image") # type: ignorez
+        if qrcode_enabled and image_enabled:
+            img = qrcode.make(f"{date_time} {local_tzname}")
+            pil_image = img.get_image()
+            yield SixelImage(pil_image, classes="qrcode-image") # type: ignorez
