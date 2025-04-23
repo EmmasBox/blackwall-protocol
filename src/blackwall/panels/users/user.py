@@ -1,5 +1,6 @@
 
 from dataclasses import dataclass
+from textual.lazy import Lazy
 from textual.reactive import reactive
 from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, RadioButton, Collapsible, Select
@@ -70,7 +71,7 @@ class PanelUserPassphrase(VerticalGroup):
 class PanelUserAttributes(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
-        with Lazy(widget=Collapsible(title="User attributes")):
+        with Collapsible(title="User attributes"):
             yield RadioButton("Special",id="base_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option")
             yield RadioButton("Operations",id="base_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards")
             yield RadioButton("Auditor",id="base_auditor")
@@ -78,7 +79,7 @@ class PanelUserAttributes(VerticalGroup):
 class PanelUserLevelAndCategory(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
-        with Lazy(widget=Collapsible(title="Security level and category")):
+        with Collapsible(title="Security level and category"):
             yield Label("Security level:")
             yield Input(max_length=8,id="base_security_level",classes="field-short-generic")
             yield Label("Security category:")
@@ -89,7 +90,7 @@ class PanelUserLevelAndCategory(VerticalGroup):
 class PanelUserDatasetsAndUACC(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
-        with Lazy(widget=Collapsible(title="Datasets and UACC")):
+        with Collapsible(title="Datasets and UACC"):
             yield Label("UACC:")
             yield Select([("NONE", 1),("READ", 2),("EXECUTE", 3),("UPDATE", 4),("CONTROL", 5),("ALTER", 6)],id="universal_access",value=1,classes="uacc-select")
             yield Label("model dataset:")
