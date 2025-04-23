@@ -152,8 +152,6 @@ class UserInfo:
     username: str = ""
 
 class PanelUser(VerticalScroll):
-    user_info: reactive[UserInfo] = reactive(UserInfo())
-
     def compose(self) -> ComposeResult:
         yield PanelUserInfo()
         yield PanelUserName()
@@ -167,6 +165,8 @@ class PanelUser(VerticalScroll):
         yield PanelUserSegments()
         yield PanelUserActionButtons(save_action="save_user", delete_action="delete_user")
     
+    user_info: reactive[UserInfo] = reactive(UserInfo())
+
     def watch_user_info(self, value: UserInfo):
         if user.user_exists(value.username):
             user_dict = user.get_user(username=value.username)
