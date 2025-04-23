@@ -37,12 +37,12 @@ class BaseUserTraits(TraitsBase):
         "minimum": 12,
     })
     
-    default_group_authority: str | None = field(default=None)
-    security_category: str | None = field(default=None)
-    security_level: str | None = field(default=None)
-    security_label: str | None = field(default=None)
-    class_authorization: str | None = field(default=None)
-    universal_access: str | None = field(default=None)
+    default_group_authority: str | None = field(default=None,metadata={"label": "Default group authority"})
+    security_category: str | None = field(default=None,metadata={"label": "Security category"})
+    security_level: str | None = field(default=None,metadata={"label": "Security level"})
+    security_label: str | None = field(default=None,metadata={"label": "Security label"})
+    class_authorization: str | None = field(default=None,metadata={"label": "Class authorization"})
+    universal_access: str | None = field(default=None,metadata={"label": "UACC"})
 
 @dataclass
 class CICSUserTraits(TraitsBase):
