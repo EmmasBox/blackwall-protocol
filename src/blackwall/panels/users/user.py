@@ -150,6 +150,21 @@ class UserInfo:
     base_traits: user.BaseUserTraits | None = None
     tso_traits: user.TSOUserTraits | None = None
     omvs_traits: user.OMVSUserTraits | None = None
+    cics_traits: user.CICSUserTraits | None = None
+    kerb_traits: user.KerbUserTraits | None = None
+    eim_traits: user.EIMUserTraits | None = None
+    lang_traits: user.LanguageUserTraits | None = None
+    dce_traits: user.DCEUserTraits | None = None
+    dfp_traits: user.DFPUserTraits | None = None
+    nds_traits: user.NDSUserTraits | None = None
+    lnotes_traits: user.LnotesUserTraits | None = None
+    mfa_traits: user.MfaUserTraits | None = None
+    ovm_traits: user.OvmUserTraits | None = None
+    proxy_traits: user.ProxyUserTraits | None = None
+    workattr_traits: user.WorkattrUserTraits | None = None
+    netview_traits: user.NetviewUserTraits | None = None
+    operparm_traits: user.OperparmUserTraits | None = None
+
     mode: PanelMode = PanelMode.create
     username: str = ""
 
@@ -179,6 +194,19 @@ class PanelUser(VerticalScroll):
             set_traits_in_input(self,traits=self.user_info.base_traits,prefix="base")
             set_traits_in_input(self,traits=self.user_info.tso_traits,prefix="tso")
             set_traits_in_input(self,traits=self.user_info.omvs_traits,prefix="omvs")
+            set_traits_in_input(self,traits=self.user_info.cics_traits,prefix="cics")
+            set_traits_in_input(self,traits=self.user_info.mfa_traits,prefix="mfa")
+            set_traits_in_input(self,traits=self.user_info.lang_traits,prefix="language")
+            set_traits_in_input(self,traits=self.user_info.dce_traits,prefix="dce")
+            set_traits_in_input(self,traits=self.user_info.dfp_traits,prefix="dfp")
+            set_traits_in_input(self,traits=self.user_info.netview_traits,prefix="netview")
+            set_traits_in_input(self,traits=self.user_info.lnotes_traits,prefix="lnotes")
+            set_traits_in_input(self,traits=self.user_info.ovm_traits,prefix="ovm")
+            set_traits_in_input(self,traits=self.user_info.nds_traits,prefix="nds")
+            set_traits_in_input(self,traits=self.user_info.workattr_traits,prefix="workattr")
+            set_traits_in_input(self,traits=self.user_info.proxy_traits,prefix="proxy")
+            set_traits_in_input(self,traits=self.user_info.eim_traits,prefix="eim")
+            set_traits_in_input(self,traits=self.user_info.operparm_traits,prefix="operparm")
 
     def set_edit_mode(self):
         user_name_panel = self.get_child_by_type(PanelUserName)
