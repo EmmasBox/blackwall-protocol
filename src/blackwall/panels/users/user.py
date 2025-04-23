@@ -237,6 +237,8 @@ class PanelUser(VerticalScroll):
             if self.user_info.operparm_traits is not None:
                 set_traits_in_input(self,traits=self.user_info.operparm_traits,prefix="operparm")
 
+            self.set_edit_mode()
+
     def set_edit_mode(self):
         user_name_panel = self.get_child_by_type(PanelUserName)
         user_name_panel.mode = PanelMode.edit
