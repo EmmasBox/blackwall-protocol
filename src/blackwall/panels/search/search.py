@@ -60,7 +60,7 @@ class PanelSearch(VerticalScroll):
                 )
                 self.post_message(OpenTab(f"User: {search_query}",new_user_panel))
 
-                self.notify("user search")
+                self.notify(f"Found user: {search_query}")
         elif search_type == "search_type_group":
             pass
         elif search_type == "search_type_dataset":
