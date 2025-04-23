@@ -174,7 +174,7 @@ class PanelUser(VerticalScroll):
             tso_traits = user.TSOUserTraits.from_dict(prefix="tso",source=user_dict["profile"]["tso"])
             
             set_traits_in_input(self,traits=base_traits,prefix="base")
-            set_traits_in_input(self,traits=tso_traits,prefix="tso")
+            #set_traits_in_input(self,traits=tso_traits,prefix="tso")
 
     def set_edit_mode(self):
         user_name_panel = self.get_child_by_type(PanelUserName)
