@@ -252,7 +252,6 @@ class PanelUser(VerticalScroll):
         result = user.delete_user(username)
         if (result == 0 or result == 4):
             self.notify(f"User {username} deleted, return code: {result}",severity="warning")
-            self.set_edit_mode()
         else:
             self.notify(f"Unable to delete user, return code: {result}",severity="error")
 
