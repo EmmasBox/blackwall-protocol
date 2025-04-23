@@ -37,10 +37,6 @@ class SearchField(HorizontalGroup):
         yield Input(name="Search",id="search_field",classes="search-field")
         yield Button("Search",action="search")
 
-    def on_mount(self) -> None:
-        search_field = self.get_child_by_id("search_field",Input)
-        search_field.focus()
-
     async def action_search(self):
         await self.app.run_action(self.search_action,default_namespace=self.parent)
 
