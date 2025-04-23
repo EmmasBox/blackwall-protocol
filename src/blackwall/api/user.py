@@ -23,9 +23,9 @@ class BaseUserTraits(TraitsBase):
     installation_data: str | None = field(default=None,metadata={"label": "Installation data", "input_args": {"max_length": 255,"classes": "field-long-generic"}})
 
     #user attributes
-    special: bool | None = field(default=None)
-    operations: bool | None = field(default=None)
-    auditor: bool | None = field(default=None)
+    special: bool | None = field(default=None,metadata={"label": "Special"})
+    operations: bool | None = field(default=None,metadata={"label": "Operations"})
+    auditor: bool | None = field(default=None,metadata={"label": "Auditor"})
 
     password: str | None = field(default=None, metadata={
         "masked": True,
