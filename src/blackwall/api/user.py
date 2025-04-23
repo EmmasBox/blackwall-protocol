@@ -303,4 +303,4 @@ def delete_user(username: str):
                     "profile_name": username.upper(),
                 }
             )
-        return result.result["return_codes"]["racf_return_code"]
+        return result.result
