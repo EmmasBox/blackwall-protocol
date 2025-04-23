@@ -172,14 +172,14 @@ class PanelUser(VerticalScroll):
 
     def watch_user_info(self, value: UserInfo):
         if user.user_exists(value.username):
-            pass
-    
-    def on_mount(self) -> None:
-        if user.user_exists(UserInfo.username):
             self.query_exactly_one("#username",Input).value = user_info.username
             set_traits_in_input(self,traits=self.user_info.base_traits,prefix="base")
             set_traits_in_input(self,traits=self.user_info.tso_traits,prefix="tso")
             set_traits_in_input(self,traits=self.user_info.omvs_traits,prefix="omvs")
+    
+    def on_mount(self) -> None:
+        if user.user_exists(UserInfo.username):
+            pass
 
     def set_edit_mode(self):
         user_name_panel = self.get_child_by_type(PanelUserName)
