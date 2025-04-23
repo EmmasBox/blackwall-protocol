@@ -56,7 +56,16 @@ class PanelSearch(VerticalScroll):
             if user.user_exists(username=search_query):
                 new_user_panel = PanelUser()
 
+                user_dict = user.get_user(username=search_query)
+            
+                base_traits = user.BaseUserTraits.from_dict(prefix="base",source=user_dict["profile"]["base"])
+                tso_traits = user.TSOUserTraits.from_dict(prefix="tso",source=user_dict["profile"]["tso"])
+                omvs_traits = user.OMVSUserTraits.from_dict(prefix="omvs",source=user_dict["profile"]["omvs"])
+                
                 new_user_panel.user_info = UserInfo(
+                    base_traits=base_traits,
+                    tso_traits=tso_traits,
+                    omvs_traits=omvs_traits,
                     username=search_query,
                     mode=PanelMode.edit
                 )
