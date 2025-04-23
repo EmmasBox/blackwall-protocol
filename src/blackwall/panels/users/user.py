@@ -148,9 +148,9 @@ class PanelUserActionButtons(HorizontalGroup):
 
 @dataclass
 class UserInfo:
-    base_traits: user.BaseUserTraits
-    tso_traits: user.TSOUserTraits
-    omvs_traits: user.OMVSUserTraits
+    base_traits: user.BaseUserTraits | None = None
+    tso_traits: user.TSOUserTraits | None = None
+    omvs_traits: user.OMVSUserTraits | None = None
     mode: PanelMode = PanelMode.create
     username: str = ""
 
@@ -168,7 +168,7 @@ class PanelUser(VerticalScroll):
         yield PanelUserSegments()
         yield PanelUserActionButtons(save_action="save_user", delete_action="delete_user")
     
-    #user_info: reactive[UserInfo] = reactive(UserInfo())
+    user_info: reactive[UserInfo] = reactive(UserInfo())
 
     def watch_user_info(self, value: UserInfo):
         if user.user_exists(value.username):
@@ -176,10 +176,10 @@ class PanelUser(VerticalScroll):
     
     def on_mount(self) -> None:
         if user.user_exists(UserInfo.username):
-            self.query_exactly_one("#username",Input).value = UserInfo.username
-            set_traits_in_input(self,traits=UserInfo.base_traits,prefix="base")
-            set_traits_in_input(self,traits=UserInfo.tso_traits,prefix="tso")
-            set_traits_in_input(self,traits=UserInfo.omvs_traits,prefix="omvs")
+            self.query_exactly_one("#username",Input).value = user_info.username
+            set_traits_in_input(self,traits=self.user_info.base_traits,prefix="base")
+            set_traits_in_input(self,traits=self.user_info.tso_traits,prefix="tso")
+            set_traits_in_input(self,traits=self.user_info.omvs_traits,prefix="omvs")
 
     def set_edit_mode(self):
         user_name_panel = self.get_child_by_type(PanelUserName)
