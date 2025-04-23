@@ -168,7 +168,7 @@ class PanelUser(VerticalScroll):
         yield PanelUserSegments()
         yield PanelUserActionButtons(save_action="save_user", delete_action="delete_user")
     
-    user_info: reactive[UserInfo] = reactive(UserInfo())
+    #user_info: reactive[UserInfo] = reactive(UserInfo())
 
     def watch_user_info(self, value: UserInfo):
         if user.user_exists(value.username):
