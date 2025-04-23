@@ -170,12 +170,16 @@ class PanelUser(VerticalScroll):
     def watch_user_info(self, value: UserInfo):
         if user.user_exists(value.username):
             user_dict = user.get_user(username=value.username)
-            self.query_exactly_one("#username",Input).value = value.username
+            
             base_traits = user.BaseUserTraits.from_dict(prefix="base",source=user_dict["profile"]["base"])
             tso_traits = user.TSOUserTraits.from_dict(prefix="tso",source=user_dict["profile"]["tso"])
             
-            set_traits_in_input(self,traits=base_traits,prefix="base")
-            #set_traits_in_input(self,traits=tso_traits,prefix="tso")
+            try:
+                self.query_exactly_one("#username",Input).value = value.username
+                set_traits_in_input(self,traits=base_traits,prefix="base")
+                set_traits_in_input(self,traits=tso_traits,prefix="tso")
+            except:
+                pass
 
     def set_edit_mode(self):
         user_name_panel = self.get_child_by_type(PanelUserName)
