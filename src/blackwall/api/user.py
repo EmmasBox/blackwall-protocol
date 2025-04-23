@@ -44,6 +44,9 @@ class BaseUserTraits(TraitsBase):
     class_authorization: str | None = field(default=None,metadata={"label": "Class authorization"})
     universal_access: str | None = field(default=None,metadata={"label": "UACC"})
 
+    model_data_set: str | None = field(default=None,metadata={"label": "Model dataset"})
+    group_data_set_access: str | None = field(default=None,metadata={"label": "Group dataset access"})
+
 @dataclass
 class CICSUserTraits(TraitsBase):
     operator_class: str | None = field(default=None, metadata={"label": "operator class", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
