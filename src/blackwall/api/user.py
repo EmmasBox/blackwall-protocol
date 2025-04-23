@@ -45,7 +45,7 @@ class BaseUserTraits(TraitsBase):
     universal_access: str | None = field(default=None,metadata={"label": "UACC"})
 
     model_data_set: str | None = field(default=None,metadata={"label": "Model dataset"})
-    group_data_set_access: str | None = field(default=None,metadata={"label": "Group dataset access"})
+    group_data_set_access: bool | None = field(default=None,metadata={"label": "Group dataset access"})
 
 @dataclass
 class CICSUserTraits(TraitsBase):
