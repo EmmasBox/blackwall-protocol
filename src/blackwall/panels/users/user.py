@@ -179,7 +179,7 @@ class PanelUser(VerticalScroll):
             self.query_exactly_one("#username",Input).value = self.user_info.username
             set_traits_in_input(self,traits=self.user_info.base_traits,prefix="base")
             #set_traits_in_input(self,traits=self.user_info.tso_traits,prefix="tso")
-            set_traits_in_input(self,traits=self.user_info.omvs_traits,prefix="omvs")
+            #set_traits_in_input(self,traits=self.user_info.omvs_traits,prefix="omvs")
 
     def set_edit_mode(self):
         user_name_panel = self.get_child_by_type(PanelUserName)
