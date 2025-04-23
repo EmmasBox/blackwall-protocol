@@ -7,6 +7,7 @@ from textual.widgets import Button, Input, Label, RadioButton, RadioSet
 from textual.containers import HorizontalGroup, VerticalScroll
 
 from blackwall.messages import OpenTab
+from blackwall.panels.panel_mode import PanelMode
 from blackwall.panels.search.results import PanelResultsMixedType
 from blackwall.panels.users.user import PanelUser, UserInfo
 
@@ -56,7 +57,8 @@ class PanelSearch(VerticalScroll):
                 new_user_panel = PanelUser()
 
                 new_user_panel.user_info = UserInfo(
-                    username=""
+                    username=search_query,
+                    mode=PanelMode.edit
                 )
                 self.post_message(OpenTab(f"User: {search_query}",new_user_panel))
 
