@@ -200,8 +200,11 @@ def user_exists(username: str) -> bool:
     
 def get_user(username: str):
     """Doesn't handle users that don't exist, recommend using user_exists() first"""
-    result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username})
-    return result.result
+    if racfu_enabled:
+        result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username.upper()})
+        return result.result
+    else:
+        return False
 
 def update_user(
         username: str, 
