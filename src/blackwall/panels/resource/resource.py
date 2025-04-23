@@ -4,7 +4,6 @@ from textual.reactive import reactive
 from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, Collapsible
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
-from textual.lazy import Lazy
 
 from blackwall.api import resource
 from blackwall.emoji import get_emoji
@@ -26,7 +25,7 @@ class PanelResourceInstallationData(VerticalGroup):
 
 class PanelResourceSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
-        with Lazy(widget=Collapsible(title="Resource profile segments")):
+        with Collapsible(title="Resource profile segments"):
             yield from generate_trait_section(title="Started task data", prefix="stdata", traits_class=resource.STDATAResourceTraits)
             yield from generate_trait_section(title="ICSF", prefix="icsf", traits_class=resource.ICSFResourceTraits)
             yield from generate_trait_section(title="ICTX", prefix="ictx", traits_class=resource.ICTXResourceTraits)
