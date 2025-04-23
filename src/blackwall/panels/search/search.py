@@ -45,7 +45,7 @@ class PanelSearch(VerticalScroll):
 
     def action_search(self) -> None:
         search_query = self.get_child_by_type(SearchField).get_child_by_id("search_field",Input).value
-        search_type = self.get_child_by_type(SearchSelector).get_child_by_id("type_selector",RadioSet).pressed_button().value
+        search_type = self.get_child_by_type(SearchSelector).get_child_by_id("type_selector",RadioSet).pressed_button.value
         if search_type == "search_type_any":
             results = search_database_query_one(query=search_query, class_name=None,query_types=QueryType.all())
             self.post_message(OpenTab("Results",PanelResultsMixedType(results)))
