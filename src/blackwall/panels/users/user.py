@@ -192,21 +192,50 @@ class PanelUser(VerticalScroll):
         if user.user_exists(self.user_info.username):
             self.query_exactly_one("#username",Input).value = self.user_info.username
             set_traits_in_input(self,traits=self.user_info.base_traits,prefix="base")
-            set_traits_in_input(self,traits=self.user_info.tso_traits,prefix="tso")
-            set_traits_in_input(self,traits=self.user_info.omvs_traits,prefix="omvs")
-            set_traits_in_input(self,traits=self.user_info.cics_traits,prefix="cics")
-            set_traits_in_input(self,traits=self.user_info.mfa_traits,prefix="mfa")
-            set_traits_in_input(self,traits=self.user_info.lang_traits,prefix="language")
-            set_traits_in_input(self,traits=self.user_info.dce_traits,prefix="dce")
-            set_traits_in_input(self,traits=self.user_info.dfp_traits,prefix="dfp")
-            set_traits_in_input(self,traits=self.user_info.netview_traits,prefix="netview")
-            set_traits_in_input(self,traits=self.user_info.lnotes_traits,prefix="lnotes")
-            set_traits_in_input(self,traits=self.user_info.ovm_traits,prefix="ovm")
-            set_traits_in_input(self,traits=self.user_info.nds_traits,prefix="nds")
-            set_traits_in_input(self,traits=self.user_info.workattr_traits,prefix="workattr")
-            set_traits_in_input(self,traits=self.user_info.proxy_traits,prefix="proxy")
-            set_traits_in_input(self,traits=self.user_info.eim_traits,prefix="eim")
-            set_traits_in_input(self,traits=self.user_info.operparm_traits,prefix="operparm")
+            if self.user_info.tso_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.tso_traits,prefix="tso")
+
+            if self.user_info.omvs_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.omvs_traits,prefix="omvs")
+                
+            if self.user_info.cics_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.cics_traits,prefix="cics")
+            
+            if self.user_info.mfa_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.mfa_traits,prefix="mfa")
+
+            if self.user_info.lang_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.lang_traits,prefix="language")
+            
+            if self.user_info.dce_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.dce_traits,prefix="dce")
+
+            if self.user_info.dfp_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.dfp_traits,prefix="dfp")
+
+            if self.user_info.netview_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.netview_traits,prefix="netview")
+
+            if self.user_info.lnotes_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.lnotes_traits,prefix="lnotes")
+
+            if self.user_info.ovm_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.ovm_traits,prefix="ovm")
+
+            if self.user_info.nds_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.nds_traits,prefix="nds")
+
+            if self.user_info.workattr_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.workattr_traits,prefix="workattr")
+
+            if self.user_info.proxy_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.proxy_traits,prefix="proxy")
+
+            if self.user_info.eim_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.eim_traits,prefix="eim")
+            
+            if self.user_info.operparm_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.operparm_traits,prefix="operparm")
 
     def set_edit_mode(self):
         user_name_panel = self.get_child_by_type(PanelUserName)
