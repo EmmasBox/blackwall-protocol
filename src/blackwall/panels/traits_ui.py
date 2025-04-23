@@ -96,14 +96,14 @@ def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
         label = field.metadata.get("label")
         # only show an input field if it is labelled
         if label is not None:
-            input_id = f"{prefix}_{field.name}"
+            input_id = f"#{prefix}_{field.name}"
             field_value = getattr(traits,field.name)
             if (actual_type is str or actual_type is int):
                 if field_value is not None:
-                    widget.get_child_by_id(input_id, Input).value = field_value
+                    widget.query_exactly_one(input_id, Input).value = field_value
             elif actual_type is bool:
                 if field_value is not None:
-                    widget.get_child_by_id(input_id, RadioButton).value = field_value
+                    widget.query_exactly_one(input_id, RadioButton).value = field_value
             elif actual_type == list[str]:
                 collapsible_widget = widget.get_child_by_id(input_id,expect_type=Collapsible)
                 list_widget = collapsible_widget.get_child_by_type(Collapsible.Contents).get_child_by_type(ListView)

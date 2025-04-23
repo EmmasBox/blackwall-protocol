@@ -9,7 +9,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from blackwall.api import user
 from blackwall.panels.panel_mode import PanelMode
 
-from ..traits_ui import generate_trait_section, get_traits_from_input
+from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
 from blackwall.emoji import get_emoji
 
 class PanelUserInfo(HorizontalGroup):
@@ -150,10 +150,6 @@ class PanelUserActionButtons(HorizontalGroup):
 class UserInfo:
     mode: PanelMode = PanelMode.create
     username: str = ""
-    name: str = ""
-    owner: str = ""
-    dfltgrp: str = ""
-    installation_data: str = ""
 
 class PanelUser(VerticalScroll):
     user_info: reactive[UserInfo] = reactive(UserInfo())
@@ -172,10 +168,13 @@ class PanelUser(VerticalScroll):
         yield PanelUserActionButtons(save_action="save_user", delete_action="delete_user")
     
     def watch_user_info(self, value: UserInfo):
-        user_name_panel = self.get_child_by_type(PanelUserName)
-        #valid modes: create, edit, and read
-        user_name_panel.username = value.username
-        user_name_panel.name = value.name
+
+        user_dict = user.get_user(username=value.username)
+        base_traits = user.BaseUserTraits.from_dict(prefix="base",source=user_dict["profile"]["base"])
+        tso_traits = user.TSOUserTraits.from_dict(prefix="tso",source=user_dict["profile"]["tso"])
+        
+        set_traits_in_input(self,traits=base_traits,prefix="base")
+        set_traits_in_input(self,traits=tso_traits,prefix="tso")
 
     def set_edit_mode(self):
         user_name_panel = self.get_child_by_type(PanelUserName)
