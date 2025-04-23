@@ -1,6 +1,7 @@
 #User API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
 from dataclasses import dataclass, field
+from typing import Any
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
@@ -198,7 +199,7 @@ def user_exists(username: str) -> bool:
     else:
         return False
     
-def get_user(username: str):
+def get_user(username: str) -> dict[str, Any]:
     """Doesn't handle users that don't exist, recommend using user_exists() first"""
     if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username.upper()})
