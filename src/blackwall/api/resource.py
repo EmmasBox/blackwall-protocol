@@ -232,7 +232,7 @@ def resource_profile_exists(resource_class: str,resource: str) -> bool:
     """Checks if a general resource profile exists, returns true or false"""
     if racfu_enabled:
         """Checks if a general resource profile exists, returns true or false"""
-        result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource}) # type: ignore
+        result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource.upper()}) # type: ignore
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return False
@@ -241,7 +241,7 @@ def get_resource_profile(resource_class: str,resource: str) -> dict:
     """Returns a dict with information about the resource profile"""
     if racfu_enabled:
         """Doesn't handle general resource profiles that don't exist, recommend using resource_profile_exists() first"""
-        result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource}) # type: ignore
+        result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource.upper()}) # type: ignore
         return result.result
     else:
         return {}
