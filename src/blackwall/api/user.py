@@ -1,7 +1,7 @@
 #User API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
 from dataclasses import dataclass, field
-from typing import Any
+from typing import Any, Tuple
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
@@ -293,7 +293,7 @@ def update_user(
         )
     return result.result["return_codes"]["racf_return_code"]
 
-def delete_user(username: str):
+def delete_user(username: str) -> Tuple[str, int]:
     if racfu_enabled:
         """Deletes a user"""
         result = racfu(
@@ -303,4 +303,6 @@ def delete_user(username: str):
                     "profile_name": username.upper(),
                 }
             )
-        return result.result
+        return result.result["commands"][0]["messages"][0], result.result["return_codes"]["racf_return_code"]
+    else:
+        return "RACFu can't be found", 8

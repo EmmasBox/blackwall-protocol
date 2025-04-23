@@ -249,12 +249,12 @@ class PanelUser(VerticalScroll):
 
     def action_delete_user(self) -> None:
         username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
-        result = user.delete_user(username)
-        return_code = result["return_codes"]["racf_return_code"]
+        message, return_code = user.delete_user(username)
+        
         if (return_code == 0):
             self.notify(f"User {username} deleted, return code: {return_code}",severity="warning")
         else:
-            self.notify(f"{result["commands"][0]}, return code: {return_code}",severity="error")
+            self.notify(f"{message}, return code: {return_code}",severity="error")
 
     def action_save_user(self) -> None:
         username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
