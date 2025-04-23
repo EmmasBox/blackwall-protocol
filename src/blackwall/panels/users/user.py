@@ -1,6 +1,5 @@
 
 from dataclasses import dataclass
-from textual.lazy import Lazy
 from textual.reactive import reactive
 from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, RadioButton, Collapsible, Select
@@ -101,7 +100,7 @@ class PanelUserDatasetsAndUACC(VerticalGroup):
 class PanelUserSegments(VerticalGroup):
     """Component where the user can add segments such as the OMVS segment"""
     def compose(self) -> ComposeResult:
-        with Lazy(widget=Collapsible(title="User segments")):
+        with Collapsible(title="User segments"):
             yield from generate_trait_section(title="TSO", prefix="tso", traits_class=user.TSOUserTraits)
             yield from generate_trait_section(title="OMVS", prefix="omvs", traits_class=user.OMVSUserTraits)
             yield from generate_trait_section(title="Work attributes", prefix="workattr", traits_class=user.WorkattrUserTraits)
