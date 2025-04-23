@@ -61,11 +61,39 @@ class PanelSearch(VerticalScroll):
                 base_traits = user.BaseUserTraits.from_dict(prefix="base",source=user_dict["profile"]["base"])
                 tso_traits = user.TSOUserTraits.from_dict(prefix="tso",source=user_dict["profile"]["tso"])
                 omvs_traits = user.OMVSUserTraits.from_dict(prefix="omvs",source=user_dict["profile"]["omvs"])
+                nds_traits = user.NDSUserTraits.from_dict(prefix="nds",source=user_dict["profile"]["nds"])
+                cics_traits = user.CICSUserTraits.from_dict(prefix="cics",source=user_dict["profile"]["cics"])
+                netview_traits = user.NetviewUserTraits.from_dict(prefix="netview",source=user_dict["profile"]["netview"])
+                mfa_traits = user.MfaUserTraits.from_dict(prefix="mfa",source=user_dict["profile"]["mfa"])
+                eim_traits = user.EIMUserTraits.from_dict(prefix="eim",source=user_dict["profile"]["eim"])
+                workattr_traits = user.WorkattrUserTraits.from_dict(prefix="workattr",source=user_dict["profile"]["workattr"])
+                ovm_traits = user.OvmUserTraits.from_dict(prefix="ovm",source=user_dict["profile"]["ovm"])
+                dce_traits = user.DCEUserTraits.from_dict(prefix="dce",source=user_dict["profile"]["dce"])
+                dfp_traits = user.DFPUserTraits.from_dict(prefix="dfp",source=user_dict["profile"]["dfp"])
+                operparm_traits = user.OperparmUserTraits.from_dict(prefix="operparm",source=user_dict["profile"]["operparm"])
+                proxy_traits = user.ProxyUserTraits.from_dict(prefix="proxy",source=user_dict["profile"]["proxy"])
+                lnotes_traits = user.LnotesUserTraits.from_dict(prefix="lnotes",source=user_dict["profile"]["lnotes"])
+                lang_traits = user.LanguageUserTraits.from_dict(prefix="language",source=user_dict["profile"]["language"])
+                kerb_traits = user.KerbUserTraits.from_dict(prefix="kerb",source=user_dict["profile"]["kerb"])
                 
                 new_user_panel.user_info = UserInfo(
                     base_traits=base_traits,
                     tso_traits=tso_traits,
                     omvs_traits=omvs_traits,
+                    cics_traits=cics_traits,
+                    nds_traits=nds_traits,
+                    netview_traits=netview_traits,
+                    mfa_traits=mfa_traits,
+                    eim_traits=eim_traits,
+                    workattr_traits=workattr_traits,
+                    ovm_traits=ovm_traits,
+                    dce_traits=dce_traits,
+                    dfp_traits=dfp_traits,
+                    operparm_traits=operparm_traits,
+                    proxy_traits=proxy_traits,
+                    lnotes_traits=lnotes_traits,
+                    lang_traits=lang_traits,
+                    kerb_traits=kerb_traits,
                     username=search_query,
                     mode=PanelMode.edit
                 )
