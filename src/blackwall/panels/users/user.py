@@ -148,6 +148,9 @@ class PanelUserActionButtons(HorizontalGroup):
 
 @dataclass
 class UserInfo:
+    base_traits: user.BaseUserTraits
+    tso_traits: user.TSOUserTraits
+    omvs_traits: user.OMVSUserTraits
     mode: PanelMode = PanelMode.create
     username: str = ""
 
@@ -169,17 +172,14 @@ class PanelUser(VerticalScroll):
 
     def watch_user_info(self, value: UserInfo):
         if user.user_exists(value.username):
-            user_dict = user.get_user(username=value.username)
-            
-            base_traits = user.BaseUserTraits.from_dict(prefix="base",source=user_dict["profile"]["base"])
-            tso_traits = user.TSOUserTraits.from_dict(prefix="tso",source=user_dict["profile"]["tso"])
-            
-            try:
-                self.query_exactly_one("#username",Input).value = value.username
-                set_traits_in_input(self,traits=base_traits,prefix="base")
-                set_traits_in_input(self,traits=tso_traits,prefix="tso")
-            except:
-                pass
+            pass
+    
+    def on_mount(self) -> None:
+        if user.user_exists(UserInfo.username):
+            self.query_exactly_one("#username",Input).value = UserInfo.username
+            set_traits_in_input(self,traits=UserInfo.base_traits,prefix="base")
+            set_traits_in_input(self,traits=UserInfo.tso_traits,prefix="tso")
+            set_traits_in_input(self,traits=UserInfo.omvs_traits,prefix="omvs")
 
     def set_edit_mode(self):
         user_name_panel = self.get_child_by_type(PanelUserName)
