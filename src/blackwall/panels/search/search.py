@@ -45,6 +45,10 @@ class PanelSearch(VerticalScroll):
         yield SearchSelector()
         yield SearchField(search_action="search")
 
+    def on_mount(self) -> None:
+        search_field = self.get_child_by_type(SearchField).get_child_by_id("search_field",Input)
+        search_field.focus()
+
     @on(Input.Submitted)
     def action_search(self) -> None:
         search_query = self.get_child_by_type(SearchField).get_child_by_id("search_field",Input).value
