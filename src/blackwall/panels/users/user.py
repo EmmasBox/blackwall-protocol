@@ -254,7 +254,7 @@ class PanelUser(VerticalScroll):
         if (return_code == 0):
             self.notify(f"User {username} deleted, return code: {return_code}",severity="warning")
         else:
-            self.notify(f"{result["commands"]["messages"][0]}, return code: {return_code}",severity="error")
+            self.notify(f"{result["commands"]["messages"]}, return code: {return_code}",severity="error")
 
     def action_save_user(self) -> None:
         username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
