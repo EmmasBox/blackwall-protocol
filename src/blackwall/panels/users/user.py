@@ -172,7 +172,7 @@ class PanelUser(VerticalScroll):
 
     def watch_user_info(self, value: UserInfo):
         if user.user_exists(value.username):
-            self.query_exactly_one("#username",Input).value = user_info.username
+            self.query_exactly_one("#username",Input).value = self.user_info.username
             set_traits_in_input(self,traits=self.user_info.base_traits,prefix="base")
             set_traits_in_input(self,traits=self.user_info.tso_traits,prefix="tso")
             set_traits_in_input(self,traits=self.user_info.omvs_traits,prefix="omvs")
