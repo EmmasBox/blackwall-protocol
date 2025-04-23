@@ -93,10 +93,9 @@ class PanelUserDatasetsAndUACC(VerticalGroup):
         with Collapsible(title="Datasets and UACC"):
             yield Label("UACC:")
             yield Select([("NONE", 1),("READ", 2),("EXECUTE", 3),("UPDATE", 4),("CONTROL", 5),("ALTER", 6)],id="universal_access",value=1,classes="uacc-select")
-            yield Label("model dataset:")
+            yield Label("Model dataset:")
             yield Input(max_length=255,id="base_model_data_set",classes="field-long-generic")
-            yield Label("Group dataset access:")
-            yield Input(max_length=8,id="base_group_data_set_access",classes="field-short-generic")
+            yield RadioButton(id="base_group_data_set_access",classes="generic-checkbox-medium")
 
 class PanelUserSegments(VerticalGroup):
     """Component where the user can add segments such as the OMVS segment"""
