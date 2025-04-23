@@ -34,11 +34,12 @@ class SearchField(HorizontalGroup):
             self.post_message(OpenTab("Results",PanelResultsMixedType(results)))
         elif search_type == "search_type_user":
             if user.user_exists(username=search_query):
-                self.post_message(OpenTab(f"User: {search_query}",PanelUser()))
+                new_user_panel = PanelUser()
 
-                #new_user_panel.user_info = UserInfo(
-                #    username=""
-                #)
+                new_user_panel.user_info = UserInfo(
+                    username=""
+                )
+                self.post_message(OpenTab(f"User: {search_query}",new_user_panel))
         elif search_type == "search_type_group":
             pass
         elif search_type == "search_type_dataset":
