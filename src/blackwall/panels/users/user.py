@@ -248,7 +248,13 @@ class PanelUser(VerticalScroll):
         self.notify("Switched to edit mode",severity="information")
 
     def action_delete_user(self) -> None:
-        pass
+        username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
+        result = user.delete_user(username)
+        if (result == 0 or result == 4):
+            self.notify(f"User {username} deleted, return code: {result}",severity="warning")
+            self.set_edit_mode()
+        else:
+            self.notify(f"Unable to delete user, return code: {result}",severity="error")
 
     def action_save_user(self) -> None:
         username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value

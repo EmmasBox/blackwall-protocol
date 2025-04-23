@@ -300,7 +300,7 @@ def delete_user(username: str):
                 {
                     "operation": "delete", 
                     "admin_type": "user", 
-                    "profile_name": username,
+                    "profile_name": username.upper(),
                 }
             )
         return result.result["return_codes"]["racf_return_code"] == 0
