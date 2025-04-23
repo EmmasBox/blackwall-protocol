@@ -34,7 +34,7 @@ class PanelUserName(HorizontalGroup):
 
     def compose(self) -> ComposeResult:
         yield Label("Username*: ")
-        yield Input(max_length=8,id="username",classes="username",tooltip="Username is what the user uses to log on with, this is required. While very few characters can be used at least 4 character long usernames are recommended to avoid collisions",disabled=self.username_is_disabled).data_bind(value=PanelUserName.username)
+        yield Input(max_length=8,id="username",classes="generic-short-field",tooltip="Username is what the user uses to log on with, this is required. While very few characters can be used at least 4 character long usernames are recommended to avoid collisions",disabled=self.username_is_disabled).data_bind(value=PanelUserName.username)
         yield Label("name: ")
         yield Input(max_length=20,id="base_name",classes="name",tooltip="For personal users this is typically used for names i.e. Song So Mi, for system users it can be the name of the subsystem that it is used for").data_bind(value=PanelUserName.name)
 
@@ -42,9 +42,9 @@ class PanelUserOwnership(HorizontalGroup):
     """Component that contains ownership field and default group"""
     def compose(self) -> ComposeResult:
         yield Label("Owner: ")
-        yield Input(max_length=8,id="base_owner",classes="owner", tooltip="The group or user that owns this user profile. This is required in the RACF database")
+        yield Input(max_length=8,id="base_owner",classes="generic-short-field", tooltip="The group or user that owns this user profile. This is required in the RACF database")
         yield Label("Default group*: ")
-        yield Input(max_length=8,id="base_default_group",classes="owner", tooltip="All users must belong to a group in the RACF database")
+        yield Input(max_length=8,id="base_default_group",classes="generic-short-field", tooltip="All users must belong to a group in the RACF database")
 
 class PanelUserInstalldata(HorizontalGroup):
     """Component that contains install data field"""
