@@ -11,8 +11,8 @@ from blackwall.panels.search.search_backend import search_database_query_one, Qu
 class SearchSelector(HorizontalGroup):
     def compose(self) -> ComposeResult:
         with RadioSet(id="type-selector",classes="search-selector"):
-            yield RadioButton("Any",value=True)
-            yield RadioButton("User")
+            yield RadioButton("Any",value=False,disabled=True)
+            yield RadioButton("User",value=True)
             yield RadioButton("Group")
             yield RadioButton("Dataset profile")
             yield RadioButton("Resource profile")
