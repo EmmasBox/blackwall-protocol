@@ -26,6 +26,23 @@ class SearchSelector(HorizontalGroup):
             yield RadioButton("Only one",value=True)
 
 class SearchField(HorizontalGroup):
+    def __init__(self, search_action: str):
+        super().__init__()
+        self.search_action = search_action
+
+    def compose(self) -> ComposeResult:
+        yield Label("Search:")
+        yield Input(name="Search",id="search_field",classes="search-field")
+        yield Button("Search",action="search")
+
+    async def action_search(self):
+        await self.app.run_action(self.search_action,default_namespace=self.parent)
+
+class PanelSearch(VerticalScroll):
+    def compose(self) -> ComposeResult:
+        yield SearchSelector()
+        yield SearchField(search_action="search")
+
     def action_search(self) -> None:
         search_query = self.get_child_by_id("search_field",Input).value
         search_type = self.get_child_by_type(SearchSelector).get_child_by_id("type_selector",RadioSet).pressed_button
@@ -46,14 +63,3 @@ class SearchField(HorizontalGroup):
             pass
         elif search_type == "search_type_resource":
             pass
-        
-
-    def compose(self) -> ComposeResult:
-        yield Label("Search:")
-        yield Input(name="Search",id="search_field",classes="search-field")
-        yield Button("Search",action="search")
-
-class PanelSearch(VerticalScroll):
-    def compose(self) -> ComposeResult:
-        yield SearchSelector()
-        yield SearchField()
