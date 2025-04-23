@@ -1,6 +1,7 @@
 
 #TODO fix all of this shitty code. Not gonna lie the code below is really bad, but I was in a crunch
 
+from textual import on
 from textual.app import ComposeResult
 from textual.widgets import Button, Input, Label, RadioButton, RadioSet
 from textual.containers import HorizontalGroup, VerticalScroll
@@ -43,6 +44,7 @@ class PanelSearch(VerticalScroll):
         yield SearchSelector()
         yield SearchField(search_action="search")
 
+    @on(Input.Submitted)
     def action_search(self) -> None:
         search_query = self.get_child_by_type(SearchField).get_child_by_id("search_field",Input).value
         search_type = self.get_child_by_type(SearchSelector).get_child_by_id("type_selector",RadioSet).pressed_button.value
