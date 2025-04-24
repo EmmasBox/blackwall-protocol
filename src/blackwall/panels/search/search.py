@@ -63,9 +63,11 @@ class PanelSearch(VerticalScroll):
             
                 base_traits = user.BaseUserTraits.from_dict(prefix="base",source=user_dict["profile"]["base"])
                 tso_traits = user.TSOUserTraits.from_dict(prefix="tso",source=user_dict["profile"]["tso"])
+                nds_traits = user.NDSUserTraits.from_dict(prefix="nds",source=user_dict["profile"]["nds"])
                 new_user_panel.user_info = UserInfo(
                     base_traits=base_traits,
                     tso_traits=tso_traits,
+                    nds_traits=nds_traits,
                     username=search_query,
                     mode=PanelMode.edit
                 )
@@ -79,7 +81,7 @@ class PanelSearch(VerticalScroll):
                     new_user_panel.omvs_traits = user.OMVSUserTraits.from_dict(prefix="omvs",source=user_dict["profile"]["omvs"])
 
                 if "nds" in user_dict:
-                    new_user_panel.nds_traits = user.NDSUserTraits.from_dict(prefix="nds",source=user_dict["profile"]["nds"])
+                    
 
                 if "cics" in user_dict:
                     new_user_panel.cics_traits = user.CICSUserTraits.from_dict(prefix="cics",source=user_dict["profile"]["cics"])
