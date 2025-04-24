@@ -79,8 +79,6 @@ class PanelSearch(VerticalScroll):
 
                 if "omvs" in user_dict:
                     new_user_panel.omvs_traits = user.OMVSUserTraits.from_dict(prefix="omvs",source=user_dict["profile"]["omvs"])
-
-                if "nds" in user_dict:
                     
 
                 if "cics" in user_dict:
