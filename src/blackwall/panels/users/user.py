@@ -46,7 +46,7 @@ class PanelUserOwnership(HorizontalGroup):
         yield Label("Default group*:")
         yield Input(max_length=8,id="base_default_group",classes="field-short-generic", tooltip="All users must belong to a group in the RACF database")
         yield Label("Default group authority:")
-        yield Input(id="default_group_authority",classes="")
+        yield Select([("USE", "USE"),("CREATE", "CREATE"),("CONNECT", "CONNECT"),("JOIN", "JOIN")],id="default_group_authority",value="USE",classes="uacc-select")
 
 class PanelUserInstalldata(HorizontalGroup):
     """Component that contains install data field"""
