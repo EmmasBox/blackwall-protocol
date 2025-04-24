@@ -15,6 +15,23 @@ readme = "README.md"
 license = {file = "LICENSE"}
 keywords = ["RACF", "security", "mainframe", "zos", "TUI"]
 
+classifiers = [    
+    #Application audience and type
+    "Intended Audience :: Security specialists",
+    "Topic :: Security administration :: Administration tool",
+
+    #Status
+    "Development Status :: 4 - Beta",
+
+    #Application environment
+    "Environment :: Console",
+    "Operating System :: IBM :: z/OS :: >=2.5",
+
+    #Supported python versions
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13"
+]
+
 [project.optional-dependencies]
 images = [
   "qrcode>=8.1",
