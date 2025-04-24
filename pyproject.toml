@@ -18,7 +18,7 @@ keywords = ["RACF", "security", "mainframe", "zos", "TUI", "RACFu", "ESM"]
 classifiers = [    
   #Application audience and type
   "Intended Audience :: Security specialists",
-  "Topic :: Security administration :: Administration tool",
+  "Topic :: Security",
 
   #Status
   "Development Status :: 3 - Alpha",
