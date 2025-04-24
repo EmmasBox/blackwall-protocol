@@ -69,14 +69,13 @@ class PanelSearch(VerticalScroll):
                     mode=PanelMode.edit
                 )
 
-                if "tso" in user_dict["profile"]:
-                    new_user_panel.tso_traits = user.TSOUserTraits.from_dict(prefix="tso",source=user_dict["profile"]["tso"])
+                
+                new_user_panel.tso_traits = user.TSOUserTraits.from_dict(prefix="tso",source=user_dict.get(["profile"]["tso"]))
 
                 if "omvs" in user_dict:
                     new_user_panel.omvs_traits = user.OMVSUserTraits.from_dict(prefix="omvs",source=user_dict["profile"]["omvs"])
 
-                if "nds" in user_dict:
-                    new_user_panel.nds_traits = user.NDSUserTraits.from_dict(prefix="nds",source=user_dict["profile"]["nds"])
+                new_user_panel.nds_traits = user.NDSUserTraits.from_dict(prefix="nds",source=user_dict.get(["profile"]["nds"]))
 
                 if "cics" in user_dict:
                     new_user_panel.cics_traits = user.CICSUserTraits.from_dict(prefix="cics",source=user_dict["profile"]["cics"])
