@@ -62,15 +62,16 @@ class PanelSearch(VerticalScroll):
                 
             
                 base_traits = user.BaseUserTraits.from_dict(prefix="base",source=user_dict["profile"]["base"])
-
+                tso_traits = user.TSOUserTraits.from_dict(prefix="tso",source=user_dict["profile"]["tso"])
                 new_user_panel.user_info = UserInfo(
                     base_traits=base_traits,
+                    tso_traits=tso_traits,
                     username=search_query,
                     mode=PanelMode.edit
                 )
 
                 #if 'profile' in user_dict and 'tso' in user_dict['profile']:
-                new_user_panel.tso_traits = user.TSOUserTraits.from_dict(prefix="tso",source=user_dict["profile"]["tso"])
+                
                     #if new_user_panel.tso_traits is None:
                         #self.action_notify("test")
 
