@@ -94,7 +94,7 @@ class PanelUserDatasetsAndUACC(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Collapsible(title="Datasets and UACC"):
             yield Label("UACC:")
-            yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],id="universal_access",value=1,classes="uacc-select")
+            yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],id="universal_access",value="NONE",classes="uacc-select")
             yield Label("Model dataset:")
             yield Input(max_length=255,id="base_model_data_set",classes="field-long-generic")
             yield RadioButton(label="Group dataset access",id="base_group_data_set_access",classes="generic-checkbox-medium")
