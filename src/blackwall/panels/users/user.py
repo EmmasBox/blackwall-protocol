@@ -244,8 +244,8 @@ class PanelUser(VerticalScroll):
             self.set_edit_mode()
 
     def set_edit_mode(self):
-        user_name_panel = self.get_child_by_type(PanelUserName)
-        user_name_panel.mode = PanelMode.edit
+        #user_name_panel = self.get_child_by_type(PanelUserName)
+        #user_name_panel.mode = PanelMode.edit
         self.query_exactly_one("#username",Input).disabled = True
         self.query_exactly_one("#delete",Button).disabled = False
         self.query_exactly_one("#save",Button).label = f"{get_emoji("💾")} Save"
