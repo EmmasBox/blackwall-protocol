@@ -244,7 +244,7 @@ class PanelUser(VerticalScroll):
         user_name_panel.mode = PanelMode.edit
         self.query_exactly_one("#username",Input).disabled = True
         self.query_exactly_one("#delete",Button).disabled = False
-        self.query_exactly_one("#save",Button).label = "Save"
+        self.query_exactly_one("#save",Button).label = f"{get_emoji("💾")} Save"
         self.notify("Switched to edit mode",severity="information")
 
     def action_delete_user(self) -> None:
