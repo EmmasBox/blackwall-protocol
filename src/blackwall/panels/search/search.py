@@ -69,7 +69,7 @@ class PanelSearch(VerticalScroll):
                     mode=PanelMode.edit
                 )
 
-                if "tso" in user_dict["profile"]:
+                if 'profile' in user_dict and 'tso' in user_dict['profile']:
                     new_user_panel.tso_traits = user.TSOUserTraits.from_dict(prefix="tso",source=user_dict["profile"]["tso"])
 
                 if "omvs" in user_dict:
