@@ -13,7 +13,7 @@ authors = [
 ]
 readme = "README.md"
 license = {file = "LICENSE"}
-keywords = ["RACF", "security", "mainframe", "zos", "TUI"]
+keywords = ["RACF", "security", "mainframe", "zos", "TUI", "RACFu", "ESM"]
 
 classifiers = [    
   #Application audience and type
