@@ -71,6 +71,7 @@ class PanelSearch(VerticalScroll):
 
                 if 'profile' in user_dict and 'tso' in user_dict['profile']:
                     new_user_panel.tso_traits = user.TSOUserTraits.from_dict(prefix="tso",source=user_dict["profile"]["tso"])
+                    self.action_notify("test")
 
                 if "omvs" in user_dict:
                     new_user_panel.omvs_traits = user.OMVSUserTraits.from_dict(prefix="omvs",source=user_dict["profile"]["omvs"])
