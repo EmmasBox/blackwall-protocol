@@ -18,7 +18,7 @@ else:
 class BaseUserTraits(TraitsBase):
     #primary
     owner: str | None = field(default=None,metadata={"label": "Owner", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
-    default_group: None = field(default=None,metadata={"label": "Default group", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    default_group: str | None = field(default=None,metadata={"label": "Default group", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
     name: str | None = field(default=None,metadata={"label": "Name", "input_args": {"max_length": 20,"classes": "field-medium-generic"}})
     installation_data: str | None = field(default=None,metadata={"label": "Installation data", "input_args": {"max_length": 255,"classes": "field-long-generic"}})
 
