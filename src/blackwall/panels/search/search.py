@@ -57,9 +57,6 @@ class PanelSearch(VerticalScroll):
                 new_user_panel = PanelUser()
 
                 user_dict = user.get_user(username=search_query)
-
-
-                
             
                 base_traits = user.BaseUserTraits.from_dict(prefix="base",source=user_dict["profile"]["base"])
 
