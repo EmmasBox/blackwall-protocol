@@ -168,6 +168,7 @@ class UserInfo:
     mode: PanelMode = PanelMode.create
     username: str = ""
 
+
 class PanelUser(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield PanelUserInfo()
