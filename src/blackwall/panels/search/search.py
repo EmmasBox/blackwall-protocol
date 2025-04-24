@@ -67,7 +67,7 @@ class PanelSearch(VerticalScroll):
                 new_user_panel.user_info = UserInfo(
                     base_traits=base_traits,
                     tso_traits=tso_traits,
-                    nds_traits=nds_traits,
+                    nds_traits=nds_traits or None,
                     username=search_query,
                     mode=PanelMode.edit
                 )
