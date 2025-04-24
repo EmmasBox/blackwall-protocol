@@ -21,7 +21,7 @@ classifiers = [
     "Topic :: Security administration :: Administration tool",
 
     #Status
-    "Development Status :: 4 - Beta",
+    "Development Status :: 3 - Alpha",
 
     #Application environment
     "Environment :: Console",
