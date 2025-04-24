@@ -41,7 +41,7 @@ class BaseUserTraits(TraitsBase):
     security_category: str | None = field(default=None,metadata={"label": "Security category"})
     security_level: str | None = field(default=None,metadata={"label": "Security level"})
     security_label: str | None = field(default=None,metadata={"label": "Security label"})
-    class_authorization: str | None = field(default=None,metadata={"label": "Class authorization"})
+    class_authorization: str | None = field(default=None)
     universal_access: str | None = field(default=None,metadata={"label": "UACC"})
 
     model_data_set: str | None = field(default=None,metadata={"label": "Model dataset"})
