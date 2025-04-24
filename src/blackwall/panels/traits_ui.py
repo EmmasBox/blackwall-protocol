@@ -60,9 +60,10 @@ def get_traits_from_input[T : TraitsBase](operator: str, widget: Widget, prefix:
             continue
 
         input_id = f"#{prefix}_{field.name}"
-        try:
+        label = field.metadata.get("label")
+        if label is not None:
             field_value = widget.query_exactly_one(input_id).value
-        except ValueError:
+        else:
             field_value = None
 
         if actual_type is str:
