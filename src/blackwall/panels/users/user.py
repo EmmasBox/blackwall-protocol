@@ -132,7 +132,7 @@ class PanelUserActionButtons(HorizontalGroup):
     def __init__(self, save_action: str, delete_action: str):
         super().__init__()
         self.save_action = save_action
-        self.delete_action = deledefault_group_authorityte_action
+        self.delete_action = delete_action
 
     def compose(self) -> ComposeResult:
         if self.edit_mode == PanelMode.create:
