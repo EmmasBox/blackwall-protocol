@@ -45,6 +45,8 @@ class PanelUserOwnership(HorizontalGroup):
         yield Input(max_length=8,id="base_owner",classes="field-short-generic", tooltip="The group or user that owns this user profile. This is required in the RACF database")
         yield Label("Default group*:")
         yield Input(max_length=8,id="base_default_group",classes="field-short-generic", tooltip="All users must belong to a group in the RACF database")
+        yield Label("Default group authority:")
+        yield Input(id="default_group_authority",classes="")
 
 class PanelUserInstalldata(HorizontalGroup):
     """Component that contains install data field"""
@@ -92,7 +94,7 @@ class PanelUserDatasetsAndUACC(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Collapsible(title="Datasets and UACC"):
             yield Label("UACC:")
-            yield Select([("NONE", 1),("READ", 2),("EXECUTE", 3),("UPDATE", 4),("CONTROL", 5),("ALTER", 6)],id="universal_access",value=1,classes="uacc-select")
+            yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],id="universal_access",value=1,classes="uacc-select")
             yield Label("Model dataset:")
             yield Input(max_length=255,id="base_model_data_set",classes="field-long-generic")
             yield RadioButton(label="Group dataset access",id="base_group_data_set_access",classes="generic-checkbox-medium")
@@ -130,7 +132,7 @@ class PanelUserActionButtons(HorizontalGroup):
     def __init__(self, save_action: str, delete_action: str):
         super().__init__()
         self.save_action = save_action
-        self.delete_action = delete_action
+        self.delete_action = deledefault_group_authorityte_action
 
     def compose(self) -> ComposeResult:
         if self.edit_mode == PanelMode.create:
