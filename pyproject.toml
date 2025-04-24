@@ -25,7 +25,7 @@ classifiers = [
 
     #Application environment
     "Environment :: Console",
-    "Operating System :: IBM :: z/OS :: >=2.5",
+    "Operating System :: IBM :: z/OS :: >=v2r5",
 
     #Supported python versions
     "Programming Language :: Python :: 3.12",
