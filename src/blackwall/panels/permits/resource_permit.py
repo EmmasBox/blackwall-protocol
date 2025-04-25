@@ -4,12 +4,12 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 class PanelResourcePermitSearchField(HorizontalGroup):
     def compose(self) -> ComposeResult:
-        yield Input(id="search_permit_field")    
+        yield Input(id="search_permit_field",classes="search-field")    
         yield Button(label="Search")
 
 class PanelResourcePermitCreate(HorizontalGroup):
     def compose(self) -> ComposeResult:
-        yield Input(id="permit_receiver_field",placeholder="User or group to add, update, or remove")    
+        yield Input(id="permit_receiver_field",placeholder="User or group to add, update, or remove",classes="field-short-generic")    
         yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],id="permit_access_selector")
         yield Button(label="Save")
 
