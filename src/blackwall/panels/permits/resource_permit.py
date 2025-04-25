@@ -6,7 +6,7 @@ from blackwall.emoji import get_emoji
 
 class PanelResourcePermitInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
-        yield Label("Use this panel to create, delete, and update permits for general resource profiles")
+        yield Label("Use this panel to create, delete, and update permits for general resource profiles",classes="label-generic")
 
 class PanelResourcePermitSearchField(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -21,7 +21,7 @@ class PanelResourcePermitCreate(HorizontalGroup):
 
 class PanelResourcePermitList(VerticalGroup):
     def compose(self) -> ComposeResult:
-        yield Label("Current permits:")
+        yield Label("Current permits:",classes="label-generic")
         yield DataTable(id="resource_permits_list")
 
 class PanelResourcePermit(VerticalScroll):

@@ -10,6 +10,10 @@
     margin-bottom: 1;
 }
 
+.label-generic {
+    margin: 1;
+}
+
 .field-short-generic {
     width: 16;
     margin-bottom: 1;
