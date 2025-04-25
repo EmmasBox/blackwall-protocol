@@ -80,5 +80,9 @@ class PanelResourcePermit(VerticalScroll):
                 #Adds the entry to the datatable
                 permit_table.add_row(entry_id,id_type,entry_access)
 
+            self.notify("Found profile")
+        else:
+            self.notify("Couldn't find profile")
+
     def action_create(self) -> None:
         pass
