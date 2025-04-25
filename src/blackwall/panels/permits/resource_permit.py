@@ -85,4 +85,9 @@ class PanelResourcePermit(VerticalScroll):
             self.notify("Couldn't find profile")
 
     def action_create(self) -> None:
-        pass
+        search_profile_field_value = self.get_child_by_type(PanelResourcePermitSearchField).get_child_by_id("search_permit_profile",Input).value
+        search_class_field_value = self.get_child_by_type(PanelResourcePermitSearchField).get_child_by_id("search_permit_class",Input).value
+
+        if resource.resource_profile_exists(resource=search_profile_field_value,resource_class=search_class_field_value):
+            pass
+            #resource.update_resource_profile(resource=search_profile_field_value,resource_class=search_class_field_value)
