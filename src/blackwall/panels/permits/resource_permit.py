@@ -10,7 +10,7 @@ class PanelResourcePermitSearchField(HorizontalGroup):
 class PanelResourcePermitCreate(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Input(id="permit_receiver_field",placeholder="ID...",classes="field-short-generic")    
-        yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],id="permit_access_selector")
+        yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],classes="uacc-select",id="permit_access_selector")
         yield Button(label="Save")
 
 class PanelResourcePermitList(VerticalGroup):
