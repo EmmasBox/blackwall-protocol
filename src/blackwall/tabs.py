@@ -4,6 +4,7 @@ from textual.widgets import TabPane, TabbedContent
 from textual.containers import HorizontalGroup
 
 from blackwall.emoji import get_emoji
+from blackwall.panels.permits.resource_permit import PanelResourcePermit
 from .panels.welcome.welcome import PanelWelcome
 from .panels.users.user import PanelUser
 from .panels.search.search import PanelSearch
@@ -35,6 +36,7 @@ class TabSystem(HorizontalGroup):
         ("ctrl+r", "open_resource", "Open resource profile tab"),
         ("ctrl+l", "open_command_output", "Open command output tab"),
         ("ctrl+o", "open_options", "Open RACF options tab"),
+        ("shift+p", "open_resource_permits", "Open resource permits tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
     ]
@@ -94,6 +96,10 @@ class TabSystem(HorizontalGroup):
     def action_open_options(self) -> None:
         """Add a new RACF options tab."""
         self.post_message(OpenTab("RACF options",PanelSetropts()))
+
+    def action_open__resource_permits(self) -> None:
+        """Add a new resource permits tab."""
+        self.post_message(OpenTab("Resource permits",PanelResourcePermit()))
 
     #Remove current tab
     def action_remove(self) -> None:
