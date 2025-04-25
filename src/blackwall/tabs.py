@@ -97,7 +97,7 @@ class TabSystem(HorizontalGroup):
         """Add a new RACF options tab."""
         self.post_message(OpenTab("RACF options",PanelSetropts()))
 
-    def action_open__resource_permits(self) -> None:
+    def action_open_resource_permits(self) -> None:
         """Add a new resource permits tab."""
         self.post_message(OpenTab("Resource permits",PanelResourcePermit()))
 
