@@ -5,7 +5,7 @@ from textual.containers import HorizontalGroup
 
 from blackwall.emoji import get_emoji
 from .panels.welcome.welcome import PanelWelcome
-from .panels.users.user import PanelUser, UserInfo
+from .panels.users.user import PanelUser
 from .panels.search.search import PanelSearch
 from .panels.analysis.analysis import PanelAnalysis
 from .panels.dataset.dataset import PanelDataset
