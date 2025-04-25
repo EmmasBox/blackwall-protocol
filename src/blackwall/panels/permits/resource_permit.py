@@ -4,6 +4,10 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.emoji import get_emoji
 
+PERMIT_COLUMNS = [
+    ("ID", "Type", "Access"),
+]
+
 class PanelResourcePermitInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Use this panel to create, delete, and update permits for general resource profiles",classes="label-generic")
@@ -37,7 +41,12 @@ class PanelResourcePermitCreate(HorizontalGroup):
 class PanelResourcePermitList(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Current permits:",classes="label-generic")
-        yield DataTable(id="resource_permits_list")
+        yield DataTable(id="resource_permits_table")
+
+    def on_mount(self) -> None:
+        permit_table = self.get_child_by_id("resource_permits_table",DataTable)
+        permit_table.zebra_stripes = True
+        permit_table.add_columns(*PERMIT_COLUMNS[0]) 
 
 class PanelResourcePermit(VerticalScroll):
     def compose(self) -> ComposeResult:
