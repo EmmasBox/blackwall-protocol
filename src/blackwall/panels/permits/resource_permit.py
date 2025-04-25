@@ -4,6 +4,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 class PanelResourcePermitSearchField(HorizontalGroup):
     def compose(self) -> ComposeResult:
+        yield Label("Use this panel to create, delete, and update permits for general resource profiles")
         yield Input(id="search_permit_field",classes="search-field")    
         yield Button(label="Search")
 
