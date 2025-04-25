@@ -2,9 +2,12 @@ from textual.app import ComposeResult
 from textual.widgets import Input, Label, Button, Select, DataTable
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
-class PanelResourcePermitSearchField(HorizontalGroup):
+class PanelResourcePermitInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Use this panel to create, delete, and update permits for general resource profiles")
+
+class PanelResourcePermitSearchField(HorizontalGroup):
+    def compose(self) -> ComposeResult:
         yield Input(id="search_permit_field",classes="search-field")    
         yield Button(label="Search")
 
@@ -21,6 +24,7 @@ class PanelResourcePermitList(VerticalGroup):
 
 class PanelResourcePermit(VerticalScroll):
     def compose(self) -> ComposeResult:
+        yield PanelResourcePermitInfo()
         yield PanelResourcePermitSearchField()
         yield PanelResourcePermitCreate()
         yield PanelResourcePermitList()
