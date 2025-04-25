@@ -24,7 +24,7 @@ class PanelResourcePermitSearchField(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Input(id="search_permit_class",placeholder="class...",classes="field-short-generic")
         yield Input(id="search_permit_profile",placeholder="profile name...",classes="search-field")    
-        yield Button(label="Search",id="search_permit_button",action="search")
+        yield Button(label="Get ACL",id="search_permit_button",action="search")
 
     async def action_search(self):
         await self.app.run_action(self.search_action,default_namespace=self.parent)
