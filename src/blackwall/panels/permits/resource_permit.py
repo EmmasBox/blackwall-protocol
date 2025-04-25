@@ -17,7 +17,7 @@ class PanelResourcePermitCreate(HorizontalGroup):
 class PanelResourcePermitList(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Current permits:")
-        yield DataTable()
+        yield DataTable(id="resource_permits_list")
 
 class PanelResourcePermit(VerticalScroll):
     def compose(self) -> ComposeResult:
