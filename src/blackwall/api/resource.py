@@ -246,7 +246,7 @@ def get_resource_profile(resource_class: str, resource: str) -> dict:
     else:
         return {}
     
-def get_resource_acl(resource_class: str, resource: str) -> list[str]:
+def get_resource_acl(resource_class: str, resource: str) -> list[dict]:
     """Returns a string list with the access list of the specified resource"""
     if racfu_enabled:
         """Returns a list of active classes on the system"""
