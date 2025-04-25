@@ -36,7 +36,7 @@ class TabSystem(HorizontalGroup):
         ("ctrl+r", "open_resource", "Open resource profile tab"),
         ("ctrl+l", "open_command_output", "Open command output tab"),
         ("ctrl+o", "open_options", "Open RACF options tab"),
-        ("shift+p", "open_resource_permits", "Open resource permits tab"),
+        ("ctrl+n", "open_resource_permits", "Open resource permits tab"),
         ("r", "remove", "Remove active tab"),
         ("c", "clear", "Clear all tabs"),
     ]
