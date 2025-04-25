@@ -10,7 +10,8 @@ class PanelResourcePermitInfo(HorizontalGroup):
 
 class PanelResourcePermitSearchField(HorizontalGroup):
     def compose(self) -> ComposeResult:
-        yield Input(id="search_permit_field",classes="search-field")    
+        yield Input(id="search_permit_class",placeholder="class...",classes="field-short-generic")
+        yield Input(id="search_permit_profile",placeholder="profile name...",classes="search-field")    
         yield Button(label="Search")
 
 class PanelResourcePermitCreate(HorizontalGroup):
