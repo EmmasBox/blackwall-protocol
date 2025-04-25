@@ -247,7 +247,7 @@ def get_resource_profile(resource_class: str, resource: str) -> dict:
         return {}
     
 def get_resource_acl(resource_class: str, resource: str) -> list[str]:
-    """Returns a string list with all of the active classes on the system"""
+    """Returns a string list with the access list of the specified resource"""
     if racfu_enabled:
         """Returns a list of active classes on the system"""
         result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource.upper(), "class_name": resource_class}) # type: ignore
