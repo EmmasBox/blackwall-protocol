@@ -17,7 +17,6 @@ from .tabs import TabSystem
 from blackwall.settings import get_site_setting, get_user_setting
 from blackwall.messages import SubmitCommand
 from blackwall.submit_command import execute_command
-from blackwall.screens.modal.warning import WarningScreen
 
 import importlib.util
 
