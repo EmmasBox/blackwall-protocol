@@ -14,7 +14,7 @@ class ModalScreen(Screen):
 
     def compose(self) -> ComposeResult:
         yield Grid(
-            Label("Are you sure you want to quit?", id="question"),
+            Label(self.dialog_text, id="question"),
             Button("Confirm", variant="error", id="confirm"),
             Button("Cancel", variant="primary", id="cancel"),
             id="dialog",
@@ -22,6 +22,7 @@ class ModalScreen(Screen):
 
     async def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "confirm":
+            self.app.pop_screen()
             await self.app.run_action(self.confirm_action,default_namespace=self.parent)
         else:
             self.app.pop_screen()
