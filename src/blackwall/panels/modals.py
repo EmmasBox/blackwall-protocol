@@ -9,7 +9,7 @@ def generic_confirmation_modal(self, modal_text: str, confirm_action: str, actio
 
     self.app.push_screen(modal_screen)
 
-def generic_warning_modal(self, modal_text: str, confirm_action: str, action_widget: Widget) -> None:
+def generic_warning_modal(self, modal_text: str) -> None:
     modal_screen = WarningScreen(dialog_text=modal_text)
 
     self.app.push_screen(modal_screen)
