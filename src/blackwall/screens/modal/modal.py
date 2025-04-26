@@ -15,8 +15,8 @@ class ModalScreen(Screen):
     def compose(self) -> ComposeResult:
         yield Grid(
             Label(self.dialog_text, id="question"),
-            Button("Confirm", variant="error", id="confirm"),
-            Button("Cancel", variant="primary", id="cancel"),
+            Button("Confirm", variant="error", id="confirm", classes="modal-buttons"),
+            Button("Cancel", variant="primary", id="cancel", classes="modal-buttons"),
             id="dialog",
         )
 

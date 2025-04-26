@@ -6,6 +6,10 @@
 
 # General
 
+.modal-buttons {
+    width: 100%
+}
+
 ModalScreen {
     align: center middle;
 }
