@@ -9,7 +9,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from blackwall.api import user
 from blackwall.panels.panel_mode import PanelMode
 
-from ..traits_ui import generate_trait_section, get_traits_from_input
+from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
 from blackwall.emoji import get_emoji
 
 class PanelUserInfo(HorizontalGroup):
@@ -23,7 +23,6 @@ class PanelUserInfo(HorizontalGroup):
 class PanelUserName(HorizontalGroup):
     """Username and name components"""
     username: reactive[str] = reactive("")
-    name: reactive[str] = reactive("")
 
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
 
@@ -33,24 +32,27 @@ class PanelUserName(HorizontalGroup):
         username_is_disabled = False
 
     def compose(self) -> ComposeResult:
-        yield Label("Username*: ")
-        yield Input(max_length=8,id="username",classes="username",tooltip="Username is what the user uses to log on with, this is required. While very few characters can be used at least 4 character long usernames are recommended to avoid collisions",disabled=self.username_is_disabled).data_bind(value=PanelUserName.username)
-        yield Label("name: ")
-        yield Input(max_length=20,id="base_name",classes="name",tooltip="For personal users this is typically used for names i.e. Song So Mi, for system users it can be the name of the subsystem that it is used for").data_bind(value=PanelUserName.name)
+        yield Label("Username*:")
+        yield Input(max_length=8,id="username",classes="field-short-generic",tooltip="Username is what the user uses to log on with, this is required. While very few characters can be used at least 4 character long usernames are recommended to avoid collisions",disabled=self.username_is_disabled).data_bind(value=PanelUserName.username)
+        yield Label("name:")
+        yield Input(max_length=20,id="base_name",classes="name",tooltip="For personal users this is typically used for names i.e. Song So Mi, for system users it can be the name of the subsystem that it is used for")
 
 class PanelUserOwnership(HorizontalGroup):
     """Component that contains ownership field and default group"""
     def compose(self) -> ComposeResult:
-        yield Label("Owner: ")
-        yield Input(max_length=8,id="base_owner",classes="owner", tooltip="The group or user that owns this user profile. This is required in the RACF database")
-        yield Label("Default group*: ")
-        yield Input(max_length=8,id="base_default_group",classes="owner", tooltip="All users must belong to a group in the RACF database")
+        yield Label("Owner:")
+        yield Input(max_length=8,id="base_owner",classes="field-short-generic", tooltip="The group or user that owns this user profile. This is required in the RACF database")
+        yield Label("Default group*:")
+        yield Input(max_length=8,id="base_default_group",classes="field-short-generic", tooltip="All users must belong to a group in the RACF database")
+        yield Label("Default group authority:")
+        #yield Input(id="base_default_group_authority",classes="field-short-generic",max_length=8)
+        yield Select([("USE", "USE"),("CREATE", "CREATE"),("CONNECT", "CONNECT"),("JOIN", "JOIN")],id="base_default_group_authority",value="USE",classes="uacc-select")
 
 class PanelUserInstalldata(HorizontalGroup):
     """Component that contains install data field"""
     def compose(self) -> ComposeResult:
         yield Label("Installation data: ")
-        yield Input(max_length=254,id="base_installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a user. You can use installation data to describe whatever you want, such as department or what the user is for")
+        yield Input(max_length=255,id="base_installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a user. You can use installation data to describe whatever you want, such as department or what the user is for")
 
 class PanelUserPassword(VerticalGroup):
     """Change/add password component"""
@@ -71,7 +73,7 @@ class PanelUserPassphrase(VerticalGroup):
 class PanelUserAttributes(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
-        with Lazy(widget=Collapsible(title="User attributes")):
+        with Collapsible(title="User attributes"):
             yield RadioButton("Special",id="base_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option")
             yield RadioButton("Operations",id="base_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards")
             yield RadioButton("Auditor",id="base_auditor")
@@ -79,7 +81,7 @@ class PanelUserAttributes(VerticalGroup):
 class PanelUserLevelAndCategory(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
-        with Lazy(widget=Collapsible(title="Security level and category")):
+        with Collapsible(title="Security level and category"):
             yield Label("Security level:")
             yield Input(max_length=8,id="base_security_level",classes="field-short-generic")
             yield Label("Security category:")
@@ -90,20 +92,19 @@ class PanelUserLevelAndCategory(VerticalGroup):
 class PanelUserDatasetsAndUACC(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
-        with Lazy(widget=Collapsible(title="Datasets and UACC")):
+        with Collapsible(title="Datasets and UACC"):
             yield Label("UACC:")
-            yield Select([("NONE", 1),("READ", 2),("EXECUTE", 3),("UPDATE", 4),("CONTROL", 5),("ALTER", 6)],id="universal_access",value=1,classes="uacc-select")
-            yield Label("model dataset:")
+            yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],id="base_universal_access",value="NONE",classes="uacc-select")
+            yield Label("Model dataset:")
             yield Input(max_length=255,id="base_model_data_set",classes="field-long-generic")
-            yield Label("Group dataset access:")
-            yield Input(max_length=8,id="base_group_data_set_access",classes="field-short-generic")
+            yield RadioButton(label="Group dataset access",id="base_group_data_set_access",classes="generic-checkbox-medium")
 
 class PanelUserSegments(VerticalGroup):
     """Component where the user can add segments such as the OMVS segment"""
     def compose(self) -> ComposeResult:
-        with Lazy(widget=Collapsible(title="User segments")):
+        with Collapsible(title="User segments"):
             yield from generate_trait_section(title="TSO", prefix="tso", traits_class=user.TSOUserTraits)
-            yield from generate_trait_section(title="OMVS", prefix="omvs", traits_class=user.OMVSUserTraits)
+            yield from generate_trait_section(title="OMVS (z/OS Unix)", prefix="omvs", traits_class=user.OMVSUserTraits)
             yield from generate_trait_section(title="Work attributes", prefix="workattr", traits_class=user.WorkattrUserTraits)
             yield from generate_trait_section(title="CICS", prefix="cics", traits_class=user.CICSUserTraits)
             yield from generate_trait_section(title="KERB", prefix="kerb", traits_class=user.KerbUserTraits)
@@ -148,16 +149,29 @@ class PanelUserActionButtons(HorizontalGroup):
 
 @dataclass
 class UserInfo:
+    base_traits: user.BaseUserTraits | None = None
+    tso_traits: user.TSOUserTraits | None = None
+    omvs_traits: user.OMVSUserTraits | None = None
+    cics_traits: user.CICSUserTraits | None = None
+    kerb_traits: user.KerbUserTraits | None = None
+    eim_traits: user.EIMUserTraits | None = None
+    lang_traits: user.LanguageUserTraits | None = None
+    dce_traits: user.DCEUserTraits | None = None
+    dfp_traits: user.DFPUserTraits | None = None
+    nds_traits: user.NDSUserTraits | None = None
+    lnotes_traits: user.LnotesUserTraits | None = None
+    mfa_traits: user.MfaUserTraits | None = None
+    ovm_traits: user.OvmUserTraits | None = None
+    proxy_traits: user.ProxyUserTraits | None = None
+    workattr_traits: user.WorkattrUserTraits | None = None
+    netview_traits: user.NetviewUserTraits | None = None
+    operparm_traits: user.OperparmUserTraits | None = None
+
     mode: PanelMode = PanelMode.create
     username: str = ""
-    name: str = ""
-    owner: str = ""
-    dfltgrp: str = ""
-    installation_data: str = ""
+
 
 class PanelUser(VerticalScroll):
-    user_info: reactive[UserInfo] = reactive(UserInfo())
-
     def compose(self) -> ComposeResult:
         yield PanelUserInfo()
         yield PanelUserName()
@@ -171,22 +185,81 @@ class PanelUser(VerticalScroll):
         yield PanelUserSegments()
         yield PanelUserActionButtons(save_action="save_user", delete_action="delete_user")
     
+    user_info: reactive[UserInfo] = reactive(UserInfo())
+
     def watch_user_info(self, value: UserInfo):
-        user_name_panel = self.get_child_by_type(PanelUserName)
-        #valid modes: create, edit, and read
-        user_name_panel.username = value.username
-        user_name_panel.name = value.name
+        if user.user_exists(value.username):
+            pass
+    
+    def on_mount(self) -> None:
+        if user.user_exists(self.user_info.username):
+            self.query_exactly_one("#username",Input).value = self.user_info.username
+            if self.user_info.base_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.base_traits,prefix="base")
+            
+            if self.user_info.tso_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.tso_traits,prefix="tso")
+
+            if self.user_info.omvs_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.omvs_traits,prefix="omvs")
+                
+            if self.user_info.cics_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.cics_traits,prefix="cics")
+            
+            if self.user_info.mfa_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.mfa_traits,prefix="mfa")
+
+            if self.user_info.lang_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.lang_traits,prefix="language")
+            
+            if self.user_info.dce_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.dce_traits,prefix="dce")
+
+            if self.user_info.dfp_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.dfp_traits,prefix="dfp")
+
+            if self.user_info.netview_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.netview_traits,prefix="netview")
+
+            if self.user_info.lnotes_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.lnotes_traits,prefix="lnotes")
+
+            if self.user_info.ovm_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.ovm_traits,prefix="ovm")
+
+            if self.user_info.nds_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.nds_traits,prefix="nds")
+
+            if self.user_info.workattr_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.workattr_traits,prefix="workattr")
+
+            if self.user_info.proxy_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.proxy_traits,prefix="proxy")
+
+            if self.user_info.eim_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.eim_traits,prefix="eim")
+            
+            if self.user_info.operparm_traits is not None:
+                set_traits_in_input(self,traits=self.user_info.operparm_traits,prefix="operparm")
+
+            self.set_edit_mode()
 
     def set_edit_mode(self):
-        user_name_panel = self.get_child_by_type(PanelUserName)
-        user_name_panel.mode = PanelMode.edit
+        #user_name_panel = self.get_child_by_type(PanelUserName)
+        #user_name_panel.mode = PanelMode.edit
         self.query_exactly_one("#username",Input).disabled = True
         self.query_exactly_one("#delete",Button).disabled = False
-        self.query_exactly_one("#save",Button).label = "Save"
+        self.query_exactly_one("#save",Button).label = f"{get_emoji("💾")} Save"
         self.notify("Switched to edit mode",severity="information")
 
     def action_delete_user(self) -> None:
-        pass
+        username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
+        message, return_code = user.delete_user(username)
+        
+        if (return_code == 0):
+            self.notify(f"User {username} deleted, return code: {return_code}",severity="warning")
+        else:
+            self.notify(f"{message}, return code: {return_code}",severity="error")
 
     def action_save_user(self) -> None:
         username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value

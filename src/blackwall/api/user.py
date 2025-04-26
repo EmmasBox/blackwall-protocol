@@ -1,6 +1,7 @@
 #User API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
 from dataclasses import dataclass, field
+from typing import Any, Tuple
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
@@ -16,15 +17,15 @@ else:
 @dataclass
 class BaseUserTraits(TraitsBase):
     #primary
-    owner: str | None = field(default=None)
-    default_group: None = field(default=None)
-    name: str | None = field(default=None)
-    installation_data: str | None = field(default=None)
+    owner: str | None = field(default=None,metadata={"label": "Owner", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    default_group: str | None = field(default=None,metadata={"label": "Default group", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    name: str | None = field(default=None,metadata={"label": "Name", "input_args": {"max_length": 20,"classes": "field-medium-generic"}})
+    installation_data: str | None = field(default=None,metadata={"label": "Installation data", "input_args": {"max_length": 255,"classes": "field-long-generic"}})
 
     #user attributes
-    special: bool | None = field(default=None)
-    operations: bool | None = field(default=None)
-    auditor: bool | None = field(default=None)
+    special: bool | None = field(default=None,metadata={"label": "Special"})
+    operations: bool | None = field(default=None,metadata={"label": "Operations"})
+    auditor: bool | None = field(default=None,metadata={"label": "Auditor"})
 
     password: str | None = field(default=None, metadata={
         "masked": True,
@@ -36,12 +37,15 @@ class BaseUserTraits(TraitsBase):
         "minimum": 12,
     })
     
-    default_group_authority: str | None = field(default=None)
-    security_category: str | None = field(default=None)
-    security_level: str | None = field(default=None)
-    security_label: str | None = field(default=None)
+    default_group_authority: str | None = field(default=None,metadata={"label": "Default group authority"})
+    security_category: str | None = field(default=None,metadata={"label": "Security category"})
+    security_level: str | None = field(default=None,metadata={"label": "Security level"})
+    security_label: str | None = field(default=None,metadata={"label": "Security label"})
     class_authorization: str | None = field(default=None)
-    universal_access: str | None = field(default=None)
+    universal_access: str | None = field(default=None,metadata={"label": "UACC"})
+
+    model_data_set: str | None = field(default=None,metadata={"label": "Model dataset"})
+    group_data_set_access: bool | None = field(default=None,metadata={"label": "Group dataset access"})
 
 @dataclass
 class CICSUserTraits(TraitsBase):
@@ -198,10 +202,13 @@ def user_exists(username: str) -> bool:
     else:
         return False
     
-def get_user(username: str):
+def get_user(username: str) -> dict[str, Any]:
     """Doesn't handle users that don't exist, recommend using user_exists() first"""
-    result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username})
-    return result.result
+    if racfu_enabled:
+        result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username.upper()})
+        return result.result
+    else:
+        return False
 
 def update_user(
         username: str, 
@@ -286,14 +293,16 @@ def update_user(
         )
     return result.result["return_codes"]["racf_return_code"]
 
-def delete_user(username: str):
+def delete_user(username: str) -> Tuple[str, int]:
     if racfu_enabled:
         """Deletes a user"""
         result = racfu(
                 {
                     "operation": "delete", 
                     "admin_type": "user", 
-                    "profile_name": username,
+                    "profile_name": username.upper(),
                 }
             )
-        return result.result["return_codes"]["racf_return_code"] == 0
+        return result.result["commands"][0]["messages"][0], result.result["return_codes"]["racf_return_code"]
+    else:
+        return "RACFu can't be found", 8

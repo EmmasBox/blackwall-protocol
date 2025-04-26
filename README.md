@@ -42,7 +42,7 @@ Blackwall does not support ACF2 or Top Secret. Users are welcome to fork the cod
 
 #### Python packages
 
-- Textual 3.1.0 or later (for UI)
+- Textual 3.1.1 or later (for UI)
 - [RACFU](https://github.com/ambitus/racfu) (To communicate with RACF)
   - RACFU being a dependency means you need the IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space configured.
 

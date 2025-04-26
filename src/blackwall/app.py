@@ -59,7 +59,7 @@ class Blackwall(App):
             try:
                 self.theme = user_theme
             except ImportError:
-                print("Couldn't find user theme")
+                self.notify("Couldn't find user theme",severity="warning")
         else:
             self.theme = "cynosure"
         self.install_screen(CommandOutputScreen(), name="command_output")

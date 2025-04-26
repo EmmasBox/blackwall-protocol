@@ -4,8 +4,8 @@ description = "Blackwall Protocol for mainframe security administration"
 dynamic = ["version"]
 requires-python = ">=3.12"
 dependencies = [
-  "racfu",
-  "textual>=3.1.0",
+  "racfu==1.0a1",
+  "textual>=3.1.1",
 ]
 authors = [
   {name = "Emma Skovgaard"},
@@ -13,7 +13,24 @@ authors = [
 ]
 readme = "README.md"
 license = {file = "LICENSE"}
-keywords = ["RACF", "security", "mainframe", "zos", "TUI"]
+keywords = ["RACF", "security", "mainframe", "zos", "TUI", "RACFu", "ESM"]
+
+classifiers = [    
+  #Application audience and type
+  "Intended Audience :: Security specialists",
+  "Topic :: Security",
+
+  #Status
+  "Development Status :: 3 - Alpha",
+
+  #Application environment
+  "Environment :: Console",
+  "Operating System :: IBM :: z/OS :: >=v2r5",
+
+  #Supported python versions
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13"
+]
 
 [project.optional-dependencies]
 images = [
@@ -38,7 +55,7 @@ build-backend = "setuptools.build_meta"
 [tool.setuptools_scm]
 
 [tool.setuptools.package-data]
-blackwall = ["*.css", "*.tcss", "*.md"]
+blackwall = ["*.css", "*.tcss", "*.md", "*.png"]
 
 [tool.bandit]
 exclude_dirs = [".github"]

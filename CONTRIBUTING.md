@@ -4,6 +4,7 @@
 - New dependencies should be avoided to keep the program easy to install and vet.
 - Passwords, usernames, IP addresses, ports, and other sensitive system information should be kept out of the code.
 - Please follow the established folder structure. For example, do not put API wrapper code outside of the `api` folder.
+- Tooltips and code should call datasets "dataset" and not "data-set" when possible to keep the code consistent
 
 # Documentation guidelines
 

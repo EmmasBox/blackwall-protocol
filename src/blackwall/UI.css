@@ -10,6 +10,10 @@
     margin-bottom: 1;
 }
 
+.label-generic {
+    margin: 1;
+}
+
 .field-short-generic {
     width: 16;
     margin-bottom: 1;
@@ -106,13 +110,8 @@
 }
 
 # User creation/modification panel
-.username {
-    width: 16;
-    margin-bottom: 1;
-}
-
 .name {
-    width: 32;
+    width: 40;
 }
 
 .password {
@@ -121,11 +120,6 @@
 
 .passphrase {
     width: 200;
-}
-
-.owner {
-    width: 16;
-    margin-bottom: 1;
 }
 
 ToggleButton > .toggle--button {
