@@ -26,6 +26,7 @@ class PanelResourcePermitSearchField(HorizontalGroup):
         yield Input(id="search_permit_profile",placeholder="profile name...",classes="search-field")    
         yield Button(label="Get ACL",id="search_permit_button",action="search")
 
+    @on(Input.Submitted)
     async def action_search(self):
         await self.app.run_action(self.search_action,default_namespace=self.parent)
 
@@ -39,6 +40,7 @@ class PanelResourcePermitCreate(HorizontalGroup):
         yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="READ",classes="uacc-select",id="permit_access_selector")
         yield Button(f"{get_emoji("💾")} Save",id="resource_permit_save",action="update")
 
+    @on(Input.Submitted)
     async def action_create(self):
         await self.app.run_action(self.update_action,default_namespace=self.parent)
 
