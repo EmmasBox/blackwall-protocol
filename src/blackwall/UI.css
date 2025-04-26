@@ -11,12 +11,10 @@
 }
 
 ConfirmationScreen {
-    opacity: 50%;
     align: center middle;
 }
 
 WarningScreen {
-    opacity: 50%;
     align: center middle;
 }
 
