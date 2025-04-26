@@ -5,6 +5,8 @@ from textual.containers import Container
 from textual.signal import Signal
 
 import json
+
+from blackwall.notifications import send_notification
 from .command_line import CommandLine
 from .screens.refresh.refresh import RefreshScreen
 from .theme_cynosure import cynosure_theme
@@ -80,11 +82,7 @@ class Blackwall(App):
                     self.command_output_change.publish(data=self.command_output)
                     self.notify(f"command {message.command.upper()} successfully completed",severity="information")
             except BaseException as e:
-                if get_user_setting(section="notifications",setting="use_modal"):
-                    command_warning_screen = WarningScreen(dialog_text=f"Command {message.command.upper()} failed: {e}")
-                    self.push_screen(command_warning_screen)
-                else:
-                    self.notify(f"Command {message.command.upper()} failed: {e}",severity="error")
+                send_notification(self,message=f"Command {message.command.upper()} failed: {e}",severity="error")
                 
     #UI elements
     def compose(self):
