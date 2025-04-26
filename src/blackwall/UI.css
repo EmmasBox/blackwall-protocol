@@ -12,6 +12,7 @@
 
 ConfirmationScreen {
     align: center middle;
+    background: rgba(0,0,255,0.5);
 }
 
 WarningScreen {
