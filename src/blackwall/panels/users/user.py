@@ -7,6 +7,7 @@ from textual.widgets import Input, Label, Button, RadioButton, Collapsible, Sele
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.api import user
+from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
 
 from blackwall.modals import generic_confirmation_modal
@@ -318,9 +319,9 @@ class PanelUser(VerticalScroll):
                 self.notify(f"User {username} created, return code: {result}",severity="information")
                 self.set_edit_mode()
             else:
-                self.notify(f"Unable to create user, return code: {result}",severity="error")
+                send_notification(self,message=f"Unable to create user, return code: {result}",severity="error")
         else:
             if (result == 0 or result == 4):
                 self.notify(f"User {username} updated, return code: {result}",severity="information")
             else:
-                self.notify(f"Unable to update user, return code: {result}",severity="error")
+                send_notification(self,message=f"Unable to update user, return code: {result}",severity="error")
