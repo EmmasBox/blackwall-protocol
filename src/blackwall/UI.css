@@ -11,6 +11,7 @@
 }
 
 ModalScreen {
+    opacity: 50;
     align: center middle;
 }
 
