@@ -7,6 +7,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.api import group
 from blackwall.emoji import get_emoji
+from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
 
 from ..traits_ui import generate_trait_section, get_traits_from_input
@@ -90,9 +91,9 @@ class PanelGroup(VerticalScroll):
             if (result == 0 or result == 4):
                 self.notify(f"Group {group_name} created, return code: {result}",severity="information")
             else:
-                self.notify(f"Unable to create group, return code: {result}",severity="error")
+                send_notification(self,message=f"Unable to create group, return code: {result}",severity="error")
         else:
-            if (result == 0 or result == 4):
+            if (result == 0):
                 self.notify(f"Group {group_name} updated, return code: {result}",severity="information")
             else:
-                self.notify(f"Unable to update group, return code: {result}",severity="error")
+                send_notification(self,message=f"Unable to update group, return code: {result}",severity="error")
