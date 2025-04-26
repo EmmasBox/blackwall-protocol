@@ -12,7 +12,7 @@ from blackwall.notifications import send_notification
 from blackwall.panels.traits_ui import get_traits_from_input
 
 PERMIT_COLUMNS = [
-    ("Action", "ID", "Type", "Access"),
+    ("ID", "Type", "Access"),
 ]
 
 class PanelResourcePermitInfo(HorizontalGroup):
@@ -84,7 +84,7 @@ class PanelResourcePermit(VerticalScroll):
                     id_type = "user"
                 
                 #Adds the entry to the datatable
-                permit_table.add_row(Button("Delete"),entry_id,id_type,entry_access)
+                permit_table.add_row(entry_id,id_type,entry_access)
             if notification:
                 self.notify(f"Found profile {search_profile_field_value} in class {search_class_field_value}",severity="information")
         else:
