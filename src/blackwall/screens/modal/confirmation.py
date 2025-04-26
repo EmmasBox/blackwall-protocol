@@ -5,8 +5,8 @@ from textual.screen import Screen
 from textual.widgets import Button, Label
 from textual.widget import Widget
 
-class ModalScreen(Screen):
-    """Modal screen"""
+class ConfirmationScreen(Screen):
+    """Modal confirmation screen"""
 
     def __init__(self, dialog_text: str, confirm_action: str,action_widget: Widget):
         super().__init__()

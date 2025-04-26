@@ -10,7 +10,6 @@ from blackwall.api import user
 from blackwall.panels.panel_mode import PanelMode
 
 from blackwall.panels.modals import generic_confirmation_modal
-from blackwall.screens.modal.modal import ModalScreen
 
 from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
 from blackwall.emoji import get_emoji
