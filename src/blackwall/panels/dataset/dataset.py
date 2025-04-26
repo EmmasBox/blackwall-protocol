@@ -6,6 +6,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.reactive import reactive
 
 from blackwall.emoji import get_emoji
+from blackwall.notifications import send_notification
 from blackwall.panels.traits_ui import get_traits_from_input
 
 from blackwall.panels.panel_mode import PanelMode
@@ -143,12 +144,12 @@ class PanelDataset(VerticalScroll):
                 self.notify(f"Dataset profile {dataset_name} created, return code: {result}",severity="information")
                 #self.set_edit_mode()
             else:
-                self.notify(f"Unable to create dataset profile, return code: {result}",severity="error")
+                send_notification(self,message=f"Unable to create dataset profile, return code: {result}",severity="error")
         else:
             if (result == 0 or result == 4):
                 self.notify(f"Dataset profile {dataset_name} updated, return code: {result}",severity="information")
             else:
-                self.notify(f"Unable to update dataset profile, return code: {result}",severity="error")
+                send_notification(self,message=f"Unable to update dataset profile, return code: {result}",severity="error")
 
     def action_delete_dataset_profile(self) -> None:
         pass
