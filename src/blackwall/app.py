@@ -6,7 +6,6 @@ from textual.signal import Signal
 
 import json
 from .command_line import CommandLine
-from .screens.command_output.command_output import CommandOutputScreen
 from .screens.refresh.refresh import RefreshScreen
 from .theme_cynosure import cynosure_theme
 from .theme_3270 import ibm_3270_theme
@@ -39,7 +38,6 @@ class Blackwall(App):
     CSS_PATH = "UI.css"
 
     BINDINGS = [
-        ("h", "push_screen('command_output')", "Switch to command output screen"),
         ("ctrl+i", "push_screen('refresh')", "Switch to refresh screen"),
         ("ctrl+home", "go_to_cli", "Focus command line")
     ]
@@ -62,7 +60,6 @@ class Blackwall(App):
                 self.notify("Couldn't find user theme",severity="warning")
         else:
             self.theme = "cynosure"
-        self.install_screen(CommandOutputScreen(), name="command_output")
         self.install_screen(RefreshScreen(), name="refresh")
         self.command_output_change = Signal(self,name="command_output_change")
         self.command_output = ""
