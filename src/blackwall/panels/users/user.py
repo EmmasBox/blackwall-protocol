@@ -254,8 +254,6 @@ class PanelUser(VerticalScroll):
         self.query_exactly_one("#save",Button).label = f"{get_emoji("💾")} Save"
         self.notify("Switched to edit mode",severity="information")
 
-    ConfirmDeleteScreen = ModalScreen(dialog_text="Are you sure you want to delete this user?",confirm_action="delete_user_api")
-
     def action_delete_user_api(self):
         username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
         if user.user_exists(username=username):
@@ -267,7 +265,9 @@ class PanelUser(VerticalScroll):
                 self.notify(f"{message}, return code: {return_code}",severity="error")
 
     def action_delete_user(self) -> None:
-        self.app.push_screen(self.ConfirmDeleteScreen)
+        confirm_delete_screen = ModalScreen(dialog_text="Are you sure you want to delete this user?",confirm_action="delete_user_api",action_widget=self)
+
+        self.app.push_screen(confirm_delete_screen)
 
     def action_save_user(self) -> None:
         username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
