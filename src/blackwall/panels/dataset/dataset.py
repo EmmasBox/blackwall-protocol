@@ -146,7 +146,7 @@ class PanelDataset(VerticalScroll):
             else:
                 send_notification(self,message=f"Unable to create dataset profile, return code: {result}",severity="error")
         else:
-            if (result == 0 or result == 4):
+            if result == 0:
                 self.notify(f"Dataset profile {dataset_name} updated, return code: {result}",severity="information")
             else:
                 send_notification(self,message=f"Unable to update dataset profile, return code: {result}",severity="error")
