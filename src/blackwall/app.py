@@ -15,6 +15,7 @@ from .tabs import TabSystem
 from blackwall.settings import get_site_setting, get_user_setting
 from blackwall.messages import SubmitCommand
 from blackwall.submit_command import execute_command
+from blackwall.screens.warning.warning import WarningScreen
 
 import importlib.util
 
@@ -79,7 +80,11 @@ class Blackwall(App):
                     self.command_output_change.publish(data=self.command_output)
                     self.notify(f"command {message.command.upper()} successfully completed",severity="information")
             except BaseException as e:
-                self.notify(f"Command {message.command.upper()} failed: {e}",severity="error")
+                if get_user_setting(section="notifications",setting="use_modal"):
+                    command_warning_screen = WarningScreen(dialog_text=f"Command {message.command.upper()} failed: {e}")
+                    self.push_screen(command_warning_screen)
+                else:
+                    self.notify(f"Command {message.command.upper()} failed: {e}",severity="error")
                 
     #UI elements
     def compose(self):
