@@ -68,9 +68,9 @@ class PanelResourcePermit(VerticalScroll):
         
         if resource.resource_profile_exists(resource=search_profile_field_value,resource_class=search_class_field_value):
             resource_acl = resource.get_resource_acl(resource=search_profile_field_value,resource_class=search_class_field_value)
+            permit_table.clear(columns=False)
 
             for entry in resource_acl:
-                permit_table.clear(columns=False)
                 entry_id = entry["base:access_id"]
                 entry_access = entry["base:access_type"]
 
