@@ -12,11 +12,12 @@
 
 ConfirmationScreen {
     align: center middle;
-    background: rgba(0,0,255,0.5);
+    background: rgba(45, 45, 45, 0.75);
 }
 
 WarningScreen {
     align: center middle;
+    background: rgba(45, 45, 45, 0.75);
 }
 
 #dialog {
