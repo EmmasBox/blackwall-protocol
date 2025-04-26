@@ -315,7 +315,7 @@ class PanelUser(VerticalScroll):
         )
 
         if not user_exists:
-            if (result == 0 or result == 4):
+            if result == 0:
                 self.notify(f"User {username} created, return code: {result}",severity="information")
                 self.set_edit_mode()
             else:
