@@ -22,7 +22,7 @@ class ModalScreen(Screen):
 
     async def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "confirm":
-            await self.app.pop_screen()
+            self.app.pop_screen()
             await self.app.run_action(self.confirm_action,default_namespace=self.parent)
         else:
-            await self.app.pop_screen()
+            self.app.pop_screen()
