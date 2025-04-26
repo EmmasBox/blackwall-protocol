@@ -315,13 +315,13 @@ class PanelUser(VerticalScroll):
         )
 
         if not user_exists:
-            if result == 0:
+            if (result == 0 or result == 4):
                 self.notify(f"User {username} created, return code: {result}",severity="information")
                 self.set_edit_mode()
             else:
                 send_notification(self,message=f"Unable to create user, return code: {result}",severity="error")
         else:
-            if (result == 0 or result == 4):
+            if result == 0:
                 self.notify(f"User {username} updated, return code: {result}",severity="information")
             else:
                 send_notification(self,message=f"Unable to update user, return code: {result}",severity="error")
