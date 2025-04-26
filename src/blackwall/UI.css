@@ -10,12 +10,13 @@
     width: 100%
 }
 
-ModalScreen {
-    opacity: 50;
+ConfirmationScreen {
+    opacity: 50%;
     align: center middle;
 }
 
 WarningScreen {
+    opacity: 50%;
     align: center middle;
 }
 
