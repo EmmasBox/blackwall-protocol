@@ -9,6 +9,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from blackwall.api import user
 from blackwall.panels.panel_mode import PanelMode
 
+from blackwall.panels.confirmation_modal import generic_modal
 from blackwall.screens.modal.modal import ModalScreen
 
 from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
@@ -265,9 +266,7 @@ class PanelUser(VerticalScroll):
                 self.notify(f"{message}, return code: {return_code}",severity="error")
 
     def action_delete_user(self) -> None:
-        confirm_delete_screen = ModalScreen(dialog_text="Are you sure you want to delete this user?",confirm_action="delete_user_api",action_widget=self)
-
-        self.app.push_screen(confirm_delete_screen)
+        generic_modal(self,modal_text="Are you sure you want to delete this user?",confirm_action="delete_user_api",action_widget=self)
 
     def action_save_user(self) -> None:
         username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
