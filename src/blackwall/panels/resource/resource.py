@@ -7,6 +7,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.api import resource
 from blackwall.emoji import get_emoji
+from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
 
 from ..traits_ui import generate_trait_section, get_traits_from_input
@@ -136,12 +137,12 @@ class PanelResource(VerticalScroll):
                 self.notify(f"General resource profile {resource_profile_name} created, return code: {result}",severity="information")
                 #self.set_edit_mode()
             else:
-                self.notify(f"Unable to create general resource profile, return code: {result}",severity="error")
+                send_notification(self,message=f"Unable to create general resource profile, return code: {result}",severity="error")
         else:
-            if (result == 0 or result == 4):
+            if result == 0:
                 self.notify(f"General resource profile {resource_profile_name} updated, return code: {result}",severity="information")
             else:
-                self.notify(f"Unable to update general resource profile, return code: {result}",severity="error")
+                send_notification(self,message=f"Unable to update general resource profile, return code: {result}",severity="error")
 
     def action_delete_resource_profile(self) -> None:
         pass
