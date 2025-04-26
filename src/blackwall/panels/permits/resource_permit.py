@@ -36,8 +36,8 @@ class PanelResourcePermitCreate(HorizontalGroup):
         self.update_action = update_action
     
     def compose(self) -> ComposeResult:
-        yield Input(id="permit_receiver_field",placeholder="ID...",classes="field-short-generic", tooltip="User ID or group ID you want this permit change to affect")    
         yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="READ",classes="uacc-select",id="permit_access_selector")
+        yield Input(id="permit_receiver_field",placeholder="ID...",classes="field-short-generic", tooltip="User ID or group ID you want this permit change to affect")    
         yield Button(f"{get_emoji("💾")} Save",id="resource_permit_save",action="update")
 
     @on(Input.Submitted)
