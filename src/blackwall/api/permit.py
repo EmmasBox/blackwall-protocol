@@ -54,7 +54,7 @@ def update_resource_permit(profile: str ,class_name: str, racf_id: str, base: Ba
     if racfu_enabled:
         traits = base.to_traits(prefix="base")
 
-        result = racfu({"operation": "alter", "admin_type": "permission", "resource": profile.upper(), "class": class_name.upper(), "userid": racf_id.upper(), "traits":  traits})
+        result = racfu({"operation": "alter", "admin_type": "permission", "resource": profile.upper(), "class_name": class_name.upper(), "userid": racf_id.upper(), "traits":  traits})
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return 8
@@ -62,7 +62,7 @@ def update_resource_permit(profile: str ,class_name: str, racf_id: str, base: Ba
 def delete_resource_permit(profile: str, class_name: str, racf_id: str) -> int:
     """Deletes a general resource profile permit"""
     if racfu_enabled:
-        result = racfu({"operation": "delete", "admin_type": "permission", "resource": profile.upper(), "class": class_name.upper(), "userid": racf_id.upper()})
+        result = racfu({"operation": "delete", "admin_type": "permission", "resource": profile.upper(), "class_name": class_name.upper(), "userid": racf_id.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return 8
