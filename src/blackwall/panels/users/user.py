@@ -9,6 +9,8 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from blackwall.api import user
 from blackwall.panels.panel_mode import PanelMode
 
+from blackwall.screens.modal.modal import ModalScreen
+
 from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
 from blackwall.emoji import get_emoji
 
@@ -252,14 +254,20 @@ class PanelUser(VerticalScroll):
         self.query_exactly_one("#save",Button).label = f"{get_emoji("💾")} Save"
         self.notify("Switched to edit mode",severity="information")
 
-    def action_delete_user(self) -> None:
+    ConfirmDeleteScreen = ModalScreen(dialog_text="Are you sure you want to delete this user?",confirm_action="delete_user_api")
+
+    def action_delete_user_api(self):
         username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
-        message, return_code = user.delete_user(username)
-        
-        if (return_code == 0):
-            self.notify(f"User {username} deleted, return code: {return_code}",severity="warning")
-        else:
-            self.notify(f"{message}, return code: {return_code}",severity="error")
+        if user.user_exists(username=username):
+            message, return_code = user.delete_user(username)
+            
+            if (return_code == 0):
+                self.notify(f"User {username} deleted, return code: {return_code}",severity="warning")
+            else:
+                self.notify(f"{message}, return code: {return_code}",severity="error")
+
+    def action_delete_user(self) -> None:
+        self.app.push_screen(self.ConfirmDeleteScreen)
 
     def action_save_user(self) -> None:
         username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
