@@ -8,6 +8,7 @@ from blackwall.emoji import get_emoji
 from blackwall.api import resource
 from blackwall.api import group
 from blackwall.api import permit
+from blackwall.notifications import send_notification
 from blackwall.panels.traits_ui import get_traits_from_input
 
 PERMIT_COLUMNS = [
@@ -109,4 +110,5 @@ class PanelResourcePermit(VerticalScroll):
             if return_code == 0:
                 self.notify("Created permit",severity="information")
             else:
-                self.notify(f"Couldn't create permit, return code: {return_code}",severity="error")
+                send_notification(self,message=f"Couldn't create permit, return code: {return_code}",severity="error")
+                
