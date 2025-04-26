@@ -9,7 +9,7 @@ from blackwall.api import resource
 from blackwall.api import group
 
 PERMIT_COLUMNS = [
-    ("ID", "Type", "Access"),
+    ("Action", "ID", "Type", "Access"),
 ]
 
 class PanelResourcePermitInfo(HorizontalGroup):
@@ -81,7 +81,7 @@ class PanelResourcePermit(VerticalScroll):
                     id_type = "user"
                 
                 #Adds the entry to the datatable
-                permit_table.add_row(entry_id,id_type,entry_access)
+                permit_table.add_row("",entry_id,id_type,entry_access)
 
             self.notify("Found profile")
         else:
