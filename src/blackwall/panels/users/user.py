@@ -9,7 +9,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from blackwall.api import user
 from blackwall.panels.panel_mode import PanelMode
 
-from blackwall.panels.confirmation_modal import generic_modal
+from blackwall.panels.modals import generic_modal
 from blackwall.screens.modal.modal import ModalScreen
 
 from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
