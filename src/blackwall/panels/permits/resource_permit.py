@@ -93,7 +93,7 @@ class PanelResourcePermit(VerticalScroll):
     def action_search(self) -> None:
         self.get_acl(notification=True)
 
-    def action_create(self) -> None:
+    def action_update(self) -> None:
         search_profile_field_value = self.get_child_by_type(PanelResourcePermitSearchField).get_child_by_id("search_permit_profile",Input).value
         search_class_field_value = self.get_child_by_type(PanelResourcePermitSearchField).get_child_by_id("search_permit_class",Input).value
 
