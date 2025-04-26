@@ -102,8 +102,11 @@ class PanelResourcePermit(VerticalScroll):
         if resource.resource_profile_exists(resource=search_profile_field_value,resource_class=search_class_field_value):
             base_segment = get_traits_from_input("alter", self, prefix="base", trait_cls=permit.BasePermitTraits)
 
-            permit.update_resource_permit(profile=search_profile_field_value,class_name=search_class_field_value,racf_id=racf_id_field_value,base=base_segment)
+            return_code = permit.update_resource_permit(profile=search_profile_field_value,class_name=search_class_field_value,racf_id=racf_id_field_value,base=base_segment)
 
             self.get_acl(notification=False)
 
-            self.notify("Created permit",severity="information")
+            if return_code == 0:
+                self.notify("Created permit",severity="information")
+            else:
+                self.notify(f"Couldn't create permit, return code: {return_code}",severity="error")
