@@ -15,10 +15,10 @@ else:
 
 @dataclass
 class BaseGroupTraits(TraitsBase):
-    owner: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    installation_data: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    data_set_model: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    superior_group: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    owner: str | None = field(default=None,metadata={"label": "Owner", "allowed_in": {"add","alter","extract"}})
+    installation_data: str | None = field(default=None,metadata={"label": "Intallation data", "allowed_in": {"add","alter","extract"}})
+    data_set_model: str | None = field(default=None,metadata={"label": "Dataset model", "allowed_in": {"add","alter","extract"}})
+    superior_group: str | None = field(default=None,metadata={"label": "Superior group","allowed_in": {"add","alter","extract"}})
     terminal_universal_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     universal: str | None = field(default=None,metadata={"allowed_in": {"add","extract"}})
     subgroups: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})

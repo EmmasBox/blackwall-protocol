@@ -80,7 +80,6 @@ class PanelGroup(VerticalScroll):
             self.query_exactly_one("#group_name",Input).value = self.group_info.group_name
             if self.group_info.base_traits is not None:
                 set_traits_in_input(self,traits=self.group_info.base_traits,prefix="base")
-                self.notify("test")
             
             if self.group_info.dfp_traits is not None:
                 set_traits_in_input(self,traits=self.group_info.dfp_traits,prefix="dfp")
