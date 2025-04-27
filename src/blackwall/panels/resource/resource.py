@@ -13,6 +13,15 @@ from blackwall.panels.panel_mode import PanelMode
 
 from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
 
+class PanelResourceInfo(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Creation date:",classes="date-labels")
+        yield Input(id="base_create_date",disabled=True,classes="date-fields")
+        yield Label("Last change date:",classes="date-labels")
+        yield Input(id="base_last_change_date",disabled=True,classes="date-fields")
+        yield Label("Last reference time:",classes="date-labels")
+        yield Input(id="base_last_reference_date",disabled=True,classes="date-fields")
+
 class PanelResourceNameAndClass(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Profile name:")
@@ -21,7 +30,6 @@ class PanelResourceNameAndClass(VerticalGroup):
         yield Input(max_length=8,id="resource_profile_class",classes="class-field")
         yield Label("Owner:")
         yield Input(max_length=8,id="base_owner",classes="class-field")
-
 
 class PanelResourceInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -105,6 +113,7 @@ class ResourceInfo:
 
 class PanelResource(VerticalScroll):
     def compose(self) -> ComposeResult:
+        yield PanelResourceInfo()
         yield PanelResourceNameAndClass()
         yield PanelResourceInstallationData()
         yield PanelResourceAccess()
