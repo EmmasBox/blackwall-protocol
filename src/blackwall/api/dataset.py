@@ -43,7 +43,7 @@ class BaseDatasetTraits(TraitsBase):
     security_level: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     racf_indicated_dataset: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     create_only_tape_vtoc_entry: str | None = field(default=None,metadata={"allowed_in": {"add"}})
-    universal_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    universal_access: str | None = field(default=None,metadata={"label": "UACC", "allowed_in": {"add","alter"}})
     data_set_allocation_unit: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     volume: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     warn_on_insufficient_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
