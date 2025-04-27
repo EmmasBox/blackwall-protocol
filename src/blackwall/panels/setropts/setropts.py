@@ -6,6 +6,7 @@ from textual.widgets import Button, Label
 from textual.containers import VerticalGroup, VerticalScroll
 
 from blackwall.api.setropts import BaseSetroptsTraits, get_racf_options
+from blackwall.emoji import get_emoji
 from blackwall.panels.traits_ui import generate_trait_inputs, set_traits_in_input, toggle_inputs
 from blackwall.panels.panel_mode import PanelMode
 
@@ -59,7 +60,7 @@ class PanelSetroptsFields(VerticalGroup):
 class PanelSetroptsActionButtons(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Changing system settings can be dangerous")
-        yield Button("Save",variant="warning",classes="action-button")
+        yield Button(f"{get_emoji("💾")} Save",variant="warning",classes="action-button")
 
 class PanelSetropts(VerticalScroll):
     setropts_info: reactive[SetroptsInfo] = reactive(SetroptsInfo())
