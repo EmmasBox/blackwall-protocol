@@ -7,6 +7,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.api import group
 from blackwall.emoji import get_emoji
+from blackwall.modals import generic_confirmation_modal
 from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
 
@@ -84,15 +85,19 @@ class PanelGroup(VerticalScroll):
             if self.group_info.dfp_traits is not None:
                 set_traits_in_input(self,traits=self.group_info.dfp_traits,prefix="dfp")
 
-    def action_delete_group(self) -> None:
+    def action_delete_group_api(self) -> None:
         group_name = self.get_child_by_type(PanelGroupNameAndSubgroup).get_child_by_id("group_name",Input).value
         if group.group_exists(group_name):
             message, return_code = group.delete_group(group=group_name)
             
             if (return_code == 0):
-                self.notify(f"User {username} deleted, return code: {return_code}",severity="warning")
+                self.notify(f"Group {group_name} deleted, return code: {return_code}",severity="warning")
             else:
                 self.notify(f"{message}, return code: {return_code}",severity="error")
+
+    def action_delete_group(self) -> None:
+        group_name = self.get_child_by_type(PanelGroupNameAndSubgroup).get_child_by_id("group_name",Input).value
+        generic_confirmation_modal(self,modal_text=f"Are you sure you want to delete group {group_name}?",confirm_action="delete_group_api",action_widget=self)
 
     def action_save_group(self) -> None:
         group_name = self.get_child_by_type(PanelGroupNameAndSubgroup).get_child_by_id("group_name",Input).value
