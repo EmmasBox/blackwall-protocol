@@ -47,7 +47,7 @@ class BaseSetroptsTraits(TraitsBase):
     protect_all_data_sets: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     password_encryption_algorithm: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     refresh: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
-    tape_data_set_security_retention_period: int | None = field(default=None,metadata={"label": "Tape dataset security retention period","allowed_in": {"alter","extract"}})
+    tape_data_set_security_retention_period: int | None = field(default=None,metadata={"label": "Tape dataset security retention period","allowed_in": {"alter","extract"},"input_args": {"classes": "field-medium-generic"}})
     max_incorrect_password_attempts: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     rvary_status_password_format: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     rvary_status_password: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
