@@ -143,4 +143,4 @@ def update_racf_options(base: BaseSetroptsTraits):
                 "traits":  traits
             }
         )
-        return result.result["commands"][0]["messages"][0], result.result["return_codes"]["racf_return_code"] # type: ignore
+        return result.result, result.result["return_codes"]["racf_return_code"] # type: ignore
