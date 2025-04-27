@@ -49,7 +49,7 @@ RefreshScreen {
     grid-rows: 1fr 3;
     padding: 0 1;
     width: 60;
-    height: 11;
+    height: 14;
     border: thick $background 80%;
     background: $surface;
 }
