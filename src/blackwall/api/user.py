@@ -47,6 +47,10 @@ class BaseUserTraits(TraitsBase):
     model_data_set: str | None = field(default=None,metadata={"label": "Model dataset"})
     group_data_set_access: bool | None = field(default=None,metadata={"label": "Group dataset access"})
 
+    create_date: str | None = field(default=None,metadata={"label": "Create date","allowed_in": {"extract"}})
+    last_access_date: str | None = field(default=None,metadata={"label": "Last access date","allowed_in": {"extract"}})
+    last_access_time: str | None = field(default=None,metadata={"label": "Last access time","allowed_in": {"extract"}})
+
 @dataclass
 class CICSUserTraits(TraitsBase):
     operator_class: str | None = field(default=None, metadata={"label": "operator class", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
