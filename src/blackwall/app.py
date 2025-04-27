@@ -90,7 +90,10 @@ class Blackwall(App):
         if zoau_enabled:
             system_label = get_user_setting(section="display",setting="system_label")
             if system_label is not False:
-                yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}",classes="system-label")
+                if get_user_setting(section="display",setting="short_system_label"):
+                    yield Label(f"System: {system_name} LPAR: {lpar_name}",classes="system-label")
+                else:
+                    yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}",classes="system-label")
         yield CommandLine()
         with Container():
             yield TabSystem()
