@@ -66,22 +66,22 @@ class BaseSetroptsTraits(TraitsBase):
     
 
     #Bools
-    add_creator_to_access_list: bool | None = field(default=None,metadata={"label": "Add creator to access list", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
+    #add_creator_to_access_list: bool | None = field(default=None,metadata={"label": "Add creator to access list", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     #Note type in documentation wrong
-    automatic_data_set_protection: bool | None = field(default=None,metadata={"label": "Automatic dataset protection", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
+    #automatic_data_set_protection: bool | None = field(default=None,metadata={"label": "Automatic dataset protection", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     security_label_compatibility_mode: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     program_control: bool | None = field(default=None,metadata={"label": "Program control", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     tape_data_set_protection: bool | None = field(default=None,metadata={"label": "Tape dataset protection","allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
-    erase_data_sets_on_delete: bool | None = field(default=None,metadata={"label": "Erase datasets on deletion","allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
+    #erase_data_sets_on_delete: bool | None = field(default=None,metadata={"label": "Erase datasets on deletion","allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     log_real_data_set_name: bool | None = field(default=None,metadata={"label": "Log real dataset names", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     log_operator_actions: bool | None = field(default=None,metadata={"label": "Log operator actions","allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     security_label_auditing: bool | None = field(default=None,metadata={"label": "Security label auditing", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     security_label_system: bool | None = field(default=None,metadata={"label": "Security label system", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     security_label_control: bool | None = field(default=None,metadata={"label": "Security label control", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
-    record_user_verification_statistics: bool | None = field(default=None,metadata={"label": "Record user verification statistics", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
+    #record_user_verification_statistics: bool | None = field(default=None,metadata={"label": "Record user verification statistics", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     password_rules: bool | None = field(default=None,metadata={"label": "Password rules", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     mixed_case_password_support: bool | None = field(default=None,metadata={"label": "Mixed case password support", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
-    special_character_password_support: bool | None = field(default=None,metadata={"label": "Special character password support", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
+    #special_character_password_support: bool | None = field(default=None,metadata={"label": "Special character password support", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     multi_level_security_label_alteration: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     profile_modelling: bool | None = field(default=None,metadata={"label": "Profile modelling","allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     profile_modelling_generation_data_group: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
