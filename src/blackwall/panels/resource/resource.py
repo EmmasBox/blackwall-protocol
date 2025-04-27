@@ -68,8 +68,8 @@ class PanelResourceActionButtons(HorizontalGroup):
         self.delete_action = delete_action
     
     def compose(self) -> ComposeResult:
-        yield Button(f"{get_emoji("💾")} Save",action="save",classes="action-button")
-        yield Button("Delete",action="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
+        yield Button("Create",id="save",action="save",classes="action-button")
+        yield Button("Delete",action="delete",id="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
 
     async def action_save(self):
         await self.app.run_action(self.save_action,default_namespace=self.parent)
@@ -111,6 +111,13 @@ class PanelResource(VerticalScroll):
         yield PanelResourceActionButtons(save_action="save_resource_profile", delete_action="delete_resource_profile")
 
     resource_info: reactive[ResourceInfo] = reactive(ResourceInfo())
+
+    def set_edit_mode(self):
+        self.query_exactly_one("#resource_profile_name",Input).disabled = True
+        self.query_exactly_one("#resource_profile_class",Input).disabled = True
+        self.query_exactly_one("#delete",Button).disabled = False
+        self.query_exactly_one("#save",Button).label = f"{get_emoji("💾")} Save"
+        self.notify("Switched to edit mode",severity="information")
 
     def on_mount(self) -> None:
         if resource.resource_profile_exists(resource=self.resource_info.resource_name,resource_class=self.resource_info.resource_class):
@@ -169,6 +176,8 @@ class PanelResource(VerticalScroll):
 
             if self.resource_info.cfdef_traits is not None:
                 set_traits_in_input(self,traits=self.resource_info.cfdef_traits,prefix="cfdef")
+
+            self.set_edit_mode()
 
     def action_save_resource_profile(self) -> None:
         resource_profile_name = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_name",Input).value
