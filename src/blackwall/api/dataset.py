@@ -16,7 +16,7 @@ else:
 @dataclass
 class BaseDatasetTraits(TraitsBase):
     #Add and alter fields
-    owner: str | None = field(default=None)
+    owner: str | None = field(default=None, metadata={"label": "Owner"})
     audit_alter: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_control: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_none: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
@@ -24,7 +24,7 @@ class BaseDatasetTraits(TraitsBase):
     audit_read: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_update: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     security_category: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
-    installation_data: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    installation_data: str | None = field(default=None,metadata={"label": "Installation data", "allowed_in": {"add","alter"}})
     erase_data_sets_on_delete: bool | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     model_profile_class: str | None = field(default=None,metadata={"allowed_in": {"add"}})
     model_profile_generic: str | None = field(default=None,metadata={"allowed_in": {"add"}})
