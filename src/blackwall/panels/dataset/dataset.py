@@ -149,6 +149,8 @@ class PanelDataset(VerticalScroll):
             if self.dataset_info.base_traits is not None:
                 set_traits_in_input(self,traits=self.dataset_info.base_traits,prefix="base")
 
+            self.set_edit_mode()
+
     def action_delete_dataset_api(self) -> None:
         dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("profile_name",Input).value
         if dataset.dataset_profile_exists(dataset_name):
@@ -158,8 +160,6 @@ class PanelDataset(VerticalScroll):
                 self.notify(f"Dataset profile {dataset_name} deleted, return code: {return_code}",severity="warning")
             else:
                 self.notify(f"{message}, return code: {return_code}",severity="error")
-
-            self.set_edit_mode()
 
     def action_delete_dataset_profile(self) -> None:
         dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("profile_name",Input).value
