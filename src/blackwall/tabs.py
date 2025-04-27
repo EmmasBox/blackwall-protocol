@@ -125,7 +125,7 @@ class TabSystem(HorizontalGroup):
 
     def action_open_backout(self) -> None:
         """Add a new backout panel tab."""
-        self.post_message(OpenTab("Backout changes",PanelBackout()))
+        self.post_message(OpenTab(f"{get_emoji("↪")} Backout changes",PanelBackout()))
 
     #Remove current tab
     def action_remove(self) -> None:
