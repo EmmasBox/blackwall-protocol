@@ -10,12 +10,13 @@ from blackwall.messages import OpenTab
 from blackwall.panels.dataset.dataset import DatasetInfo, PanelDataset
 from blackwall.panels.group.group import GroupInfo, PanelGroup
 from blackwall.panels.panel_mode import PanelMode
+from blackwall.panels.resource.resource import PanelResource, ResourceInfo
 from blackwall.panels.search.results import PanelResultsMixedType
 from blackwall.panels.users.user import PanelUser, UserInfo
 
 from blackwall.panels.search.search_backend import search_database_query_one, QueryType
 
-from blackwall.api import user
+from blackwall.api import resource, user
 from blackwall.api import group
 from blackwall.api import dataset
 
@@ -38,6 +39,7 @@ class SearchField(HorizontalGroup):
 
     def compose(self) -> ComposeResult:
         yield Label("Search:")
+        yield Input(name="Class",id="search_field_class",classes="field-short-generic")
         yield Input(name="Search",id="search_field",classes="search-field")
         yield Button("Search",action="search")
 
@@ -52,6 +54,7 @@ class PanelSearch(VerticalScroll):
     @on(Input.Submitted)
     def action_search(self) -> None:
         search_query = self.get_child_by_type(SearchField).get_child_by_id("search_field",Input).value
+        search_query_class = self.get_child_by_type(SearchField).get_child_by_id("search_field_class",Input).value
         search_type = self.get_child_by_type(SearchSelector).get_child_by_id("type_selector",RadioSet).pressed_button.id
         if search_type == "search_type_any":
             results = search_database_query_one(query=search_query, class_name=None,query_types=QueryType.all())
@@ -163,4 +166,21 @@ class PanelSearch(VerticalScroll):
             else:
                 self.notify(f"Dataset profile {search_query} couldn't be found")
         elif search_type == "search_type_resource":
-            pass
+            if resource.resource_profile_exists(resource=search_query,resource_class=search_query_class):
+                new_resource_panel = PanelResource()
+
+                resource_dict = resource.get_resource_profile(resource=search_query,resource_class=search_query_class)
+            
+                base_traits = resource.BaseResourceTraits.from_dict(prefix="base",source=resource_dict["profile"]["base"])
+
+                new_resource_panel.resource_info = ResourceInfo(
+                    base_traits=base_traits,
+                    resource_class=search_query_class,
+                    resource_name=search_query,
+                )
+
+                self.post_message(OpenTab(f"Resource: {search_query}",new_resource_panel))
+
+                self.notify(f"Found resource profile: {search_query}")
+            else:
+                self.notify(f"Resource profile {search_query} couldn't be found")
