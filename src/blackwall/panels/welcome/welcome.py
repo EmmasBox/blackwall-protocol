@@ -1,4 +1,5 @@
 
+import importlib.util
 from textual.app import ComposeResult
 from textual.widgets import Label, Button, Markdown
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll, Grid
@@ -34,12 +35,11 @@ class PanelWelcomeLogo(VerticalGroup):
 
     def compose(self) -> ComposeResult:
         if logo_allowed is not False:
-            try:
+            textual_image_enabled = importlib.util.find_spec('textual_image')
+            if textual_image_enabled:
                 from textual_image.widget import SixelImage
                 image = Path(f'{logo_path}')
                 yield SixelImage(image, classes="logo-image")
-            except ImportError:
-                pass 
 
 class PanelWelcomeMessage(VerticalGroup):
     def compose(self) -> ComposeResult:
