@@ -359,6 +359,6 @@ def delete_resource_profile(resource_class: str,resource: str) -> Tuple[str, int
                 }
             )
         #TODO add error message
-        return  result.result, result.result["return_codes"]["racf_return_code"]
+        return "", result.result["return_codes"]["racf_return_code"]
     else:
         return "RACFu can't be found", 8
