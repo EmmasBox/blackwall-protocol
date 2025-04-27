@@ -23,6 +23,11 @@
     width: 100%
 }
 
+RvaryScreen {
+    align: center middle;
+    background: rgba(45, 45, 45, 0.75);    
+}
+
 ConfirmationScreen {
     align: center middle;
     background: rgba(45, 45, 45, 0.75);

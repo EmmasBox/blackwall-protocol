@@ -9,6 +9,7 @@ import json
 from blackwall.notifications import send_notification
 from .command_line import CommandLine
 from .screens.modal.refresh import RefreshScreen
+from .screens.modal.rvary import RvaryScreen
 from .theme_cynosure import cynosure_theme
 from .theme_3270 import ibm_3270_theme
 
@@ -41,6 +42,7 @@ class Blackwall(App):
 
     BINDINGS = [
         ("h", "push_screen('refresh')", "Switch to refresh screen"),
+        ("r", "push_screen('rvary')", "Switch to rvary password screen"),
         ("ctrl+home", "go_to_cli", "Focus command line")
     ]
     
@@ -63,6 +65,7 @@ class Blackwall(App):
         else:
             self.theme = "cynosure"
         self.install_screen(RefreshScreen(), name="refresh")
+        self.install_screen(RvaryScreen(), name="rvary")
         self.command_output_change = Signal(self,name="command_output_change")
         self.command_output = ""
 
