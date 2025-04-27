@@ -97,7 +97,11 @@ class PanelSetropts(VerticalScroll):
 
     def action_save_setropts_api(self) -> None:
         base_traits = get_traits_from_input(prefix="base",operator="alter",trait_cls=BaseSetroptsTraits,widget=self)
-        update_racf_options(base=base_traits)
+        return_code = update_racf_options(base=base_traits)
+        if return_code == 0:
+            self.notify("Updated system settings",severity="warning")
+        else:
+            self.notify("Couldn't update system settings",severity="error")
 
     def action_save(self) -> None:
         generic_confirmation_modal(self,modal_text="Are you abosulutely sure you want to change the RACF system options?",action_widget=self,confirm_action="save_setropts_api")
