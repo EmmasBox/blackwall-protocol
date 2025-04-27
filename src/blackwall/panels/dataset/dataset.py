@@ -7,7 +7,7 @@ from textual.reactive import reactive
 
 from blackwall.emoji import get_emoji
 from blackwall.notifications import send_notification
-from blackwall.panels.traits_ui import get_traits_from_input
+from blackwall.panels.traits_ui import get_traits_from_input, set_traits_in_input
 
 from blackwall.panels.panel_mode import PanelMode
 
@@ -16,7 +16,7 @@ from blackwall.api import dataset
 class PanelDatasetName(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Profile name:")
-        yield Input(id="dataset_name")
+        yield Input(id="profile_name")
 
 class PanelDatasetOwner(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -113,6 +113,8 @@ class DatasetInfo:
     base_traits: dataset.BaseDatasetTraits | None = None
     mode: PanelMode = PanelMode.create
 
+    profile_name: str = ""
+
 class PanelDataset(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield PanelDatasetName()
@@ -124,8 +126,16 @@ class PanelDataset(VerticalScroll):
         yield PanelDatasetAudit()
         yield PanelDatasetActionButtons(save_action="save_dataset_profile", delete_action="delete_dataset_profile")
 
+    dataset_info: reactive[DatasetInfo] = reactive(DatasetInfo())
+
+    def on_mount(self) -> None:
+        if dataset.dataset_profile_exists(self.dataset_info.profile_name):
+            self.query_exactly_one("#profile_name",Input).value = self.dataset_info.profile_name
+            if self.dataset_info.base_traits is not None:
+                set_traits_in_input(self,traits=self.dataset_info.base_traits,prefix="base")
+
     def action_save_dataset_profile(self) -> None:
-        dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("dataset_name",Input).value
+        dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("profile_name",Input).value
         dataset_profile_exists = dataset.dataset_profile_exists(dataset=dataset_name)
 
         if dataset_profile_exists:
