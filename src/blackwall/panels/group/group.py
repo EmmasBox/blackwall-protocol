@@ -13,6 +13,11 @@ from blackwall.panels.panel_mode import PanelMode
 
 from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
 
+class PanelGroupInfo(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Creation date:",classes="date-labels")
+        yield Input(id="base_create_date",disabled=True,classes="date-fields")
+
 class PanelGroupNameAndSubgroup(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Group name:")
@@ -68,6 +73,7 @@ class GroupInfo:
 
 class PanelGroup(VerticalScroll):
     def compose(self) -> ComposeResult:
+        yield PanelGroupInfo()
         yield PanelGroupNameAndSubgroup()
         yield PanelGroupInstallationData()
         yield PanelGroupDatasetModel()
