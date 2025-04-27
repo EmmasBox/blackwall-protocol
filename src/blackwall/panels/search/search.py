@@ -7,6 +7,7 @@ from textual.widgets import Button, Input, Label, RadioButton, RadioSet
 from textual.containers import HorizontalGroup, VerticalScroll
 
 from blackwall.messages import OpenTab
+from blackwall.panels.dataset.dataset import DatasetInfo, PanelDataset
 from blackwall.panels.group.group import GroupInfo, PanelGroup
 from blackwall.panels.panel_mode import PanelMode
 from blackwall.panels.search.results import PanelResultsMixedType
@@ -16,6 +17,7 @@ from blackwall.panels.search.search_backend import search_database_query_one, Qu
 
 from blackwall.api import user
 from blackwall.api import group
+from blackwall.api import dataset
 
 class SearchSelector(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -143,6 +145,22 @@ class PanelSearch(VerticalScroll):
             else:
                 self.notify(f"Group {search_query} couldn't be found")
         elif search_type == "search_type_dataset":
-            pass
+            if dataset.dataset_profile_exists(dataset=search_query):
+                new_dataset_panel = PanelDataset()
+
+                dataset_dict = dataset.get_dataset_profile(dataset=search_query)
+            
+                base_traits = dataset.BaseDatasetTraits.from_dict(prefix="base",source=dataset_dict["profile"]["base"])
+
+                new_dataset_panel.dataset_info = DatasetInfo(
+                    base_traits=base_traits,
+                    profile_name=search_query
+                )
+
+                self.post_message(OpenTab(f"Dataset: {search_query}",new_dataset_panel))
+
+                self.notify(f"Found dataset profile: {search_query}")
+            else:
+                self.notify(f"Dataset profile {search_query} couldn't be found")
         elif search_type == "search_type_resource":
             pass
