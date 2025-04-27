@@ -39,7 +39,7 @@ PanelWelcomeContent {
 
 PanelWelcomeMessage {
     row-span: 8;
-    column-span: 100%;
+    column-span: auto;
 }
 
 PanelWelcomeLogo {
