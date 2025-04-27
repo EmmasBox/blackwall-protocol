@@ -97,7 +97,7 @@ class PanelGroup(VerticalScroll):
             operator = "add"
 
         base_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=group.BaseGroupTraits)
-        dfp_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=group.DFPGroupTraits)
+        dfp_segment = get_traits_from_input(operator, self, prefix="dfp", trait_cls=group.DFPGroupTraits)
         result = group.update_group(
             group=group_name,
             create=not group_exists,
