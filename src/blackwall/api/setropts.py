@@ -28,7 +28,7 @@ class BaseSetroptsTraits(TraitsBase):
     password_history: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     revoke_inactive_userids_interval: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     max_password_change_interval: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
-    jes_network_user: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
+    jes_network_user: str | None = field(default=None,metadata={"label": "JES network user", "allowed_in": {"alter","extract"},"input_args": {"classes": "field-short-generic","max_length": 8,}})
     jes_undefined_user: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     kerberos_encryption_level: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     audit_log_always_classes: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
