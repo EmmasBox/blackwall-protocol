@@ -68,7 +68,7 @@ class BaseSetroptsTraits(TraitsBase):
     #automatic_data_set_protection: bool | None = field(default=None,metadata={"label": "Automatic dataset protection", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     multi_level_security_file_names: bool | None = field(default=None,metadata={"label": "Multi-level security file names", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     multi_level_security_logon: bool | None = field(default=None,metadata={"label": "Multi-level security logon", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
-    security_label_compatibility_mode: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
+    security_label_compatibility_mode: bool | None = field(default=None,metadata={"label": "Security label compatibility mode", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     program_control: bool | None = field(default=None,metadata={"label": "Program control", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     tape_data_set_protection: bool | None = field(default=None,metadata={"label": "Tape dataset protection","allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     #erase_data_sets_on_delete: bool | None = field(default=None,metadata={"label": "Erase datasets on deletion","allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
