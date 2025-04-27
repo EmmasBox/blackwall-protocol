@@ -2,7 +2,7 @@ from dataclasses import dataclass
 
 from textual.reactive import reactive
 from textual.app import ComposeResult
-from textual.widgets import Input, Label, Button, Collapsible
+from textual.widgets import Input, Label, Button, Collapsible, Select
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.api import resource
@@ -20,6 +20,8 @@ class PanelResourceNameAndClass(VerticalGroup):
         yield Input(max_length=8,id="resource_profile_class",classes="class-field")
         yield Label("Owner:")
         yield Input(max_length=8,id="base_owner",classes="class-field")
+        yield Label("UACC:")
+        yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="NONE",classes="uacc-select",id="base_universal_access",tooltip="It's advised that you keep this at NONE, UACC read or higher are unsecure, see z/OS RACF Administrator's Guide for more details")
 
 class PanelResourceInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
