@@ -63,7 +63,7 @@ class PanelSetroptsActionButtons(VerticalGroup):
         self.save_action = save_action
 
     def compose(self) -> ComposeResult:
-        yield Label("Changing system settings can be dangerous")
+        yield Label("Changing system settings can be dangerous",classes="setropts-warning")
         yield Button(f"{get_emoji("💾")} Save",variant="warning",classes="action-button")
 
     async def action_save(self):
