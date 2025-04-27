@@ -40,7 +40,6 @@ class BaseSetroptsTraits(TraitsBase):
     multi_level_security_address_space: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     multi_level_security_file_system: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     multi_level_security_interprocess: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
-    multi_level_security_file_names: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     multi_level_security_declassification: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     passphrase_change_interval: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     data_set_single_level_name_prefix_protection: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
@@ -68,6 +67,7 @@ class BaseSetroptsTraits(TraitsBase):
     #add_creator_to_access_list: bool | None = field(default=None,metadata={"label": "Add creator to access list", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     #Note type in documentation wrong
     #automatic_data_set_protection: bool | None = field(default=None,metadata={"label": "Automatic dataset protection", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
+    multi_level_security_file_names: bool | None = field(default=None,metadata={"label": "Multi-level security file names", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     multi_level_security_logon: bool | None = field(default=None,metadata={"label": "Multi-level security logon", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     security_label_compatibility_mode: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     program_control: bool | None = field(default=None,metadata={"label": "Program control", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
