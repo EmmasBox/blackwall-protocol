@@ -85,7 +85,14 @@ class PanelGroup(VerticalScroll):
                 set_traits_in_input(self,traits=self.group_info.dfp_traits,prefix="dfp")
 
     def action_delete_group(self) -> None:
-        pass
+        group_name = self.get_child_by_type(PanelGroupNameAndSubgroup).get_child_by_id("group_name",Input).value
+        if group.group_exists(group_name):
+            message, return_code = group.delete_group(group=group_name)
+            
+            if (return_code == 0):
+                self.notify(f"User {username} deleted, return code: {return_code}",severity="warning")
+            else:
+                self.notify(f"{message}, return code: {return_code}",severity="error")
 
     def action_save_group(self) -> None:
         group_name = self.get_child_by_type(PanelGroupNameAndSubgroup).get_child_by_id("group_name",Input).value
