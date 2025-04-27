@@ -136,6 +136,9 @@ class PanelSearch(VerticalScroll):
 
                 if 'profile' in group_dict and 'dfp' in group_dict['profile']:
                     new_group_panel.group_info.dfp_traits = group.DFPGroupTraits.from_dict(prefix="dfp",source=group_dict["profile"]["dfp"])
+
+                self.post_message(OpenTab(f"Group: {search_query}",new_group_panel))
+
                 self.notify(f"Found group: {search_query}")
             else:
                 self.notify(f"Group {search_query} couldn't be found")
