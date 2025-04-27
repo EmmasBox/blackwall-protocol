@@ -24,5 +24,6 @@ class RefreshScreen(Screen):
                 self.notify(f"Refresh successfully issued, return code: {return_code}",severity="information")
             else:
                 self.notify(f"Refresh failed, return code: {return_code}",severity="error")
+            self.app.pop_screen()
         else:
             self.app.pop_screen()
