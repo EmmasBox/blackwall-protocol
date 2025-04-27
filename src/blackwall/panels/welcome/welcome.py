@@ -1,7 +1,7 @@
 
 from textual.app import ComposeResult
 from textual.widgets import Label, Button, Markdown
-from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
+from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll, Grid
 
 from blackwall.messages import OpenTab
 from blackwall.panels.users.user import PanelUser
@@ -77,13 +77,9 @@ class PanelWelcomeActions(VerticalGroup):
     async def action_create_analysis(self):
         self.post_message(OpenTab(title="Health check",content=PanelAnalysis()))
 
-
-class PanelWelcomeMain(HorizontalGroup):
-    def compose(self) -> ComposeResult:
-        yield PanelWelcomeMessage()
-        yield PanelWelcomeLogo(logo_path=logo_path)
-        yield PanelWelcomeActions()
-
 class PanelWelcome(VerticalScroll):
     def compose(self) -> ComposeResult:
-        yield PanelWelcomeMain()
+        with Grid():
+            yield PanelWelcomeMessage()
+            yield PanelWelcomeLogo(logo_path=logo_path)
+            yield PanelWelcomeActions()
