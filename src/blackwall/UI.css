@@ -34,6 +34,22 @@ PanelWelcome {
     grid-columns: 3fr;
 }
 
+PanelWelcomeMessage {
+    row-span: 3;
+    column-span: 2;
+}
+
+PanelWelcomeLogo {
+    row-span: 2;
+    column-span: 2;
+}
+
+PanelWelcomeActions {
+    row-span: 2;
+    column-span: 2;
+}
+
+
 RvaryScreen {
     align: center middle;
     background: rgba(45, 45, 45, 0.75);    
