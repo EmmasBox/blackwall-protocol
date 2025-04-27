@@ -7,6 +7,8 @@ from textual.widgets import Button, Label
 class WarningScreen(Screen):
     """Warning screen"""
 
+    BINDINGS = [("escape", "app.pop_screen", "Pop screen")]
+
     def __init__(self, dialog_text: str):
         super().__init__()
         self.dialog_text = dialog_text

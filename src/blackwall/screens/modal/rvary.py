@@ -7,6 +7,8 @@ from textual.widgets import Button, Label, Input
 class RvaryScreen(Screen):
     """Modal rvary password change screen"""
 
+    BINDINGS = [("escape", "app.pop_screen", "Pop screen")]
+
     def compose(self) -> ComposeResult:
         yield Grid(
             Label("Change RVARY password for whole RACF database. Password must be up to 8 characters long. Only do this if you're absolutely sure you know what you're doing.", id="question"),
