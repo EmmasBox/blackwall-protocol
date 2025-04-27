@@ -65,7 +65,7 @@ class PanelSetroptsActionButtons(VerticalGroup):
 
     def compose(self) -> ComposeResult:
         yield Label("Attention: changing system settings can be dangerous!",classes="setropts-warning")
-        yield Button(f"{get_emoji("💾")} Save",variant="warning",classes="action-button")
+        yield Button(f"{get_emoji("💾")} Save",id="save",variant="warning",classes="action-button")
 
     async def action_save(self):
         await self.app.run_action(self.save_action,default_namespace=self.parent)
@@ -100,10 +100,12 @@ class PanelSetropts(VerticalScroll):
     def action_switch(self) -> None:
         if self.setropts_info.mode is PanelMode.read:
             self.setropts_info = SetroptsInfo(mode=PanelMode.edit) 
+            self.query_exactly_one("#save",Button).disabled = False
             readable_mode = "edit"
         elif self.setropts_info.mode is PanelMode.edit:
             self.setropts_info = SetroptsInfo(mode=PanelMode.read) 
             readable_mode = "read"
+            self.query_exactly_one("#save",Button).disabled = True
         else:
             readable_mode = "read"
 
