@@ -23,7 +23,7 @@ class BaseDatasetTraits(TraitsBase):
     audit_read: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_read: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_update: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    security_category: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
+    security_category: str | None = field(default=None,metadata={"label": "Security category", "allowed_in": {"alter"}})
     installation_data: str | None = field(default=None,metadata={"label": "Installation data", "allowed_in": {"add","alter"}})
     erase_data_sets_on_delete: bool | None = field(default=None,metadata={"label": "Erase datasets on deletion", "allowed_in": {"add","alter"}})
     model_profile_class: str | None = field(default=None,metadata={"label": "Model profile class", "allowed_in": {"add"}})
