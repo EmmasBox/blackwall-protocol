@@ -16,12 +16,13 @@ from ..traits_ui import generate_trait_section, get_traits_from_input, set_trait
 from blackwall.emoji import get_emoji
 
 class PanelUserInfo(HorizontalGroup):
-    edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
-
     def compose(self) -> ComposeResult:
-        if self.edit_mode != PanelMode.create:
-            yield Label("Created: ")
-            yield Label("Last logon: ")
+        yield Label("Creation date:",classes="date-labels")
+        yield Input(id="base_create_date",disabled=True,classes="date-fields")
+        yield Label("Last access date:",classes="date-labels")
+        yield Input(id="base_last_access_date",disabled=True,classes="date-fields")
+        yield Label("Last access time:",classes="date-labels")
+        yield Input(id="last_acess_time",disabled=True,classes="date-fields")
 
 class PanelUserName(HorizontalGroup):
     """Username and name components"""
