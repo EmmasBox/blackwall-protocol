@@ -10,6 +10,10 @@
 }
 
 # General
+.date-labels {
+    margin: 1;    
+}
+
 .date-fields {
     margin: 1;
     max-width: 18;
