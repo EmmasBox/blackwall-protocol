@@ -90,6 +90,7 @@ class PanelGroup(VerticalScroll):
             
             if self.group_info.dfp_traits is not None:
                 set_traits_in_input(self,traits=self.group_info.dfp_traits,prefix="dfp")
+            self.set_edit_mode()
 
     def action_delete_group_api(self) -> None:
         group_name = self.get_child_by_type(PanelGroupNameAndSubgroup).get_child_by_id("group_name",Input).value
