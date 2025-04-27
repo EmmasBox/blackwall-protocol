@@ -10,6 +10,11 @@
 }
 
 # General
+.date-fields {
+    margin: 1;
+    max-width: 12;
+}
+
 .modal-buttons {
     width: 100%
 }

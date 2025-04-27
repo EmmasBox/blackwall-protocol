@@ -16,9 +16,9 @@ from blackwall.api import dataset
 class PanelDatasetInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Last change date:")
-        yield Input(id="base_last_change_date",disabled=True)
+        yield Input(id="base_last_change_date",disabled=True,classes="date-fields")
         yield Label("Creation date:")
-        yield Input(id="base_create_date",disabled=True)
+        yield Input(id="base_create_date",disabled=True,classes="date-fields")
 
 class PanelDatasetName(VerticalGroup):
     def compose(self) -> ComposeResult:
