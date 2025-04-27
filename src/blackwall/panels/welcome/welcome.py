@@ -79,7 +79,6 @@ class PanelWelcomeActions(VerticalGroup):
 
 class PanelWelcome(VerticalScroll):
     def compose(self) -> ComposeResult:
-        with Grid():
-            yield PanelWelcomeMessage()
-            yield PanelWelcomeLogo(logo_path=logo_path)
-            yield PanelWelcomeActions()
+        yield PanelWelcomeMessage()
+        yield PanelWelcomeLogo(logo_path=logo_path)
+        yield PanelWelcomeActions()

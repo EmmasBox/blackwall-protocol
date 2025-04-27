@@ -29,6 +29,11 @@
     width: 100%;
 }
 
+PanelWelcome {
+    layout: grid;
+    grid-columns: 3fr;
+}
+
 RvaryScreen {
     align: center middle;
     background: rgba(45, 45, 45, 0.75);    
