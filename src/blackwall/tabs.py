@@ -29,12 +29,12 @@ people_list = [
 class TabSystem(HorizontalGroup):
     BINDINGS = [
         ("ctrl+u", "open_user", "Open user tab"),
-        ("ctrl+f", "open_search", "Open search tab"),
-        #("ctrl+a", "open_analysis", "Open analysis tab"),
-        ("ctrl+d", "open_dataset", "Open dataset profile tab"),
         ("ctrl+g", "open_groups", "Open group profile tab"),
+        ("ctrl+d", "open_dataset", "Open dataset profile tab"),
         ("ctrl+r", "open_resource", "Open resource profile tab"),
         ("ctrl+l", "open_command_output", "Open command output tab"),
+        ("ctrl+f", "open_search", "Open search tab"),
+        #("ctrl+a", "open_analysis", "Open analysis tab"),
         ("ctrl+o", "open_options", "Open RACF options tab"),
         ("ctrl+n", "open_resource_permits", "Open resource permits tab"),
         ("ctrl+w", "remove", "Remove active tab"),
