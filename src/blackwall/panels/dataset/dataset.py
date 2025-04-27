@@ -107,8 +107,8 @@ class PanelDatasetActionButtons(HorizontalGroup):
         self.delete_action = delete_action
     
     def compose(self) -> ComposeResult:
-        yield Button(f"{get_emoji("💾")} Save",action="save",classes="action-button")
-        yield Button("Delete",action="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
+        yield Button("Create",id="save",action="save",classes="action-button")
+        yield Button("Delete",action="delete",id="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
 
     async def action_save(self):
         await self.app.run_action(self.save_action,default_namespace=self.parent)
@@ -137,6 +137,12 @@ class PanelDataset(VerticalScroll):
 
     dataset_info: reactive[DatasetInfo] = reactive(DatasetInfo())
 
+    def set_edit_mode(self):
+        self.query_exactly_one("#profile_name",Input).disabled = True
+        self.query_exactly_one("#delete",Button).disabled = False
+        self.query_exactly_one("#save",Button).label = f"{get_emoji("💾")} Save"
+        self.notify("Switched to edit mode",severity="information")
+
     def on_mount(self) -> None:
         if dataset.dataset_profile_exists(self.dataset_info.profile_name):
             self.query_exactly_one("#profile_name",Input).value = self.dataset_info.profile_name
@@ -152,6 +158,8 @@ class PanelDataset(VerticalScroll):
                 self.notify(f"Dataset profile {dataset_name} deleted, return code: {return_code}",severity="warning")
             else:
                 self.notify(f"{message}, return code: {return_code}",severity="error")
+
+            self.set_edit_mode()
 
     def action_delete_dataset_profile(self) -> None:
         dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("profile_name",Input).value
