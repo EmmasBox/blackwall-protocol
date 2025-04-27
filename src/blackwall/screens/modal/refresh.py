@@ -11,7 +11,7 @@ class RefreshScreen(Screen):
 
     def compose(self) -> ComposeResult:
         yield Grid(
-            Label("Here you can issue a refresh of the system", id="question"),
+            Label("Are you sure you want to issue a refresh of the system?", id="question"),
             Button("Cancel", variant="primary", id="cancel", classes="modal-buttons"),
             Button("Confirm", variant="error", id="confirm", classes="modal-buttons"),
             id="dialog",
