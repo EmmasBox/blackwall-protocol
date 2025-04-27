@@ -59,13 +59,18 @@ class PanelSetroptsFields(VerticalGroup):
 
 
 class PanelSetroptsActionButtons(VerticalGroup):
+    edit_mode: reactive[PanelMode] = reactive(PanelMode.read)
+
     def __init__(self, save_action: str):
         super().__init__()
         self.save_action = save_action
 
     def compose(self) -> ComposeResult:
         yield Label("Attention: changing system settings can be dangerous!",classes="setropts-warning")
-        yield Button(f"{get_emoji("💾")} Save",id="save",variant="warning",classes="action-button")
+        if self.edit_mode is PanelMode.read:
+            yield Button(f"{get_emoji("💾")} Save",id="save",variant="warning",classes="action-button",disabled=True)
+        elif self.edit_mode is PanelMode.edit:
+            yield Button(f"{get_emoji("💾")} Save",id="save",variant="warning",classes="action-button",disabled=False)
 
     async def action_save(self):
         await self.app.run_action(self.save_action,default_namespace=self.parent)
