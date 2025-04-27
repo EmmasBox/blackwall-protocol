@@ -35,7 +35,7 @@ PanelWelcomeContent {
 }
 
 PanelWelcomeMessage {
-    row-span: 3;
+    row-span: 1;
     column-span: 1;
 }
 
