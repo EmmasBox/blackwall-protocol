@@ -180,3 +180,9 @@ ToggleButton > .toggle--button {
 ToggleButton.-on > .toggle--button {
     color: $text-success;
 }
+
+# Backout panel
+
+.backout-title {
+    margin: 1;
+}
