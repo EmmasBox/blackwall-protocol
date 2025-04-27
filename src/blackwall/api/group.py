@@ -96,7 +96,7 @@ def update_group(group: str,create: bool, base: BaseGroupTraits, tme: TMEGroupTr
             {
                 "operation": operation, 
                 "admin_type": "group", 
-                "profile_name": group,
+                "profile_name": group.upper(),
                 "traits":  traits
             }
         )
@@ -109,7 +109,7 @@ def delete_group(group: str):
             {
                 "operation": "delete", 
                 "admin_type": "group", 
-                "profile_name": group
+                "profile_name": group.upper()
             }
         )
         return result.result["return_codes"]["racf_return_code"]
