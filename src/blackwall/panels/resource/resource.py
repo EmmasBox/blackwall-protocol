@@ -10,7 +10,7 @@ from blackwall.emoji import get_emoji
 from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
 
-from ..traits_ui import generate_trait_section, get_traits_from_input
+from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
 
 class PanelResourceNameAndClass(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -70,7 +70,28 @@ class PanelResourceActionButtons(HorizontalGroup):
 
 @dataclass
 class ResourceInfo:
+    base_traits: resource.BaseResourceTraits | None = None
+    kerb_traits: resource.KerbResourceTraits | None = None
+    dlf_traits: resource.DLFDataResourceTraits | None = None
+    eim_traits: resource.EIMResourceTraits | None = None
+    jes_traits: resource.JESResourceTraits | None = None
+    icsf_traits: resource.ICSFResourceTraits | None = None
+    ictx_traits: resource.ICTXResourceTraits | None = None
+    idtparms_traits: resource.IDTPARMSResourceTraits | None = None
+    session_traits: resource.SessionResourceTraits | None = None
+    svfmr_traits: resource.SVFMRResourceTraits | None = None
+    stdata_traits: resource.STDATAResourceTraits | None = None
+    proxy_traits: resource.ProxyResourceTraits | None = None
+    mfpolicy_traits: resource.MFPolicyResourceTraits | None = None
+    sigver_traits: resource.SIGVERResourceTraits | None = None
+    tme_traits: resource.TMEResourceTraits | None = None
+    cdtinfo_traits: resource.CDTINFOResourceTraits | None = None
+    ssignon_traits: resource.SSIGNONResourceTraits | None = None
+    cfdef_traits: resource.CfdefResourceTraits | None = None
     mode: PanelMode = PanelMode.create
+
+    resource_name: str = ""
+    resource_class: str = ""
 
 class PanelResource(VerticalScroll):
     def compose(self) -> ComposeResult:
@@ -78,6 +99,66 @@ class PanelResource(VerticalScroll):
         yield PanelResourceInstallationData()
         yield PanelResourceSegments()
         yield PanelResourceActionButtons(save_action="save_resource_profile", delete_action="delete_resource_profile")
+
+    resource_info: reactive[ResourceInfo] = reactive(ResourceInfo())
+
+    def on_mount(self) -> None:
+        if resource.resource_profile_exists(self.resource_info.resource_name,self.resource_info.resource_class):
+            self.query_exactly_one("#resource_profile_name",Input).value = self.resource_info.resource_name
+            self.query_exactly_one("#resource_profile_class",Input).value = self.resource_info.resource_class
+            if self.resource_info.base_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.base_traits,prefix="base")
+            
+            if self.resource_info.kerb_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.kerb_traits,prefix="kerb")
+
+            if self.resource_info.dlf_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.dlf_traits,prefix="dlf")
+
+            if self.resource_info.eim_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.eim_traits,prefix="eim")
+
+            if self.resource_info.jes_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.jes_traits,prefix="jes")
+
+            if self.resource_info.icsf_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.icsf_traits,prefix="icsf")
+
+            if self.resource_info.ictx_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.ictx_traits,prefix="ictx")
+
+            if self.resource_info.idtparms_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.idtparms_traits,prefix="idtparms")
+
+            if self.resource_info.session_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.session_traits,prefix="session")
+
+            if self.resource_info.svfmr_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.svfmr_traits,prefix="svfmr")
+
+            if self.resource_info.stdata_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.stdata_traits,prefix="stdata")
+
+            if self.resource_info.proxy_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.proxy_traits,prefix="proxy")
+
+            if self.resource_info.mfpolicy_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.mfpolicy_traits,prefix="mfpolicy")
+
+            if self.resource_info.sigver_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.sigver_traits,prefix="sigver")
+
+            if self.resource_info.tme_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.tme_traits,prefix="tme")
+            
+            if self.resource_info.cdtinfo_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.cdtinfo_traits,prefix="cdtinfo")
+
+            if self.resource_info.ssignon_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.ssignon_traits,prefix="ssignon")
+
+            if self.resource_info.cfdef_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.cfdef_traits,prefix="cfdef")
 
     def action_save_resource_profile(self) -> None:
         resource_profile_name = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_name",Input).value
