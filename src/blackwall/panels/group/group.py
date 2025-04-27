@@ -50,8 +50,8 @@ class PanelGroupActionButtons(HorizontalGroup):
         self.delete_action = delete_action
     
     def compose(self) -> ComposeResult:
-        yield Button(f"{get_emoji("💾")} Save",action="save",classes="action-button")
-        yield Button("Delete",action="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
+        yield Button("Create",id="save",action="save",classes="action-button")
+        yield Button("Delete",id="delete",action="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
 
     async def action_save(self):
         await self.app.run_action(self.save_action,default_namespace=self.parent)
@@ -75,6 +75,12 @@ class PanelGroup(VerticalScroll):
         yield PanelGroupActionButtons(save_action="save_group",delete_action="delete_group")
 
     group_info: reactive[GroupInfo] = reactive(GroupInfo())
+
+    def set_edit_mode(self):
+        self.query_exactly_one("#group_name",Input).disabled = True
+        self.query_exactly_one("#delete",Button).disabled = False
+        self.query_exactly_one("#save",Button).label = f"{get_emoji("💾")} Save"
+        self.notify("Switched to edit mode",severity="information")
 
     def on_mount(self) -> None:
         if group.group_exists(self.group_info.group_name):
