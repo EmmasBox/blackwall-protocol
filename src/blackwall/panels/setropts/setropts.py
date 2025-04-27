@@ -58,9 +58,16 @@ class PanelSetroptsFields(VerticalGroup):
 
 
 class PanelSetroptsActionButtons(VerticalGroup):
+    def __init__(self, save_action: str):
+        super().__init__()
+        self.save_action = save_action
+
     def compose(self) -> ComposeResult:
         yield Label("Changing system settings can be dangerous")
         yield Button(f"{get_emoji("💾")} Save",variant="warning",classes="action-button")
+
+    async def action_save(self):
+        await self.app.run_action(self.save_action,default_namespace=self.parent)
 
 class PanelSetropts(VerticalScroll):
     setropts_info: reactive[SetroptsInfo] = reactive(SetroptsInfo())
@@ -80,7 +87,10 @@ class PanelSetropts(VerticalScroll):
         yield PanelSetroptsNotice()
         yield PanelSetroptsMode(switch_action="switch")
         yield PanelSetroptsFields()
-        yield PanelSetroptsActionButtons()
+        yield PanelSetroptsActionButtons(save_action="save")
+
+    def action_save(self) -> None:
+        pass
 
     def action_switch(self) -> None:
         if self.setropts_info.mode is PanelMode.read:
