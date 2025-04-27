@@ -21,8 +21,8 @@ class PanelUserInfo(HorizontalGroup):
         yield Input(id="base_create_date",disabled=True,classes="date-fields")
         yield Label("Last access date:",classes="date-labels")
         yield Input(id="base_last_access_date",disabled=True,classes="date-fields")
-        yield Label("Last access time:",classes="date-labels")
-        yield Input(id="last_acess_time",disabled=True,classes="date-fields")
+        #yield Label("Last access time:",classes="date-labels")
+        #yield Input(id="last_acess_time",disabled=True,classes="date-fields")
 
 class PanelUserName(HorizontalGroup):
     """Username and name components"""
