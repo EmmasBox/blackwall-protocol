@@ -13,6 +13,13 @@ from blackwall.panels.panel_mode import PanelMode
 
 from blackwall.api import dataset
 
+class PanelDatasetInfo(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Last change date:")
+        yield Input(id="base_last_change_date",disabled=True)
+        yield Label("Creation date:")
+        yield Input(id="base_create_date",disabled=True)
+
 class PanelDatasetName(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Profile name:")
@@ -117,6 +124,7 @@ class DatasetInfo:
 
 class PanelDataset(VerticalScroll):
     def compose(self) -> ComposeResult:
+        yield PanelDatasetInfo()
         yield PanelDatasetName()
         yield PanelDatasetOwner()
         yield PanelDatasetInstallationData()
