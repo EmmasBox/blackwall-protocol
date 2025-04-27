@@ -154,7 +154,7 @@ class PanelDataset(VerticalScroll):
                 self.notify(f"{message}, return code: {return_code}",severity="error")
 
     def action_delete_dataset_profile(self) -> None:
-        dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("group_name",Input).value
+        dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("profile_name",Input).value
         generic_confirmation_modal(self,modal_text=f"Are you sure you want to delete dataset profile {dataset_name}?",confirm_action="delete_dataset_api",action_widget=self)
 
     def action_save_dataset_profile(self) -> None:
