@@ -19,7 +19,9 @@ class RvaryScreen(Screen):
 
     async def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "confirm":
-            self.app.pop_screen()
-            
+            input_value = self.get_child_by_id("rvary_password",Input).value
+            input_confirm_value = self.get_child_by_id("rvary_password_confirm",Input).value
+            if input_value == input_confirm_value:
+                self.app.pop_screen()
         else:
             self.app.pop_screen()
