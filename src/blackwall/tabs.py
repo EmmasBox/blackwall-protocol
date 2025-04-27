@@ -63,6 +63,8 @@ class TabSystem(HorizontalGroup):
                 self.post_message(OpenTab(f"{get_emoji("📃")} Command history",PanelCommandOutput()))
             elif default_tab == "options":
                 self.post_message(OpenTab("RACF options",PanelSetropts()))
+            elif default_tab == "search":
+                self.post_message(OpenTab(f"{get_emoji("🔎")} Search",PanelSearch()))
             else:
                 self.post_message(OpenTab("Welcome!",PanelWelcome()))
         else:
