@@ -110,7 +110,7 @@ def update_dataset_profile(dataset: str, create: bool, base: BaseDatasetTraits):
             {
                 "operation": operation, 
                 "admin_type": "data-set", 
-                "profile_name": dataset,
+                "profile_name": dataset.upper(),
                 "traits":  traits
             }
         )
