@@ -5,9 +5,10 @@ from textual.app import ComposeResult
 from textual.widgets import Button, Label
 from textual.containers import VerticalGroup, VerticalScroll
 
-from blackwall.api.setropts import BaseSetroptsTraits, get_racf_options
+from blackwall.api.setropts import BaseSetroptsTraits, get_racf_options, update_racf_options
 from blackwall.emoji import get_emoji
-from blackwall.panels.traits_ui import generate_trait_inputs, set_traits_in_input, toggle_inputs
+from blackwall.modals import generic_confirmation_modal
+from blackwall.panels.traits_ui import generate_trait_inputs, set_traits_in_input, get_traits_from_input, toggle_inputs
 from blackwall.panels.panel_mode import PanelMode
 
 @dataclass
@@ -89,8 +90,12 @@ class PanelSetropts(VerticalScroll):
         yield PanelSetroptsFields()
         yield PanelSetroptsActionButtons(save_action="save")
 
+    def action_save_api(self) -> None:
+        base_traits = get_traits_from_input(prefix="base",operator="alter",trait_cls=BaseSetroptsTraits,widget=self)
+        update_racf_options(base=base_traits)
+
     def action_save(self) -> None:
-        pass
+        generic_confirmation_modal(self,modal_text="Are you abosulutely sure you want to change the RACF system options?",action_widget=self,confirm_action="action_save_api")
 
     def action_switch(self) -> None:
         if self.setropts_info.mode is PanelMode.read:
