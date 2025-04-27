@@ -6,6 +6,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.reactive import reactive
 
 from blackwall.emoji import get_emoji
+from blackwall.modals import generic_confirmation_modal
 from blackwall.notifications import send_notification
 from blackwall.panels.traits_ui import get_traits_from_input, set_traits_in_input
 
@@ -142,6 +143,20 @@ class PanelDataset(VerticalScroll):
             if self.dataset_info.base_traits is not None:
                 set_traits_in_input(self,traits=self.dataset_info.base_traits,prefix="base")
 
+    def action_delete_dataset_api(self) -> None:
+        dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("profile_name",Input).value
+        if dataset.dataset_profile_exists(dataset_name):
+            message, return_code = dataset.delete_dataset_profile(dataset_name)
+            
+            if (return_code == 0):
+                self.notify(f"Dataset profile {dataset_name} deleted, return code: {return_code}",severity="warning")
+            else:
+                self.notify(f"{message}, return code: {return_code}",severity="error")
+
+    def action_delete_dataset_profile(self) -> None:
+        dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("group_name",Input).value
+        generic_confirmation_modal(self,modal_text=f"Are you sure you want to delete dataset profile {dataset_name}?",confirm_action="delete_dataset_api",action_widget=self)
+
     def action_save_dataset_profile(self) -> None:
         dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("profile_name",Input).value
         dataset_profile_exists = dataset.dataset_profile_exists(dataset=dataset_name)
@@ -169,6 +184,3 @@ class PanelDataset(VerticalScroll):
                 self.notify(f"Dataset profile {dataset_name} updated, return code: {result}",severity="information")
             else:
                 send_notification(self,message=f"Unable to update dataset profile, return code: {result}",severity="error")
-
-    def action_delete_dataset_profile(self) -> None:
-        pass
