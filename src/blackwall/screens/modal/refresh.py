@@ -7,6 +7,8 @@ from textual.containers import Grid
 from blackwall.api.setropts import refresh_RACF
         
 class RefreshScreen(Screen):
+    """Refresh RACF database screen"""
+
     BINDINGS = [("escape", "app.pop_screen", "Pop screen")]
 
     def compose(self) -> ComposeResult:
