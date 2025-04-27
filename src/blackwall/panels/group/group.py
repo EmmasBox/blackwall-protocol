@@ -10,7 +10,7 @@ from blackwall.emoji import get_emoji
 from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
 
-from ..traits_ui import generate_trait_section, get_traits_from_input
+from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
 
 class PanelGroupNameAndSubgroup(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -63,7 +63,7 @@ class GroupInfo:
     base_traits: group.BaseGroupTraits | None = None
     dfp_traits: group.DFPGroupTraits | None = None
 
-    name: str = ""
+    group_name: str = ""
 
 class PanelGroup(VerticalScroll):
     def compose(self) -> ComposeResult:
@@ -72,6 +72,17 @@ class PanelGroup(VerticalScroll):
         yield PanelGroupDatasetModel()
         yield PanelGroupSegments()
         yield PanelGroupActionButtons(save_action="save_group",delete_action="delete_group")
+
+    group_info: reactive[GroupInfo] = reactive(GroupInfo())
+
+    def on_mount(self) -> None:
+        if group.group_exists(self.group_info.group_name):
+            self.query_exactly_one("#group_name",Input).value = self.group_info.group_name
+            if self.group_info.base_traits is not None:
+                set_traits_in_input(self,traits=self.group_info.base_traits,prefix="base")
+            
+            if self.group_info.dfp_traits is not None:
+                set_traits_in_input(self,traits=self.group_info.dfp_traits,prefix="dfp")
 
     def action_delete_group(self) -> None:
         pass
