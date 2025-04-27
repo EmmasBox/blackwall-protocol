@@ -7,6 +7,7 @@ from textual.widgets import Button, Input, Label, RadioButton, RadioSet
 from textual.containers import HorizontalGroup, VerticalScroll
 
 from blackwall.messages import OpenTab
+from blackwall.panels.group.group import GroupInfo, PanelGroup
 from blackwall.panels.panel_mode import PanelMode
 from blackwall.panels.search.results import PanelResultsMixedType
 from blackwall.panels.users.user import PanelUser, UserInfo
@@ -14,6 +15,7 @@ from blackwall.panels.users.user import PanelUser, UserInfo
 from blackwall.panels.search.search_backend import search_database_query_one, QueryType
 
 from blackwall.api import user
+from blackwall.api import group
 
 class SearchSelector(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -120,7 +122,21 @@ class PanelSearch(VerticalScroll):
             else:
                 self.notify(f"User {search_query} couldn't be found")
         elif search_type == "search_type_group":
-            pass
+            if group.group_exists(group=search_query):
+                new_group_panel = PanelGroup()
+
+                group_dict = group.get_group(group=search_query)
+            
+                base_traits = group.BaseGroupTraits.from_dict(prefix="base",source=group_dict["profile"]["base"])
+
+                new_group_panel.group_info = GroupInfo(
+                    base_traits=base_traits,
+                    group_name=search_query
+                )
+
+                if 'profile' in group_dict and 'dfp' in group_dict['profile']:
+                    new_group_panel.group_info.dfp_traits = group.DFPGroupTraits.from_dict(prefix="dfp",source=group_dict["profile"]["dfp"])
+
         elif search_type == "search_type_dataset":
             pass
         elif search_type == "search_type_resource":
