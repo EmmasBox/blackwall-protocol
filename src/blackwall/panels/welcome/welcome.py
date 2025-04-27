@@ -77,7 +77,7 @@ class PanelWelcomeActions(VerticalGroup):
     async def action_create_analysis(self):
         self.post_message(OpenTab(title="Health check",content=PanelAnalysis()))
 
-class PanelWelcome(HorizontalGroup):
+class PanelWelcome(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield PanelWelcomeMessage()
         yield PanelWelcomeLogo(logo_path=logo_path)
