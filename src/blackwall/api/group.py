@@ -113,6 +113,7 @@ def delete_group(group: str) -> Tuple[str, int]:
                 "profile_name": group.upper()
             }
         )
-        return result.result["commands"][0]["messages"][0], result.result["return_codes"]["racf_return_code"]
+        #TODO add error message
+        return "", result.result["return_codes"]["racf_return_code"]
     else:
         return "RACFu can't be found", 8
