@@ -7,6 +7,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.api import resource
 from blackwall.emoji import get_emoji
+from blackwall.modals import generic_confirmation_modal
 from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
 
@@ -179,6 +180,23 @@ class PanelResource(VerticalScroll):
 
             self.set_edit_mode()
 
+    def action_delete_resource_profile_api(self):
+        resource_profile_name = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_name",Input).value
+        resource_profile_class = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_class",Input).value
+        if resource.resource_profile_exists(resource_class=resource_profile_class,resource=resource_profile_name):
+            message, return_code = resource.delete_resource_profile(resource_class=resource_profile_class,resource=resource_profile_name)
+            
+            if (return_code == 0):
+                self.notify(f"Resource profile {resource_profile_name} deleted, return code: {return_code}",severity="warning")
+            else:
+                self.notify(f"{message}, return code: {return_code}",severity="error")
+
+    def action_delete_resource_profile(self) -> None:
+        resource_profile_name = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_name",Input).value
+        resource_profile_class = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_class",Input).value
+        generic_confirmation_modal(self,modal_text=f"Are you sure you want to delete resource profile {resource_profile_name} in {resource_profile_class}?",confirm_action="delete_resource_profile_api",action_widget=self)
+
+
     def action_save_resource_profile(self) -> None:
         resource_profile_name = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_name",Input).value
         resource_profile_class = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_class",Input).value
@@ -243,6 +261,3 @@ class PanelResource(VerticalScroll):
                 self.notify(f"General resource profile {resource_profile_name} updated, return code: {result}",severity="information")
             else:
                 send_notification(self,message=f"Unable to update general resource profile, return code: {result}",severity="error")
-
-    def action_delete_resource_profile(self) -> None:
-        pass
