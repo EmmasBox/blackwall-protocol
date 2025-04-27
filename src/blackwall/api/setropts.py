@@ -52,7 +52,6 @@ class BaseSetroptsTraits(TraitsBase):
     rvary_status_password_format: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     rvary_status_password: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     rvary_status_password_format: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
-    rvary_status_password: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     #log_commands_issuesd_by_special_users: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     secondary_language: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     max_session_key_interval: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
