@@ -68,9 +68,9 @@ class PanelSetroptsActionButtons(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Attention: changing system settings can be dangerous!",classes="setropts-warning")
         if self.edit_mode is PanelMode.read:
-            yield Button(f"{get_emoji("💾")} Save",id="save",variant="warning",classes="action-button",disabled=True)
+            yield Button(f"{get_emoji("💾")} Save",id="save",action="save",variant="warning",classes="action-button",disabled=True)
         elif self.edit_mode is PanelMode.edit:
-            yield Button(f"{get_emoji("💾")} Save",id="save",variant="warning",classes="action-button",disabled=False)
+            yield Button(f"{get_emoji("💾")} Save",id="save",action="save",variant="warning",classes="action-button",disabled=False)
 
     async def action_save(self):
         await self.app.run_action(self.save_action,default_namespace=self.parent)
