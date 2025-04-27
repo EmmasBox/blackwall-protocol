@@ -3,7 +3,6 @@ from textual.app import ComposeResult
 from textual.widgets import Label, OptionList
 from textual.containers import VerticalScroll
 from textual.widgets.option_list import Option
-from rich.table import 
 
 class PanelBackout(VerticalScroll):
     def compose(self) -> ComposeResult:
