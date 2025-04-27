@@ -81,7 +81,7 @@ class BaseSetroptsTraits(TraitsBase):
     password_rules: bool | None = field(default=None,metadata={"label": "Password rules", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     mixed_case_password_support: bool | None = field(default=None,metadata={"label": "Mixed case password support", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     #special_character_password_support: bool | None = field(default=None,metadata={"label": "Special character password support", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
-    multi_level_security_label_alteration: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
+    multi_level_security_label_alteration: bool | None = field(default=None,metadata={"label": "Multi-level security label alteration","allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     profile_modelling: bool | None = field(default=None,metadata={"label": "Profile modelling","allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     profile_modelling_generation_data_group: bool | None = field(default=None,metadata={"label": "Profile modelling generation data group","allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
     profile_modelling_group: bool | None = field(default=None,metadata={"label": "Profile modelling group","allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
