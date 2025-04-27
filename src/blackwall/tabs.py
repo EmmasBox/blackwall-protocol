@@ -5,6 +5,7 @@ from textual.containers import HorizontalGroup
 
 from blackwall.emoji import get_emoji
 from blackwall.panels.permits.resource_permit import PanelResourcePermit
+from blackwall.settings import get_user_setting
 from .panels.welcome.welcome import PanelWelcome
 from .panels.users.user import PanelUser
 from .panels.search.search import PanelSearch
@@ -48,7 +49,22 @@ class TabSystem(HorizontalGroup):
         yield self.tabs
 
     def on_mount(self) -> None:
-        self.post_message(OpenTab("Welcome!",PanelWelcome()))
+        default_tab = get_user_setting(section="tabs",setting="default_tab")
+        if default_tab is not None:
+            if default_tab == "user":
+                self.post_message(OpenTab(f"{get_emoji(people_list)} User management",PanelUser()))
+            elif default_tab == "group":
+                self.post_message(OpenTab(f"{get_emoji("👥")} Group management",PanelGroup()))
+            elif default_tab == "dataset":
+                self.post_message(OpenTab(f"{get_emoji("📁")} Dataset profile mangement",PanelDataset()))
+            elif default_tab == "resource":
+                self.post_message(OpenTab(f"{get_emoji("☕")} Resource management",PanelResource()))
+            elif default_tab == "commands":
+                self.post_message(OpenTab(f"{get_emoji("📃")} Command history",PanelCommandOutput()))
+            elif default_tab == "options":
+                self.post_message(OpenTab("RACF options",PanelSetropts()))
+        else:
+            self.post_message(OpenTab("Welcome!",PanelWelcome()))
 
     async def on_open_tab(self, message: OpenTab):
         message.stop()
