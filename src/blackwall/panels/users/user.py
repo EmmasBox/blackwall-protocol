@@ -262,7 +262,8 @@ class PanelUser(VerticalScroll):
                 self.notify(f"{message}, return code: {return_code}",severity="error")
 
     def action_delete_user(self) -> None:
-        generic_confirmation_modal(self,modal_text="Are you sure you want to delete this user?",confirm_action="delete_user_api",action_widget=self)
+        username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
+        generic_confirmation_modal(self,modal_text=f"Are you sure you want to delete user {username}?",confirm_action="delete_user_api",action_widget=self)
 
     def action_save_user(self) -> None:
         username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
