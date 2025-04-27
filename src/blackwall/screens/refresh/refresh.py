@@ -2,7 +2,7 @@
 from textual.app import ComposeResult
 from textual.screen import Screen
 from textual.widgets import Label, Button
-from textual.containers import Middle, Center
+from textual.containers import Grid
 
 from blackwall.api.setropts import refresh_RACF
         
@@ -17,8 +17,9 @@ class RefreshScreen(Screen):
             self.notify(f"Refresh failed, return code: {return_code}",severity="error")
 
     def compose(self) -> ComposeResult:
-        with Middle():
-            with Center():
-                yield Label("Here you can issue a refresh of the system")
-                yield Button("Refresh system",variant="warning",action="refresh")
-                yield Label("Press 'Esc' to exit refresh screen")
+        yield Grid(
+            Label("Here you can issue a refresh of the system", id="question"),
+            Button("Cancel", variant="primary", id="cancel", classes="modal-buttons"),
+            Button("Confirm", variant="error", id="confirm", classes="modal-buttons"),
+            id="dialog",
+        )
