@@ -21,7 +21,12 @@
 
 .modal-buttons {
     width: 100%;
+}
+
+.single-modal-button {
+    column-span: 2;
     content-align: center middle;
+    width: 100%;
 }
 
 RvaryScreen {

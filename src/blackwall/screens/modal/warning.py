@@ -14,7 +14,7 @@ class WarningScreen(Screen):
     def compose(self) -> ComposeResult:
         yield Grid(
             Label(self.dialog_text, id="question"),
-            Button("Dismiss", variant="warning", id="dismiss", classes="modal-buttons"),
+            Button("Dismiss", variant="warning", id="dismiss", classes="single-modal-button"),
             id="dialog",
         )
 
