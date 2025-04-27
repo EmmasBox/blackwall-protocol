@@ -43,7 +43,7 @@ class BaseSetroptsTraits(TraitsBase):
     multi_level_security_declassification: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     passphrase_change_interval: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     data_set_single_level_name_prefix_protection: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
-    primary_language: str | None = field(default=None,metadata={"label": "Primary language", "allowed_in": {"alter","extract"}})
+    primary_language: str | None = field(default=None,metadata={"label": "Primary language", "allowed_in": {"alter","extract"},"input_args": {"classes": "field-short-generic","max_length": 8,}})
     protect_all_data_sets: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     password_encryption_algorithm: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     refresh: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
