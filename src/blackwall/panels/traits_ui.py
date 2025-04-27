@@ -101,7 +101,7 @@ def set_traits_in_input(widget: Widget, prefix: str, traits: TraitsBase):
             field_value = getattr(traits,field.name)
             if (actual_type is str or actual_type is int):
                 if field_value is not None:
-                    widget.query_exactly_one(f"#{input_id}", Input).value = str(field_value)
+                    widget.query_exactly_one(f"#{input_id}").value = str(field_value)
             elif actual_type is bool:
                 if field_value is not None:
                     widget.query_exactly_one(f"#{input_id}", RadioButton).value = field_value
