@@ -40,7 +40,7 @@ class Blackwall(App):
     CSS_PATH = "UI.css"
 
     BINDINGS = [
-        ("ctrl+h", "push_screen('refresh')", "Switch to refresh screen"),
+        ("shift+h", "push_screen('refresh')", "Switch to refresh screen"),
         ("ctrl+home", "go_to_cli", "Focus command line")
     ]
     
