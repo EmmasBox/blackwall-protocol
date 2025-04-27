@@ -110,6 +110,7 @@ class PanelDatasetActionButtons(HorizontalGroup):
 
 @dataclass
 class DatasetInfo:
+    base_traits: dataset.BaseDatasetTraits | None = None
     mode: PanelMode = PanelMode.create
 
 class PanelDataset(VerticalScroll):
