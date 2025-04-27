@@ -31,7 +31,7 @@
 
 PanelWelcome {
     layout: grid;
-    grid-columns: 3fr;
+    grid-columns: 8fr;
 }
 
 PanelWelcomeMessage {
