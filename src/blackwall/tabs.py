@@ -15,6 +15,7 @@ from .panels.resource.resource import PanelResource
 from .panels.command_output.command_output import PanelCommandOutput
 from .panels.setropts.setropts import PanelSetropts
 from .panels.group.group import PanelGroup
+from .panels.backout.backout import PanelBackout
 
 from blackwall.messages import OpenTab
 
@@ -38,6 +39,7 @@ class TabSystem(HorizontalGroup):
         #("ctrl+a", "open_analysis", "Open analysis tab"),
         ("ctrl+o", "open_options", "Open RACF options tab"),
         ("ctrl+n", "open_resource_permits", "Open resource permits tab"),
+        ("ctrl+b", "open_backout", "Open backout tab"),
         ("ctrl+w", "remove", "Remove active tab"),
         ("ctrl+shift+w", "clear", "Clear all tabs"),
     ]
@@ -120,6 +122,10 @@ class TabSystem(HorizontalGroup):
     def action_open_resource_permits(self) -> None:
         """Add a new resource permits tab."""
         self.post_message(OpenTab("Resource permits",PanelResourcePermit()))
+
+    def action_open_backout(self) -> None:
+        """Add a new backout panel tab."""
+        self.post_message(OpenTab("Backout changes",PanelBackout()))
 
     #Remove current tab
     def action_remove(self) -> None:
