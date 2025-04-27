@@ -8,7 +8,7 @@ import json
 
 from blackwall.notifications import send_notification
 from .command_line import CommandLine
-from .screens.refresh.refresh import RefreshScreen
+from .screens.modal.refresh import RefreshScreen
 from .theme_cynosure import cynosure_theme
 from .theme_3270 import ibm_3270_theme
 
