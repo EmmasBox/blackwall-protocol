@@ -14,3 +14,10 @@ assignees: ''
 ## Suggested fixes (optional)
 
 <- Elaborate ->
+
+**Check list**
+You must comply with this
+
+- [ ] Using latest version of Blackwall
+- [ ] Using supported operating system
+- [ ] Using supported Python version
