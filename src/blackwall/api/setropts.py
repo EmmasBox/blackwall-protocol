@@ -144,7 +144,18 @@ def update_racf_options(base: BaseSetroptsTraits):
         )
         return result.result, result.result["return_codes"]["racf_return_code"] # type: ignore
     
-def racf_change_rvary_password(password: str):
+def racf_change_rvary_password(password: str) -> int:
     """Change rvary password"""
     if racfu_enabled:
-        pass
+        result = racfu(
+            {
+                "operation": "alter", 
+                "admin_type": "racf-options", 
+                "traits": {
+                    "base:rvary_switch_password": password.upper(),
+                },
+            },
+        )
+        return result.result["return_codes"]["racf_return_code"] # type: ignore
+    else:
+        return 8

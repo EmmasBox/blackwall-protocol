@@ -4,6 +4,8 @@ from textual.containers import Grid
 from textual.screen import Screen
 from textual.widgets import Button, Input, Label
 
+from blackwall.api.setropts import racf_change_rvary_password
+
 
 class RvaryScreen(Screen):
     """Modal rvary password change screen"""
@@ -25,6 +27,7 @@ class RvaryScreen(Screen):
             input_value = self.get_child_by_id("rvary_password",Input).value
             input_confirm_value = self.get_child_by_id("rvary_password_confirm",Input).value
             if input_value == input_confirm_value:
+                racf_change_rvary_password(input_value)
                 self.app.pop_screen()
         else:
             self.app.pop_screen()
