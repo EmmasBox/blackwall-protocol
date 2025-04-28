@@ -10,6 +10,7 @@ from blackwall.emoji import get_emoji
 from blackwall.modals import generic_confirmation_modal
 from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
+from blackwall.regex import racf_id_regex
 
 from ..traits_ui import (
     generate_trait_section,
@@ -34,7 +35,7 @@ class PanelResourceNameAndClass(VerticalGroup):
         yield Label("Class:")
         yield Input(max_length=8,id="resource_profile_class",classes="class-field")
         yield Label("Owner:")
-        yield Input(max_length=8,id="base_owner",classes="class-field")
+        yield Input(max_length=8,restrict=racf_id_regex,id="base_owner",classes="class-field")
 
 class PanelResourceInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:

@@ -11,6 +11,7 @@ from blackwall.modals import generic_confirmation_modal
 from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
 from blackwall.panels.traits_ui import get_traits_from_input, set_traits_in_input
+from blackwall.regex import racf_id_regex
 
 
 class PanelDatasetInfo(HorizontalGroup):
@@ -28,7 +29,7 @@ class PanelDatasetName(VerticalGroup):
 class PanelDatasetOwner(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Owner:")
-        yield Input(id="base_owner")
+        yield Input(id="base_owner",max_length=8,restrict=racf_id_regex)
 
 class PanelDatasetInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
