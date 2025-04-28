@@ -305,7 +305,7 @@ class PanelUser(VerticalScroll):
             nds=nds_segment,
             lnotes=lnotes_segment,
             mfa=mfa_segment,
-            netview=netview_segment
+            netview=netview_segment,
         )
 
         if not user_exists:
