@@ -1,23 +1,23 @@
 
 from textual.app import ComposeResult
-from textual.widgets import TabPane, TabbedContent
 from textual.containers import HorizontalGroup
+from textual.widgets import TabbedContent, TabPane
 
 from blackwall.emoji import get_emoji
+from blackwall.messages import OpenTab
 from blackwall.panels.permits.resource_permit import PanelResourcePermit
 from blackwall.settings import get_user_setting
-from .panels.welcome.welcome import PanelWelcome
-from .panels.users.user import PanelUser
-from .panels.search.search import PanelSearch
-from .panels.analysis.analysis import PanelAnalysis
-from .panels.dataset.dataset import PanelDataset
-from .panels.resource.resource import PanelResource
-from .panels.command_output.command_output import PanelCommandOutput
-from .panels.setropts.setropts import PanelSetropts
-from .panels.group.group import PanelGroup
-from .panels.backout.backout import PanelBackout
 
-from blackwall.messages import OpenTab
+from .panels.analysis.analysis import PanelAnalysis
+from .panels.backout.backout import PanelBackout
+from .panels.command_output.command_output import PanelCommandOutput
+from .panels.dataset.dataset import PanelDataset
+from .panels.group.group import PanelGroup
+from .panels.resource.resource import PanelResource
+from .panels.search.search import PanelSearch
+from .panels.setropts.setropts import PanelSetropts
+from .panels.users.user import PanelUser
+from .panels.welcome.welcome import PanelWelcome
 
 people_list = [
     "🧔",
