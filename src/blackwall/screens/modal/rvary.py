@@ -13,8 +13,8 @@ class RvaryScreen(Screen):
     def compose(self) -> ComposeResult:
         yield Grid(
             Label("Change RVARY password for whole RACF database. Password must be up to 8 characters long. Allowed characters: alphanumeric and @#$", id="question"),
-            Input(id="rvary_password",restrict=r"([a-z]*[0-9]*[\@\#\$]*)",placeholder="enter password...",max_length=8,password=True),
-            Input(id="rvary_password_confirm",restrict=r"([a-z]*[0-9]*[\@\#\$]*)",placeholder="confirm password...",max_length=8,password=True),
+            Input(id="rvary_password",restrict=r"([a-z]*[A-Z]*[0-9]*[\@\#\$]*)",placeholder="enter password...",max_length=8,password=True),
+            Input(id="rvary_password_confirm",restrict=r"([a-z]*[A-Z]*[0-9]*[\@\#\$]*)",placeholder="confirm password...",max_length=8,password=True),
             Button("Cancel", variant="primary", id="cancel", classes="modal-buttons"),
             Button("Confirm", variant="error", id="confirm", classes="modal-buttons"),
             id="dialog",
