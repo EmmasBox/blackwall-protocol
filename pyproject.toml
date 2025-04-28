@@ -18,12 +18,15 @@ keywords = ["RACF", "security", "mainframe", "zos", "TUI", "RACFu", "ESM"]
 classifiers = [    
   #Application audience and type
   "Topic :: Security",
+  "Intended Audience :: System Administrators",
 
   #Status
   "Development Status :: 3 - Alpha",
 
   #Application environment
   "Environment :: Console",
+  "Operating System :: POSIX",
+  "Topic :: System :: Hardware :: Mainframes",
 
   #Supported python versions
   "Programming Language :: Python :: 3.12",
@@ -61,7 +64,7 @@ exclude_dirs = [".github"]
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
 exclude = [
-    ".git",
+  ".git",
 ]
 
 [tool.ruff.lint]
@@ -70,17 +73,19 @@ select = [
   "F", 
   "B", 
   "EM", 
-  "SIM", 
+  "SIM", #Comes with suggestions on simplifying things
   "PTH", #Must use pathlib instead of os
-  "N", 
+  "N",  #Checks if code conforms to the PEP8 naming conventions
   "PLE", 
   "UP", 
   "TRY", 
-  "FLY", 
-  "I", 
-  "COM", 
+  "FLY", #Checks for string joins
+  "I",  #Comes with suggestions on organizing imports
+  "COM", #Checks for missing commas and unnecessary 
   "A", 
-  "C4"
+  "C4",
+  "YTT",
+  "ASYNC",
   ]
 
 # Avoid enforcing line-length violations (`E501`)
