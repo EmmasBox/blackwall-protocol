@@ -25,6 +25,8 @@ classifiers = [
 
   #Application environment
   "Environment :: Console",
+  "Operating System :: POSIX",
+  "Topic :: System :: Hardware :: Mainframes",
 
   #Supported python versions
   "Programming Language :: Python :: 3.12",
