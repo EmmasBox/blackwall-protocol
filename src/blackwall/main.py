@@ -2,12 +2,13 @@
 
 #Enables true colors to be active by default
 from os import environ
+
 if "TEXTUAL_COLOR_SYSTEM" not in environ:
     environ["TEXTUAL_COLOR_SYSTEM"] = "truecolor"
 
-from .app import Blackwall
-
 import importlib.util
+
+from .app import Blackwall
 
 spec = importlib.util.find_spec('textual_image')
 
