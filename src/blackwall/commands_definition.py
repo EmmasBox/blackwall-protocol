@@ -46,5 +46,5 @@ commands = [
     "FREE",
     "SMCOPY",
     "OUTPUT",
-    "PRINTDS"
+    "PRINTDS",
     ]
