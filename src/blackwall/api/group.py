@@ -1,7 +1,6 @@
 #Group API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
 from dataclasses import dataclass, field
-from typing import Tuple
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
@@ -100,7 +99,7 @@ def update_group(group: str,create: bool, base: BaseGroupTraits, tme: TMEGroupTr
         )
         return result.result["return_codes"]["racf_return_code"]
 
-def delete_group(group: str) -> Tuple[str, int]:
+def delete_group(group: str) -> tuple[str, int]:
     if racfu_enabled:
         """Deletes a group"""
         result = racfu(

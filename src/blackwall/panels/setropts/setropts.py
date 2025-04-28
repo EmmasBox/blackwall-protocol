@@ -98,9 +98,7 @@ class PanelSetropts(VerticalScroll):
     def action_save_setropts_api(self) -> None:
         base_traits = get_traits_from_input(prefix="base",operator="alter",trait_cls=BaseSetroptsTraits,widget=self)
         message, return_code = update_racf_options(base=base_traits)
-        if return_code == 0:
-            self.notify(f"Updated system settings, return code: {return_code}",severity="warning")
-        elif return_code == 4:
+        if return_code == 0 or return_code == 4:
             self.notify(f"Updated system settings, return code: {return_code}",severity="warning")
         else:
             self.notify(f"Couldn't update system settings, return code: {return_code}",severity="error")
