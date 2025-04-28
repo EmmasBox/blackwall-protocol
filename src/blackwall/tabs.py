@@ -5,6 +5,7 @@ from textual.widgets import TabbedContent, TabPane
 
 from blackwall.emoji import get_emoji
 from blackwall.messages import OpenTab
+from blackwall.panels.errors.history import PanelErrorHistory
 from blackwall.panels.permits.resource_permit import PanelResourcePermit
 from blackwall.settings import get_user_setting
 
@@ -122,6 +123,10 @@ class TabSystem(HorizontalGroup):
     def action_open_resource_permits(self) -> None:
         """Add a new resource permits tab."""
         self.post_message(OpenTab("Resource permits",PanelResourcePermit()))
+
+    def action_open_error_log(self) -> None:
+        """Add a new error log panel tab."""
+        self.post_message(OpenTab("Error history",PanelErrorHistory()))
 
     def action_open_backout(self) -> None:
         """Add a new backout panel tab."""
