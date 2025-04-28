@@ -40,7 +40,7 @@ class PanelDatasetAudit(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Collapsible(title="Auditing"):
             yield Label("Notify user:")
-            yield Input(id="base_notify_userid",max_length=8,classes="field-short-generic") 
+            yield Input(id="base_notify_userid",max_length=8,restrict=racf_id_regex,classes="field-short-generic") 
             yield Label("Audit NONE:")
             yield Input(id="base_audit_none",classes="field-medium-generic")
             yield Label("Audit READ:")
