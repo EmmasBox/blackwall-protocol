@@ -1,13 +1,14 @@
 
-from textual.app import ComposeResult
-from textual.suggester import SuggestFromList
 from textual import on
-from textual.widgets import Input
+from textual.app import ComposeResult
 from textual.containers import HorizontalGroup
+from textual.suggester import SuggestFromList
+from textual.widgets import Input
 
 from blackwall.commands_definition import commands
 from blackwall.messages import SubmitCommand
 from blackwall.settings import get_user_setting
+
 
 class CommandLine(HorizontalGroup):
     BINDINGS = [

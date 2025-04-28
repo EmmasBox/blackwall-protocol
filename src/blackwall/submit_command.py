@@ -1,9 +1,9 @@
 
+import subprocess
 from datetime import datetime
 
-import subprocess
-
 from blackwall.settings import get_user_setting
+
 
 def generate_command_meta_header(command_type: str,command: str) -> str:
     date_format = get_user_setting(section="locale",setting="date_format")

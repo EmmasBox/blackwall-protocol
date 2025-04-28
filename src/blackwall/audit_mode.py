@@ -1,10 +1,10 @@
 
-from textual.app import ComposeResult
-from textual.widgets import Label
-from textual.containers import Container
+import importlib.util
 from datetime import datetime
 
-import importlib.util
+from textual.app import ComposeResult
+from textual.containers import Container
+from textual.widgets import Label
 
 #Checks if textual_image can be imported
 image_enabled = importlib.util.find_spec('textual_image')
