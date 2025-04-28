@@ -7,6 +7,7 @@ from blackwall.api import group, permit, resource
 from blackwall.emoji import get_emoji
 from blackwall.notifications import send_notification
 from blackwall.panels.traits_ui import get_traits_from_input
+from blackwall.regex import racf_id_regex
 
 PERMIT_COLUMNS = [
     ("ID", "Type", "Access"),
@@ -37,7 +38,7 @@ class PanelResourcePermitCreate(HorizontalGroup):
     
     def compose(self) -> ComposeResult:
         yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="READ",classes="uacc-select",id="base_access")
-        yield Input(id="permit_racf_id",placeholder="ID...",max_length=8,classes="field-short-generic", tooltip="User ID or group ID you want this permit change to affect")    
+        yield Input(id="permit_racf_id",placeholder="ID...",max_length=8,restrict=racf_id_regex,classes="field-short-generic", tooltip="User ID or group ID you want this permit change to affect")    
         yield Button(f"{get_emoji("💾")} Save",id="resource_permit_save",action="update")
 
     @on(Input.Submitted)
