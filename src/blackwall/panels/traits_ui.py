@@ -1,12 +1,14 @@
 
 from collections.abc import Generator
-from dataclasses import fields, Field
+from dataclasses import Field, fields
 from types import UnionType
 from typing import get_args
 
 from textual.widget import Widget
-from textual.widgets import Input, Label, RadioButton, Collapsible, ListView, ListItem
+from textual.widgets import Collapsible, Input, Label, ListItem, ListView, RadioButton
+
 from blackwall.api.traits_base import TraitsBase
+
 
 def get_actual(field: Field) -> tuple[type,bool]:
     # UnionType is 'str | None'
