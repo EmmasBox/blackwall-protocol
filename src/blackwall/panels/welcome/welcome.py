@@ -2,7 +2,7 @@
 import importlib.util
 from textual.app import ComposeResult
 from textual.widgets import Label, Button, Markdown
-from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll, Grid
+from textual.containers import VerticalGroup, VerticalScroll, Grid
 
 from blackwall.messages import OpenTab
 from blackwall.panels.users.user import PanelUser

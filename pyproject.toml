@@ -59,3 +59,12 @@ blackwall = ["*.css", "*.tcss", "*.md", "*.png"]
 
 [tool.bandit]
 exclude_dirs = [".github"]
+
+[tool.ruff]
+# Exclude a variety of commonly ignored directories.
+exclude = [
+    ".git",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "B", "EM", "SIM", "PTH", "N", "PLE", "UP", "TRY"]
