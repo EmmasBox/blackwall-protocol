@@ -29,5 +29,7 @@ class RvaryScreen(Screen):
             if input_value == input_confirm_value:
                 racf_change_rvary_password(input_value)
                 self.app.pop_screen()
+            else:
+                self.notify("Password does not match",severity="error")
         else:
             self.app.pop_screen()
