@@ -13,7 +13,7 @@ from blackwall.settings import get_user_setting
 class CommandLine(HorizontalGroup):
     BINDINGS = [
         ("up", "cycle_up", "Cycle previous executed commands"),
-        ("down", "cycle_down", "Cycle previous executed commands")
+        ("down", "cycle_down", "Cycle previous executed commands"),
     ]
 
     command_history_list = []
