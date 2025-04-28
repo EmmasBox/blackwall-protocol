@@ -80,7 +80,9 @@ select = [
   "I", 
   "COM", 
   "A", 
-  "C4"
+  "C4",
+  "YTT",
+  "ASYNC",
   ]
 
 # Avoid enforcing line-length violations (`E501`)
