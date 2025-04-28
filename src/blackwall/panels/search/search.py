@@ -46,7 +46,7 @@ class SearchField(HorizontalGroup):
 class PanelSearch(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield SearchSelector()
-        yield SearchField(search_action="search")id # type: ignore
+        yield SearchField(search_action="search")
 
     @on(Input.Submitted)
     def action_search(self) -> None:
