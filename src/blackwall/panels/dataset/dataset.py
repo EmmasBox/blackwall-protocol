@@ -171,7 +171,7 @@ class PanelDataset(VerticalScroll):
         result = dataset.update_dataset_profile(
             dataset=dataset_name,
             create=not dataset_profile_exists,
-            base=base_segment
+            base=base_segment,
             )
         
         if not dataset_profile_exists:
