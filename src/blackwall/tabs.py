@@ -5,6 +5,7 @@ from textual.widgets import TabbedContent, TabPane
 
 from blackwall.emoji import get_emoji
 from blackwall.messages import OpenTab
+from blackwall.panels.errors.history import PanelErrorHistory
 from blackwall.panels.permits.resource_permit import PanelResourcePermit
 from blackwall.settings import get_user_setting
 
@@ -39,12 +40,12 @@ class TabSystem(HorizontalGroup):
         #("ctrl+a", "open_analysis", "Open analysis tab"),
         ("ctrl+o", "open_options", "Open RACF options tab"),
         ("ctrl+n", "open_resource_permits", "Open resource permits tab"),
-        ("ctrl+b", "open_backout", "Open backout tab"),
+        #("ctrl+b", "open_backout", "Open backout tab"),
         ("ctrl+w", "remove", "Remove active tab"),
         ("ctrl+shift+w", "clear", "Clear all tabs"),
     ]
-    def __init__(self, *children, name = None, id = None, classes = None, disabled = False, markup = True):
-        super().__init__(*children, name=name, id=id, classes=classes, disabled=disabled, markup=markup)
+    def __init__(self, *children, name = None, classes = None, disabled = False, markup = True):
+        super().__init__(*children, name=name, classes=classes, disabled=disabled, markup=markup)
         self.tabs = TabbedContent(id="tab_system")
 
     def compose(self) -> ComposeResult:
@@ -122,6 +123,10 @@ class TabSystem(HorizontalGroup):
     def action_open_resource_permits(self) -> None:
         """Add a new resource permits tab."""
         self.post_message(OpenTab("Resource permits",PanelResourcePermit()))
+
+    def action_open_error_log(self) -> None:
+        """Add a new error log panel tab."""
+        self.post_message(OpenTab("Error history",PanelErrorHistory()))
 
     def action_open_backout(self) -> None:
         """Add a new backout panel tab."""

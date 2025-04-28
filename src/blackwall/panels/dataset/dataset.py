@@ -11,6 +11,7 @@ from blackwall.modals import generic_confirmation_modal
 from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
 from blackwall.panels.traits_ui import get_traits_from_input, set_traits_in_input
+from blackwall.regex import racf_id_regex
 
 
 class PanelDatasetInfo(HorizontalGroup):
@@ -28,7 +29,7 @@ class PanelDatasetName(VerticalGroup):
 class PanelDatasetOwner(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Owner:")
-        yield Input(id="base_owner")
+        yield Input(id="base_owner",max_length=8,restrict=racf_id_regex)
 
 class PanelDatasetInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -39,7 +40,7 @@ class PanelDatasetAudit(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Collapsible(title="Auditing"):
             yield Label("Notify user:")
-            yield Input(id="base_notify_userid",max_length=8,classes="field-short-generic") 
+            yield Input(id="base_notify_userid",max_length=8,restrict=racf_id_regex,classes="field-short-generic") 
             yield Label("Audit NONE:")
             yield Input(id="base_audit_none",classes="field-medium-generic")
             yield Label("Audit READ:")
@@ -69,7 +70,7 @@ class PanelDatasetUACC(VerticalGroup):
 class PanelDatasetNotify(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Notify user:")
-        yield Input(id="base_notify_userid",max_length=8,classes="field-short-generic")
+        yield Input(id="base_notify_userid",restrict=racf_id_regex,max_length=8,classes="field-short-generic")
 
 class PanelDatasetVolume(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -90,7 +91,7 @@ class PanelDatasetSettings(VerticalGroup):
             yield Label("Dataset model profile:")
             yield Input(id="base_data_set_model_profile",max_length=255,classes="field-long-generic")
             yield Label("Volume:")
-            yield Input(id="base_vlume",max_length=8,classes="field-short-generic")
+            yield Input(id="base_volume",max_length=8,classes="field-short-generic")
 
 class PanelDatasetActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
