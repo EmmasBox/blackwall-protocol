@@ -12,3 +12,8 @@ class SubmitCommand(Message):
     def __init__(self, command: str):
         super().__init__()
         self.command =  command
+
+class SubmitError(Message):
+    def __init__(self, error: str):
+        super().__init__()
+        self.error = error

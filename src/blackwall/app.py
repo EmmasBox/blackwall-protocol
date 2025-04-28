@@ -64,8 +64,12 @@ class Blackwall(App):
             self.theme = "cynosure"
         self.install_screen(RefreshScreen(), name="refresh")
         self.install_screen(RvaryScreen(), name="rvary")
+        
         self.command_output_change = Signal(self,name="command_output_change")
         self.command_output = ""
+
+        self.error_output_change = Signal(self,name="error_output_change")
+        self.error_output = ""
 
     async def action_go_to_cli(self) -> None:
         """Focuses the command line"""
