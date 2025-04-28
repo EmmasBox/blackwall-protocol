@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
-from textual.reactive import reactive
 from textual.app import ComposeResult
-from textual.widgets import Input, Label, Button, Collapsible, Select, RadioButton
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
+from textual.reactive import reactive
+from textual.widgets import Button, Collapsible, Input, Label, RadioButton, Select
 
 from blackwall.api import resource
 from blackwall.emoji import get_emoji
@@ -11,7 +11,12 @@ from blackwall.modals import generic_confirmation_modal
 from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
 
-from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
+from ..traits_ui import (
+    generate_trait_section,
+    get_traits_from_input,
+    set_traits_in_input,
+)
+
 
 class PanelResourceInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
