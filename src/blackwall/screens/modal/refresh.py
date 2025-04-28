@@ -1,11 +1,12 @@
 
 from textual.app import ComposeResult
-from textual.screen import Screen
-from textual.widgets import Label, Button
 from textual.containers import Grid
+from textual.screen import Screen
+from textual.widgets import Button, Label
 
 from blackwall.api.setropts import refresh_racf
-        
+
+
 class RefreshScreen(Screen):
     """Refresh RACF database screen"""
 
