@@ -2,8 +2,9 @@
 from textual.app import ComposeResult
 from textual.containers import Grid
 from textual.screen import Screen
-from textual.widgets import Button, Label
 from textual.widget import Widget
+from textual.widgets import Button, Label
+
 
 class ConfirmationScreen(Screen):
     """Modal confirmation screen"""

@@ -2,6 +2,7 @@ from abc import ABC
 from dataclasses import dataclass, fields
 from typing import Any, Self
 
+
 @dataclass
 class TraitsBase(ABC):
     def to_traits(self, prefix: str) -> dict[str, Any]:
