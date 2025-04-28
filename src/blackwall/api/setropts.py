@@ -116,7 +116,7 @@ def get_active_classes() -> list[str]:
     else:
         return []
 
-def refresh_RACF():
+def refresh_racf():
     """Refresh RACF"""
     if racfu_enabled:
         result = racfu(
