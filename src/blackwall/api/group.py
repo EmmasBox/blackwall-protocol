@@ -1,15 +1,15 @@
 #Group API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
+import importlib.util
 from dataclasses import dataclass, field
+
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
-import importlib.util
-
 racfu_enabled = importlib.util.find_spec('racfu')
 
 if racfu_enabled:
-    from racfu import racfu # type: ignore
+    from racfu import racfu  # type: ignore
 else:
     print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
 
@@ -94,8 +94,8 @@ def update_group(group: str,create: bool, base: BaseGroupTraits, tme: TMEGroupTr
                 "operation": operation, 
                 "admin_type": "group", 
                 "profile_name": group.upper(),
-                "traits":  traits
-            }
+                "traits":  traits,
+            },
         )
         return result.result["return_codes"]["racf_return_code"]
 
@@ -106,8 +106,8 @@ def delete_group(group: str) -> tuple[str, int]:
             {
                 "operation": "delete", 
                 "admin_type": "group", 
-                "profile_name": group.upper()
-            }
+                "profile_name": group.upper(),
+            },
         )
         #TODO add error message
         return "", result.result["return_codes"]["racf_return_code"]

@@ -3,22 +3,19 @@
 
 from textual import on
 from textual.app import ComposeResult
-from textual.widgets import Button, Input, Label, RadioButton, RadioSet
 from textual.containers import HorizontalGroup, VerticalScroll
+from textual.widgets import Button, Input, Label, RadioButton, RadioSet
 
+from blackwall.api import dataset, group, resource, user
 from blackwall.messages import OpenTab
 from blackwall.panels.dataset.dataset import DatasetInfo, PanelDataset
 from blackwall.panels.group.group import GroupInfo, PanelGroup
 from blackwall.panels.panel_mode import PanelMode
 from blackwall.panels.resource.resource import PanelResource, ResourceInfo
 from blackwall.panels.search.results import PanelResultsMixedType
+from blackwall.panels.search.search_backend import QueryType, search_database_query_one
 from blackwall.panels.users.user import PanelUser, UserInfo
 
-from blackwall.panels.search.search_backend import search_database_query_one, QueryType
-
-from blackwall.api import resource, user
-from blackwall.api import group
-from blackwall.api import dataset
 
 class SearchSelector(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -70,7 +67,7 @@ class PanelSearch(VerticalScroll):
                 new_user_panel.user_info = UserInfo(
                     base_traits=base_traits,
                     username=search_query,
-                    mode=PanelMode.edit
+                    mode=PanelMode.edit,
                 )
 
                 if 'profile' in user_dict and 'tso' in user_dict['profile']:
@@ -136,7 +133,7 @@ class PanelSearch(VerticalScroll):
 
                 new_group_panel.group_info = GroupInfo(
                     base_traits=base_traits,
-                    group_name=search_query
+                    group_name=search_query,
                 )
 
                 if 'profile' in group_dict and 'dfp' in group_dict['profile']:
@@ -157,7 +154,7 @@ class PanelSearch(VerticalScroll):
 
                 new_dataset_panel.dataset_info = DatasetInfo(
                     base_traits=base_traits,
-                    profile_name=search_query
+                    profile_name=search_query,
                 )
 
                 self.post_message(OpenTab(f"Dataset: {search_query}",new_dataset_panel))

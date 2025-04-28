@@ -1,10 +1,12 @@
 
 from enum import Enum
-from blackwall.api.user import user_exists, get_user
-from blackwall.api.group import group_exists, get_group
+
 from blackwall.api.dataset import dataset_profile_exists, get_dataset_profile
-from blackwall.api.resource import resource_profile_exists, get_resource_profile
+from blackwall.api.group import get_group, group_exists
+from blackwall.api.resource import get_resource_profile, resource_profile_exists
 from blackwall.api.setropts import get_active_classes
+from blackwall.api.user import get_user, user_exists
+
 
 class QueryType(Enum):
     User = "user"

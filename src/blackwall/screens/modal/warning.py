@@ -4,6 +4,7 @@ from textual.containers import Grid
 from textual.screen import Screen
 from textual.widgets import Button, Label
 
+
 class WarningScreen(Screen):
     """Warning screen"""
 

@@ -1,15 +1,15 @@
 #General resource API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
+import importlib.util
 from dataclasses import dataclass, field
+
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
-import importlib.util
-
 racfu_enabled = importlib.util.find_spec('racfu')
 
 if racfu_enabled:
-    from racfu import racfu # type: ignore
+    from racfu import racfu  # type: ignore
 else:
     print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
 
@@ -339,8 +339,8 @@ def update_resource_profile(
             "admin_type": "resource", 
             "profile_name": resource.upper(),
             "class_name": resource_class.upper(),
-            "traits":  traits
-        }
+            "traits":  traits,
+        },
     )
     return result.result["return_codes"]["racf_return_code"]
 
@@ -351,8 +351,8 @@ def delete_resource_profile(resource_class: str,resource: str) -> tuple[str, int
                     "operation": "delete", 
                     "admin_type": "resource", 
                     "profile_name": resource.upper(),
-                    "class_name": resource_class.upper()
-                }
+                    "class_name": resource_class.upper(),
+                },
             )
         #TODO add error message
         return "", result.result["return_codes"]["racf_return_code"]

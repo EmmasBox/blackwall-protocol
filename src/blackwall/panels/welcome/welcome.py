@@ -1,23 +1,22 @@
 
 import importlib.util
-from textual.app import ComposeResult
-from textual.widgets import Label, Button, Markdown
-from textual.containers import VerticalGroup, VerticalScroll, Grid
-
-from blackwall.messages import OpenTab
-from blackwall.panels.users.user import PanelUser
-from blackwall.panels.dataset.dataset import PanelDataset
-from blackwall.panels.resource.resource import PanelResource
-from blackwall.panels.analysis.analysis import PanelAnalysis
-from blackwall.panels.group.group import PanelGroup
-from blackwall.panels.search.search import PanelSearch
-from blackwall.panels.setropts.setropts import PanelSetropts
-
-from blackwall.settings import get_user_setting, get_site_setting
-
+from importlib.resources import files
 from pathlib import Path
 
-from importlib.resources import files
+from textual.app import ComposeResult
+from textual.containers import Grid, VerticalGroup, VerticalScroll
+from textual.widgets import Button, Label, Markdown
+
+from blackwall.messages import OpenTab
+from blackwall.panels.analysis.analysis import PanelAnalysis
+from blackwall.panels.dataset.dataset import PanelDataset
+from blackwall.panels.group.group import PanelGroup
+from blackwall.panels.resource.resource import PanelResource
+from blackwall.panels.search.search import PanelSearch
+from blackwall.panels.setropts.setropts import PanelSetropts
+from blackwall.panels.users.user import PanelUser
+from blackwall.settings import get_site_setting, get_user_setting
+
 message = files('blackwall.panels.welcome').joinpath('welcome_message.md').read_text()
 
 logo_allowed = get_user_setting(section="display",setting="logo")

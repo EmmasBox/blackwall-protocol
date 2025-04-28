@@ -1,15 +1,15 @@
 
+import importlib.util
 from dataclasses import dataclass, field
 from typing import Any
+
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
-import importlib.util
-
 racfu_enabled = importlib.util.find_spec('racfu')
 
 if racfu_enabled:
-    from racfu import racfu # type: ignore
+    from racfu import racfu  # type: ignore
 else:
     print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
 
@@ -43,8 +43,8 @@ class BaseSetroptsTraits(TraitsBase):
     multi_level_security_declassification: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     passphrase_change_interval: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     data_set_single_level_name_prefix_protection: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
-    primary_language: str | None = field(default=None,metadata={"label": "Primary language", "allowed_in": {"alter","extract"},"input_args": {"classes": "field-short-generic","max_length": 8,}})
-    secondary_language: str | None = field(default=None,metadata={"label": "Secondary language", "allowed_in": {"alter","extract"},"input_args": {"classes": "field-short-generic","max_length": 8,}})
+    primary_language: str | None = field(default=None,metadata={"label": "Primary language", "allowed_in": {"alter","extract"},"input_args": {"classes": "field-short-generic","max_length": 8}})
+    secondary_language: str | None = field(default=None,metadata={"label": "Secondary language", "allowed_in": {"alter","extract"},"input_args": {"classes": "field-short-generic","max_length": 8}})
     protect_all_data_sets: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     password_encryption_algorithm: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     refresh: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
@@ -124,9 +124,9 @@ def refresh_racf():
                 "operation": "alter", 
                 "admin_type": "racf-options", 
                 "traits": {
-                    "base:refresh": True
-                }
-            }
+                    "base:refresh": True,
+                },
+            },
         )
         return result.result["return_codes"]["racf_return_code"] # type: ignore
 
@@ -139,7 +139,7 @@ def update_racf_options(base: BaseSetroptsTraits):
             {
                 "operation": "alter", 
                 "admin_type": "racf-options", 
-                "traits":  traits
-            }
+                "traits":  traits,
+            },
         )
         return result.result, result.result["return_codes"]["racf_return_code"] # type: ignore

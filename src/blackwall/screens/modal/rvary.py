@@ -2,7 +2,8 @@
 from textual.app import ComposeResult
 from textual.containers import Grid
 from textual.screen import Screen
-from textual.widgets import Button, Label, Input
+from textual.widgets import Button, Input, Label
+
 
 class RvaryScreen(Screen):
     """Modal rvary password change screen"""

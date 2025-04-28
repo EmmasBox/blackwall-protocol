@@ -1,7 +1,7 @@
 
 from textual.app import ComposeResult
-from textual.widgets import Label, DataTable
 from textual.containers import VerticalScroll
+from textual.widgets import DataTable, Label
 
 from blackwall.panels.search.search_backend import QueryType
 

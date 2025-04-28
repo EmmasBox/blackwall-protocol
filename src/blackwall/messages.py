@@ -1,5 +1,6 @@
-from textual.widget import Widget
 from textual.message import Message
+from textual.widget import Widget
+
 
 class OpenTab(Message):
     def __init__(self, title: str, content: Widget):

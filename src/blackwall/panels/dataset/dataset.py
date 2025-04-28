@@ -1,18 +1,17 @@
 from dataclasses import dataclass
 
 from textual.app import ComposeResult
-from textual.widgets import Button, Label, Select, Input, Collapsible, RadioButton
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.reactive import reactive
+from textual.widgets import Button, Collapsible, Input, Label, RadioButton, Select
 
+from blackwall.api import dataset
 from blackwall.emoji import get_emoji
 from blackwall.modals import generic_confirmation_modal
 from blackwall.notifications import send_notification
+from blackwall.panels.panel_mode import PanelMode
 from blackwall.panels.traits_ui import get_traits_from_input, set_traits_in_input
 
-from blackwall.panels.panel_mode import PanelMode
-
-from blackwall.api import dataset
 
 class PanelDatasetInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -172,7 +171,7 @@ class PanelDataset(VerticalScroll):
         result = dataset.update_dataset_profile(
             dataset=dataset_name,
             create=not dataset_profile_exists,
-            base=base_segment
+            base=base_segment,
             )
         
         if not dataset_profile_exists:

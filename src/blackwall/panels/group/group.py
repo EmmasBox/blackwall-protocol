@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
-from textual.reactive import reactive
 from textual.app import ComposeResult
-from textual.widgets import Input, Label, Button
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
+from textual.reactive import reactive
+from textual.widgets import Button, Input, Label
 
 from blackwall.api import group
 from blackwall.emoji import get_emoji
@@ -11,7 +11,12 @@ from blackwall.modals import generic_confirmation_modal
 from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
 
-from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
+from ..traits_ui import (
+    generate_trait_section,
+    get_traits_from_input,
+    set_traits_in_input,
+)
+
 
 class PanelGroupInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -121,7 +126,7 @@ class PanelGroup(VerticalScroll):
             group=group_name,
             create=not group_exists,
             base=base_segment,
-            dfp=dfp_segment
+            dfp=dfp_segment,
         )
 
         if not group_exists:
