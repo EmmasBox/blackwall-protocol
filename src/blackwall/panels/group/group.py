@@ -44,10 +44,7 @@ class PanelGroupSegments(VerticalGroup):
 class PanelGroupActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
 
-    if edit_mode is True:
-        delete_is_disabled = False
-    else:
-        delete_is_disabled = True
+    delete_is_disabled = edit_mode is not True
 
     def __init__(self, save_action: str, delete_action: str):
         super().__init__()
@@ -116,10 +113,7 @@ class PanelGroup(VerticalScroll):
         group_name = self.get_child_by_type(PanelGroupNameAndSubgroup).get_child_by_id("group_name",Input).value
         group_exists = group.group_exists(group=group_name)
 
-        if group_exists:
-            operator = "alter"
-        else:
-            operator = "add"
+        operator = "alter" if group_exists else "add"
 
         base_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=group.BaseGroupTraits)
         dfp_segment = get_traits_from_input(operator, self, prefix="dfp", trait_cls=group.DFPGroupTraits)
