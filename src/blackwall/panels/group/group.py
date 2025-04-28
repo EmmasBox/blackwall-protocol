@@ -126,7 +126,7 @@ class PanelGroup(VerticalScroll):
             group=group_name,
             create=not group_exists,
             base=base_segment,
-            dfp=dfp_segment
+            dfp=dfp_segment,
         )
 
         if not group_exists:
