@@ -88,10 +88,7 @@ def update_group(group: str,create: bool, base: BaseGroupTraits, tme: TMEGroupTr
         if ovm is not None:
             traits.update(ovm.to_traits("ovm"))
 
-        if create:
-            operation = "add"
-        else:
-            operation = "alter"
+        operation = "add" if create else "alter"
         
         result = racfu(
             {
