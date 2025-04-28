@@ -289,8 +289,8 @@ def update_user(
                 "operation": operation, 
                 "admin_type": "user", 
                 "profile_name": username,
-                "traits":  traits
-            }
+                "traits":  traits,
+            },
         )
     return result.result["return_codes"]["racf_return_code"]
 
@@ -302,7 +302,7 @@ def delete_user(username: str) -> tuple[str, int]:
                     "operation": "delete", 
                     "admin_type": "user", 
                     "profile_name": username.upper(),
-                }
+                },
             )
         return result.result["commands"][0]["messages"][0], result.result["return_codes"]["racf_return_code"]
     else:

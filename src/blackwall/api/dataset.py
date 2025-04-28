@@ -108,8 +108,8 @@ def update_dataset_profile(dataset: str, create: bool, base: BaseDatasetTraits):
                 "operation": operation, 
                 "admin_type": "data-set", 
                 "profile_name": dataset.upper(),
-                "traits":  traits
-            }
+                "traits":  traits,
+            },
         )
         return result.result["return_codes"]["racf_return_code"]
 
@@ -121,7 +121,7 @@ def delete_dataset_profile(dataset: str) -> tuple[str, int]:
                     "operation": "delete", 
                     "admin_type": "data-set", 
                     "profile_name": dataset.upper(),
-                }
+                },
             )
         #TODO add error message
         return "", result.result["return_codes"]["racf_return_code"]
