@@ -1,15 +1,26 @@
 
 from dataclasses import dataclass
-from textual.reactive import reactive
-from textual.app import ComposeResult
-from textual.widgets import Button, Label
-from textual.containers import VerticalGroup, VerticalScroll
 
-from blackwall.api.setropts import BaseSetroptsTraits, get_racf_options, update_racf_options
+from textual.app import ComposeResult
+from textual.containers import VerticalGroup, VerticalScroll
+from textual.reactive import reactive
+from textual.widgets import Button, Label
+
+from blackwall.api.setropts import (
+    BaseSetroptsTraits,
+    get_racf_options,
+    update_racf_options,
+)
 from blackwall.emoji import get_emoji
 from blackwall.modals import generic_confirmation_modal
-from blackwall.panels.traits_ui import generate_trait_inputs, set_traits_in_input, get_traits_from_input, toggle_inputs
 from blackwall.panels.panel_mode import PanelMode
+from blackwall.panels.traits_ui import (
+    generate_trait_inputs,
+    get_traits_from_input,
+    set_traits_in_input,
+    toggle_inputs,
+)
+
 
 @dataclass
 class SetroptsInfo:
