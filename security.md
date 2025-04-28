@@ -6,7 +6,7 @@ No current versions are supported, due to the fact that the program is in alpha.
 
 ## Reporting a Vulnerability
 
-To report a security vulnerability start an at <https://github.com/EmmasBox/blackwall-protocol/issues> and report it with the "Security issues" template.
+To report a security vulnerability start a new issue at <https://github.com/EmmasBox/blackwall-protocol/issues> and report it with the "Security issues" template.
 
 ## Security pratices for Blackwall
 
