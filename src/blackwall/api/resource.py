@@ -339,8 +339,8 @@ def update_resource_profile(
             "admin_type": "resource", 
             "profile_name": resource.upper(),
             "class_name": resource_class.upper(),
-            "traits":  traits
-        }
+            "traits":  traits,
+        },
     )
     return result.result["return_codes"]["racf_return_code"]
 
@@ -352,7 +352,7 @@ def delete_resource_profile(resource_class: str,resource: str) -> tuple[str, int
                     "admin_type": "resource", 
                     "profile_name": resource.upper(),
                     "class_name": resource_class.upper(),
-                }
+                },
             )
         #TODO add error message
         return "", result.result["return_codes"]["racf_return_code"]

@@ -106,7 +106,7 @@ def delete_group(group: str) -> tuple[str, int]:
             {
                 "operation": "delete", 
                 "admin_type": "group", 
-                "profile_name": group.upper()
+                "profile_name": group.upper(),
             }
         )
         #TODO add error message
