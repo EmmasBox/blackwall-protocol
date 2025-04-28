@@ -3,22 +3,19 @@
 
 from textual import on
 from textual.app import ComposeResult
-from textual.widgets import Button, Input, Label, RadioButton, RadioSet
 from textual.containers import HorizontalGroup, VerticalScroll
+from textual.widgets import Button, Input, Label, RadioButton, RadioSet
 
+from blackwall.api import dataset, group, resource, user
 from blackwall.messages import OpenTab
 from blackwall.panels.dataset.dataset import DatasetInfo, PanelDataset
 from blackwall.panels.group.group import GroupInfo, PanelGroup
 from blackwall.panels.panel_mode import PanelMode
 from blackwall.panels.resource.resource import PanelResource, ResourceInfo
 from blackwall.panels.search.results import PanelResultsMixedType
+from blackwall.panels.search.search_backend import QueryType, search_database_query_one
 from blackwall.panels.users.user import PanelUser, UserInfo
 
-from blackwall.panels.search.search_backend import search_database_query_one, QueryType
-
-from blackwall.api import resource, user
-from blackwall.api import group
-from blackwall.api import dataset
 
 class SearchSelector(HorizontalGroup):
     def compose(self) -> ComposeResult:
