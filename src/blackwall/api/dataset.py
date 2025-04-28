@@ -9,7 +9,7 @@ from .traits_base import TraitsBase
 racfu_enabled = importlib.util.find_spec('racfu')
 
 if racfu_enabled:
-    from racfu import racfu # type: ignore
+    from racfu import racfu  # type: ignore
 else:
     print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
 
