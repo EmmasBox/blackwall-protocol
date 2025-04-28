@@ -1,8 +1,9 @@
 
 from textual.app import ComposeResult
-from textual.widgets import Log
 from textual.containers import VerticalScroll
 from textual.signal import Signal
+from textual.widgets import Log
+
 
 class PanelErrorHistory(VerticalScroll):
     def compose(self) -> ComposeResult:

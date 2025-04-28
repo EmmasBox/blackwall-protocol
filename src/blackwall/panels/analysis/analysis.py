@@ -1,12 +1,13 @@
 
-from textual.app import ComposeResult
-from textual.widgets import Button, Label, RadioButton, RadioSet, Log
-from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
-
 import importlib.util
+
+from textual.app import ComposeResult
+from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
+from textual.widgets import Button, Label, Log, RadioButton, RadioSet
 
 zoau_enabled = importlib.util.find_spec('zoautil_py')
 
+#Check if ZOAU can be imported
 if zoau_enabled:
     from zoautil_py import zsystem # type: ignore
 else:
