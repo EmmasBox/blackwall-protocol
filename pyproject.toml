@@ -90,5 +90,5 @@ select = [
   "ASYNC",
   ]
 
-# Avoid enforcing line-length violations (`E501`)
+# Avoid enforcing dumb rules
 ignore = ["E501","B024"]
