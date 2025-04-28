@@ -41,7 +41,7 @@ class Blackwall(App):
     BINDINGS = [
         ("h", "push_screen('refresh')", "Switch to refresh screen"),
         ("r", "push_screen('rvary')", "Switch to rvary password screen"),
-        ("ctrl+home", "go_to_cli", "Focus command line")
+        ("ctrl+home", "go_to_cli", "Focus command line"),
     ]
     
     #This portion handles the text in the header bar
