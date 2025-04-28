@@ -68,3 +68,6 @@ exclude = [
 
 [tool.ruff.lint]
 select = ["E", "F", "B", "EM", "SIM", "PTH", "N", "PLE", "UP", "TRY"]
+
+# Avoid enforcing line-length violations (`E501`)
+ignore = ["E501"]
