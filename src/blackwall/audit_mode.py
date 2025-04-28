@@ -18,7 +18,7 @@ else:
 qrcode_enabled = importlib.util.find_spec('qrcode')
 
 if qrcode_enabled:
-    import qrcode # type: ignore
+    import qrcode  # type: ignore
 else:
     print("##BLKWL_ERROR_4 Warning: could not find qrcode")   
 
