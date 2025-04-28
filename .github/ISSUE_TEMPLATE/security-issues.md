@@ -8,7 +8,9 @@ assignees: ''
 ---
 
 # What is the issue?
+
 <- Explain the issue ->
 
 ## Suggested fixes (optional)
+
 <- Elaborate ->
