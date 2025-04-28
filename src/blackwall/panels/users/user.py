@@ -1,19 +1,24 @@
 
 from dataclasses import dataclass
+
+from textual.app import ComposeResult
+from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.lazy import Lazy
 from textual.reactive import reactive
-from textual.app import ComposeResult
-from textual.widgets import Input, Label, Button, RadioButton, Collapsible, Select
-from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
+from textual.widgets import Button, Collapsible, Input, Label, RadioButton, Select
 
 from blackwall.api import user
+from blackwall.emoji import get_emoji
+from blackwall.modals import generic_confirmation_modal
 from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
 
-from blackwall.modals import generic_confirmation_modal
+from ..traits_ui import (
+    generate_trait_section,
+    get_traits_from_input,
+    set_traits_in_input,
+)
 
-from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
-from blackwall.emoji import get_emoji
 
 class PanelUserInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
