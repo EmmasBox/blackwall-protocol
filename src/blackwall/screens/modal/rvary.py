@@ -24,8 +24,8 @@ class RvaryScreen(Screen):
 
     async def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "confirm":
-            input_value = self.get_child_by_id("rvary_password",Input).value
-            input_confirm_value = self.get_child_by_id("rvary_password_confirm",Input).value
+            input_value = self.query_exactly_one("#rvary_password",Input).value
+            input_confirm_value = self.query_exactly_one("#rvary_password_confirm",Input).value
             if input_value == input_confirm_value:
                 racf_change_rvary_password(input_value)
                 self.app.pop_screen()
