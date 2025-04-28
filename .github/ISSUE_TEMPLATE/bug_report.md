@@ -12,6 +12,7 @@ A clear and concise description of what the bug is.
 
 **To Reproduce**
 Steps to reproduce the behavior:
+
 1. Go to '...'
 2. Click on '....'
 3. Scroll down to '....'
@@ -26,7 +27,4 @@ If applicable, add screenshots to help explain your problem.
 **Desktop (please complete the following information):**
 ZOAU version (if used):
 z/OS version:
-Python: 
-
-**Additional context**
-Add any other context about the problem here.
+Python:
