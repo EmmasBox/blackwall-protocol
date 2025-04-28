@@ -70,7 +70,7 @@ class PanelDatasetUACC(VerticalGroup):
 class PanelDatasetNotify(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Notify user:")
-        yield Input(id="base_notify_userid",max_length=8,classes="field-short-generic")
+        yield Input(id="base_notify_userid",restrict=racf_id_regex,max_length=8,classes="field-short-generic")
 
 class PanelDatasetVolume(HorizontalGroup):
     def compose(self) -> ComposeResult:
