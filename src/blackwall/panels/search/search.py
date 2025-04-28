@@ -67,7 +67,7 @@ class PanelSearch(VerticalScroll):
                 new_user_panel.user_info = UserInfo(
                     base_traits=base_traits,
                     username=search_query,
-                    mode=PanelMode.edit
+                    mode=PanelMode.edit,
                 )
 
                 if 'profile' in user_dict and 'tso' in user_dict['profile']:
@@ -133,7 +133,7 @@ class PanelSearch(VerticalScroll):
 
                 new_group_panel.group_info = GroupInfo(
                     base_traits=base_traits,
-                    group_name=search_query
+                    group_name=search_query,
                 )
 
                 if 'profile' in group_dict and 'dfp' in group_dict['profile']:
@@ -154,7 +154,7 @@ class PanelSearch(VerticalScroll):
 
                 new_dataset_panel.dataset_info = DatasetInfo(
                     base_traits=base_traits,
-                    profile_name=search_query
+                    profile_name=search_query,
                 )
 
                 self.post_message(OpenTab(f"Dataset: {search_query}",new_dataset_panel))
