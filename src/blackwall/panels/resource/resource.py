@@ -255,7 +255,7 @@ class PanelResource(VerticalScroll):
             sigver=sigver_segment,
             tme=tme_segment,
             ssignon=ssignon_segment,
-            cfdef=cfdef_segment
+            cfdef=cfdef_segment,
             )
         
         if not resource_profile_exists:
