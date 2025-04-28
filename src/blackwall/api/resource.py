@@ -351,7 +351,7 @@ def delete_resource_profile(resource_class: str,resource: str) -> tuple[str, int
                     "operation": "delete", 
                     "admin_type": "resource", 
                     "profile_name": resource.upper(),
-                    "class_name": resource_class.upper()
+                    "class_name": resource_class.upper(),
                 }
             )
         #TODO add error message
