@@ -67,7 +67,23 @@ exclude = [
 ]
 
 [tool.ruff.lint]
-select = ["E", "F", "B", "EM", "SIM", "PTH", "N", "PLE", "UP", "TRY", "FLY", "I", "COM", "A", "C4"]
+select = [
+  "E", 
+  "F", 
+  "B", 
+  "EM", 
+  "SIM", 
+  "PTH", #Must use pathlib instead of os
+  "N", 
+  "PLE", 
+  "UP", 
+  "TRY", 
+  "FLY", 
+  "I", 
+  "COM", 
+  "A", 
+  "C4"
+  ]
 
 # Avoid enforcing line-length violations (`E501`)
 ignore = ["E501"]
