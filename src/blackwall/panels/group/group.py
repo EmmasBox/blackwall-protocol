@@ -10,6 +10,7 @@ from blackwall.emoji import get_emoji
 from blackwall.modals import generic_confirmation_modal
 from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
+from blackwall.regex import racf_id_regex
 
 from ..traits_ui import (
     generate_trait_section,
@@ -26,11 +27,11 @@ class PanelGroupInfo(HorizontalGroup):
 class PanelGroupNameAndSubgroup(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Group name:")
-        yield Input(id="group_name",max_length=8,classes="field-short-generic",tooltip="1-8 character long alphanumeric name used to identify the group")
+        yield Input(id="group_name",restrict=racf_id_regex,max_length=8,classes="field-short-generic",tooltip="1-8 character long alphanumeric name used to identify the group")
         yield Label("Superior group:")
-        yield Input(max_length=8,id="base_superior_group",classes="field-short-generic",tooltip="")
+        yield Input(max_length=8,restrict=racf_id_regex,id="base_superior_group",classes="field-short-generic",tooltip="")
         yield Label("Owner:")
-        yield Input(max_length=8,id="base_owner",classes="field-short-generic",tooltip="")
+        yield Input(max_length=8,restrict=racf_id_regex,id="base_owner",classes="field-short-generic",tooltip="")
 
 class PanelGroupInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:

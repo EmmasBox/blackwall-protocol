@@ -12,6 +12,7 @@ from blackwall.emoji import get_emoji
 from blackwall.modals import generic_confirmation_modal
 from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
+from blackwall.regex import racf_id_regex
 
 from ..traits_ui import (
     generate_trait_section,
@@ -39,7 +40,7 @@ class PanelUserName(HorizontalGroup):
 
     def compose(self) -> ComposeResult:
         yield Label("Username*:")
-        yield Input(max_length=8,restrict=r"([a-zA-Z]*[0-9]*[\@\#\$]*)",id="username",classes="field-short-generic",tooltip="Username is what the user uses to log on with, this is required. While very few characters can be used at least 4 character long usernames are recommended to avoid collisions",disabled=self.username_is_disabled).data_bind(value=PanelUserName.username)
+        yield Input(max_length=8,restrict=racf_id_regex,id="username",classes="field-short-generic",tooltip="Username is what the user uses to log on with, this is required. While very few characters can be used at least 4 character long usernames are recommended to avoid collisions",disabled=self.username_is_disabled).data_bind(value=PanelUserName.username)
         yield Label("name:")
         yield Input(max_length=20,id="base_name",classes="name",tooltip="For personal users this is typically used for names i.e. Song So Mi, for system users it can be the name of the subsystem that it is used for")
 
@@ -47,9 +48,9 @@ class PanelUserOwnership(HorizontalGroup):
     """Component that contains ownership field and default group"""
     def compose(self) -> ComposeResult:
         yield Label("Owner:")
-        yield Input(max_length=8,id="base_owner",classes="field-short-generic", tooltip="The group or user that owns this user profile. This is required in the RACF database")
+        yield Input(max_length=8,restrict=racf_id_regex,id="base_owner",classes="field-short-generic", tooltip="The group or user that owns this user profile. This is required in the RACF database")
         yield Label("Default group*:")
-        yield Input(max_length=8,id="base_default_group",classes="field-short-generic", tooltip="All users must belong to a group in the RACF database")
+        yield Input(max_length=8,restrict=racf_id_regex,id="base_default_group",classes="field-short-generic", tooltip="All users must belong to a group in the RACF database")
         yield Label("Default group authority:")
         #yield Input(id="base_default_group_authority",classes="field-short-generic",max_length=8)
         yield Select([("USE", "USE"),("CREATE", "CREATE"),("CONNECT", "CONNECT"),("JOIN", "JOIN")],id="base_default_group_authority",value="USE",classes="uacc-select")
