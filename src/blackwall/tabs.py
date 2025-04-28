@@ -43,8 +43,8 @@ class TabSystem(HorizontalGroup):
         ("ctrl+w", "remove", "Remove active tab"),
         ("ctrl+shift+w", "clear", "Clear all tabs"),
     ]
-    def __init__(self, *children, name = None, id = None, classes = None, disabled = False, markup = True):
-        super().__init__(*children, name=name, id=id, classes=classes, disabled=disabled, markup=markup)
+    def __init__(self, *children, name = None, classes = None, disabled = False, markup = True):
+        super().__init__(*children, name=name, classes=classes, disabled=disabled, markup=markup)
         self.tabs = TabbedContent(id="tab_system")
 
     def compose(self) -> ComposeResult:
