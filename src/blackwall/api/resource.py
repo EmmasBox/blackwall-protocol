@@ -1,7 +1,6 @@
 #General resource API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
 from dataclasses import dataclass, field
-from typing import Tuple
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
@@ -332,10 +331,7 @@ def update_resource_profile(
     if eim is not None:
         traits.update(eim.to_traits("eim"))
 
-    if create:
-        operation = "add"
-    else:
-        operation = "alter"
+    operation = "add" if create else "alter"
     
     result = racfu( # type: ignore
         {
@@ -348,7 +344,7 @@ def update_resource_profile(
     )
     return result.result["return_codes"]["racf_return_code"]
 
-def delete_resource_profile(resource_class: str,resource: str) -> Tuple[str, int]:
+def delete_resource_profile(resource_class: str,resource: str) -> tuple[str, int]:
     if racfu_enabled:
         result = racfu( # type: ignore
                 {

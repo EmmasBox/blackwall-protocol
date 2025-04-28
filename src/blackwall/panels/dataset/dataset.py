@@ -96,10 +96,7 @@ class PanelDatasetSettings(VerticalGroup):
 class PanelDatasetActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
 
-    if edit_mode is True:
-        delete_is_disabled = False
-    else:
-        delete_is_disabled = True
+    delete_is_disabled = edit_mode is not True
 
     def __init__(self, save_action: str, delete_action: str):
         super().__init__()
@@ -169,10 +166,7 @@ class PanelDataset(VerticalScroll):
         dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("profile_name",Input).value
         dataset_profile_exists = dataset.dataset_profile_exists(dataset=dataset_name)
 
-        if dataset_profile_exists:
-            operator = "alter"
-        else:
-            operator = "add"
+        operator = "alter" if dataset_profile_exists else "add"
 
         base_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=dataset.BaseDatasetTraits)
         result = dataset.update_dataset_profile(

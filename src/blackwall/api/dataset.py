@@ -1,7 +1,6 @@
 #API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
 from dataclasses import dataclass, field
-from typing import Tuple
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
@@ -102,10 +101,7 @@ def update_dataset_profile(dataset: str, create: bool, base: BaseDatasetTraits):
     if racfu_enabled:
         traits = base.to_traits(prefix="base")
         
-        if create:
-            operation = "add"
-        else:
-            operation = "alter"
+        operation = "add" if create else "alter"
         
         result = racfu(
             {
@@ -117,7 +113,7 @@ def update_dataset_profile(dataset: str, create: bool, base: BaseDatasetTraits):
         )
         return result.result["return_codes"]["racf_return_code"]
 
-def delete_dataset_profile(dataset: str) -> Tuple[str, int]:
+def delete_dataset_profile(dataset: str) -> tuple[str, int]:
     """Deletes a dataset profile"""
     if racfu_enabled:
         result = racfu(

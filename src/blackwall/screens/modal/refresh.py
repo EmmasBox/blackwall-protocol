@@ -4,7 +4,7 @@ from textual.screen import Screen
 from textual.widgets import Label, Button
 from textual.containers import Grid
 
-from blackwall.api.setropts import refresh_RACF
+from blackwall.api.setropts import refresh_racf
         
 class RefreshScreen(Screen):
     """Refresh RACF database screen"""
@@ -21,7 +21,7 @@ class RefreshScreen(Screen):
 
     async def on_button_pressed(self, event: Button.Pressed) -> None:
         if event.button.id == "confirm":
-            return_code = refresh_RACF()
+            return_code = refresh_racf()
             if return_code == 0:
                 self.notify(f"Refresh successfully issued, return code: {return_code}",severity="information")
             else:

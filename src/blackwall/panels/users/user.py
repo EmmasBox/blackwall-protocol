@@ -30,10 +30,7 @@ class PanelUserName(HorizontalGroup):
 
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
 
-    if edit_mode is True:
-        username_is_disabled = True
-    else:
-        username_is_disabled = False
+    username_is_disabled = edit_mode is True
 
     def compose(self) -> ComposeResult:
         yield Label("Username*:")
@@ -128,10 +125,7 @@ class PanelUserActionButtons(HorizontalGroup):
     """Action buttons"""
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
 
-    if edit_mode is True:
-        delete_is_disabled = False
-    else:
-        delete_is_disabled = True
+    delete_is_disabled = edit_mode is not True
 
     def __init__(self, save_action: str, delete_action: str):
         super().__init__()
@@ -270,10 +264,7 @@ class PanelUser(VerticalScroll):
         username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
         user_exists = user.user_exists(username=username)
 
-        if user_exists:
-            operator = "alter"
-        else:
-            operator = "add"
+        operator = "alter" if user_exists else "add"
         
         base_segment = get_traits_from_input(operator, self, prefix="base", trait_cls=user.BaseUserTraits)
         tso_segment = get_traits_from_input(operator, self, prefix="tso", trait_cls=user.TSOUserTraits)

@@ -66,10 +66,7 @@ class PanelResourceSegments(VerticalGroup):
 class PanelResourceActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
 
-    if edit_mode is True:
-        delete_is_disabled = False
-    else:
-        delete_is_disabled = True
+    delete_is_disabled = edit_mode is not True
 
     def __init__(self, save_action: str, delete_action: str):
         super().__init__()
@@ -211,10 +208,7 @@ class PanelResource(VerticalScroll):
         resource_profile_class = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_class",Input).value
         resource_profile_exists = resource.resource_profile_exists(resource=resource_profile_name,resource_class=resource_profile_class)
 
-        if resource_profile_exists:
-            operator = "alter"
-        else:
-            operator = "add"
+        operator = "alter" if resource_profile_exists else "add"
 
         base_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=resource.BaseResourceTraits)
         kerb_segment = get_traits_from_input(operator,self, prefix="kerb", trait_cls=resource.KerbResourceTraits)
