@@ -139,7 +139,7 @@ def update_racf_options(base: BaseSetroptsTraits):
             {
                 "operation": "alter", 
                 "admin_type": "racf-options", 
-                "traits":  traits
+                "traits":  traits,
             }
         )
         return result.result, result.result["return_codes"]["racf_return_code"] # type: ignore
