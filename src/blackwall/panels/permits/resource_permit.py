@@ -1,13 +1,10 @@
 from textual import on
 from textual.app import ComposeResult
-from textual.widgets import Input, Label, Button, Select, DataTable
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
+from textual.widgets import Button, DataTable, Input, Label, Select
 
+from blackwall.api import group, permit, resource
 from blackwall.emoji import get_emoji
-
-from blackwall.api import resource
-from blackwall.api import group
-from blackwall.api import permit
 from blackwall.notifications import send_notification
 from blackwall.panels.traits_ui import get_traits_from_input
 
