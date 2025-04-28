@@ -5,8 +5,10 @@ from textual.app import ComposeResult
 from textual.widgets import Button, Label
 from textual.containers import VerticalGroup, VerticalScroll
 
-from blackwall.api.setropts import BaseSetroptsTraits, get_racf_options
-from blackwall.panels.traits_ui import generate_trait_inputs, set_traits_in_input, toggle_inputs
+from blackwall.api.setropts import BaseSetroptsTraits, get_racf_options, update_racf_options
+from blackwall.emoji import get_emoji
+from blackwall.modals import generic_confirmation_modal
+from blackwall.panels.traits_ui import generate_trait_inputs, set_traits_in_input, get_traits_from_input, toggle_inputs
 from blackwall.panels.panel_mode import PanelMode
 
 @dataclass
@@ -57,9 +59,21 @@ class PanelSetroptsFields(VerticalGroup):
 
 
 class PanelSetroptsActionButtons(VerticalGroup):
+    edit_mode: reactive[PanelMode] = reactive(PanelMode.read)
+
+    def __init__(self, save_action: str):
+        super().__init__()
+        self.save_action = save_action
+
     def compose(self) -> ComposeResult:
-        yield Label("Changing system settings can be dangerous")
-        yield Button("Save",variant="warning",classes="action-button")
+        yield Label("Attention: changing system settings can be dangerous!",classes="setropts-warning")
+        if self.edit_mode is PanelMode.read:
+            yield Button(f"{get_emoji("💾")} Save",id="save",action="save",variant="warning",classes="action-button",disabled=True)
+        elif self.edit_mode is PanelMode.edit:
+            yield Button(f"{get_emoji("💾")} Save",id="save",action="save",variant="warning",classes="action-button",disabled=False)
+
+    async def action_save(self):
+        await self.app.run_action(self.save_action,default_namespace=self.parent)
 
 class PanelSetropts(VerticalScroll):
     setropts_info: reactive[SetroptsInfo] = reactive(SetroptsInfo())
@@ -79,15 +93,30 @@ class PanelSetropts(VerticalScroll):
         yield PanelSetroptsNotice()
         yield PanelSetroptsMode(switch_action="switch")
         yield PanelSetroptsFields()
-        yield PanelSetroptsActionButtons()
+        yield PanelSetroptsActionButtons(save_action="save")
+
+    def action_save_setropts_api(self) -> None:
+        base_traits = get_traits_from_input(prefix="base",operator="alter",trait_cls=BaseSetroptsTraits,widget=self)
+        message, return_code = update_racf_options(base=base_traits)
+        if return_code == 0:
+            self.notify(f"Updated system settings, return code: {return_code}",severity="warning")
+        elif return_code == 4:
+            self.notify(f"Updated system settings, return code: {return_code}",severity="warning")
+        else:
+            self.notify(f"Couldn't update system settings, return code: {return_code}",severity="error")
+
+    def action_save(self) -> None:
+        generic_confirmation_modal(self,modal_text="Are you abosulutely sure you want to change the RACF system options?",action_widget=self,confirm_action="save_setropts_api")
 
     def action_switch(self) -> None:
         if self.setropts_info.mode is PanelMode.read:
             self.setropts_info = SetroptsInfo(mode=PanelMode.edit) 
+            self.query_exactly_one("#save",Button).disabled = False
             readable_mode = "edit"
         elif self.setropts_info.mode is PanelMode.edit:
             self.setropts_info = SetroptsInfo(mode=PanelMode.read) 
             readable_mode = "read"
+            self.query_exactly_one("#save",Button).disabled = True
         else:
             readable_mode = "read"
 

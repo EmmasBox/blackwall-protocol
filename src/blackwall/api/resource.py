@@ -1,6 +1,7 @@
 #General resource API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
 from dataclasses import dataclass, field
+from typing import Tuple
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
@@ -16,7 +17,7 @@ else:
 @dataclass
 class BaseResourceTraits(TraitsBase):
     #add+alter fields
-    owner: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    owner: str | None = field(default=None,metadata={"label": "Owner", "allowed_in": {"add","alter"}})
     audit_alter: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_control: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_none: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
@@ -24,20 +25,20 @@ class BaseResourceTraits(TraitsBase):
     audit_read: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_update: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     security_category: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    installation_data: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    installation_data: str | None = field(default=None,metadata={"label": "Installation data", "allowed_in": {"add","alter"}})
     level: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     member_class_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     notify_userid: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    security_label: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    security_level: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    security_label: str | None = field(default=None,metadata={"label": "Security label", "allowed_in": {"add","alter"}})
+    security_level: str | None = field(default=None,metadata={"label": "Security level", "allowed_in": {"add","alter"}})
     single_data_set_tape_volume: bool | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     time_zone: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    universal_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    warn_on_insufficient_access: bool | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    universal_access: str | None = field(default=None,metadata={"label": "UACC", "allowed_in": {"add","alter"}})
+    warn_on_insufficient_access: bool | None = field(default=None,metadata={"label": "Warn on insufficient access", "allowed_in": {"add","alter"}})
     terminal_access_allowed_day: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     terminal_access_allowed_time: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
 
-    tape_vtoc: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    tape_vtoc: bool | None = field(default=None,metadata={"label": "Tape VTOC", "allowed_in": {"add","alter","extract"}})
 
     #add fields
     model_profile: str | None = field(default=None,metadata={"allowed_in": {"add"}})
@@ -347,7 +348,7 @@ def update_resource_profile(
     )
     return result.result["return_codes"]["racf_return_code"]
 
-def delete_resource_profile(resource_class: str,resource: str) -> int:
+def delete_resource_profile(resource_class: str,resource: str) -> Tuple[str, int]:
     if racfu_enabled:
         result = racfu( # type: ignore
                 {
@@ -357,6 +358,7 @@ def delete_resource_profile(resource_class: str,resource: str) -> int:
                     "class_name": resource_class.upper()
                 }
             )
-        return result.result["return_codes"]["racf_return_code"] == 0
+        #TODO add error message
+        return "", result.result["return_codes"]["racf_return_code"]
     else:
-        return 8
+        return "RACFu can't be found", 8

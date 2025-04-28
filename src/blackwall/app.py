@@ -5,9 +5,11 @@ from textual.containers import Container
 from textual.signal import Signal
 
 import json
+
+from blackwall.notifications import send_notification
 from .command_line import CommandLine
-from .screens.command_output.command_output import CommandOutputScreen
-from .screens.refresh.refresh import RefreshScreen
+from .screens.modal.refresh import RefreshScreen
+from .screens.modal.rvary import RvaryScreen
 from .theme_cynosure import cynosure_theme
 from .theme_3270 import ibm_3270_theme
 
@@ -39,8 +41,8 @@ class Blackwall(App):
     CSS_PATH = "UI.css"
 
     BINDINGS = [
-        ("h", "push_screen('command_output')", "Switch to command output screen"),
-        ("ctrl+i", "push_screen('refresh')", "Switch to refresh screen"),
+        ("h", "push_screen('refresh')", "Switch to refresh screen"),
+        ("r", "push_screen('rvary')", "Switch to rvary password screen"),
         ("ctrl+home", "go_to_cli", "Focus command line")
     ]
     
@@ -62,8 +64,8 @@ class Blackwall(App):
                 self.notify("Couldn't find user theme",severity="warning")
         else:
             self.theme = "cynosure"
-        self.install_screen(CommandOutputScreen(), name="command_output")
         self.install_screen(RefreshScreen(), name="refresh")
+        self.install_screen(RvaryScreen(), name="rvary")
         self.command_output_change = Signal(self,name="command_output_change")
         self.command_output = ""
 
@@ -82,7 +84,7 @@ class Blackwall(App):
                     self.command_output_change.publish(data=self.command_output)
                     self.notify(f"command {message.command.upper()} successfully completed",severity="information")
             except BaseException as e:
-                self.notify(f"Command {message.command.upper()} failed: {e}",severity="error")
+                send_notification(self,message=f"Command {message.command.upper()} failed: {e}",severity="error")
                 
     #UI elements
     def compose(self):
@@ -91,7 +93,10 @@ class Blackwall(App):
         if zoau_enabled:
             system_label = get_user_setting(section="display",setting="system_label")
             if system_label is not False:
-                yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}")
+                if get_user_setting(section="display",setting="short_system_label"):
+                    yield Label(f"System: {system_name}, LPAR: {lpar_name}",classes="system-label")
+                else:
+                    yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}",classes="system-label")
         yield CommandLine()
         with Container():
             yield TabSystem()

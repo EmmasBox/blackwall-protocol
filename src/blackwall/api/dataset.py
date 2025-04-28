@@ -1,6 +1,7 @@
 #API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
 from dataclasses import dataclass, field
+from typing import Tuple
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
@@ -16,21 +17,21 @@ else:
 @dataclass
 class BaseDatasetTraits(TraitsBase):
     #Add and alter fields
-    owner: str | None = field(default=None)
+    owner: str | None = field(default=None, metadata={"label": "Owner"})
     audit_alter: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_control: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_none: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_read: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_read: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_update: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    security_category: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
-    installation_data: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    erase_data_sets_on_delete: bool | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    model_profile_class: str | None = field(default=None,metadata={"allowed_in": {"add"}})
-    model_profile_generic: str | None = field(default=None,metadata={"allowed_in": {"add"}})
+    security_category: str | None = field(default=None,metadata={"label": "Security category", "allowed_in": {"alter"}})
+    installation_data: str | None = field(default=None,metadata={"label": "Installation data", "allowed_in": {"add","alter"}})
+    erase_data_sets_on_delete: bool | None = field(default=None,metadata={"label": "Erase datasets on deletion", "allowed_in": {"add","alter"}})
+    model_profile_class: str | None = field(default=None,metadata={"label": "Model profile class", "allowed_in": {"add"}})
+    model_profile_generic: str | None = field(default=None,metadata={"label": "Model profile generic", "allowed_in": {"add"}})
     tape_data_set_file_sequence_number: int | None = field(default=None,metadata={"allowed_in": {"add"}})
-    model_profile: str | None = field(default=None,metadata={"allowed_in": {"add"}})
-    model_profile_volume: str | None = field(default=None,metadata={"allowed_in": {"add"}})
+    model_profile: str | None = field(default=None,metadata={"label": "Model profile", "allowed_in": {"add"}})
+    model_profile_volume: str | None = field(default=None,metadata={"label": "Model profile volume", "allowed_in": {"add"}})
     global_audit_alter: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
     global_audit_control: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
     global_audit_none: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
@@ -38,14 +39,14 @@ class BaseDatasetTraits(TraitsBase):
     global_audit_update: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
     level: int | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     data_set_model_profile: str | None = field(default=None,metadata={"allowed_in": {"add"}})
-    notify_userid: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    security_label: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    security_level: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    notify_userid: str | None = field(default=None,metadata={"label": "Notify userid", "allowed_in": {"add","alter"}})
+    security_label: str | None = field(default=None,metadata={"label": "Security label", "allowed_in": {"add","alter"}})
+    security_level: str | None = field(default=None,metadata={"label": "Security level", "allowed_in": {"add","alter"}})
     racf_indicated_dataset: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     create_only_tape_vtoc_entry: str | None = field(default=None,metadata={"allowed_in": {"add"}})
-    universal_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    universal_access: str | None = field(default=None,metadata={"label": "UACC", "allowed_in": {"add","alter"}})
     data_set_allocation_unit: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    volume: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    volume: str | None = field(default=None,metadata={"label": "Volume", "allowed_in": {"add","alter","extract"}})
     warn_on_insufficient_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
 
     #Extraction fields
@@ -59,11 +60,11 @@ class BaseDatasetTraits(TraitsBase):
     update_access_count: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
     alter_volume: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
     security_categories: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    create_date: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    create_date: str | None = field(default=None,metadata={"label": "Creation date", "allowed_in": {"extract"}})
     data_set_type: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
     high_level_qualifier_is_group: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
     creation_group_name: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    last_change_date: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    last_change_date: str | None = field(default=None,metadata={"label": "Change date","allowed_in": {"extract"}})
     auditing: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
     global_auditing: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
     use_tape_data_set_profile: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
@@ -110,13 +111,13 @@ def update_dataset_profile(dataset: str, create: bool, base: BaseDatasetTraits):
             {
                 "operation": operation, 
                 "admin_type": "data-set", 
-                "profile_name": dataset,
+                "profile_name": dataset.upper(),
                 "traits":  traits
             }
         )
         return result.result["return_codes"]["racf_return_code"]
 
-def delete_dataset_profile(dataset: str):
+def delete_dataset_profile(dataset: str) -> Tuple[str, int]:
     """Deletes a dataset profile"""
     if racfu_enabled:
         result = racfu(
@@ -126,4 +127,7 @@ def delete_dataset_profile(dataset: str):
                     "profile_name": dataset.upper(),
                 }
             )
-        return result.result["return_codes"]["racf_return_code"] == 0
+        #TODO add error message
+        return "", result.result["return_codes"]["racf_return_code"]
+    else:
+        return "RACFu can't be found", 8

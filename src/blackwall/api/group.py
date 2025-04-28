@@ -1,6 +1,7 @@
 #Group API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
 
 from dataclasses import dataclass, field
+from typing import Tuple
 from .traits_base import TraitsBase
 
 #Checks if RACFU can be imported
@@ -15,10 +16,10 @@ else:
 
 @dataclass
 class BaseGroupTraits(TraitsBase):
-    owner: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    installation_data: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    data_set_model: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    superior_group: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    owner: str | None = field(default=None,metadata={"label": "Owner", "allowed_in": {"add","alter","extract"}})
+    installation_data: str | None = field(default=None,metadata={"label": "Intallation data", "allowed_in": {"add","alter","extract"}})
+    data_set_model: str | None = field(default=None,metadata={"label": "Dataset model", "allowed_in": {"add","alter","extract"}})
+    superior_group: str | None = field(default=None,metadata={"label": "Superior group","allowed_in": {"add","alter","extract"}})
     terminal_universal_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     universal: str | None = field(default=None,metadata={"allowed_in": {"add","extract"}})
     subgroups: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
@@ -96,20 +97,23 @@ def update_group(group: str,create: bool, base: BaseGroupTraits, tme: TMEGroupTr
             {
                 "operation": operation, 
                 "admin_type": "group", 
-                "profile_name": group,
+                "profile_name": group.upper(),
                 "traits":  traits
             }
         )
         return result.result["return_codes"]["racf_return_code"]
 
-def delete_group(group: str):
+def delete_group(group: str) -> Tuple[str, int]:
     if racfu_enabled:
         """Deletes a group"""
         result = racfu(
             {
                 "operation": "delete", 
                 "admin_type": "group", 
-                "profile_name": group
+                "profile_name": group.upper()
             }
         )
-        return result.result["return_codes"]["racf_return_code"]
+        #TODO add error message
+        return "", result.result["return_codes"]["racf_return_code"]
+    else:
+        return "RACFu can't be found", 8

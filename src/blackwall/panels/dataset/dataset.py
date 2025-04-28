@@ -6,16 +6,25 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.reactive import reactive
 
 from blackwall.emoji import get_emoji
-from blackwall.panels.traits_ui import get_traits_from_input
+from blackwall.modals import generic_confirmation_modal
+from blackwall.notifications import send_notification
+from blackwall.panels.traits_ui import get_traits_from_input, set_traits_in_input
 
 from blackwall.panels.panel_mode import PanelMode
 
 from blackwall.api import dataset
 
+class PanelDatasetInfo(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Last change date:",classes="date-labels")
+        yield Input(id="base_last_change_date",disabled=True,classes="date-fields")
+        yield Label("Creation date:",classes="date-labels")
+        yield Input(id="base_create_date",disabled=True,classes="date-fields")
+
 class PanelDatasetName(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Profile name:")
-        yield Input(id="dataset_name")
+        yield Input(id="profile_name")
 
 class PanelDatasetOwner(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -98,8 +107,8 @@ class PanelDatasetActionButtons(HorizontalGroup):
         self.delete_action = delete_action
     
     def compose(self) -> ComposeResult:
-        yield Button(f"{get_emoji("💾")} Save",action="save",classes="action-button")
-        yield Button("Delete",action="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
+        yield Button("Create",id="save",action="save",classes="action-button")
+        yield Button("Delete",action="delete",id="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
 
     async def action_save(self):
         await self.app.run_action(self.save_action,default_namespace=self.parent)
@@ -109,10 +118,14 @@ class PanelDatasetActionButtons(HorizontalGroup):
 
 @dataclass
 class DatasetInfo:
+    base_traits: dataset.BaseDatasetTraits | None = None
     mode: PanelMode = PanelMode.create
+
+    profile_name: str = ""
 
 class PanelDataset(VerticalScroll):
     def compose(self) -> ComposeResult:
+        yield PanelDatasetInfo()
         yield PanelDatasetName()
         yield PanelDatasetOwner()
         yield PanelDatasetInstallationData()
@@ -122,8 +135,38 @@ class PanelDataset(VerticalScroll):
         yield PanelDatasetAudit()
         yield PanelDatasetActionButtons(save_action="save_dataset_profile", delete_action="delete_dataset_profile")
 
+    dataset_info: reactive[DatasetInfo] = reactive(DatasetInfo())
+
+    def set_edit_mode(self):
+        self.query_exactly_one("#profile_name",Input).disabled = True
+        self.query_exactly_one("#delete",Button).disabled = False
+        self.query_exactly_one("#save",Button).label = f"{get_emoji("💾")} Save"
+        self.notify("Switched to edit mode",severity="information")
+
+    def on_mount(self) -> None:
+        if dataset.dataset_profile_exists(self.dataset_info.profile_name):
+            self.query_exactly_one("#profile_name",Input).value = self.dataset_info.profile_name
+            if self.dataset_info.base_traits is not None:
+                set_traits_in_input(self,traits=self.dataset_info.base_traits,prefix="base")
+
+            self.set_edit_mode()
+
+    def action_delete_dataset_api(self) -> None:
+        dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("profile_name",Input).value
+        if dataset.dataset_profile_exists(dataset_name):
+            message, return_code = dataset.delete_dataset_profile(dataset_name)
+            
+            if (return_code == 0):
+                self.notify(f"Dataset profile {dataset_name} deleted, return code: {return_code}",severity="warning")
+            else:
+                self.notify(f"{message}, return code: {return_code}",severity="error")
+
+    def action_delete_dataset_profile(self) -> None:
+        dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("profile_name",Input).value
+        generic_confirmation_modal(self,modal_text=f"Are you sure you want to delete dataset profile {dataset_name}?",confirm_action="delete_dataset_api",action_widget=self)
+
     def action_save_dataset_profile(self) -> None:
-        dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("dataset_name",Input).value
+        dataset_name = self.get_child_by_type(PanelDatasetName).get_child_by_id("profile_name",Input).value
         dataset_profile_exists = dataset.dataset_profile_exists(dataset=dataset_name)
 
         if dataset_profile_exists:
@@ -143,12 +186,9 @@ class PanelDataset(VerticalScroll):
                 self.notify(f"Dataset profile {dataset_name} created, return code: {result}",severity="information")
                 #self.set_edit_mode()
             else:
-                self.notify(f"Unable to create dataset profile, return code: {result}",severity="error")
+                send_notification(self,message=f"Unable to create dataset profile, return code: {result}",severity="error")
         else:
-            if (result == 0 or result == 4):
+            if result == 0:
                 self.notify(f"Dataset profile {dataset_name} updated, return code: {result}",severity="information")
             else:
-                self.notify(f"Unable to update dataset profile, return code: {result}",severity="error")
-
-    def action_delete_dataset_profile(self) -> None:
-        pass
+                send_notification(self,message=f"Unable to update dataset profile, return code: {result}",severity="error")

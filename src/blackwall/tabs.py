@@ -5,6 +5,7 @@ from textual.containers import HorizontalGroup
 
 from blackwall.emoji import get_emoji
 from blackwall.panels.permits.resource_permit import PanelResourcePermit
+from blackwall.settings import get_user_setting
 from .panels.welcome.welcome import PanelWelcome
 from .panels.users.user import PanelUser
 from .panels.search.search import PanelSearch
@@ -14,6 +15,7 @@ from .panels.resource.resource import PanelResource
 from .panels.command_output.command_output import PanelCommandOutput
 from .panels.setropts.setropts import PanelSetropts
 from .panels.group.group import PanelGroup
+from .panels.backout.backout import PanelBackout
 
 from blackwall.messages import OpenTab
 
@@ -29,16 +31,17 @@ people_list = [
 class TabSystem(HorizontalGroup):
     BINDINGS = [
         ("ctrl+u", "open_user", "Open user tab"),
-        ("ctrl+f", "open_search", "Open search tab"),
-        ("ctrl+a", "open_analysis", "Open analysis tab"),
-        ("ctrl+d", "open_dataset", "Open dataset profile tab"),
         ("ctrl+g", "open_groups", "Open group profile tab"),
+        ("ctrl+d", "open_dataset", "Open dataset profile tab"),
         ("ctrl+r", "open_resource", "Open resource profile tab"),
         ("ctrl+l", "open_command_output", "Open command output tab"),
+        ("ctrl+f", "open_search", "Open search tab"),
+        #("ctrl+a", "open_analysis", "Open analysis tab"),
         ("ctrl+o", "open_options", "Open RACF options tab"),
         ("ctrl+n", "open_resource_permits", "Open resource permits tab"),
-        ("r", "remove", "Remove active tab"),
-        ("c", "clear", "Clear all tabs"),
+        ("ctrl+b", "open_backout", "Open backout tab"),
+        ("ctrl+w", "remove", "Remove active tab"),
+        ("ctrl+shift+w", "clear", "Clear all tabs"),
     ]
     def __init__(self, *children, name = None, id = None, classes = None, disabled = False, markup = True):
         super().__init__(*children, name=name, id=id, classes=classes, disabled=disabled, markup=markup)
@@ -48,7 +51,26 @@ class TabSystem(HorizontalGroup):
         yield self.tabs
 
     def on_mount(self) -> None:
-        self.post_message(OpenTab("Welcome!",PanelWelcome()))
+        default_tab = get_user_setting(section="tabs",setting="default_tab")
+        if default_tab is not None:
+            if default_tab == "user":
+                self.post_message(OpenTab(f"{get_emoji(people_list)} User management",PanelUser()))
+            elif default_tab == "group":
+                self.post_message(OpenTab(f"{get_emoji("👥")} Group management",PanelGroup()))
+            elif default_tab == "dataset":
+                self.post_message(OpenTab(f"{get_emoji("📁")} Dataset profile mangement",PanelDataset()))
+            elif default_tab == "resource":
+                self.post_message(OpenTab(f"{get_emoji("☕")} Resource management",PanelResource()))
+            elif default_tab == "commands":
+                self.post_message(OpenTab(f"{get_emoji("📃")} Command history",PanelCommandOutput()))
+            elif default_tab == "options":
+                self.post_message(OpenTab("RACF options",PanelSetropts()))
+            elif default_tab == "search":
+                self.post_message(OpenTab(f"{get_emoji("🔎")} Search",PanelSearch()))
+            else:
+                self.post_message(OpenTab("Welcome!",PanelWelcome()))
+        else:
+            self.post_message(OpenTab("Welcome!",PanelWelcome()))
 
     async def on_open_tab(self, message: OpenTab):
         message.stop()
@@ -100,6 +122,10 @@ class TabSystem(HorizontalGroup):
     def action_open_resource_permits(self) -> None:
         """Add a new resource permits tab."""
         self.post_message(OpenTab("Resource permits",PanelResourcePermit()))
+
+    def action_open_backout(self) -> None:
+        """Add a new backout panel tab."""
+        self.post_message(OpenTab(f"{get_emoji("↪")} Backout changes",PanelBackout()))
 
     #Remove current tab
     def action_remove(self) -> None:

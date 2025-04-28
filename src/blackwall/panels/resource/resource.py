@@ -2,14 +2,25 @@ from dataclasses import dataclass
 
 from textual.reactive import reactive
 from textual.app import ComposeResult
-from textual.widgets import Input, Label, Button, Collapsible
+from textual.widgets import Input, Label, Button, Collapsible, Select, RadioButton
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.api import resource
 from blackwall.emoji import get_emoji
+from blackwall.modals import generic_confirmation_modal
+from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
 
-from ..traits_ui import generate_trait_section, get_traits_from_input
+from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
+
+class PanelResourceInfo(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Creation date:",classes="date-labels")
+        yield Input(id="base_create_date",disabled=True,classes="date-fields")
+        yield Label("Last change date:",classes="date-labels")
+        yield Input(id="base_last_change_date",disabled=True,classes="date-fields")
+        yield Label("Last reference time:",classes="date-labels")
+        yield Input(id="base_last_reference_date",disabled=True,classes="date-fields")
 
 class PanelResourceNameAndClass(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -17,11 +28,19 @@ class PanelResourceNameAndClass(VerticalGroup):
         yield Input(max_length=255,id="resource_profile_name",classes="resource-name-field")
         yield Label("Class:")
         yield Input(max_length=8,id="resource_profile_class",classes="class-field")
+        yield Label("Owner:")
+        yield Input(max_length=8,id="base_owner",classes="class-field")
 
 class PanelResourceInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Installation data:")
         yield Input(max_length=255,id="base_installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a dataset profile. You can use installation data to describe whatever you want, such as owning department or what kind of data it protects")
+
+class PanelResourceAccess(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("UACC:")
+        yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="NONE",classes="uacc-select",id="base_universal_access",tooltip="It's advised that you keep this at NONE, UACC read or higher are unsecure, see z/OS RACF Administrator's Guide for more details")
+        yield RadioButton(label="Warn on insufficient access",id="base_warn_on_insufficient_access",classes="generic-checkbox-medium")
 
 class PanelResourceSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -58,8 +77,8 @@ class PanelResourceActionButtons(HorizontalGroup):
         self.delete_action = delete_action
     
     def compose(self) -> ComposeResult:
-        yield Button(f"{get_emoji("💾")} Save",action="save",classes="action-button")
-        yield Button("Delete",action="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
+        yield Button("Create",id="save",action="save",classes="action-button")
+        yield Button("Delete",action="delete",id="delete",variant="error",classes="action-button",disabled=self.delete_is_disabled)
 
     async def action_save(self):
         await self.app.run_action(self.save_action,default_namespace=self.parent)
@@ -69,14 +88,123 @@ class PanelResourceActionButtons(HorizontalGroup):
 
 @dataclass
 class ResourceInfo:
+    base_traits: resource.BaseResourceTraits | None = None
+    kerb_traits: resource.KerbResourceTraits | None = None
+    dlf_traits: resource.DLFDataResourceTraits | None = None
+    eim_traits: resource.EIMResourceTraits | None = None
+    jes_traits: resource.JESResourceTraits | None = None
+    icsf_traits: resource.ICSFResourceTraits | None = None
+    ictx_traits: resource.ICTXResourceTraits | None = None
+    idtparms_traits: resource.IDTPARMSResourceTraits | None = None
+    session_traits: resource.SessionResourceTraits | None = None
+    svfmr_traits: resource.SVFMRResourceTraits | None = None
+    stdata_traits: resource.STDATAResourceTraits | None = None
+    proxy_traits: resource.ProxyResourceTraits | None = None
+    mfpolicy_traits: resource.MFPolicyResourceTraits | None = None
+    sigver_traits: resource.SIGVERResourceTraits | None = None
+    tme_traits: resource.TMEResourceTraits | None = None
+    cdtinfo_traits: resource.CDTINFOResourceTraits | None = None
+    ssignon_traits: resource.SSIGNONResourceTraits | None = None
+    cfdef_traits: resource.CfdefResourceTraits | None = None
     mode: PanelMode = PanelMode.create
+
+    resource_name: str = ""
+    resource_class: str = ""
 
 class PanelResource(VerticalScroll):
     def compose(self) -> ComposeResult:
+        yield PanelResourceInfo()
         yield PanelResourceNameAndClass()
         yield PanelResourceInstallationData()
+        yield PanelResourceAccess()
         yield PanelResourceSegments()
         yield PanelResourceActionButtons(save_action="save_resource_profile", delete_action="delete_resource_profile")
+
+    resource_info: reactive[ResourceInfo] = reactive(ResourceInfo())
+
+    def set_edit_mode(self):
+        self.query_exactly_one("#resource_profile_name",Input).disabled = True
+        self.query_exactly_one("#resource_profile_class",Input).disabled = True
+        self.query_exactly_one("#delete",Button).disabled = False
+        self.query_exactly_one("#save",Button).label = f"{get_emoji("💾")} Save"
+        self.notify("Switched to edit mode",severity="information")
+
+    def on_mount(self) -> None:
+        if resource.resource_profile_exists(resource=self.resource_info.resource_name,resource_class=self.resource_info.resource_class):
+            self.query_exactly_one("#resource_profile_name",Input).value = self.resource_info.resource_name
+            self.query_exactly_one("#resource_profile_class",Input).value = self.resource_info.resource_class
+            if self.resource_info.base_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.base_traits,prefix="base")
+            
+            if self.resource_info.kerb_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.kerb_traits,prefix="kerb")
+
+            if self.resource_info.dlf_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.dlf_traits,prefix="dlf")
+
+            if self.resource_info.eim_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.eim_traits,prefix="eim")
+
+            if self.resource_info.jes_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.jes_traits,prefix="jes")
+
+            if self.resource_info.icsf_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.icsf_traits,prefix="icsf")
+
+            if self.resource_info.ictx_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.ictx_traits,prefix="ictx")
+
+            if self.resource_info.idtparms_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.idtparms_traits,prefix="idtparms")
+
+            if self.resource_info.session_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.session_traits,prefix="session")
+
+            if self.resource_info.svfmr_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.svfmr_traits,prefix="svfmr")
+
+            if self.resource_info.stdata_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.stdata_traits,prefix="stdata")
+
+            if self.resource_info.proxy_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.proxy_traits,prefix="proxy")
+
+            if self.resource_info.mfpolicy_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.mfpolicy_traits,prefix="mfpolicy")
+
+            if self.resource_info.sigver_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.sigver_traits,prefix="sigver")
+
+            if self.resource_info.tme_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.tme_traits,prefix="tme")
+            
+            if self.resource_info.cdtinfo_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.cdtinfo_traits,prefix="cdtinfo")
+
+            if self.resource_info.ssignon_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.ssignon_traits,prefix="ssignon")
+
+            if self.resource_info.cfdef_traits is not None:
+                set_traits_in_input(self,traits=self.resource_info.cfdef_traits,prefix="cfdef")
+
+            self.set_edit_mode()
+
+    def action_delete_resource_profile_api(self):
+        resource_profile_name = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_name",Input).value
+        resource_profile_class = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_class",Input).value
+        if resource.resource_profile_exists(resource_class=resource_profile_class,resource=resource_profile_name):
+            message, return_code = resource.delete_resource_profile(resource_class=resource_profile_class,resource=resource_profile_name)
+            
+            if (return_code == 0):
+                self.notify(f"Resource profile {resource_profile_name} deleted, return code: {return_code}",severity="warning")
+            else:
+                self.notify(f"{message}, return code: {return_code}",severity="error")
+
+    def action_delete_resource_profile(self) -> None:
+        resource_profile_name = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_name",Input).value
+        resource_profile_class = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_class",Input).value
+        generic_confirmation_modal(self,modal_text=f"Are you sure you want to delete resource profile {resource_profile_name} in {resource_profile_class}?",confirm_action="delete_resource_profile_api",action_widget=self)
+
 
     def action_save_resource_profile(self) -> None:
         resource_profile_name = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_name",Input).value
@@ -136,12 +264,9 @@ class PanelResource(VerticalScroll):
                 self.notify(f"General resource profile {resource_profile_name} created, return code: {result}",severity="information")
                 #self.set_edit_mode()
             else:
-                self.notify(f"Unable to create general resource profile, return code: {result}",severity="error")
+                send_notification(self,message=f"Unable to create general resource profile, return code: {result}",severity="error")
         else:
-            if (result == 0 or result == 4):
+            if result == 0:
                 self.notify(f"General resource profile {resource_profile_name} updated, return code: {result}",severity="information")
             else:
-                self.notify(f"Unable to update general resource profile, return code: {result}",severity="error")
-
-    def action_delete_resource_profile(self) -> None:
-        pass
+                send_notification(self,message=f"Unable to update general resource profile, return code: {result}",severity="error")

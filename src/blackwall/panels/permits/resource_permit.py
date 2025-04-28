@@ -7,9 +7,12 @@ from blackwall.emoji import get_emoji
 
 from blackwall.api import resource
 from blackwall.api import group
+from blackwall.api import permit
+from blackwall.notifications import send_notification
+from blackwall.panels.traits_ui import get_traits_from_input
 
 PERMIT_COLUMNS = [
-    ("Action", "ID", "Type", "Access"),
+    ("ID", "Type", "Access"),
 ]
 
 class PanelResourcePermitInfo(HorizontalGroup):
@@ -36,8 +39,8 @@ class PanelResourcePermitCreate(HorizontalGroup):
         self.update_action = update_action
     
     def compose(self) -> ComposeResult:
-        yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="READ",classes="uacc-select",id="permit_access_selector")
-        yield Input(id="permit_receiver_field",placeholder="ID...",classes="field-short-generic", tooltip="User ID or group ID you want this permit change to affect")    
+        yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="READ",classes="uacc-select",id="base_access")
+        yield Input(id="permit_racf_id",placeholder="ID...",max_length=8,classes="field-short-generic", tooltip="User ID or group ID you want this permit change to affect")    
         yield Button(f"{get_emoji("💾")} Save",id="resource_permit_save",action="update")
 
     @on(Input.Submitted)
@@ -61,7 +64,7 @@ class PanelResourcePermit(VerticalScroll):
         yield PanelResourcePermitCreate(update_action="update")
         yield PanelResourcePermitList()
 
-    def action_search(self) -> None:
+    def get_acl(self, notification: bool) -> None:
         search_profile_field_value = self.get_child_by_type(PanelResourcePermitSearchField).get_child_by_id("search_permit_profile",Input).value
         search_class_field_value = self.get_child_by_type(PanelResourcePermitSearchField).get_child_by_id("search_permit_class",Input).value
         permit_table = self.get_child_by_type(PanelResourcePermitList).get_child_by_id("resource_permits_table",DataTable)
@@ -81,16 +84,31 @@ class PanelResourcePermit(VerticalScroll):
                     id_type = "user"
                 
                 #Adds the entry to the datatable
-                permit_table.add_row("",entry_id,id_type,entry_access)
-
-            self.notify("Found profile")
+                permit_table.add_row(entry_id,id_type,entry_access)
+            if notification:
+                self.notify(f"Found profile {search_profile_field_value} in class {search_class_field_value}",severity="information")
         else:
-            self.notify("Couldn't find profile")
+            if notification:
+                self.notify(f"Couldn't find profile {search_profile_field_value} in class {search_class_field_value}",severity="error")
 
-    def action_create(self) -> None:
+    def action_search(self) -> None:
+        self.get_acl(notification=True)
+
+    def action_update(self) -> None:
         search_profile_field_value = self.get_child_by_type(PanelResourcePermitSearchField).get_child_by_id("search_permit_profile",Input).value
         search_class_field_value = self.get_child_by_type(PanelResourcePermitSearchField).get_child_by_id("search_permit_class",Input).value
 
+        racf_id_field_value = self.get_child_by_type(PanelResourcePermitCreate).get_child_by_id("permit_racf_id",Input).value
+
         if resource.resource_profile_exists(resource=search_profile_field_value,resource_class=search_class_field_value):
-            pass
-            #resource.update_resource_profile(resource=search_profile_field_value,resource_class=search_class_field_value)
+            base_segment = get_traits_from_input("alter", self, prefix="base", trait_cls=permit.BasePermitTraits)
+
+            return_code = permit.update_resource_permit(profile=search_profile_field_value,class_name=search_class_field_value,racf_id=racf_id_field_value,base=base_segment)
+
+            self.get_acl(notification=False)
+
+            if return_code == 0:
+                self.notify("Created permit",severity="information")
+            else:
+                send_notification(self,message=f"Couldn't create permit, return code: {return_code}",severity="error")
+                

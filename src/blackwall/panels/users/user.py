@@ -7,18 +7,22 @@ from textual.widgets import Input, Label, Button, RadioButton, Collapsible, Sele
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 
 from blackwall.api import user
+from blackwall.notifications import send_notification
 from blackwall.panels.panel_mode import PanelMode
+
+from blackwall.modals import generic_confirmation_modal
 
 from ..traits_ui import generate_trait_section, get_traits_from_input, set_traits_in_input
 from blackwall.emoji import get_emoji
 
 class PanelUserInfo(HorizontalGroup):
-    edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
-
     def compose(self) -> ComposeResult:
-        if self.edit_mode != PanelMode.create:
-            yield Label("Created: ")
-            yield Label("Last logon: ")
+        yield Label("Creation date:",classes="date-labels")
+        yield Input(id="base_create_date",disabled=True,classes="date-fields")
+        yield Label("Last access date:",classes="date-labels")
+        yield Input(id="base_last_access_date",disabled=True,classes="date-fields")
+        #yield Label("Last access time:",classes="date-labels")
+        #yield Input(id="last_acess_time",disabled=True,classes="date-fields")
 
 class PanelUserName(HorizontalGroup):
     """Username and name components"""
@@ -186,10 +190,6 @@ class PanelUser(VerticalScroll):
         yield PanelUserActionButtons(save_action="save_user", delete_action="delete_user")
     
     user_info: reactive[UserInfo] = reactive(UserInfo())
-
-    def watch_user_info(self, value: UserInfo):
-        if user.user_exists(value.username):
-            pass
     
     def on_mount(self) -> None:
         if user.user_exists(self.user_info.username):
@@ -252,14 +252,19 @@ class PanelUser(VerticalScroll):
         self.query_exactly_one("#save",Button).label = f"{get_emoji("💾")} Save"
         self.notify("Switched to edit mode",severity="information")
 
+    def action_delete_user_api(self):
+        username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
+        if user.user_exists(username=username):
+            message, return_code = user.delete_user(username)
+            
+            if (return_code == 0):
+                self.notify(f"User {username} deleted, return code: {return_code}",severity="warning")
+            else:
+                self.notify(f"{message}, return code: {return_code}",severity="error")
+
     def action_delete_user(self) -> None:
         username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
-        message, return_code = user.delete_user(username)
-        
-        if (return_code == 0):
-            self.notify(f"User {username} deleted, return code: {return_code}",severity="warning")
-        else:
-            self.notify(f"{message}, return code: {return_code}",severity="error")
+        generic_confirmation_modal(self,modal_text=f"Are you sure you want to delete user {username}?",confirm_action="delete_user_api",action_widget=self)
 
     def action_save_user(self) -> None:
         username = self.get_child_by_type(PanelUserName).get_child_by_id("username",Input).value
@@ -312,9 +317,9 @@ class PanelUser(VerticalScroll):
                 self.notify(f"User {username} created, return code: {result}",severity="information")
                 self.set_edit_mode()
             else:
-                self.notify(f"Unable to create user, return code: {result}",severity="error")
+                send_notification(self,message=f"Unable to create user, return code: {result}",severity="error")
         else:
-            if (result == 0 or result == 4):
+            if result == 0:
                 self.notify(f"User {username} updated, return code: {result}",severity="information")
             else:
-                self.notify(f"Unable to update user, return code: {result}",severity="error")
+                send_notification(self,message=f"Unable to update user, return code: {result}",severity="error")
