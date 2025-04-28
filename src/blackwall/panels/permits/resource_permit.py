@@ -78,10 +78,7 @@ class PanelResourcePermit(VerticalScroll):
                 entry_access = entry["base:access_type"]
 
                 #Checks if the entry is a user or group
-                if group.group_exists(entry_id):
-                    id_type = "group"
-                else:
-                    id_type = "user"
+                id_type = "group" if group.group_exists(entry_id) else "user"
                 
                 #Adds the entry to the datatable
                 permit_table.add_row(entry_id,id_type,entry_access)
