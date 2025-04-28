@@ -53,7 +53,7 @@ class Blackwall(App):
         else:
             self.sub_title = "Mainframe Security Administration"
         self.register_theme(cynosure_theme)
-        self.register_theme(ibm_3270_theme)
+        #self.register_theme(ibm_3270_theme)
         user_theme = get_user_setting(section="display",setting="theme")
         if user_theme is not None or user_theme == "":
             try:
@@ -64,7 +64,7 @@ class Blackwall(App):
             self.theme = "cynosure"
         self.install_screen(RefreshScreen(), name="refresh")
         self.install_screen(RvaryScreen(), name="rvary")
-        
+
         self.command_output_change = Signal(self,name="command_output_change")
         self.command_output = ""
 
