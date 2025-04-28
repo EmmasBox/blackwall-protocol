@@ -143,3 +143,8 @@ def update_racf_options(base: BaseSetroptsTraits):
             },
         )
         return result.result, result.result["return_codes"]["racf_return_code"] # type: ignore
+    
+def racf_change_rvary_password(password: str):
+    """Change rvary password"""
+    if racfu_enabled:
+        pass
