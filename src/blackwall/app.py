@@ -1,30 +1,28 @@
 
-from textual.app import App
-from textual.widgets import Header, Footer, Label, Input
-from textual.containers import Container
-from textual.signal import Signal
-
+import importlib.util
 import json
 
+from textual.app import App
+from textual.containers import Container
+from textual.signal import Signal
+from textual.widgets import Footer, Header, Input, Label
+
+from blackwall.messages import SubmitCommand
 from blackwall.notifications import send_notification
+from blackwall.settings import get_site_setting, get_user_setting
+from blackwall.submit_command import execute_command
+
 from .command_line import CommandLine
 from .screens.modal.refresh import RefreshScreen
 from .screens.modal.rvary import RvaryScreen
-from .theme_cynosure import cynosure_theme
-from .theme_3270 import ibm_3270_theme
-
 from .tabs import TabSystem
-
-from blackwall.settings import get_site_setting, get_user_setting
-from blackwall.messages import SubmitCommand
-from blackwall.submit_command import execute_command
-
-import importlib.util
+from .theme_3270 import ibm_3270_theme
+from .theme_cynosure import cynosure_theme
 
 zoau_enabled = importlib.util.find_spec('zoautil_py')
 
 if zoau_enabled:
-    from zoautil_py import zsystem # type: ignore
+    from zoautil_py import zsystem  # type: ignore
 else:
     print("##BLKWL_ERROR_1 Warning: could not find ZOAU, certain features will be disabled such as diplaying system and LPAR names")    
 
