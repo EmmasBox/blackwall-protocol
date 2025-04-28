@@ -70,15 +70,15 @@ select = [
   "F", 
   "B", 
   "EM", 
-  "SIM", 
+  "SIM", #Comes with suggestions on simplifying things
   "PTH", #Must use pathlib instead of os
-  "N", 
+  "N",  #Checks if code conforms to the PEP8 naming conventions
   "PLE", 
   "UP", 
   "TRY", 
-  "FLY", 
-  "I", 
-  "COM", 
+  "FLY", #Checks for string joins
+  "I",  #Comes with suggestions on organizing imports
+  "COM", #Checks for missing commas and unnecessary 
   "A", 
   "C4",
   "YTT",
