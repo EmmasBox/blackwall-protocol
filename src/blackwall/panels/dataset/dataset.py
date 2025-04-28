@@ -91,7 +91,7 @@ class PanelDatasetSettings(VerticalGroup):
             yield Label("Dataset model profile:")
             yield Input(id="base_data_set_model_profile",max_length=255,classes="field-long-generic")
             yield Label("Volume:")
-            yield Input(id="base_vlume",max_length=8,classes="field-short-generic")
+            yield Input(id="base_volume",max_length=8,classes="field-short-generic")
 
 class PanelDatasetActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
