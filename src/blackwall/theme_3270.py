@@ -1,6 +1,6 @@
 from textual.theme import Theme
 
-ibm_3270_theme = Theme(
+legacy_3270_theme = Theme(
     name="IBM 3270",
     primary="#00feff",
     secondary="#17f9e1",
