@@ -9,13 +9,13 @@ class PanelBackout(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield Label("Changes available for backout",classes="backout-title")
         yield OptionList(
-            Option("[27/04/2025 at 20:30] - Created user 'BLATEST1'"),
+            Option("27/04/2025 at 20:30 - Created user 'BLATEST1'"),
             None,
-            Option("[27/04/2025 at 20:30] - Deleted user 'BLATEST2'"),
+            Option("27/04/2025 at 20:30 - Deleted user 'BLATEST2'"),
             None,
-            Option("[27/04/2025 at 20:30] - Created resource 'BLATEST3.**' profile"),
+            Option("27/04/2025 at 20:30 - Created resource 'BLATEST3.**' profile"),
             None,
-            Option("[27/04/2025 at 20:30] - Updated dataset 'BLATEST7.**' profile"),
+            Option("27/04/2025 at 20:30 - Updated dataset 'BLATEST7.**' profile"),
             None,
-            Option("[27/04/2025 at 20:30] - Updated system options (SETROPTS)"),
+            Option("27/04/2025 at 20:30 - Updated system options (SETROPTS)"),
         )
