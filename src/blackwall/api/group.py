@@ -70,22 +70,30 @@ def get_group_connections(group: str):
     """Get information on group connections"""
     pass
 
-def update_group(group: str,create: bool, base: BaseGroupTraits, tme: TMEGroupTraits | None = None, omvs: OMVSGroupTraits | None = None, dfp: DFPGroupTraits | None = None, ovm: OVMGroupTraits | None = None):
+@dataclass
+class GroupObject:
+    base_traits: BaseGroupTraits
+    tme_traits: TMEGroupTraits | None = None
+    omvs_traits: OMVSGroupTraits | None = None
+    dfp_traits: DFPGroupTraits | None = None
+    ovm_traits: OVMGroupTraits | None = None
+
+def update_group(group: str,create: bool, group_object: GroupObject):
     if racfu_enabled:
         """Creates or updates an existing group"""
-        traits = base.to_traits(prefix="base")
+        traits = group_object.base_traits.to_traits(prefix="base")
         
-        if tme is not None:
-            traits.update(tme.to_traits("tme"))
+        if group_object.tme_traits is not None:
+            traits.update(group_object.tme_traits.to_traits("tme"))
 
-        if dfp is not None:
-            traits.update(dfp.to_traits("dfp"))
+        if group_object.omvs_traits is not None:
+            traits.update(group_object.omvs_traits.to_traits("omvs"))
 
-        if omvs is not None:
-            traits.update(omvs.to_traits("omvs"))
+        if group_object.dfp_traits is not None:
+            traits.update(group_object.dfp_traits.to_traits("dfp"))
 
-        if ovm is not None:
-            traits.update(ovm.to_traits("ovm"))
+        if group_object.ovm_traits is not None:
+            traits.update(group_object.ovm_traits.to_traits("ovm"))
 
         operation = "add" if create else "alter"
         
