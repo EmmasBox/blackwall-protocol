@@ -16,4 +16,6 @@ class PanelBackout(VerticalScroll):
             Option("Created resource 'BLATEST3.**' profile 27/04/2025 at 20:30"),
             None,
             Option("Updated dataset 'BLATEST7.**' profile 27/04/2025 at 20:30"),
+            None,
+            Option("Updated system options (SETROPTS) 27/04/2025 at 20:30"),
         )
