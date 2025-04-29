@@ -61,7 +61,7 @@ build-backend = "setuptools.build_meta"
 blackwall = ["*.css", "*.tcss", "*.md", "*.png"]
 
 [tool.bandit]
-exclude_dirs = [".github"]
+exclude_dirs = [".github", ".git"]
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
