@@ -42,7 +42,7 @@ images = [
   "textual-image>=0.8.2",
 ]
 dev = [
-  "textual-deve>=1.7.0",
+  "textual-dev>=1.7.0",
 ]
 
 [project.scripts]
