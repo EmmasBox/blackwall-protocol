@@ -7,6 +7,7 @@ from textual.widgets.option_list import Option
 
 class PanelBackout(VerticalScroll):
     def compose(self) -> ComposeResult:
+        yield Label("Warning: changes done through commands cannot be reverted through this panel",variant="warning")
         yield Label("Changes available for backout",classes="backout-title")
         yield OptionList(
             Option("27/04/2025 at 20:30 - Created user 'BLATEST1'"),
