@@ -29,6 +29,7 @@ classifiers = [
   "Topic :: System :: Hardware :: Mainframes",
 
   #Supported python versions
+  "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: 3.13",
 
