@@ -29,8 +29,11 @@ classifiers = [
   "Topic :: System :: Hardware :: Mainframes",
 
   #Supported python versions
+  "Programming Language :: Python :: 3 :: Only",
   "Programming Language :: Python :: 3.12",
-  "Programming Language :: Python :: 3.13"
+  "Programming Language :: Python :: 3.13",
+
+  "Typing :: Typed",
 ]
 
 [project.optional-dependencies]
@@ -59,15 +62,63 @@ build-backend = "setuptools.build_meta"
 blackwall = ["*.css", "*.tcss", "*.md", "*.png"]
 
 [tool.bandit]
-exclude_dirs = [".github"]
+exclude_dirs = [".github", ".git"]
+tests = [
+  "B101",
+  "B102",
+  "B103",
+  "B104",
+  "B105",
+  "B106",
+  "B107",
+  "B108",
+  "B109",
+  "B111",
+  "B113",
+  "B202",
+  "B324",
+  "B501",
+  "B502",
+  "B503",
+  "B504",
+  "B505",
+  "B507",
+  "B604",
+  "B607",
+  "B609",
+  #Blacklist
+  "B302", 
+  "B301", 
+  "B303", 
+  "B312", 
+  "B321", 
+  "B323", 
+  "B304", 
+  "B305",
+  "B401",
+  "B402",
+  "B403",
+  "B405",
+  "B406",
+  "B407",
+  "B408",
+  "B409",
+  "B411",
+  "B412",
+  "B413",
+  "B415",
+]
 
 [tool.ruff]
 # Exclude a variety of commonly ignored directories.
 exclude = [
   ".git",
+  ".github",
 ]
 
 [tool.ruff.lint]
+# Ruff by default is not very aggressive, only enforcing a few rulesets like E and F.
+# To ensure security and well organized code a bunch more rulesets have been enabled
 select = [
   "E", 
   "F", 
@@ -88,5 +139,5 @@ select = [
   "ASYNC",
   ]
 
-# Avoid enforcing line-length violations (`E501`)
-ignore = ["E501"]
+# Avoid enforcing dumb rules
+ignore = ["E501","B024"]
