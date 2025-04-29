@@ -61,7 +61,7 @@ class Blackwall(App):
             except ImportError:
                 self.notify("Couldn't find user theme",severity="warning")
         else:
-            self.theme = "cynosure"
+            self.theme = "LEGACY 3270"
         self.install_screen(RefreshScreen(), name="refresh")
         self.install_screen(RvaryScreen(), name="rvary")
 
