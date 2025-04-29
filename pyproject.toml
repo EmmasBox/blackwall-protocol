@@ -67,6 +67,7 @@ exclude_dirs = [".github", ".git"]
 # Exclude a variety of commonly ignored directories.
 exclude = [
   ".git",
+  ".github",
 ]
 
 [tool.ruff.lint]
