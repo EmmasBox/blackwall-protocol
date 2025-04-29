@@ -71,6 +71,8 @@ exclude = [
 ]
 
 [tool.ruff.lint]
+# Ruff by default is not very aggressive, only enforcing a few rulesets like E and F.
+# To ensure security and well organized code a bunch more rulesets have been enabled
 select = [
   "E", 
   "F", 
