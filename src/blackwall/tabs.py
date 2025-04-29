@@ -40,7 +40,7 @@ class TabSystem(HorizontalGroup):
         #("ctrl+a", "open_analysis", "Open analysis tab"),
         ("ctrl+o", "open_options", "Open RACF options tab"),
         ("ctrl+n", "open_resource_permits", "Open resource permits tab"),
-        #("ctrl+b", "open_backout", "Open backout tab"),
+        ("ctrl+b", "open_backout", "Open backout tab"),
         ("ctrl+w", "remove", "Remove active tab"),
         ("ctrl+shift+w", "clear", "Clear all tabs"),
     ]
