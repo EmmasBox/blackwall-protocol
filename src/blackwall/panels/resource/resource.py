@@ -235,28 +235,32 @@ class PanelResource(VerticalScroll):
         ssignon_segment = get_traits_from_input(operator,self, prefix="ssignon", trait_cls=resource.SSIGNONResourceTraits)
         cfdef_segment = get_traits_from_input(operator,self, prefix="cfdef", trait_cls=resource.CfdefResourceTraits)
 
+        resource_object = resource.ResourceObject(
+            base_traits=base_segment,
+            kerb_traits=kerb_segment,
+            dlf_traits=dlfdata_segment,
+            eim_traits=eim_segment,
+            jes_traits=jes_segment,
+            icsf_traits=icsf_segment,
+            ictx_traits=ictx_segment,
+            idtparms_traits=idtparms_segment,
+            session_traits=session_segment,
+            svfmr_traits=svfmr_segment,
+            stdata_traits=stdata_segment,
+            proxy_traits=proxy_segment,
+            mfpolicy_traits=mfpolicy_segment,
+            sigver_traits=sigver_segment,
+            tme_traits=tme_segment,
+            cdtinfo_traits=cdtinfo_segment,
+            ssignon_traits=ssignon_segment,
+            cfdef_traits=cfdef_segment,
+        )
+
         result = resource.update_resource_profile(
             resource=resource_profile_name,
             resource_class=resource_profile_class,
             create=not resource_profile_exists,
-            base=base_segment,
-            kerb=kerb_segment,
-            cdtinfo=cdtinfo_segment,
-            dlfdata=dlfdata_segment,
-            eim=eim_segment,
-            jes=jes_segment,
-            icsf=icsf_segment,
-            ictx=ictx_segment,
-            idtparms=idtparms_segment,
-            session=session_segment,
-            svfmr=svfmr_segment,
-            stdata=stdata_segment,
-            proxy=proxy_segment,
-            mfpolicy=mfpolicy_segment,
-            sigver=sigver_segment,
-            tme=tme_segment,
-            ssignon=ssignon_segment,
-            cfdef=cfdef_segment,
+            resource_object=resource_object,
             )
         
         if not resource_profile_exists:
