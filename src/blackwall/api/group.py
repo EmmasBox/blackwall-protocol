@@ -82,18 +82,12 @@ def update_group(group: str,create: bool, group_object: GroupObject):
     if racfu_enabled:
         """Creates or updates an existing group"""
         traits = group_object.base_traits.to_traits(prefix="base")
-        
-        if group_object.tme_traits is not None:
-            traits.update(group_object.tme_traits.to_traits("tme"))
 
-        if group_object.omvs_traits is not None:
-            traits.update(group_object.omvs_traits.to_traits("omvs"))
-
-        if group_object.dfp_traits is not None:
-            traits.update(group_object.dfp_traits.to_traits("dfp"))
-
-        if group_object.ovm_traits is not None:
-            traits.update(group_object.ovm_traits.to_traits("ovm"))
+        labels = ["tme","omvs","dfp","ovm"]
+        for label in labels:
+            trait_object: TraitsBase | None = getattr(group_object,f"{label}_traits")
+            if trait_object is not None:
+                traits.update(trait_object.to_traits(label))
 
         operation = "add" if create else "alter"
         
