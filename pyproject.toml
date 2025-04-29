@@ -41,6 +41,9 @@ images = [
   "qrcode>=8.1",
   "textual-image>=0.8.2",
 ]
+dev = [
+  "textual-dev>=1.7.0",
+]
 
 [project.scripts]
 blackwall = "blackwall.main:main"
