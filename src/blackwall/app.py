@@ -53,7 +53,7 @@ class Blackwall(App):
         else:
             self.sub_title = "Mainframe Security Administration"
         self.register_theme(cynosure_theme)
-        self.register_theme(legacy_3270_theme)
+        #self.register_theme(legacy_3270_theme)
         user_theme = get_user_setting(section="display",setting="theme")
         if user_theme is not None or user_theme == "":
             try:
@@ -61,7 +61,7 @@ class Blackwall(App):
             except ImportError:
                 self.notify("Couldn't find user theme",severity="warning")
         else:
-            self.theme = "LEGACY 3270"
+            self.theme = "cynosure"
         self.install_screen(RefreshScreen(), name="refresh")
         self.install_screen(RvaryScreen(), name="rvary")
 
