@@ -169,10 +169,15 @@ class PanelDataset(VerticalScroll):
         operator = "alter" if dataset_profile_exists else "add"
 
         base_segment = get_traits_from_input(operator,self, prefix="base", trait_cls=dataset.BaseDatasetTraits)
+
+        dataset_object = dataset.DatasetObject(
+            base_traits=base_segment,
+        )
+
         result = dataset.update_dataset_profile(
             dataset=dataset_name,
             create=not dataset_profile_exists,
-            base=base_segment,
+            dataset_object=dataset_object,
             )
         
         if not dataset_profile_exists:
