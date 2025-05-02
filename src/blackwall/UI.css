@@ -184,6 +184,7 @@ RefreshScreen {
 
 .search-selector {
     margin: 1;
+    width: auto;
 }
 
 # Analysis panel
@@ -216,4 +217,11 @@ ToggleButton.-on > .toggle--button {
 
 .backout-title {
     margin: 1;
+}
+
+# Health checker
+
+.selector-health-checks {
+    margin: 1;
+    width: auto:
 }
