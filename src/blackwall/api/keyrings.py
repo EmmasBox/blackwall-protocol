@@ -10,10 +10,17 @@ if racfu_enabled:
 else:
     print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
 
-def get_keyring(keyring: str, owner: str):
+def keyring_exists(keyring: str, owner: str):
     if racfu_enabled:
-        if racfu_enabled:
-            result = racfu({"operation": "extract", "admin_type": "keyring", "keyring": keyring.upper(), "owner": owner})
-            return result.result
-        else:
-            return {}
+        result = racfu({"operation": "extract", "admin_type": "keyring", "keyring": keyring.upper(), "owner": owner})
+        return result.result["return_codes"]["racf_return_code"] == 0
+    else:
+        return {}
+
+def get_keyring(keyring: str, owner: str):
+    """Extracts information on a keyring"""
+    if racfu_enabled:
+        result = racfu({"operation": "extract", "admin_type": "keyring", "keyring": keyring.upper(), "owner": owner})
+        return result.result
+    else:
+        return {"": ""}
