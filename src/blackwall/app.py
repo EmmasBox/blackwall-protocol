@@ -16,7 +16,8 @@ from .command_line import CommandLine
 from .screens.modal.refresh import RefreshScreen
 from .screens.modal.rvary import RvaryScreen
 from .tabs import TabSystem
-from .themes.theme_3270 import legacy_3270_theme
+
+#from .themes.theme_3270 import legacy_3270_theme
 from .themes.theme_cynosure import cynosure_theme
 
 zoau_enabled = importlib.util.find_spec('zoautil_py')
