@@ -96,10 +96,14 @@ def get_dataset_profile(dataset: str) -> dict:
     else:
         return {}
 
-def update_dataset_profile(dataset: str, create: bool, base: BaseDatasetTraits):
+@dataclass
+class DatasetObject:
+    base_traits: BaseDatasetTraits
+
+def update_dataset_profile(dataset: str, create: bool, dataset_object: DatasetObject):
     """Creates or updates a dataset profile"""
     if racfu_enabled:
-        traits = base.to_traits(prefix="base")
+        traits = dataset_object.base_traits.to_traits(prefix="base")
         
         operation = "add" if create else "alter"
         

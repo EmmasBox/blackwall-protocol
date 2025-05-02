@@ -288,25 +288,30 @@ class PanelUser(VerticalScroll):
         lnotes_segment = get_traits_from_input(operator, self, prefix="lnotes", trait_cls=user.LnotesUserTraits)
         mfa_segment = get_traits_from_input(operator, self, prefix="mfa", trait_cls=user.MfaUserTraits)
         netview_segment = get_traits_from_input(operator, self, prefix="netview", trait_cls=user.NetviewUserTraits)
+
+        user_object = user.UserObject(
+            base_traits=base_segment,
+            tso_traits=tso_segment,
+            omvs_traits=omvs_segment,
+            cics_traits=cics_segment,
+            workattr_traits=workattr_segment,
+            language_traits=language_segment,
+            dfp_traits=dfp_segment,
+            dce_traits=dce_segment,
+            proxy_traits=proxy_segment,
+            operparm_traits=operparm_segment,
+            ovm_traits=ovm_segment,
+            eim_traits=eim_segment,
+            nds_traits=nds_segment,
+            lnotes_traits=lnotes_segment,
+            mfa_traits=mfa_segment,
+            netview_traits=netview_segment,
+        )
+
         result = user.update_user(
             username=username,
             create=not user_exists,
-            base=base_segment,
-            tso=tso_segment,
-            omvs=omvs_segment,
-            cics=cics_segment,
-            workattr=workattr_segment,
-            language=language_segment,
-            dfp=dfp_segment,
-            dce=dce_segment,
-            proxy=proxy_segment,
-            operparm=operparm_segment,
-            ovm=ovm_segment,
-            eim=eim_segment,
-            nds=nds_segment,
-            lnotes=lnotes_segment,
-            mfa=mfa_segment,
-            netview=netview_segment,
+            user_object=user_object,
         )
 
         if not user_exists:

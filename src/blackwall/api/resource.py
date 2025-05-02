@@ -255,81 +255,40 @@ def get_resource_acl(resource_class: str, resource: str) -> list[dict]:
     else:
         return []
 
+@dataclass
+class ResourceObject:
+    base_traits: BaseResourceTraits
+    kerb_traits: KerbResourceTraits | None = None
+    dlf_traits: DLFDataResourceTraits | None = None
+    eim_traits: EIMResourceTraits | None = None
+    jes_traits: JESResourceTraits | None = None
+    icsf_traits: ICSFResourceTraits | None = None
+    ictx_traits: ICTXResourceTraits | None = None
+    idtparms_traits: IDTPARMSResourceTraits | None = None
+    session_traits: SessionResourceTraits | None = None
+    svfmr_traits: SVFMRResourceTraits | None = None
+    stdata_traits: STDATAResourceTraits | None = None
+    proxy_traits: ProxyResourceTraits | None = None
+    mfpolicy_traits: MFPolicyResourceTraits | None = None
+    sigver_traits: SIGVERResourceTraits | None = None
+    tme_traits: TMEResourceTraits | None = None
+    cdtinfo_traits: CDTINFOResourceTraits | None = None
+    ssignon_traits: SSIGNONResourceTraits | None = None
+    cfdef_traits: CfdefResourceTraits | None = None 
+
 def update_resource_profile(
         resource_class: str,
         resource: str, 
         create: bool, 
-        base: BaseResourceTraits,
-        stdata: STDATAResourceTraits | None = None,
-        cdtinfo: CDTINFOResourceTraits | None = None,
-        kerb: KerbResourceTraits | None = None,
-        tme: TMEResourceTraits | None = None,
-        ssignon: SSIGNONResourceTraits | None = None,
-        proxy: ProxyResourceTraits | None = None,
-        icsf: ICSFResourceTraits | None = None,
-        ictx: ICTXResourceTraits | None = None,
-        svfmr: SVFMRResourceTraits | None = None,
-        sigver: SIGVERResourceTraits | None = None,
-        mfpolicy: MFPolicyResourceTraits | None = None,
-        session: SessionResourceTraits | None = None,
-        idtparms: IDTPARMSResourceTraits | None = None,
-        jes: JESResourceTraits | None = None,
-        dlfdata: DLFDataResourceTraits | None = None,
-        cfdef: CfdefResourceTraits | None = None,
-        eim: EIMResourceTraits | None = None,
+        resource_object: ResourceObject,
         ):
-    traits = base.to_traits(prefix="base")
+    traits = resource_object.base_traits.to_traits(prefix="base")
 
-    if stdata is not None:
-        traits.update(stdata.to_traits("stdata"))
-
-    if cdtinfo is not None:
-        traits.update(cdtinfo.to_traits("cdtinfo"))
-
-    if ssignon is not None:
-        traits.update(ssignon.to_traits("ssignon"))
-
-    if sigver is not None:
-        traits.update(sigver.to_traits("sigver"))
-
-    if svfmr is not None:
-        traits.update(svfmr.to_traits("svfmr"))
-
-    if tme is not None:
-        traits.update(tme.to_traits("tme"))
-
-    if kerb is not None:
-        traits.update(kerb.to_traits("kerb"))
-
-    if proxy is not None:
-        traits.update(proxy.to_traits("proxy"))
-
-    if icsf is not None:
-        traits.update(icsf.to_traits("icsf"))
-
-    if ictx is not None:
-        traits.update(ictx.to_traits("ictx"))
-
-    if mfpolicy is not None:
-        traits.update(mfpolicy.to_traits("mfpolicy"))
-
-    if session is not None:
-        traits.update(session.to_traits("session"))
-
-    if idtparms is not None:
-        traits.update(idtparms.to_traits("idtparms"))
-
-    if jes is not None:
-        traits.update(jes.to_traits("jes"))
-
-    if dlfdata is not None:
-        traits.update(dlfdata.to_traits("dlfdata"))
-
-    if cfdef is not None:
-        traits.update(cfdef.to_traits("cfdef"))
-
-    if eim is not None:
-        traits.update(eim.to_traits("eim"))
+    labels = ["kerb","dlf","eim","jes","icsf","ictx","idtparms","session","svfmr","stdata","proxy","mfpolicy","sigver","tme","cdtinfo","ssignon","cfdef"]
+    for label in labels:
+        trait_object: TraitsBase | None = getattr(resource_object,f"{label}_traits")
+        if trait_object is not None:
+            traits.update(trait_object.to_traits(label))
 
     operation = "add" if create else "alter"
     
