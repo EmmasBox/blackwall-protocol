@@ -1,7 +1,7 @@
 from textual.theme import Theme
 
-ibm_3270_theme = Theme(
-    name="IBM 3270",
+legacy_3270_theme = Theme(
+    name="LEGACY 3270",
     primary="#00feff",
     secondary="#17f9e1",
     accent="#ff0000",
@@ -21,5 +21,6 @@ ibm_3270_theme = Theme(
         "border-blurred": "#17f9e1",
         "footer-foreground": "#000000",
         "footer-description-foreground": "#000000",
+        "button-foreground": "",
     },
 )

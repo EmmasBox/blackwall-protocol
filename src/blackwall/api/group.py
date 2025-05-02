@@ -70,22 +70,24 @@ def get_group_connections(group: str):
     """Get information on group connections"""
     pass
 
-def update_group(group: str,create: bool, base: BaseGroupTraits, tme: TMEGroupTraits | None = None, omvs: OMVSGroupTraits | None = None, dfp: DFPGroupTraits | None = None, ovm: OVMGroupTraits | None = None):
+@dataclass
+class GroupObject:
+    base_traits: BaseGroupTraits
+    tme_traits: TMEGroupTraits | None = None
+    omvs_traits: OMVSGroupTraits | None = None
+    dfp_traits: DFPGroupTraits | None = None
+    ovm_traits: OVMGroupTraits | None = None
+
+def update_group(group: str,create: bool, group_object: GroupObject):
     if racfu_enabled:
         """Creates or updates an existing group"""
-        traits = base.to_traits(prefix="base")
-        
-        if tme is not None:
-            traits.update(tme.to_traits("tme"))
+        traits = group_object.base_traits.to_traits(prefix="base")
 
-        if dfp is not None:
-            traits.update(dfp.to_traits("dfp"))
-
-        if omvs is not None:
-            traits.update(omvs.to_traits("omvs"))
-
-        if ovm is not None:
-            traits.update(ovm.to_traits("ovm"))
+        labels = ["tme","omvs","dfp","ovm"]
+        for label in labels:
+            trait_object: TraitsBase | None = getattr(group_object,f"{label}_traits")
+            if trait_object is not None:
+                traits.update(trait_object.to_traits(label))
 
         operation = "add" if create else "alter"
         

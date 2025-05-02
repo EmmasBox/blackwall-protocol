@@ -214,73 +214,39 @@ def get_user(username: str) -> dict[str, Any]:
     else:
         return False
 
+@dataclass
+class UserObject:
+    base_traits: BaseUserTraits
+    tso_traits: TSOUserTraits | None = None
+    omvs_traits: OMVSUserTraits | None = None
+    cics_traits: CICSUserTraits | None = None
+    kerb_traits: KerbUserTraits | None = None
+    eim_traits: EIMUserTraits | None = None
+    language_traits: LanguageUserTraits | None = None
+    dce_traits: DCEUserTraits | None = None
+    dfp_traits: DFPUserTraits | None = None
+    nds_traits: NDSUserTraits | None = None
+    lnotes_traits: LnotesUserTraits | None = None
+    mfa_traits: MfaUserTraits | None = None
+    ovm_traits: OvmUserTraits | None = None
+    proxy_traits: ProxyUserTraits | None = None
+    workattr_traits: WorkattrUserTraits | None = None
+    netview_traits: NetviewUserTraits | None = None
+    operparm_traits: OperparmUserTraits | None = None
+
 def update_user(
         username: str, 
         create: bool,
-        base: BaseUserTraits, 
-        cics: CICSUserTraits | None = None, 
-        dce: DCEUserTraits | None = None, 
-        dfp: DFPUserTraits | None = None, 
-        eim: EIMUserTraits | None = None, 
-        language: LanguageUserTraits | None = None, 
-        lnotes: LnotesUserTraits | None = None, 
-        mfa: MfaUserTraits | None = None, 
-        nds: NDSUserTraits | None = None, 
-        netview: NetviewUserTraits | None = None, 
-        omvs: OMVSUserTraits | None = None,
-        operparm: OperparmUserTraits | None = None, 
-        ovm: OvmUserTraits | None = None, 
-        proxy: ProxyUserTraits | None = None, 
-        tso: TSOUserTraits | None = None, 
-        workattr: WorkattrUserTraits | None = None, 
+        user_object: UserObject,
         ):
     """Update or creates a new user, returns true if the user was successfully created and false if an error code was given"""
-    traits = base.to_traits(prefix="base")
+    traits = user_object.base_traits.to_traits(prefix="base")
     
-    if cics is not None:
-        traits.update(cics.to_traits("cics"))
-
-    if dce is not None:
-        traits.update(dce.to_traits("dce"))
-
-    if dfp is not None:
-        traits.update(dfp.to_traits("dfp"))
-
-    if eim is not None:
-        traits.update(eim.to_traits("eim"))
-
-    if language is not None:
-        traits.update(language.to_traits("language"))
-
-    if lnotes is not None:
-        traits.update(lnotes.to_traits("lnotes"))
-
-    if mfa is not None:
-        traits.update(mfa.to_traits("mfa"))
-
-    if nds is not None:
-        traits.update(nds.to_traits("nds"))
-
-    if netview is not None:
-        traits.update(netview.to_traits("netview"))
-
-    if omvs is not None:
-        traits.update(omvs.to_traits("omvs"))
-
-    if operparm is not None:
-        traits.update(operparm.to_traits("operparm"))
-
-    if ovm is not None:
-        traits.update(ovm.to_traits("ovm"))
-
-    if proxy is not None:
-        traits.update(proxy.to_traits("proxy"))
-
-    if tso is not None:
-        traits.update(tso.to_traits("tso"))
-    
-    if workattr is not None:
-        traits.update(workattr.to_traits("workattr"))
+    labels = ["cics","dce","dfp","eim","language","lnotes","mfa","nds","netview","omvs","operparm","ovm","proxy","tso","workattr"]
+    for label in labels:
+        trait_object: TraitsBase | None = getattr(user_object,f"{label}_traits")
+        if trait_object is not None:
+            traits.update(trait_object.to_traits(label))
 
     operation = "add" if create else "alter"
 

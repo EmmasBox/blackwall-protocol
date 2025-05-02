@@ -5,7 +5,7 @@ dynamic = ["version"]
 requires-python = ">=3.12"
 dependencies = [
   "racfu==1.0a1",
-  "textual>=3.1.1",
+  "textual>=3.2.0",
 ]
 authors = [
   {name = "Emma Skovgaard"},
