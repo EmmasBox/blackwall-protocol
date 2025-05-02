@@ -209,7 +209,7 @@ def user_exists(username: str) -> bool:
 def get_user(username: str) -> dict[str, Any]:
     """Doesn't handle users that don't exist, recommend using user_exists() first"""
     if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username.upper()})
+        result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username})
         return result.result
     else:
         return False
