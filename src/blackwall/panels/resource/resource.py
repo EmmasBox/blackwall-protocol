@@ -48,6 +48,16 @@ class PanelResourceAccess(VerticalGroup):
         yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="NONE",classes="uacc-select",id="base_universal_access",tooltip="It's advised that you keep this at NONE, UACC read or higher are unsecure, see z/OS RACF Administrator's Guide for more details")
         yield RadioButton(label="Warn on insufficient access",id="base_warn_on_insufficient_access",classes="generic-checkbox-medium")
 
+class PanelResourceSecurityLevelAndCategories(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        with Collapsible(title="Security level and category"):
+            yield Label("Security level")
+            yield Input(max_length=8,id="base_security_level",classes="field-short-generic")
+            yield Label("Security category:")
+            yield Input(max_length=8,id="base_security_category",classes="field-short-generic")
+            yield Label("Security label:")
+            yield Input(max_length=8,id="base_security_label",classes="field-short-generic")
+
 class PanelResourceSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Collapsible(title="Resource profile segments"):
@@ -120,6 +130,7 @@ class PanelResource(VerticalScroll):
         yield PanelResourceNameAndClass()
         yield PanelResourceInstallationData()
         yield PanelResourceAccess()
+        yield PanelResourceSecurityLevelAndCategories()
         yield PanelResourceSegments()
         yield PanelResourceActionButtons(save_action="save_resource_profile", delete_action="delete_resource_profile")
 
