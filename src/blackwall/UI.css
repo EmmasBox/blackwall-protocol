@@ -125,7 +125,7 @@ RefreshScreen {
     margin-bottom: 1;
 }
 
-.generic-list {
+.list-view-generic {
     box-sizing: content-box;
     height: auto;
 }
