@@ -244,7 +244,8 @@ class PanelSearch(VerticalScroll):
                 key_dict = keyrings.get_keyring(keyring=search_query,owner=search_query_class)
 
                 keyring_traits = keyrings.KeyringTraits.from_dict(prefix=None,source=key_dict)
-
+                if keyring_traits is None:
+                    self.notify("keyring traits is none!")
                 new_keyring_panel.keyring_info = KeyringInfo(
                     keyring_name=search_query,
                     keyring_owner=search_query_class,
