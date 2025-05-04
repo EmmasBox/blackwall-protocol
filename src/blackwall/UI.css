@@ -125,6 +125,10 @@ RefreshScreen {
     margin-bottom: 1;
 }
 
+.generic-list {
+    box-sizing: content-box;
+}
+
 .action-button {
     margin-top: 1;
     margin-bottom: 1;
