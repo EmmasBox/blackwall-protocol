@@ -120,6 +120,11 @@ RefreshScreen {
     margin-bottom: 1;
 }
 
+.generic-checkbox-small {
+    width: 32;
+    margin-bottom: 1;
+}
+
 .generic-checkbox-medium {
     width: 60;
     margin-bottom: 1;

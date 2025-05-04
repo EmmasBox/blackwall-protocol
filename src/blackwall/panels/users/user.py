@@ -81,10 +81,10 @@ class PanelUserAttributes(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
         with Collapsible(title="User attributes"):
-            yield RadioButton("Special",id="base_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option")
-            yield RadioButton("Operations",id="base_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards")
-            yield RadioButton("Auditor",id="base_auditor")
-            yield RadioButton("Read only auditor",id="base_audit_responsibility")
+            yield RadioButton("Special",id="base_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option",classes="generic-checkbox-small")
+            yield RadioButton("Operations",id="base_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards",classes="generic-checkbox-small")
+            yield RadioButton("Auditor",id="base_auditor",classes="generic-checkbox-small",tooltip="This attribute allows you to change system options and extract data about the RACF database, this one is pretty dangerous but not as dagnerous as special.")
+            yield RadioButton("Read only auditor",id="base_audit_responsibility",classes="generic-checkbox-small",tooltip="This attribute allows you to extract data about the RACF database, but you can't change any settings. This one is still dangerous but signifincantly less than the others as nothing can be changed.")
 
 class PanelUserAccess(VerticalGroup):
     """User dataset component"""
