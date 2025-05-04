@@ -193,7 +193,7 @@ class PanelUser(VerticalScroll):
     
     def on_mount(self) -> None:
         if user.user_exists(self.user_info.username):
-            self.query_exactly_one("#username",Input).value = self.user_info.username
+            self.query_exactly_one("#username",Input).value = self.user_info.username.upper()
             if self.user_info.base_traits is not None:
                 set_traits_in_input(self,traits=self.user_info.base_traits,prefix="base")
             
