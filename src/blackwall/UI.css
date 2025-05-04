@@ -140,6 +140,7 @@ RefreshScreen {
 .installation-data {
     width: 150;
     margin-bottom: 1;
+    box-sizing: content-box;
 }
 
 # Setropts
