@@ -127,6 +127,7 @@ RefreshScreen {
 
 .generic-list {
     box-sizing: content-box;
+    height: auto;
 }
 
 .action-button {
