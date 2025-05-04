@@ -38,6 +38,7 @@ class PanelKeyringCertificates(VerticalGroup):
         certificates_table.add_columns(*CERTIFICATE_COLUMNS[0]) 
 
         if self.keyring_info.keyring_traits is not None and self.keyring_info.keyring_traits.certificates is not None:
+            self.notify("debug")
             for certificate in self.keyring_info.keyring_traits.certificates:
 
                 certificates_table.add_row(certificate.DN,certificate.owner,certificate.issuer,certificate.keySize,certificate,certificate.notBefore,certificate.notAfter)
