@@ -23,7 +23,7 @@ class BaseResourceTraits(TraitsBase):
     audit_read: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_read: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_update: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    security_category: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    security_category: str | None = field(default=None,metadata={"label": "Security category", "allowed_in": {"add","alter"}})
     installation_data: str | None = field(default=None,metadata={"label": "Installation data", "allowed_in": {"add","alter"}})
     level: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     member_class_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
