@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.reactive import reactive
-from textual.widgets import Button, Input, Label
+from textual.widgets import Button, Input, Label, RadioButton
 
 from blackwall.api import group
 from blackwall.emoji import get_emoji
@@ -43,6 +43,11 @@ class PanelGroupDatasetModel(VerticalGroup):
         yield Label("Dataset model:")
         yield Input(id="base_data_set_model",classes="field-long-generic")
 
+class PanelGroupTerminalUACC(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Dataset model:")
+        yield RadioButton(label="Terminal UACC",id="base_terminal_universal_access",classes="generic-checkbox-medium")
+
 class PanelGroupSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield from generate_trait_section(title="DFP segment", prefix="dfp", traits_class=group.DFPGroupTraits)
@@ -81,6 +86,7 @@ class PanelGroup(VerticalScroll):
         yield PanelGroupNameAndSubgroup()
         yield PanelGroupInstallationData()
         yield PanelGroupDatasetModel()
+        yield PanelGroupTerminalUACC()
         yield PanelGroupSegments()
         yield PanelGroupActionButtons(save_action="save_group",delete_action="delete_group")
 
