@@ -1,8 +1,6 @@
 
 #TODO fix all of this shitty code. Not gonna lie the code below is really bad, but I was in a crunch
 
-from data
-
 from textual import on
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalScroll
