@@ -84,6 +84,7 @@ class PanelUserAttributes(VerticalGroup):
             yield RadioButton("Special",id="base_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option")
             yield RadioButton("Operations",id="base_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards")
             yield RadioButton("Auditor",id="base_auditor")
+            yield RadioButton("Read only auditor",id="base_audit_responsibility")
 
 class PanelUserAccess(VerticalGroup):
     """User dataset component"""

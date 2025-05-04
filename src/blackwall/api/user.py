@@ -26,6 +26,7 @@ class BaseUserTraits(TraitsBase):
     special: bool | None = field(default=None,metadata={"label": "Special"})
     operations: bool | None = field(default=None,metadata={"label": "Operations"})
     auditor: bool | None = field(default=None,metadata={"label": "Auditor"})
+    audit_responsibility: bool | None = field(default=None,metadata={"label": "Read only auditor"})
 
     password: str | None = field(default=None, metadata={
         "masked": True,
