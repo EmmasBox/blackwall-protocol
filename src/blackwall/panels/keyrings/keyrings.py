@@ -6,7 +6,6 @@ from textual.reactive import reactive
 from textual.widgets import DataTable, Input, Label
 
 from blackwall.api import keyrings
-from blackwall.panels.traits_ui import set_traits_in_input
 
 CERTIFICATE_COLUMNS = [
     ("DN", "Owner", "Issuer", "Key size", "Valid after", "Valid before"),
