@@ -248,3 +248,7 @@ class PanelSearch(VerticalScroll):
                 )
 
                 self.post_message(OpenTab(f"Keyring: {search_query}",new_keyring_panel))
+
+                self.notify(f"Found keyring: {search_query}")
+            else:
+                self.notify(f"Keyring {search_query} couldn't be found")
