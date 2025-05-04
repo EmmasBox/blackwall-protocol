@@ -42,7 +42,7 @@ class SystemInfo(HorizontalGroup):
                 else:
                     yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}",id="system_label",classes="system-label")
 
-    def on_ready(self) -> None:
+    def on_mount(self) -> None:
         self.update_clock()
         self.set_interval(1, self.update_clock)
 
