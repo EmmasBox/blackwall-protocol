@@ -26,7 +26,10 @@ class PanelKeyringInfo(VerticalGroup):
         yield Input(id="ring_owner",max_length=8,classes="field-short-generic",disabled=True)
 
 class PanelKeyringCertificates(VerticalGroup):
-    keyring_info: reactive[KeyringInfo] = reactive(KeyringInfo())
+
+    def __init__(self, keyring_info: KeyringInfo):
+        super().__init__()
+        self.keyring_info = keyring_info
 
     def compose(self) -> ComposeResult:
         yield Label("certificates: ")
@@ -57,4 +60,4 @@ class PanelKeyring(VerticalScroll):
 
     def compose(self) -> ComposeResult:
         yield PanelKeyringInfo()
-        yield PanelKeyringCertificates()
+        yield PanelKeyringCertificates(keyring_info=self.keyring_info)
