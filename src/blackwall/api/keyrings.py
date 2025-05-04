@@ -36,6 +36,11 @@ class CertificateTraits(TraitsBase):
     status: str | None = field(default=None,metadata={"label": "Status", "allowed_in": {"extract"}})
     signature: dict[str, str] | None = field(default=None,metadata={"label": "Signature", "allowed_in": {"extract"}})
 
+@dataclass
+class KeyringObject:
+    keyring_traits: KeyringTraits
+    certificate_traits: CertificateTraits
+
 def keyring_exists(keyring: str, owner: str):
     if racfu_enabled:
         result = racfu({"operation": "extract", "admin_type": "keyring", "keyring": keyring.upper(), "owner": owner})
