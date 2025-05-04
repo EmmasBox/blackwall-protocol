@@ -6,6 +6,7 @@ from textual.reactive import reactive
 from textual.widgets import DataTable, Input, Label
 
 from blackwall.api import keyrings
+from blackwall.panels.traits_ui import set_traits_in_input
 
 CERTIFICATE_COLUMNS = [
     ("DN", "Owner", "Issuer", "Key size", "Valid after", "Valid before"),
@@ -28,15 +29,24 @@ class PanelKeyringCertificates(VerticalGroup):
         certificates_table.zebra_stripes = True
         certificates_table.add_columns(*CERTIFICATE_COLUMNS[0]) 
 
-
 @dataclass
 class KeyringInfo:
+    keyring_name: str = ""
+    keyring_owner: str = ""
     keyring_traits: keyrings.KeyringTraits | None = None
     certificate_traits: keyrings.CertificateTraits | None = None
 
 class PanelKeyring(VerticalScroll):
 
     keyring_info: reactive[KeyringInfo] = reactive(KeyringInfo())
+
+    def on_mount(self) -> None:
+        if keyrings.keyring_exists(keyring=self.keyring_info.keyring_name,owner=self.keyring_info.keyring_owner):
+            self.query_exactly_one("#ring_name",Input).value = self.keyring_info.keyring_name.upper()
+            self.query_exactly_one("#ring_owner",Input).value = self.keyring_info.keyring_name.upper()
+            
+            if self.keyring_info.certificate_traits is not None:
+                set_traits_in_input(self,traits=self.keyring_info.certificate_traits,prefix="certificates")
 
     def compose(self) -> ComposeResult:
         yield PanelKeyringInfo()

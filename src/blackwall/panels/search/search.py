@@ -249,6 +249,8 @@ class PanelSearch(VerticalScroll):
                 certificate_traits = keyrings.CertificateTraits.from_dict(prefix="certificates",source=key_dict["certificates"])
 
                 new_keyring_panel.keyring_info = KeyringInfo(
+                    keyring_name=search_query,
+                    keyring_owner=search_query_class,
                     keyring_traits=keyring_traits,
                     certificate_traits=certificate_traits,
                 )
