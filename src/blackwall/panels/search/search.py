@@ -6,7 +6,7 @@ from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalScroll
 from textual.widgets import Button, Input, Label, RadioButton, RadioSet
 
-from blackwall.api import dataset, group, resource, user
+from blackwall.api import dataset, group, keyrings, resource, user
 from blackwall.messages import OpenTab
 from blackwall.panels.dataset.dataset import DatasetInfo, PanelDataset
 from blackwall.panels.group.group import GroupInfo, PanelGroup
@@ -25,6 +25,7 @@ class SearchSelector(HorizontalGroup):
             yield RadioButton("Group",id="search_type_group")
             yield RadioButton("Dataset profile",id="search_type_dataset")
             yield RadioButton("Resource profile",id="search_type_resource")
+            yield RadioButton("Keyring",id="search_type_keyring")
         with RadioSet(id="filter-selector",classes="search-selector"):
             yield RadioButton("All",disabled=True)
             yield RadioButton("Only one",value=True)
@@ -235,3 +236,6 @@ class PanelSearch(VerticalScroll):
                 self.notify(f"Found resource profile: {search_query}")
             else:
                 self.notify(f"Resource profile {search_query} couldn't be found")
+        elif search_type == "search_type_keyring":
+            if keyrings.keyring_exists(keyring=search_query,owner=search_query_class):
+                pass
