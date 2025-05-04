@@ -26,7 +26,7 @@ class SearchSelector(HorizontalGroup):
             yield RadioButton("Group",id="search_type_group")
             yield RadioButton("Dataset profile",id="search_type_dataset")
             yield RadioButton("Resource profile",id="search_type_resource")
-            yield RadioButton("Keyring",id="search_type_keyring")
+            #yield RadioButton("Keyring",id="search_type_keyring")
         with RadioSet(id="filter-selector",classes="search-selector"):
             yield RadioButton("All",disabled=True)
             yield RadioButton("Only one",value=True)
