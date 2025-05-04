@@ -38,7 +38,7 @@ class DFPGroupTraits(TraitsBase):
 @dataclass
 class OMVSGroupTraits(TraitsBase):
     auto_gid: str | None = field(default=None,metadata={"allowed_in": {"add","alter"},"invalid_values": {False}})
-    gid: int | None = field(default=None,metadata={"label": "GID", "allowed_in": {"add","alter","extract"}})
+    gid: int | None = field(default=None,metadata={"label": "GID", "input_args": {"max_length": 10,"classes": "field-medium-generic"}, "allowed_in": {"add","alter","extract"}})
     shared: str | None = field(default=None,metadata={"allowed_in": {"add","alter"},"invalid_values": {False}})
 
 @dataclass
