@@ -46,6 +46,7 @@ class PanelGroupDatasetModel(VerticalGroup):
 class PanelGroupSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield from generate_trait_section(title="DFP segment", prefix="dfp", traits_class=group.DFPGroupTraits)
+        yield from generate_trait_section(title="z/OS Unix (OMVS) segment", prefix="omvs", traits_class=group.OMVSGroupTraits)
 
 class PanelGroupActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
