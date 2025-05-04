@@ -31,7 +31,7 @@ class SystemInfo(HorizontalGroup):
         local_tzname = local_tz.tzname(local_now)
 
     def compose(self) -> ComposeResult:
-        if get_user_setting(section="display",setting="clock") is not False:
+        if get_user_setting(section="display",setting="system_clock") is not False:
             yield Digits("", id="system_clock")
             yield Label(f"{str(self.local_tzname)} |",id="system_timezone")
         if zoau_enabled:
