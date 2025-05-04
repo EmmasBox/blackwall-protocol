@@ -44,7 +44,7 @@ class KeyringObject:
 
 def keyring_exists(keyring: str, owner: str):
     if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "keyring", "keyring": keyring.upper(), "owner": owner.upper()})
+        result = racfu({"operation": "extract", "admin_type": "keyring", "keyring": keyring, "owner": owner.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return {}
@@ -52,7 +52,7 @@ def keyring_exists(keyring: str, owner: str):
 def get_keyring(keyring: str, owner: str) -> dict[str, Any]:
     """Extracts information on a keyring"""
     if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "keyring", "keyring": keyring.upper(), "owner": owner.upper()})
+        result = racfu({"operation": "extract", "admin_type": "keyring", "keyring": keyring, "owner": owner.upper()})
         if result.result is not None:
             return result.result["keyrings"][0]
     return {"": ""}
