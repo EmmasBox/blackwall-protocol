@@ -17,10 +17,10 @@ class TraitsBase(ABC):
         return traits
 
     @classmethod
-    def from_dict(cls, prefix: str, source: dict[str, Any]) -> Self:
+    def from_dict(cls, prefix: str | None, source: dict[str, Any]) -> Self:
         kwargs = {}
         for field in fields(cls):
-            key = f"{prefix}:{field.name}"
+            key = field.name if prefix is None else f"{prefix}:{field.name}"
             value = source.get(key)
             if value is not None:
                 kwargs[field.name] = value

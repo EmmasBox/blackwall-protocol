@@ -2,6 +2,7 @@
 
 import importlib.util
 from dataclasses import dataclass, field
+from typing import Any
 
 from blackwall.api.traits_base import TraitsBase
 
@@ -43,15 +44,15 @@ class KeyringObject:
 
 def keyring_exists(keyring: str, owner: str):
     if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "keyring", "keyring": keyring.upper(), "owner": owner})
+        result = racfu({"operation": "extract", "admin_type": "keyring", "keyring": keyring.upper(), "owner": owner.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return {}
 
-def get_keyring(keyring: str, owner: str):
+def get_keyring(keyring: str, owner: str) -> dict[str, Any]:
     """Extracts information on a keyring"""
     if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "keyring", "keyring": keyring.upper(), "owner": owner})
-        return result.result
-    else:
-        return {"": ""}
+        result = racfu({"operation": "extract", "admin_type": "keyring", "keyring": keyring.upper(), "owner": owner.upper()})
+        if result.result is not None:
+            return result.result["keyrings"][0]
+    return {"": ""}

@@ -1,6 +1,8 @@
 
 #TODO fix all of this shitty code. Not gonna lie the code below is really bad, but I was in a crunch
 
+from data
+
 from textual import on
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalScroll
@@ -242,6 +244,9 @@ class PanelSearch(VerticalScroll):
                 new_keyring_panel = PanelKeyring()
 
                 key_dict = keyrings.get_keyring(keyring=search_query,owner=search_query_class)
+
+                keyring_traits = keyrings.KeyringTraits.from_dict(prefix=None,source=key_dict)
+                certificate_traits = keyrings.KeyringTraits.from_dict(prefix="certificates",source=key_dict["certificates"])
 
                 new_keyring_panel.keyring_info = KeyringInfo(
                     
