@@ -30,17 +30,9 @@ class SystemInfo(HorizontalGroup):
     if local_tz is not None:
         local_tzname = local_tz.tzname(local_now)
 
-    def on_ready(self) -> None:
-        self.update_clock()
-        self.set_interval(1, self.update_clock)
-
-    def update_clock(self) -> None:
-        clock = datetime.now().time()
-        self.get_child_by_id("system_clock",Digits).update(f"{clock:%T}")
-
     def compose(self) -> ComposeResult:
         if get_user_setting(section="display",setting="clock") is not False:
-            yield Digits(id="system_clock")
+            yield Digits("", id="system_clock")
             yield Label(str(self.local_tzname),id="timezone")
         if zoau_enabled:
             system_label = get_user_setting(section="display",setting="system_label")
@@ -49,3 +41,11 @@ class SystemInfo(HorizontalGroup):
                     yield Label(f"System: {system_name}, LPAR: {lpar_name}",id="system_label",classes="system-label")
                 else:
                     yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}",id="system_label",classes="system-label")
+
+    def on_ready(self) -> None:
+        self.update_clock()
+        self.set_interval(1, self.update_clock)
+
+    def update_clock(self) -> None:
+        clock = datetime.now().time()
+        self.get_child_by_id("system_clock",Digits).update(f"{clock:%T}")
