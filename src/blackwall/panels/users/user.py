@@ -111,7 +111,7 @@ class PanelUserSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Collapsible(title="User segments"):
             yield from generate_trait_section(title="TSO", prefix="tso", traits_class=user.TSOUserTraits)
-            yield from generate_trait_section(title="OMVS (z/OS Unix)", prefix="omvs", traits_class=user.OMVSUserTraits)
+            yield from generate_trait_section(title="z/OS Unix (OMVS)", prefix="omvs", traits_class=user.OMVSUserTraits)
             yield from generate_trait_section(title="Work attributes", prefix="workattr", traits_class=user.WorkattrUserTraits)
             yield from generate_trait_section(title="CICS", prefix="cics", traits_class=user.CICSUserTraits)
             yield from generate_trait_section(title="KERB", prefix="kerb", traits_class=user.KerbUserTraits)
