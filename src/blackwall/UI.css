@@ -13,6 +13,10 @@
     width: 24;
 }
 
+#system_timezone {
+    margin: 1;
+}
+
 # General
 .date-labels {
     margin: 1;    
