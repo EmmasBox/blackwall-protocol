@@ -29,9 +29,9 @@ class PanelGroupNameAndSubgroup(HorizontalGroup):
         yield Label("Group name:")
         yield Input(id="group_name",restrict=racf_id_regex,max_length=8,classes="field-short-generic",tooltip="1-8 character long alphanumeric name used to identify the group")
         yield Label("Superior group:")
-        yield Input(max_length=8,restrict=racf_id_regex,id="base_superior_group",classes="field-short-generic",tooltip="")
+        yield Input(max_length=8,restrict=racf_id_regex,id="base_superior_group",classes="field-short-generic",tooltip="Superior group in the RACF database")
         yield Label("Owner:")
-        yield Input(max_length=8,restrict=racf_id_regex,id="base_owner",classes="field-short-generic",tooltip="")
+        yield Input(max_length=8,restrict=racf_id_regex,id="base_owner",classes="field-short-generic",tooltip="Owner of the group, can be a user or group.")
 
 class PanelGroupInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
