@@ -1,11 +1,9 @@
 
-import importlib.util
-import json
 
 from textual.app import App
 from textual.containers import Container
 from textual.signal import Signal
-from textual.widgets import Footer, Header, Input, Label
+from textual.widgets import Footer, Header, Input
 
 from blackwall.messages import SubmitCommand
 from blackwall.notifications import send_notification
@@ -15,25 +13,12 @@ from blackwall.submit_command import execute_command
 from .command_line import CommandLine
 from .screens.modal.refresh import RefreshScreen
 from .screens.modal.rvary import RvaryScreen
+from .system_info import SystemInfo
 from .tabs import TabSystem
 
 #from .themes.theme_3270 import legacy_3270_theme
 from .themes.theme_cynosure import cynosure_theme
 
-zoau_enabled = importlib.util.find_spec('zoautil_py')
-
-if zoau_enabled:
-    from zoautil_py import zsystem  # type: ignore
-else:
-    print("##BLKWL_ERROR_1 Warning: could not find ZOAU, certain features will be disabled such as diplaying system and LPAR names")    
-
-command_history = ""
-
-#system information
-if zoau_enabled:
-    zsystem_info = json.loads(zsystem.zinfo()) # type: ignore
-    system_name = zsystem_info["sys_info"]["sys_name"]
-    lpar_name = zsystem_info["sys_info"]["lpar_name"]
 
 class Blackwall(App):
     #Import css
@@ -93,13 +78,7 @@ class Blackwall(App):
     def compose(self):
         #display system and LPAR name
         yield Header()
-        if zoau_enabled:
-            system_label = get_user_setting(section="display",setting="system_label")
-            if system_label is not False:
-                if get_user_setting(section="display",setting="short_system_label"):
-                    yield Label(f"System: {system_name}, LPAR: {lpar_name}",classes="system-label")
-                else:
-                    yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}",classes="system-label")
+        yield SystemInfo()
         yield CommandLine()
         with Container():
             yield TabSystem()
