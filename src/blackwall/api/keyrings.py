@@ -15,13 +15,8 @@ else:
     print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
 
 @dataclass
-class KeyringTraits(TraitsBase):
-    ring_name: str | None = field(default=None,metadata={"label": "Ring name", "allowed_in": {"extract"}})
-    ring_owner: str | None = field(default=None,metadata={"label": "Ring owner", "allowed_in": {"extract"}})
-
-@dataclass
-class CertificateTraits(TraitsBase):
-    dn: str | None = field(default=None,metadata={"label": "DN", "allowed_in": {"extract"}})
+class CertificateTraits:
+    DN: str | None = field(default=None,metadata={"label": "DN", "allowed_in": {"extract"}})
     default: str | None = field(default=None,metadata={"label": "Default", "allowed_in": {"extract"}})
     extensions: list[str] | None = field(default=None,metadata={"label": "Extensions", "allowed_in": {"extract"}})
     issuer: str | None = field(default=None,metadata={"label": "Issuer", "allowed_in": {"extract"}})
@@ -36,6 +31,12 @@ class CertificateTraits(TraitsBase):
     usage: str | None = field(default=None,metadata={"label": "Usage", "allowed_in": {"extract"}})
     status: str | None = field(default=None,metadata={"label": "Status", "allowed_in": {"extract"}})
     signature: dict[str, str] | None = field(default=None,metadata={"label": "Signature", "allowed_in": {"extract"}})
+
+@dataclass
+class KeyringTraits(TraitsBase):
+    ring_name: str | None = field(default=None,metadata={"label": "Ring name", "allowed_in": {"extract"}})
+    ring_owner: str | None = field(default=None,metadata={"label": "Ring owner", "allowed_in": {"extract"}})
+    certificates: list[CertificateTraits] | None = field(default=None,metadata={"label": "Certificates", "allowed_in": {"extract"}})
 
 @dataclass
 class KeyringObject:

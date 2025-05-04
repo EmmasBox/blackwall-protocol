@@ -12,6 +12,13 @@ CERTIFICATE_COLUMNS = [
     ("DN", "Owner", "Issuer", "Key size", "Valid after", "Valid before"),
 ]
 
+@dataclass
+class KeyringInfo:
+    keyring_name: str = ""
+    keyring_owner: str = ""
+    keyring_traits: keyrings.KeyringTraits | None = None
+
+
 class PanelKeyringInfo(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Keyring: ")
@@ -20,6 +27,8 @@ class PanelKeyringInfo(VerticalGroup):
         yield Input(id="ring_owner",max_length=8,classes="field-short-generic",disabled=True)
 
 class PanelKeyringCertificates(VerticalGroup):
+    keyring_info: reactive[KeyringInfo] = reactive(KeyringInfo())
+
     def compose(self) -> ComposeResult:
         yield Label("certificates: ")
         yield DataTable(id="certificates_table")
@@ -29,12 +38,10 @@ class PanelKeyringCertificates(VerticalGroup):
         certificates_table.zebra_stripes = True
         certificates_table.add_columns(*CERTIFICATE_COLUMNS[0]) 
 
-@dataclass
-class KeyringInfo:
-    keyring_name: str = ""
-    keyring_owner: str = ""
-    keyring_traits: keyrings.KeyringTraits | None = None
-    certificate_traits: keyrings.CertificateTraits | None = None
+        if self.keyring_info.keyring_traits is not None and self.keyring_info.keyring_traits.certificates is not None:
+            for certificate in self.keyring_info.keyring_traits.certificates:
+
+                certificates_table.add_row(certificate.DN,certificate.owner,certificate.issuer,certificate.keySize,certificate,certificate.notBefore,certificate.notAfter)
 
 class PanelKeyring(VerticalScroll):
 
@@ -44,9 +51,6 @@ class PanelKeyring(VerticalScroll):
         if keyrings.keyring_exists(keyring=self.keyring_info.keyring_name,owner=self.keyring_info.keyring_owner):
             self.query_exactly_one("#ring_name",Input).value = self.keyring_info.keyring_name.upper()
             self.query_exactly_one("#ring_owner",Input).value = self.keyring_info.keyring_name.upper()
-            
-            if self.keyring_info.certificate_traits is not None:
-                set_traits_in_input(self,traits=self.keyring_info.certificate_traits,prefix="certificates")
 
     def compose(self) -> ComposeResult:
         yield PanelKeyringInfo()

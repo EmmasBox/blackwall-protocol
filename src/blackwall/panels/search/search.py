@@ -244,13 +244,11 @@ class PanelSearch(VerticalScroll):
                 key_dict = keyrings.get_keyring(keyring=search_query,owner=search_query_class)
 
                 keyring_traits = keyrings.KeyringTraits.from_dict(prefix=None,source=key_dict)
-                certificate_traits = keyrings.CertificateTraits.from_dict(prefix="certificates",source=key_dict["certificates"])
 
                 new_keyring_panel.keyring_info = KeyringInfo(
                     keyring_name=search_query,
                     keyring_owner=search_query_class,
                     keyring_traits=keyring_traits,
-                    certificate_traits=certificate_traits,
                 )
 
                 self.post_message(OpenTab(f"Keyring: {search_query}",new_keyring_panel))
