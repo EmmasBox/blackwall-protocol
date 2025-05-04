@@ -238,4 +238,4 @@ class PanelSearch(VerticalScroll):
                 self.notify(f"Resource profile {search_query} couldn't be found")
         elif search_type == "search_type_keyring":
             if keyrings.keyring_exists(keyring=search_query,owner=search_query_class):
-                pass
+                key_dict = keyrings.get_keyring(keyring=search_query,owner=search_query_class)
