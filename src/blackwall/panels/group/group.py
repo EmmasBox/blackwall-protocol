@@ -45,7 +45,6 @@ class PanelGroupDatasetModel(VerticalGroup):
 
 class PanelGroupTerminalUACC(VerticalGroup):
     def compose(self) -> ComposeResult:
-        yield Label("Dataset model:")
         yield RadioButton(label="Terminal UACC",id="base_terminal_universal_access",classes="generic-checkbox-medium")
 
 class PanelGroupSegments(VerticalGroup):
