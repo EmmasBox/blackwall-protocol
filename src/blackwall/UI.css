@@ -9,6 +9,10 @@
     margin-top: 1;
 }
 
+#system_clock {
+    width: 24;
+}
+
 # General
 .date-labels {
     margin: 1;    
