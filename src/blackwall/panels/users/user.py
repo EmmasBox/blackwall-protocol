@@ -85,23 +85,24 @@ class PanelUserAttributes(VerticalGroup):
             yield RadioButton("Operations",id="base_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards")
             yield RadioButton("Auditor",id="base_auditor")
 
-class PanelUserLevelAndCategory(VerticalGroup):
-    """User attributes component"""
+class PanelUserAccess(VerticalGroup):
+    """User dataset component"""
     def compose(self) -> ComposeResult:
-        with Collapsible(title="Security level and category"):
+        with Collapsible(title="Access"):
             yield Label("Security level:")
             yield Input(max_length=8,id="base_security_level",classes="field-short-generic")
             yield Label("Security category:")
             yield Input(max_length=8,id="base_security_category",classes="field-short-generic")
             yield Label("Security label:")
             yield Input(max_length=8,id="base_security_label",classes="field-short-generic")
-
-class PanelUserDatasetsAndUACC(VerticalGroup):
-    """User attributes component"""
-    def compose(self) -> ComposeResult:
-        with Collapsible(title="Datasets and UACC"):
             yield Label("UACC:")
             yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],id="base_universal_access",value="NONE",classes="uacc-select")
+            yield Input("Audit logging (UAUDIT)",id="base_audit_logging",classes="generic-checkbox-medium")
+
+class PanelUserDatasets(VerticalGroup):
+    """User dataset component"""
+    def compose(self) -> ComposeResult:
+        with Collapsible(title="Datasets"):
             yield Label("Model dataset:")
             yield Input(max_length=255,id="base_model_data_set",classes="field-long-generic")
             yield RadioButton(label="Group dataset access",id="base_group_data_set_access",classes="generic-checkbox-medium")
@@ -183,9 +184,9 @@ class PanelUser(VerticalScroll):
         yield PanelUserInstalldata()
         yield PanelUserPassword()
         yield PanelUserPassphrase()
-        yield PanelUserDatasetsAndUACC()
+        yield PanelUserAccess()
+        yield PanelUserDatasets()
         yield PanelUserAttributes()
-        yield PanelUserLevelAndCategory()
         yield PanelUserSegments()
         yield PanelUserActionButtons(save_action="save_user", delete_action="delete_user")
     

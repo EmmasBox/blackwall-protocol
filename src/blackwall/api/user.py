@@ -51,6 +51,8 @@ class BaseUserTraits(TraitsBase):
     last_access_date: str | None = field(default=None,metadata={"label": "Last access date","allowed_in": {"extract"}})
     last_access_time: str | None = field(default=None,metadata={"label": "Last access time","allowed_in": {"extract"}})
 
+    audit_logging: bool | None = field(default=None,metadata={"label": "uaudit","allowed_in": {"alter", "extract"}})
+
 @dataclass
 class CICSUserTraits(TraitsBase):
     operator_class: str | None = field(default=None, metadata={"label": "operator class", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
