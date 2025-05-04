@@ -2,6 +2,7 @@ from dataclasses import dataclass
 
 from textual.app import ComposeResult
 from textual.containers import VerticalGroup, VerticalScroll
+from textual.reactive import reactive
 from textual.widgets import DataTable, Input, Label
 
 from blackwall.api import keyrings
@@ -30,10 +31,13 @@ class PanelKeyringCertificates(VerticalGroup):
 
 @dataclass
 class KeyringInfo:
-    keyring_traits: keyrings.KeyringTraits 
-    certificate_traits: keyrings.CertificateTraits
+    keyring_traits: keyrings.KeyringTraits | None = None
+    certificate_traits: keyrings.CertificateTraits | None = None
 
 class PanelKeyring(VerticalScroll):
+
+    keyring_info: reactive[KeyringInfo] = reactive(KeyringInfo())
+
     def compose(self) -> ComposeResult:
         yield PanelKeyringInfo()
         yield PanelKeyringCertificates()

@@ -10,6 +10,7 @@ from blackwall.api import dataset, group, keyrings, resource, user
 from blackwall.messages import OpenTab
 from blackwall.panels.dataset.dataset import DatasetInfo, PanelDataset
 from blackwall.panels.group.group import GroupInfo, PanelGroup
+from blackwall.panels.keyrings.keyrings import KeyringInfo, PanelKeyring
 from blackwall.panels.panel_mode import PanelMode
 from blackwall.panels.resource.resource import PanelResource, ResourceInfo
 from blackwall.panels.search.results import PanelResultsMixedType
@@ -238,4 +239,12 @@ class PanelSearch(VerticalScroll):
                 self.notify(f"Resource profile {search_query} couldn't be found")
         elif search_type == "search_type_keyring":
             if keyrings.keyring_exists(keyring=search_query,owner=search_query_class):
+                new_keyring_panel = PanelKeyring()
+
                 key_dict = keyrings.get_keyring(keyring=search_query,owner=search_query_class)
+
+                new_keyring_panel.keyring_info = KeyringInfo(
+                    
+                )
+
+                self.post_message(OpenTab(f"Keyring: {search_query}",new_keyring_panel))
