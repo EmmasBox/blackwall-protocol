@@ -99,7 +99,7 @@ class PanelGroup(VerticalScroll):
 
     def on_mount(self) -> None:
         if group.group_exists(self.group_info.group_name):
-            self.query_exactly_one("#group_name",Input).value = self.group_info.group_name
+            self.query_exactly_one("#group_name",Input).value = self.group_info.group_name.upper()
             if self.group_info.base_traits is not None:
                 set_traits_in_input(self,traits=self.group_info.base_traits,prefix="base")
             
