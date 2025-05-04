@@ -37,7 +37,8 @@ class PanelKeyringCertificates(VerticalGroup):
         certificates_table.zebra_stripes = True
         certificates_table.add_columns(*CERTIFICATE_COLUMNS[0]) 
 
-        self.notify(str(type(self.keyring_info.keyring_traits.certificates)))
+        if self.keyring_info.keyring_traits is not None:
+            self.notify("blep")
         if self.keyring_info.keyring_traits is not None and self.keyring_info.keyring_traits.certificates is not None:
             self.notify("debug")
             for certificate in self.keyring_info.keyring_traits.certificates:
