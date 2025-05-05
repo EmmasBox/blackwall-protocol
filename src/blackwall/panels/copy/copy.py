@@ -29,8 +29,10 @@ class PanelCopyDataset(VerticalGroup):
 class PanelCopyResource(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy resource",classes="copy-label")
-        yield Input(max_length=255,classes="field-long-generic")
-        yield Input(max_length=255,classes="field-long-generic")
+        yield Input(max_length=8,placeholder="class...",classes="field-short-generic")
+        yield Input(max_length=255,placeholder="resource profile...",classes="field-long-generic")
+        yield Input(max_length=8,placeholder="class...",classes="field-short-generic")
+        yield Input(max_length=255,placeholder="resource profile...",classes="field-long-generic")
         yield Button(label="Copy resource profile",id="copy_resource_confirm",action="")
 
 class PanelCopySwitcherButtons(HorizontalGroup):
