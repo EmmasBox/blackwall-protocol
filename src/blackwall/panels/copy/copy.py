@@ -1,29 +1,29 @@
 from textual.app import ComposeResult
-from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
+from textual.containers import VerticalGroup, VerticalScroll
 from textual.widgets import Button, ContentSwitcher, Input, Label
 
 
-class PanelCopyUser(HorizontalGroup):
+class PanelCopyUser(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy user")
         yield Input(max_length=8,classes="field-short-generic")
         yield Input(max_length=8,classes="field-short-generic")
 
-class PanelCopyGroup(HorizontalGroup):
+class PanelCopyGroup(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy group")
         yield Input(max_length=8,classes="field-short-generic")
         yield Input(max_length=8,classes="field-short-generic")
 
-class PanelCopyDataset(HorizontalGroup):
+class PanelCopyDataset(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy dataset")
 
-class PanelCopyResource(HorizontalGroup):
+class PanelCopyResource(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy resource")
 
-class PanelCopySwitcherButtons(HorizontalGroup):
+class PanelCopySwitcherButtons(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Button(label="User")
         yield Button(label="Group")
