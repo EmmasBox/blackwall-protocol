@@ -6,11 +6,14 @@ from textual.widgets import Button, ContentSwitcher, Input, Label
 class PanelCopyUser(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy user")
-        yield Input()
+        yield Input(max_length=8,classes="field-short-generic")
+        yield Input(max_length=8,classes="field-short-generic")
 
 class PanelCopyGroup(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy group")
+        yield Input(max_length=8,classes="field-short-generic")
+        yield Input(max_length=8,classes="field-short-generic")
 
 class PanelCopyDataset(HorizontalGroup):
     def compose(self) -> ComposeResult:
