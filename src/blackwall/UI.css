@@ -244,3 +244,11 @@ ToggleButton.-on > .toggle--button {
     margin: 1;
     width: 32;
 }
+
+# Copy panel
+
+.copy-switcher {
+    border: square $primary;
+    width: 90%;
+    height: 1fr;
+}

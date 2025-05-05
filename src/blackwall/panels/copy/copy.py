@@ -1,11 +1,12 @@
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
-from textual.widgets import Button, ContentSwitcher, Label
+from textual.widgets import Button, ContentSwitcher, Input, Label
 
 
 class PanelCopyUser(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy user")
+        yield Input()
 
 class PanelCopyGroup(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -29,7 +30,7 @@ class PanelCopySwitcherButtons(HorizontalGroup):
 class PanelCopySwitcher(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield PanelCopySwitcherButtons()
-        with ContentSwitcher(initial="copy_user"):
+        with ContentSwitcher(initial="copy_user",classes="copy-switcher"):
             yield PanelCopyUser(id="copy_user")
             yield PanelCopyGroup()
             yield PanelCopyDataset()
