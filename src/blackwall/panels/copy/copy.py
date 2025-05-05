@@ -41,8 +41,7 @@ class PanelCopySwitcher(VerticalGroup):
             yield PanelCopyResource(id="copy_resource_panel")
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
-        if event.bu
-            self.query_one(ContentSwitcher).current = event.button.id  
+        self.query_one(ContentSwitcher).current = event.button.id  
 
 class PanelCopy(VerticalScroll):
     def compose(self) -> ComposeResult:
