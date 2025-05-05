@@ -53,7 +53,7 @@ class TMEGroupTraits(TraitsBase):
 def group_exists(group: str) -> bool:
     """Checks if a group exists, returns true or false"""
     if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "group", "profile_name": group.upper()})
+        result = racfu({"operation": "extract", "admin_type": "group", "group": group.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return False
@@ -61,7 +61,7 @@ def group_exists(group: str) -> bool:
 def get_group(group: str) -> dict:
     """Doesn't handle group profiles that don't exist, recommend using group_exists() first"""
     if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "group", "profile_name": group.upper()})
+        result = racfu({"operation": "extract", "admin_type": "group", "group": group.upper()})
         return result.result
     else:
         return {}
@@ -95,7 +95,7 @@ def update_group(group: str,create: bool, group_object: GroupObject):
             {
                 "operation": operation, 
                 "admin_type": "group", 
-                "profile_name": group.upper(),
+                "group": group.upper(),
                 "traits":  traits,
             },
         )
@@ -108,7 +108,7 @@ def delete_group(group: str) -> tuple[str, int]:
             {
                 "operation": "delete", 
                 "admin_type": "group", 
-                "profile_name": group.upper(),
+                "group": group.upper(),
             },
         )
         #TODO add error message
