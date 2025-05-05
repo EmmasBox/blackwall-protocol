@@ -2,19 +2,21 @@ from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.widgets import Button, ContentSwitcher, Input, Label
 
+from blackwall.regex import racf_id_regex
+
 
 class PanelCopyUser(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy user",classes="copy-label")
-        yield Input(max_length=8,classes="field-short-generic")
-        yield Input(max_length=8,classes="field-short-generic")
+        yield Input(max_length=8,restrict=racf_id_regex,classes="field-short-generic")
+        yield Input(max_length=8,restrict=racf_id_regex,classes="field-short-generic")
         yield Button(label="Copy user",id="copy_user_confirm",action="")
 
 class PanelCopyGroup(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy group",classes="copy-label")
-        yield Input(max_length=8,classes="field-short-generic")
-        yield Input(max_length=8,classes="field-short-generic")
+        yield Input(max_length=8,restrict=racf_id_regex,classes="field-short-generic")
+        yield Input(max_length=8,restrict=racf_id_regex,classes="field-short-generic")
         yield Button(label="Copy group",id="copy_group_confirm",action="")
 
 class PanelCopyDataset(VerticalGroup):
