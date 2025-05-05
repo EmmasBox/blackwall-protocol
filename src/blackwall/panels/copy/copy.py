@@ -34,7 +34,7 @@ class PanelCopySwitcherButtons(HorizontalGroup):
 class PanelCopySwitcher(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield PanelCopySwitcherButtons()
-        with ContentSwitcher(initial="copy_user",classes="copy-switcher"):
+        with ContentSwitcher(initial="copy_user_panel",classes="copy-switcher"):
             yield PanelCopyUser(id="copy_user_panel")
             yield PanelCopyGroup(id="copy_group_panel")
             yield PanelCopyDataset(id="copy_dataset_panel")
