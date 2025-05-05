@@ -9,7 +9,7 @@ class PanelCopyUser(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy user",classes="copy-label")
         yield Input(max_length=8,restrict=racf_id_regex,classes="field-short-generic")
-        yield Label("TO")
+        yield Label("TO",classes="copy-label")
         yield Input(max_length=8,restrict=racf_id_regex,classes="field-short-generic")
         yield Button(label="Copy user",id="copy_user_confirm",action="")
 
@@ -17,7 +17,7 @@ class PanelCopyGroup(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy group",classes="copy-label")
         yield Input(max_length=8,restrict=racf_id_regex,classes="field-short-generic")
-        yield Label("TO")
+        yield Label("TO",classes="copy-label")
         yield Input(max_length=8,restrict=racf_id_regex,classes="field-short-generic")
         yield Button(label="Copy group",id="copy_group_confirm",action="")
 
@@ -25,7 +25,7 @@ class PanelCopyDataset(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy dataset profile",classes="copy-label")
         yield Input(max_length=255,classes="field-long-generic")
-        yield Label("TO")
+        yield Label("TO",classes="copy-label")
         yield Input(max_length=255,classes="field-long-generic")
         yield Button(label="Copy dataset profile",id="copy_dataset_confirm",action="")
 
@@ -34,7 +34,7 @@ class PanelCopyResource(VerticalGroup):
         yield Label("Copy resource",classes="copy-label")
         yield Input(max_length=8,placeholder="class...",classes="field-short-generic")
         yield Input(max_length=255,placeholder="resource profile...",classes="field-long-generic")
-        yield Label("TO")
+        yield Label("TO",classes="copy-label")
         yield Input(max_length=8,placeholder="class...",classes="field-short-generic")
         yield Input(max_length=255,placeholder="resource profile...",classes="field-long-generic")
         yield Button(label="Copy resource profile",id="copy_resource_confirm",action="")
