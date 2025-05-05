@@ -5,23 +5,23 @@ from textual.widgets import Button, ContentSwitcher, Input, Label
 
 class PanelCopyUser(VerticalGroup):
     def compose(self) -> ComposeResult:
-        yield Label("Copy user")
+        yield Label("Copy user",classes="copy-label")
         yield Input(max_length=8,classes="field-short-generic")
         yield Input(max_length=8,classes="field-short-generic")
 
 class PanelCopyGroup(VerticalGroup):
     def compose(self) -> ComposeResult:
-        yield Label("Copy group")
+        yield Label("Copy group",classes="copy-label")
         yield Input(max_length=8,classes="field-short-generic")
         yield Input(max_length=8,classes="field-short-generic")
 
 class PanelCopyDataset(VerticalGroup):
     def compose(self) -> ComposeResult:
-        yield Label("Copy dataset")
+        yield Label("Copy dataset",classes="copy-label")
 
 class PanelCopyResource(VerticalGroup):
     def compose(self) -> ComposeResult:
-        yield Label("Copy resource")
+        yield Label("Copy resource",classes="copy-label")
 
 class PanelCopySwitcherButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:
