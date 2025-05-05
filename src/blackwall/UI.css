@@ -252,3 +252,7 @@ ToggleButton.-on > .toggle--button {
     width: 90%;
     height: 1fr;
 }
+
+.copy-buttons {
+    margin: 1;
+}

@@ -25,10 +25,10 @@ class PanelCopyResource(VerticalGroup):
 
 class PanelCopySwitcherButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:
-        yield Button(label="User")
-        yield Button(label="Group")
-        yield Button(label="Dataset profile")
-        yield Button(label="User")
+        yield Button(label="User",classes="copy-buttons")
+        yield Button(label="Group",classes="copy-buttons")
+        yield Button(label="Dataset profile",classes="copy-buttons")
+        yield Button(label="User",classes="copy-buttons")
 
 class PanelCopySwitcher(VerticalGroup):
     def compose(self) -> ComposeResult:
