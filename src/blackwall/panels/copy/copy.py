@@ -25,19 +25,22 @@ class PanelCopyResource(VerticalGroup):
 
 class PanelCopySwitcherButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:
-        yield Button(label="User",classes="copy-buttons")
-        yield Button(label="Group",classes="copy-buttons")
-        yield Button(label="Dataset profile",classes="copy-buttons")
-        yield Button(label="User",classes="copy-buttons")
+        yield Button(id="copy_user",label="User",classes="copy-buttons")
+        yield Button(id="copy_group",label="Group",classes="copy-buttons")
+        yield Button(id="copy_dataset",label="Dataset profile",classes="copy-buttons")
+        yield Button(id="copy_resource",label="User",classes="copy-buttons")
 
 class PanelCopySwitcher(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield PanelCopySwitcherButtons()
         with ContentSwitcher(initial="copy_user",classes="copy-switcher"):
             yield PanelCopyUser(id="copy_user")
-            yield PanelCopyGroup()
-            yield PanelCopyDataset()
-            yield PanelCopyResource()
+            yield PanelCopyGroup(id="copy_group")
+            yield PanelCopyDataset(id="copy_dataset")
+            yield PanelCopyResource(id="copy_resource")
+
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        self.query_one(ContentSwitcher).current = event.button.id  
 
 class PanelCopy(VerticalScroll):
     def compose(self) -> ComposeResult:
