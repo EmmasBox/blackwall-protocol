@@ -14,6 +14,7 @@ class PanelCopyGroup(VerticalGroup):
         yield Label("Copy group",classes="copy-label")
         yield Input(max_length=8,classes="field-short-generic")
         yield Input(max_length=8,classes="field-short-generic")
+        yield Button(label="Copy group",id="boop")
 
 class PanelCopyDataset(VerticalGroup):
     def compose(self) -> ComposeResult:
