@@ -8,21 +8,28 @@ class PanelCopyUser(VerticalGroup):
         yield Label("Copy user",classes="copy-label")
         yield Input(max_length=8,classes="field-short-generic")
         yield Input(max_length=8,classes="field-short-generic")
+        yield Button(label="Copy user",id="copy_user_confirm",action="")
 
 class PanelCopyGroup(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy group",classes="copy-label")
         yield Input(max_length=8,classes="field-short-generic")
         yield Input(max_length=8,classes="field-short-generic")
-        yield Button(label="Copy group",id="copy_group",action="")
+        yield Button(label="Copy group",id="copy_group_confirm",action="")
 
 class PanelCopyDataset(VerticalGroup):
     def compose(self) -> ComposeResult:
-        yield Label("Copy dataset",classes="copy-label")
+        yield Label("Copy dataset profile",classes="copy-label")
+        yield Input(max_length=255,classes="field-long-generic")
+        yield Input(max_length=255,classes="field-long-generic")
+        yield Button(label="Copy dataset profile",id="copy_dataset_confirm",action="")
 
 class PanelCopyResource(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Copy resource",classes="copy-label")
+        yield Input(max_length=255,classes="field-long-generic")
+        yield Input(max_length=255,classes="field-long-generic")
+        yield Button(label="Copy resource profile",id="copy_resource_confirm",action="")
 
 class PanelCopySwitcherButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:
