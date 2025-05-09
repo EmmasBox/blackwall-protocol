@@ -1,6 +1,6 @@
 from textual.theme import Theme
 
-cynosure_theme = Theme(
+blackwall_theme = Theme(
     name="blackwall",
     primary="#a11616",
     secondary="#ff0000",
