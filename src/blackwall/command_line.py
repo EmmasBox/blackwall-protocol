@@ -7,6 +7,7 @@ from textual.widgets import Input
 
 from blackwall.commands_definition import commands
 from blackwall.messages import SubmitCommand
+from blackwall.secret_scrubber import remove_secret
 from blackwall.settings import get_user_setting
 
 
@@ -29,7 +30,8 @@ class CommandLine(HorizontalGroup):
         self.post_message(SubmitCommand(command))
         clear_on_submission = get_user_setting(section="commands",setting="clear_on_submission")
         if clear_on_submission is not False:
-            self.command_history_list.append(command)
+            scrubbed_command = remove_secret(string_input=command)
+            self.command_history_list.append(scrubbed_command)
             command_line.value = ""
 
     def action_cycle_up(self) -> None:
