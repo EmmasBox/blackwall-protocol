@@ -38,7 +38,7 @@ class SearchField(HorizontalGroup):
 
     def compose(self) -> ComposeResult:
         yield Label("Search:")
-        yield Input(name="Class",id="search_field_class",classes="field-short-generic")
+        yield Input(name="Class",max_length=8,id="search_field_class",classes="field-short-generic")
         yield Input(name="Search",id="search_field",classes="search-field")
         yield Button("Search",action="search")
 
