@@ -9,12 +9,12 @@
    id="svg1"
    inkscape:version="1.4 (e7c3feb100, 2024-10-09)"
    sodipodi:docname="blackwall_banner.svg"
+   xml:space="preserve"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <sodipodi:namedview
+   xmlns:svg="http://www.w3.org/2000/svg"><sodipodi:namedview
      id="namedview1"
      pagecolor="#c5ffff"
      bordercolor="#000000"
@@ -24,48 +24,37 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="1.78"
-     inkscape:cx="183.70787"
-     inkscape:cy="207.86517"
-     inkscape:window-width="1920"
-     inkscape:window-height="1011"
+     inkscape:zoom="0.89"
+     inkscape:cx="460.67416"
+     inkscape:cy="426.96629"
+     inkscape:window-width="3440"
+     inkscape:window-height="1371"
      inkscape:window-x="0"
      inkscape:window-y="0"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer1" />
-  <defs
-     id="defs1">
-    <linearGradient
+     inkscape:current-layer="layer2" /><defs
+     id="defs1"><linearGradient
        id="linearGradient14"
-       inkscape:collect="always">
-      <stop
+       inkscape:collect="always"><stop
          style="stop-color:#c5c5c5;stop-opacity:1;"
          offset="0"
-         id="stop14" />
-      <stop
+         id="stop14" /><stop
          style="stop-color:#dcdcdc;stop-opacity:1;"
          offset="1"
-         id="stop15" />
-    </linearGradient>
-    <linearGradient
+         id="stop15" /></linearGradient><linearGradient
        id="linearGradient12"
-       inkscape:collect="always">
-      <stop
+       inkscape:collect="always"><stop
          style="stop-color:#c5c5c5;stop-opacity:1;"
          offset="0"
-         id="stop12" />
-      <stop
+         id="stop12" /><stop
          style="stop-color:#dcdcdc;stop-opacity:1;"
          offset="1"
-         id="stop13" />
-    </linearGradient>
-    <rect
+         id="stop13" /></linearGradient><rect
        x="41.37931"
        y="258.62069"
        width="309.48276"
        height="74.137931"
-       id="rect8" />
-    <linearGradient
+       id="rect8" /><linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient12"
        id="linearGradient13"
@@ -73,8 +62,7 @@
        y1="50.000013"
        x2="249.99997"
        y2="50.000013"
-       gradientUnits="userSpaceOnUse" />
-    <linearGradient
+       gradientUnits="userSpaceOnUse" /><linearGradient
        inkscape:collect="always"
        xlink:href="#linearGradient14"
        id="linearGradient15"
@@ -82,9 +70,39 @@
        y1="50.000013"
        x2="249.99997"
        y2="50.000013"
-       gradientUnits="userSpaceOnUse" />
-  </defs>
-  <rect
+       gradientUnits="userSpaceOnUse" /><clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath33"><rect
+         style="fill:#000000;stroke:none;stroke-width:0.999995;stroke-linecap:butt;stroke-linejoin:bevel;paint-order:stroke markers fill;stop-color:#000000"
+         id="rect33"
+         width="46.19186"
+         height="80.006783"
+         x="74.999985"
+         y="399.99661" /></clipPath><pattern
+       inkscape:collect="always"
+       patternUnits="userSpaceOnUse"
+       width="2.5"
+       height="1"
+       patternTransform="translate(0,0) scale(2,2)"
+       preserveAspectRatio="xMidYMid"
+       id="Strips1_1.5-7"
+       style="fill:#000000"
+       inkscape:stockid="Stripes 02 (2:3)"
+       inkscape:isstock="true"
+       inkscape:label="Stripes 02 (2:3)"><rect
+         style="stroke:none"
+         x="0"
+         y="-0.5"
+         width="1"
+         height="2"
+         id="rect140-1" /></pattern><pattern
+       inkscape:collect="always"
+       xlink:href="#Strips1_1.5-7"
+       preserveAspectRatio="xMidYMid"
+       id="pattern1"
+       patternTransform="rotate(90,-4.5161002,-7.9695886)"
+       x="0"
+       y="0" /></defs><rect
      style="fill:url(#linearGradient15);fill-opacity:1;stroke:url(#linearGradient13);stroke-width:18.8787;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:16.5;stroke-dasharray:none;stroke-opacity:1"
      id="rect10"
      width="231.12123"
@@ -92,12 +110,10 @@
      x="9.4393883"
      y="9.4393864"
      inkscape:label="background"
-     sodipodi:insensitive="true" />
-  <g
+     sodipodi:insensitive="true" /><g
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     id="layer1">
-    <text
+     id="layer1"><text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.2889px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.264583"
        x="7.5614591"
@@ -128,8 +144,7 @@
          style="font-style:normal;font-variant:normal;font-weight:500;font-stretch:normal;font-size:11.2889px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Medium';text-align:start;text-anchor:start;stroke-width:0.264583"
          x="7.5614591"
          y="81.967926"
-         id="tspan7" /></text>
-    <text
+         id="tspan7" /></text><text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:8.46667px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke-width:0.264583"
        x="7.6602364"
@@ -140,32 +155,52 @@
          id="tspan10"
          style="font-size:8.46667px;stroke-width:0.264583"
          x="7.6602364"
-         y="79.352615">A CBTTape project</tspan></text>
-  </g>
-  <g
+         y="79.352615">A CBTTape project</tspan></text></g><g
      inkscape:groupmode="layer"
      id="layer2"
      inkscape:label="LOGO"
-     transform="translate(-0.29005995,-2.9078602)">
-    <path
-       d="m 170.83846,57.615632 c -2.51048,4.673657 -2.54979,4.638184 -4.75682,9.41648 l 2.71818,4.707722 2.71818,4.70824 2.71818,4.707723 2.71818,4.70824 2.71818,4.707723 h 5.43637 5.43636 5.43636 5.43636 5.43584 5.43636 5.43636 5.43636 l 2.71818,-4.707723 2.71818,-4.70824 2.71818,-4.707723 2.71818,-4.70824 2.71818,-4.707722 c -1.87296,-3.802923 -1.81355,-3.891329 -4.75681,-9.41648 h -10.19318 -10.19317 -10.19266 -10.19318 -10.19318 z"
-       style="fill:#3a3a3a;fill-opacity:1;stroke:#000000;stroke-width:1.40705"
-       id="path3" />
-    <path
-       d="m 179.67976,14.500329 -2.71818,4.70824 -2.71818,4.70824 -2.71818,4.707723 -2.71818,4.70824 -2.71818,4.707723 c 4.04107,8.058973 1.77324,3.541676 4.75682,9.415962 h 10.19317 10.19318 10.19318 10.19266 10.19317 10.19318 l 4.75681,-9.415962 -2.71818,-4.707723 -2.71818,-4.70824 -2.71818,-4.707723 -2.71818,-4.70824 -2.71818,-4.70824 h -5.43636 -5.43636 -5.43584 -5.43636 -5.43636 -5.43636 -5.43636 z"
-       style="fill:#a11616;stroke:#000000;stroke-width:1.40705"
-       id="path2" />
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87778px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';text-align:center;writing-mode:lr-tb;direction:ltr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.264583"
-       x="200.87489"
-       y="56.135654"
-       id="text1"
-       inkscape:label="logo_text"><tspan
-         sodipodi:role="line"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:9.87778px;font-family:'IBM Plex Sans';-inkscape-font-specification:'IBM Plex Sans Bold';text-align:center;text-anchor:middle;fill:#000000;fill-opacity:1;stroke-width:0.264583"
-         x="200.87489"
-         y="56.135654"
-         id="tspan3">Blackwall Protocol</tspan></text>
-  </g>
-</svg>
+     transform="translate(-0.29005995,-2.9078602)"><g
+       inkscape:label="Layer 1"
+       id="layer1-6"
+       transform="matrix(0.52514299,0,0,0.52514299,149.30206,-0.10934781)"><path
+         id="path3"
+         style="opacity:1;fill:none;fill-opacity:1;stroke:#a11616;stroke-width:4;stroke-dasharray:none;stroke-opacity:1"
+         inkscape:transform-center-x="-2.4424926e-06"
+         inkscape:transform-center-y="-21.650635"
+         d="m 67.187507,69.5733 4.687494,-8.118988 4.687504,-8.118988 4.687504,-8.118988 4.687494,-8.118988 4.687505,-8.118989 4.687493,-8.118988 h 9.375009 l 4.68749,8.118988 4.68751,8.118989 4.68749,8.118988 4.68751,8.118988 4.68749,8.118988 4.6875,8.118988 L 100,77.692288 Z m 84.374993,32.47595 4.6875,8.119 4.6875,8.11898 4.6875,8.11899 4.6875,8.11899 -4.6875,8.11899 H 156.25 146.875 137.5 128.125 118.75 109.375 99.999995 90.624997 81.249999 71.875001 62.499999 53.125 43.75 34.375 l -4.6875,-8.11899 4.687501,-8.11899 4.6875,-8.11899 4.6875,-8.11898 4.6875,-8.119 L 100,115 Z"
+         sodipodi:nodetypes="ccccccccccccccccccccccccccccccccccccccccccc"
+         inkscape:label="Triangle" /><text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25.4px;font-family:Corbel;-inkscape-font-specification:'Corbel Bold';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.2;stroke-dasharray:none;stroke-dashoffset:0"
+         x="29.35708"
+         y="167.36137"
+         id="text3"
+         inkscape:label="Blackwall"><tspan
+           sodipodi:role="line"
+           id="tspan3"
+           style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-family:Orbitron;-inkscape-font-specification:'Orbitron Ultra-Bold';stroke-width:1.2"
+           x="29.35708"
+           y="167.36137">Blackwall</tspan></text><text
+         xml:space="preserve"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:12.7px;font-family:Corbel;-inkscape-font-specification:'Corbel Bold';text-align:start;writing-mode:lr-tb;direction:ltr;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1.2;stroke-dasharray:none;stroke-dashoffset:0"
+         x="30.505806"
+         y="180.37625"
+         id="text3-3"
+         inkscape:label="Security"><tspan
+           sodipodi:role="line"
+           id="tspan3-0"
+           style="font-style:normal;font-variant:normal;font-weight:800;font-stretch:normal;font-size:12.7px;font-family:Orbitron;-inkscape-font-specification:'Orbitron Ultra-Bold';stroke-width:1.2"
+           x="30.505806"
+           y="180.37625">Mainframe Security</tspan></text><rect
+         style="fill:none;fill-opacity:1;stroke:#a11616;stroke-width:1.54221;stroke-dasharray:none;stroke-opacity:1"
+         id="rect8-6"
+         width="14.842982"
+         height="14.311676"
+         x="92.578506"
+         y="50.358025"
+         rx="0.39264458"
+         ry="0.37858984" /><path
+         id="path8"
+         style="fill:none;stroke:#a11616;stroke-width:1.6;stroke-dasharray:none"
+         d="m 105.08106,50.334086 c -4.5272,0.0069 -5.983373,-0.01838 -10.161894,0 10e-4,-3.521309 2.62358,-5.950322 5.080954,-5.950322 2.45736,0 5.08319,2.418185 5.08094,5.950322 z"
+         sodipodi:nodetypes="cccc" /></g></g></svg>
