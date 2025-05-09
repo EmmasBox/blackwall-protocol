@@ -50,6 +50,7 @@ class PanelResourceAccess(VerticalGroup):
         yield Label("UACC:")
         yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="NONE",classes="uacc-select",id="base_universal_access",tooltip="It's advised that you keep this at NONE, UACC read or higher are unsecure, see z/OS RACF Administrator's Guide for more details")
         yield RadioButton(label="Warn on insufficient access",id="base_warn_on_insufficient_access",classes="generic-checkbox-medium")
+        yield Label("Notify userid:")
         yield Input(id="base_notify_userid",restrict=racf_id_regex,max_length=8,classes="field-short-generic")
 
 class PanelResourceSecurityLevelAndCategories(VerticalGroup):
