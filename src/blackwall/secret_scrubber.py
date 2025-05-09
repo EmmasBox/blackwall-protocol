@@ -12,5 +12,5 @@ def remove_secret(string_input: str) -> str:
         secret_start = string_input.find(secret)
         if secret_start is not -1:
             secret_end = string_input.find(")")
-            return string_input[:secret_start] + string_input[secret_end:]
+            return string_input[:secret_start] + string_input[secret_end+1:] + "[REDACTED SECRET]"
     return string_input
