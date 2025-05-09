@@ -15,8 +15,7 @@ from .screens.modal.refresh import RefreshScreen
 from .screens.modal.rvary import RvaryScreen
 from .system_info import SystemInfo
 from .tabs import TabSystem
-
-#from .themes.theme_3270 import legacy_3270_theme
+from .themes.theme_blackwall import blackwall_theme
 from .themes.theme_cynosure import cynosure_theme
 
 
@@ -39,7 +38,8 @@ class Blackwall(App):
         else:
             self.sub_title = "Mainframe Security Administration"
         self.register_theme(cynosure_theme)
-        #self.register_theme(legacy_3270_theme)
+        self.register_theme(blackwall_theme)
+
         user_theme = get_user_setting(section="display",setting="theme")
         if user_theme is not None or user_theme == "":
             try:
