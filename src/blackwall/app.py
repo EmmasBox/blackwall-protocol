@@ -7,6 +7,7 @@ from textual.widgets import Footer, Header, Input
 
 from blackwall.messages import SubmitCommand
 from blackwall.notifications import send_notification
+from blackwall.secret_scrubber import remove_secret
 from blackwall.settings import get_site_setting, get_user_setting
 from blackwall.submit_command import execute_command
 
@@ -70,7 +71,8 @@ class Blackwall(App):
                 if output is not None:
                     self.command_output = self.command_output + output
                     self.command_output_change.publish(data=self.command_output)
-                    self.notify(f"command {message.command.upper()} successfully completed",severity="information")
+                    scrubbed_command = remove_secret(string_input=message.command)
+                    self.notify(f"command {scrubbed_command.upper()} successfully completed",severity="information")
             except BaseException as e:
                 send_notification(self,message=f"Command {message.command.upper()} failed: {e}",severity="error")
                 
