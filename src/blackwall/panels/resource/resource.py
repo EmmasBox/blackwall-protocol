@@ -33,7 +33,7 @@ class PanelResourceName(VerticalGroup):
         yield Label("Profile name:")
         yield Input(max_length=255,id="resource_profile_name",classes="resource-name-field")
 
-class PanelResourceClassAndOwner(VerticalGroup):
+class PanelResourceClassAndOwner(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Profile name:")
         yield Input(max_length=255,id="resource_profile_name",classes="resource-name-field")
