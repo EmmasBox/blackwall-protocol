@@ -29,9 +29,9 @@ class CommandLine(HorizontalGroup):
         command = command_line.value
         self.post_message(SubmitCommand(command))
         clear_on_submission = get_user_setting(section="commands",setting="clear_on_submission")
+        scrubbed_command = remove_secret(string_input=command)
+        self.command_history_list.append(scrubbed_command)
         if clear_on_submission is not False:
-            scrubbed_command = remove_secret(string_input=command)
-            self.command_history_list.append(scrubbed_command)
             command_line.value = ""
 
     def action_cycle_up(self) -> None:
