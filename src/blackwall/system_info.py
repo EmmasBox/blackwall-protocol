@@ -30,6 +30,8 @@ class SystemInfo(HorizontalGroup):
     if local_tz is not None:
         local_tzname = local_tz.tzname(local_now)
 
+    clock_enabled = get_user_setting(section="display",setting="system_clock")
+
     def compose(self) -> ComposeResult:
         if get_user_setting(section="display",setting="system_clock") is not False:
             yield Digits("", id="system_clock")
@@ -44,8 +46,10 @@ class SystemInfo(HorizontalGroup):
 
     def on_mount(self) -> None:
         self.update_clock()
-        self.set_interval(1, self.update_clock)
+        if self.clock_enabled is not False:
+            self.set_interval(1, self.update_clock)
 
     def update_clock(self) -> None:
-        clock = datetime.now().time()
-        self.get_child_by_id("system_clock",Digits).update(f"{clock:%T}")
+        if self.clock_enabled is not False:
+            clock = datetime.now().time()
+            self.get_child_by_id("system_clock",Digits).update(f"{clock:%T}")
