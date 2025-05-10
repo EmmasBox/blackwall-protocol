@@ -91,12 +91,12 @@ class BaseSetroptsTraits(TraitsBase):
     jes_execution_batch_monitoring: bool | None = field(default=None,metadata={"label": "JES execution monitoring", "allowed_in": {"alter","extract"}, "input_args": {"classes": "generic-checkbox-medium"}})
 
     active_classes: list[str] | None = field(default=None,metadata={"label": "Active classes", "input_args": {"classes": "list-view-generic"}, "allowed_in": {"alter","extract"}})
-    statistics_classes: list[str] | None = field(default=None,metadata={"label": "Statistics classes", "allowed_in": {"alter","extract"}})
-    generic_command_classes: list[str] | None = field(default=None,metadata={"label": "Generic command classes", "allowed_in": {"alter","extract"}})
-    generic_profile_checking_classes: list[str] | None = field(default=None,metadata={"label": "Generic profile checking classes", "allowed_in": {"alter","extract"}})
-    raclist: list[str] | None = field(default=None,metadata={"label": "Raclisted classes", "allowed_in": {"alter","extract"}})
-    global_access_classes: list[str] | None = field(default=None,metadata={"label": "Global access classes", "allowed_in": {"alter","extract"}})
-    audit_classes: list[str] | None = field(default=None,metadata={"label": "Audit classes", "allowed_in": {"alter","extract"}})
+    statistics_classes: list[str] | None = field(default=None,metadata={"label": "Statistics classes", "input_args": {"classes": "list-view-generic"}, "allowed_in": {"alter","extract"}})
+    generic_command_classes: list[str] | None = field(default=None,metadata={"label": "Generic command classes", "input_args": {"classes": "list-view-generic"}, "allowed_in": {"alter","extract"}})
+    generic_profile_checking_classes: list[str] | None = field(default=None,metadata={"label": "Generic profile checking classes", "input_args": {"classes": "list-view-generic"}, "allowed_in": {"alter","extract"}})
+    raclist: list[str] | None = field(default=None,metadata={"label": "Raclisted classes", "input_args": {"classes": "list-view-generic"}, "allowed_in": {"alter","extract"}})
+    global_access_classes: list[str] | None = field(default=None,metadata={"label": "Global access classes", "input_args": {"classes": "list-view-generic"}, "allowed_in": {"alter","extract"}})
+    audit_classes: list[str] | None = field(default=None,metadata={"label": "Audit classes", "input_args": {"classes": "list-view-generic"}, "allowed_in": {"alter","extract"}})
 
 def get_racf_options() -> dict[str, Any]:
     """Returns a dict with all of the RACF options"""

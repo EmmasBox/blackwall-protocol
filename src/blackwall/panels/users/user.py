@@ -81,27 +81,29 @@ class PanelUserAttributes(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
         with Collapsible(title="User attributes"):
-            yield RadioButton("Special",id="base_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option")
-            yield RadioButton("Operations",id="base_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards")
-            yield RadioButton("Auditor",id="base_auditor")
+            yield RadioButton("Special",id="base_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option",classes="generic-checkbox-small")
+            yield RadioButton("Operations",id="base_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards",classes="generic-checkbox-small")
+            yield RadioButton("Auditor",id="base_auditor",classes="generic-checkbox-small",tooltip="This attribute allows you to change system options and extract data about the RACF database, this one is pretty dangerous but not as dagnerous as special.")
+            yield RadioButton("Read only auditor",id="base_audit_responsibility",classes="generic-checkbox-small",tooltip="This attribute allows you to extract data about the RACF database, but you can't change any settings. This one is still dangerous but signifincantly less than the others as nothing can be changed.")
 
-class PanelUserLevelAndCategory(VerticalGroup):
-    """User attributes component"""
+class PanelUserAccess(VerticalGroup):
+    """User dataset component"""
     def compose(self) -> ComposeResult:
-        with Collapsible(title="Security level and category"):
+        with Collapsible(title="Access"):
             yield Label("Security level:")
             yield Input(max_length=8,id="base_security_level",classes="field-short-generic")
             yield Label("Security category:")
             yield Input(max_length=8,id="base_security_category",classes="field-short-generic")
             yield Label("Security label:")
             yield Input(max_length=8,id="base_security_label",classes="field-short-generic")
-
-class PanelUserDatasetsAndUACC(VerticalGroup):
-    """User attributes component"""
-    def compose(self) -> ComposeResult:
-        with Collapsible(title="Datasets and UACC"):
             yield Label("UACC:")
             yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],id="base_universal_access",value="NONE",classes="uacc-select")
+            yield RadioButton(label="Audit logging (UAUDIT)",id="base_audit_logging",classes="generic-checkbox-small")
+
+class PanelUserDatasets(VerticalGroup):
+    """User dataset component"""
+    def compose(self) -> ComposeResult:
+        with Collapsible(title="Datasets"):
             yield Label("Model dataset:")
             yield Input(max_length=255,id="base_model_data_set",classes="field-long-generic")
             yield RadioButton(label="Group dataset access",id="base_group_data_set_access",classes="generic-checkbox-medium")
@@ -111,7 +113,7 @@ class PanelUserSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Collapsible(title="User segments"):
             yield from generate_trait_section(title="TSO", prefix="tso", traits_class=user.TSOUserTraits)
-            yield from generate_trait_section(title="OMVS (z/OS Unix)", prefix="omvs", traits_class=user.OMVSUserTraits)
+            yield from generate_trait_section(title="z/OS Unix (OMVS)", prefix="omvs", traits_class=user.OMVSUserTraits)
             yield from generate_trait_section(title="Work attributes", prefix="workattr", traits_class=user.WorkattrUserTraits)
             yield from generate_trait_section(title="CICS", prefix="cics", traits_class=user.CICSUserTraits)
             yield from generate_trait_section(title="KERB", prefix="kerb", traits_class=user.KerbUserTraits)
@@ -183,9 +185,9 @@ class PanelUser(VerticalScroll):
         yield PanelUserInstalldata()
         yield PanelUserPassword()
         yield PanelUserPassphrase()
-        yield PanelUserDatasetsAndUACC()
+        yield PanelUserAccess()
+        yield PanelUserDatasets()
         yield PanelUserAttributes()
-        yield PanelUserLevelAndCategory()
         yield PanelUserSegments()
         yield PanelUserActionButtons(save_action="save_user", delete_action="delete_user")
     
@@ -193,7 +195,7 @@ class PanelUser(VerticalScroll):
     
     def on_mount(self) -> None:
         if user.user_exists(self.user_info.username):
-            self.query_exactly_one("#username",Input).value = self.user_info.username
+            self.query_exactly_one("#username",Input).value = self.user_info.username.upper()
             if self.user_info.base_traits is not None:
                 set_traits_in_input(self,traits=self.user_info.base_traits,prefix="base")
             

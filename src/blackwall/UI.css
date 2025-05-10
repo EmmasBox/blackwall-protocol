@@ -9,6 +9,15 @@
     margin-top: 1;
 }
 
+#system_clock {
+    margin-left: 1;
+    width: 24;
+}
+
+#system_timezone {
+    margin: 1;
+}
+
 # General
 .date-labels {
     margin: 1;    
@@ -111,9 +120,19 @@ RefreshScreen {
     margin-bottom: 1;
 }
 
+.generic-checkbox-small {
+    width: 32;
+    margin-bottom: 1;
+}
+
 .generic-checkbox-medium {
     width: 60;
     margin-bottom: 1;
+}
+
+.list-view-generic {
+    box-sizing: content-box;
+    height: auto;
 }
 
 .action-button {
@@ -224,4 +243,20 @@ ToggleButton.-on > .toggle--button {
 .selector-health-checks {
     margin: 1;
     width: 32;
+}
+
+# Copy panel
+
+.copy-label {
+    margin: 1;
+}
+
+.copy-switcher {
+    border: panel $primary;
+    width: 90%;
+    height: 1fr;
+}
+
+.copy-buttons {
+    margin: 1;
 }

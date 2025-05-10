@@ -83,7 +83,7 @@ class TMEDatasetTraits(TraitsBase):
 def dataset_profile_exists(dataset: str) -> bool:
     """Checks if a dataset profile exists, returns true or false"""
     if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "data-set", "profile_name": dataset.upper()})
+        result = racfu({"operation": "extract", "admin_type": "data-set", "data_set": dataset.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return False
@@ -91,7 +91,7 @@ def dataset_profile_exists(dataset: str) -> bool:
 def get_dataset_profile(dataset: str) -> dict:
     """Doesn't handle dataset profiles that don't exist, recommend using dataset_profile_exists() first"""
     if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "data-set", "profile_name": dataset.upper()})
+        result = racfu({"operation": "extract", "admin_type": "data-set", "data_set": dataset.upper()})
         return result.result
     else:
         return {}
@@ -111,7 +111,7 @@ def update_dataset_profile(dataset: str, create: bool, dataset_object: DatasetOb
             {
                 "operation": operation, 
                 "admin_type": "data-set", 
-                "profile_name": dataset.upper(),
+                "data_set": dataset.upper(),
                 "traits":  traits,
             },
         )
@@ -124,7 +124,7 @@ def delete_dataset_profile(dataset: str) -> tuple[str, int]:
                 {
                     "operation": "delete", 
                     "admin_type": "data-set", 
-                    "profile_name": dataset.upper(),
+                    "data_set": dataset.upper(),
                 },
             )
         #TODO add error message

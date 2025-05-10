@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.reactive import reactive
-from textual.widgets import Button, Input, Label
+from textual.widgets import Button, Input, Label, RadioButton
 
 from blackwall.api import group
 from blackwall.emoji import get_emoji
@@ -29,9 +29,9 @@ class PanelGroupNameAndSubgroup(HorizontalGroup):
         yield Label("Group name:")
         yield Input(id="group_name",restrict=racf_id_regex,max_length=8,classes="field-short-generic",tooltip="1-8 character long alphanumeric name used to identify the group")
         yield Label("Superior group:")
-        yield Input(max_length=8,restrict=racf_id_regex,id="base_superior_group",classes="field-short-generic",tooltip="")
+        yield Input(max_length=8,restrict=racf_id_regex,id="base_superior_group",classes="field-short-generic",tooltip="Superior group in the RACF database")
         yield Label("Owner:")
-        yield Input(max_length=8,restrict=racf_id_regex,id="base_owner",classes="field-short-generic",tooltip="")
+        yield Input(max_length=8,restrict=racf_id_regex,id="base_owner",classes="field-short-generic",tooltip="Owner of the group, can be a user or group.")
 
 class PanelGroupInstallationData(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -43,9 +43,14 @@ class PanelGroupDatasetModel(VerticalGroup):
         yield Label("Dataset model:")
         yield Input(id="base_data_set_model",classes="field-long-generic")
 
+class PanelGroupTerminalUACC(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield RadioButton(label="Terminal UACC",id="base_terminal_universal_access",classes="generic-checkbox-medium")
+
 class PanelGroupSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield from generate_trait_section(title="DFP segment", prefix="dfp", traits_class=group.DFPGroupTraits)
+        yield from generate_trait_section(title="z/OS Unix (OMVS) segment", prefix="omvs", traits_class=group.OMVSGroupTraits)
 
 class PanelGroupActionButtons(HorizontalGroup):
     edit_mode: reactive[PanelMode] = reactive(PanelMode.create,recompose=True)
@@ -80,6 +85,7 @@ class PanelGroup(VerticalScroll):
         yield PanelGroupNameAndSubgroup()
         yield PanelGroupInstallationData()
         yield PanelGroupDatasetModel()
+        yield PanelGroupTerminalUACC()
         yield PanelGroupSegments()
         yield PanelGroupActionButtons(save_action="save_group",delete_action="delete_group")
 
@@ -93,7 +99,7 @@ class PanelGroup(VerticalScroll):
 
     def on_mount(self) -> None:
         if group.group_exists(self.group_info.group_name):
-            self.query_exactly_one("#group_name",Input).value = self.group_info.group_name
+            self.query_exactly_one("#group_name",Input).value = self.group_info.group_name.upper()
             if self.group_info.base_traits is not None:
                 set_traits_in_input(self,traits=self.group_info.base_traits,prefix="base")
             

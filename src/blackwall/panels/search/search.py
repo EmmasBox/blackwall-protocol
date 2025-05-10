@@ -6,10 +6,11 @@ from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalScroll
 from textual.widgets import Button, Input, Label, RadioButton, RadioSet
 
-from blackwall.api import dataset, group, resource, user
+from blackwall.api import dataset, group, keyrings, resource, user
 from blackwall.messages import OpenTab
 from blackwall.panels.dataset.dataset import DatasetInfo, PanelDataset
 from blackwall.panels.group.group import GroupInfo, PanelGroup
+from blackwall.panels.keyrings.keyrings import KeyringInfo, PanelKeyring
 from blackwall.panels.panel_mode import PanelMode
 from blackwall.panels.resource.resource import PanelResource, ResourceInfo
 from blackwall.panels.search.results import PanelResultsMixedType
@@ -25,6 +26,7 @@ class SearchSelector(HorizontalGroup):
             yield RadioButton("Group",id="search_type_group")
             yield RadioButton("Dataset profile",id="search_type_dataset")
             yield RadioButton("Resource profile",id="search_type_resource")
+            #yield RadioButton("Keyring",id="search_type_keyring")
         with RadioSet(id="filter-selector",classes="search-selector"):
             yield RadioButton("All",disabled=True)
             yield RadioButton("Only one",value=True)
@@ -36,7 +38,7 @@ class SearchField(HorizontalGroup):
 
     def compose(self) -> ComposeResult:
         yield Label("Search:")
-        yield Input(name="Class",id="search_field_class",classes="field-short-generic")
+        yield Input(name="Class",max_length=8,id="search_field_class",classes="field-short-generic")
         yield Input(name="Search",id="search_field",classes="search-field")
         yield Button("Search",action="search")
 
@@ -235,3 +237,22 @@ class PanelSearch(VerticalScroll):
                 self.notify(f"Found resource profile: {search_query}")
             else:
                 self.notify(f"Resource profile {search_query} couldn't be found")
+        elif search_type == "search_type_keyring":
+            if keyrings.keyring_exists(keyring=search_query,owner=search_query_class):
+                new_keyring_panel = PanelKeyring()
+
+                key_dict = keyrings.get_keyring(keyring=search_query,owner=search_query_class)
+
+                keyring_traits = keyrings.KeyringTraits.from_dict(prefix=None,source=key_dict)
+
+                new_keyring_panel.keyring_info = KeyringInfo(
+                    keyring_name=search_query,
+                    keyring_owner=search_query_class,
+                    keyring_traits=keyring_traits,
+                )
+
+                self.post_message(OpenTab(f"Keyring: {search_query}",new_keyring_panel))
+
+                self.notify(f"Found keyring: {search_query}")
+            else:
+                self.notify(f"Keyring {search_query} couldn't be found")

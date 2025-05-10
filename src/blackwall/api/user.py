@@ -26,6 +26,7 @@ class BaseUserTraits(TraitsBase):
     special: bool | None = field(default=None,metadata={"label": "Special"})
     operations: bool | None = field(default=None,metadata={"label": "Operations"})
     auditor: bool | None = field(default=None,metadata={"label": "Auditor"})
+    audit_responsibility: bool | None = field(default=None,metadata={"label": "Read only auditor"})
 
     password: str | None = field(default=None, metadata={
         "masked": True,
@@ -50,6 +51,8 @@ class BaseUserTraits(TraitsBase):
     create_date: str | None = field(default=None,metadata={"label": "Create date","allowed_in": {"extract"}})
     last_access_date: str | None = field(default=None,metadata={"label": "Last access date","allowed_in": {"extract"}})
     last_access_time: str | None = field(default=None,metadata={"label": "Last access time","allowed_in": {"extract"}})
+
+    audit_logging: bool | None = field(default=None,metadata={"label": "uaudit","allowed_in": {"alter", "extract"}})
 
 @dataclass
 class CICSUserTraits(TraitsBase):
@@ -201,7 +204,7 @@ class WorkattrUserTraits(TraitsBase):
 def user_exists(username: str) -> bool:
     """Checks if a user exists, returns true or false"""
     if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username.upper()})
+        result = racfu({"operation": "extract", "admin_type": "user", "userid": username.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return False
@@ -209,7 +212,7 @@ def user_exists(username: str) -> bool:
 def get_user(username: str) -> dict[str, Any]:
     """Doesn't handle users that don't exist, recommend using user_exists() first"""
     if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "user", "profile_name": username.upper()})
+        result = racfu({"operation": "extract", "admin_type": "user", "userid": username.upper()})
         return result.result
     else:
         return False
@@ -254,7 +257,7 @@ def update_user(
             {
                 "operation": operation, 
                 "admin_type": "user", 
-                "profile_name": username,
+                "userid": username,
                 "traits":  traits,
             },
         )
@@ -267,7 +270,7 @@ def delete_user(username: str) -> tuple[str, int]:
                 {
                     "operation": "delete", 
                     "admin_type": "user", 
-                    "profile_name": username.upper(),
+                    "userid": username.upper(),
                 },
             )
         return result.result["commands"][0]["messages"][0], result.result["return_codes"]["racf_return_code"]

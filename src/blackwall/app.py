@@ -1,39 +1,24 @@
 
-import importlib.util
-import json
 
 from textual.app import App
 from textual.containers import Container
 from textual.signal import Signal
-from textual.widgets import Footer, Header, Input, Label
+from textual.widgets import Footer, Header, Input
 
 from blackwall.messages import SubmitCommand
 from blackwall.notifications import send_notification
+from blackwall.secret_scrubber import remove_secret
 from blackwall.settings import get_site_setting, get_user_setting
 from blackwall.submit_command import execute_command
 
 from .command_line import CommandLine
 from .screens.modal.refresh import RefreshScreen
 from .screens.modal.rvary import RvaryScreen
+from .system_info import SystemInfo
 from .tabs import TabSystem
-
-#from .themes.theme_3270 import legacy_3270_theme
+from .themes.theme_blackwall import blackwall_theme
 from .themes.theme_cynosure import cynosure_theme
 
-zoau_enabled = importlib.util.find_spec('zoautil_py')
-
-if zoau_enabled:
-    from zoautil_py import zsystem  # type: ignore
-else:
-    print("##BLKWL_ERROR_1 Warning: could not find ZOAU, certain features will be disabled such as diplaying system and LPAR names")    
-
-command_history = ""
-
-#system information
-if zoau_enabled:
-    zsystem_info = json.loads(zsystem.zinfo()) # type: ignore
-    system_name = zsystem_info["sys_info"]["sys_name"]
-    lpar_name = zsystem_info["sys_info"]["lpar_name"]
 
 class Blackwall(App):
     #Import css
@@ -54,7 +39,8 @@ class Blackwall(App):
         else:
             self.sub_title = "Mainframe Security Administration"
         self.register_theme(cynosure_theme)
-        #self.register_theme(legacy_3270_theme)
+        self.register_theme(blackwall_theme)
+
         user_theme = get_user_setting(section="display",setting="theme")
         if user_theme is not None or user_theme == "":
             try:
@@ -85,7 +71,8 @@ class Blackwall(App):
                 if output is not None:
                     self.command_output = self.command_output + output
                     self.command_output_change.publish(data=self.command_output)
-                    self.notify(f"command {message.command.upper()} successfully completed",severity="information")
+                    scrubbed_command = remove_secret(string_input=message.command)
+                    self.notify(f"command {scrubbed_command.upper()} successfully completed",severity="information")
             except BaseException as e:
                 send_notification(self,message=f"Command {message.command.upper()} failed: {e}",severity="error")
                 
@@ -93,13 +80,7 @@ class Blackwall(App):
     def compose(self):
         #display system and LPAR name
         yield Header()
-        if zoau_enabled:
-            system_label = get_user_setting(section="display",setting="system_label")
-            if system_label is not False:
-                if get_user_setting(section="display",setting="short_system_label"):
-                    yield Label(f"System: {system_name}, LPAR: {lpar_name}",classes="system-label")
-                else:
-                    yield Label(f"You are working on the {system_name} mainframe system in LPAR {lpar_name}",classes="system-label")
+        yield SystemInfo()
         yield CommandLine()
         with Container():
             yield TabSystem()

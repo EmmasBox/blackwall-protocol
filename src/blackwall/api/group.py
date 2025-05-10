@@ -19,12 +19,12 @@ class BaseGroupTraits(TraitsBase):
     installation_data: str | None = field(default=None,metadata={"label": "Intallation data", "allowed_in": {"add","alter","extract"}})
     data_set_model: str | None = field(default=None,metadata={"label": "Dataset model", "allowed_in": {"add","alter","extract"}})
     superior_group: str | None = field(default=None,metadata={"label": "Superior group","allowed_in": {"add","alter","extract"}})
-    terminal_universal_access: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    terminal_universal_access: bool | None = field(default=None,metadata={"label": "Terminal universal access","allowed_in": {"add","alter","extract"}})
     universal: str | None = field(default=None,metadata={"allowed_in": {"add","extract"}})
     subgroups: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    subgroup: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    subgroup: str | None = field(default=None,metadata={"label": "Subgroup","allowed_in": {"extract"}})
     connected_users: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    connected_user_authority: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
+    connected_user_authority: str | None = field(default=None,metadata={"label": "Connected user authority","allowed_in": {"extract"}})
     connected_userid: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
     create_date: str | None = field(default=None,metadata={"allowed_in": {"extract"}})
 
@@ -38,7 +38,7 @@ class DFPGroupTraits(TraitsBase):
 @dataclass
 class OMVSGroupTraits(TraitsBase):
     auto_gid: str | None = field(default=None,metadata={"allowed_in": {"add","alter"},"invalid_values": {False}})
-    gid: int | None = field(default=None,metadata={"label": "GID", "allowed_in": {"add","alter","extract"}})
+    gid: int | None = field(default=None,metadata={"label": "GID", "input_args": {"max_length": 10,"classes": "field-medium-generic"}, "allowed_in": {"add","alter","extract"}})
     shared: str | None = field(default=None,metadata={"allowed_in": {"add","alter"},"invalid_values": {False}})
 
 @dataclass
@@ -53,7 +53,7 @@ class TMEGroupTraits(TraitsBase):
 def group_exists(group: str) -> bool:
     """Checks if a group exists, returns true or false"""
     if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "group", "profile_name": group.upper()})
+        result = racfu({"operation": "extract", "admin_type": "group", "group": group.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return False
@@ -61,7 +61,7 @@ def group_exists(group: str) -> bool:
 def get_group(group: str) -> dict:
     """Doesn't handle group profiles that don't exist, recommend using group_exists() first"""
     if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "group", "profile_name": group.upper()})
+        result = racfu({"operation": "extract", "admin_type": "group", "group": group.upper()})
         return result.result
     else:
         return {}
@@ -95,7 +95,7 @@ def update_group(group: str,create: bool, group_object: GroupObject):
             {
                 "operation": operation, 
                 "admin_type": "group", 
-                "profile_name": group.upper(),
+                "group": group.upper(),
                 "traits":  traits,
             },
         )
@@ -108,7 +108,7 @@ def delete_group(group: str) -> tuple[str, int]:
             {
                 "operation": "delete", 
                 "admin_type": "group", 
-                "profile_name": group.upper(),
+                "group": group.upper(),
             },
         )
         #TODO add error message

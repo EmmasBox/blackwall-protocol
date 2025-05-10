@@ -28,10 +28,13 @@ class PanelResourceInfo(HorizontalGroup):
         yield Label("Last reference time:",classes="date-labels")
         yield Input(id="base_last_reference_date",disabled=True,classes="date-fields")
 
-class PanelResourceNameAndClass(VerticalGroup):
+class PanelResourceName(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Profile name:")
         yield Input(max_length=255,id="resource_profile_name",classes="resource-name-field")
+
+class PanelResourceClassAndOwner(HorizontalGroup):
+    def compose(self) -> ComposeResult:
         yield Label("Class:")
         yield Input(max_length=8,id="resource_profile_class",classes="class-field")
         yield Label("Owner:")
@@ -47,6 +50,18 @@ class PanelResourceAccess(VerticalGroup):
         yield Label("UACC:")
         yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="NONE",classes="uacc-select",id="base_universal_access",tooltip="It's advised that you keep this at NONE, UACC read or higher are unsecure, see z/OS RACF Administrator's Guide for more details")
         yield RadioButton(label="Warn on insufficient access",id="base_warn_on_insufficient_access",classes="generic-checkbox-medium")
+        yield Label("Notify userid:")
+        yield Input(id="base_notify_userid",restrict=racf_id_regex,max_length=8,classes="field-short-generic")
+
+class PanelResourceSecurityLevelAndCategories(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        with Collapsible(title="Security level and category"):
+            yield Label("Security level")
+            yield Input(max_length=8,id="base_security_level",classes="field-short-generic")
+            yield Label("Security category:")
+            yield Input(max_length=8,id="base_security_category",classes="field-short-generic")
+            yield Label("Security label:")
+            yield Input(max_length=8,id="base_security_label",classes="field-short-generic")
 
 class PanelResourceSegments(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -117,9 +132,11 @@ class ResourceInfo:
 class PanelResource(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield PanelResourceInfo()
-        yield PanelResourceNameAndClass()
+        yield PanelResourceName()
+        yield PanelResourceClassAndOwner()
         yield PanelResourceInstallationData()
         yield PanelResourceAccess()
+        yield PanelResourceSecurityLevelAndCategories()
         yield PanelResourceSegments()
         yield PanelResourceActionButtons(save_action="save_resource_profile", delete_action="delete_resource_profile")
 
@@ -193,8 +210,8 @@ class PanelResource(VerticalScroll):
             self.set_edit_mode()
 
     def action_delete_resource_profile_api(self):
-        resource_profile_name = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_name",Input).value
-        resource_profile_class = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_class",Input).value
+        resource_profile_name = self.get_child_by_type(PanelResourceName).get_child_by_id("resource_profile_name",Input).value
+        resource_profile_class = self.get_child_by_type(PanelResourceClassAndOwner).get_child_by_id("resource_profile_class",Input).value
         if resource.resource_profile_exists(resource_class=resource_profile_class,resource=resource_profile_name):
             message, return_code = resource.delete_resource_profile(resource_class=resource_profile_class,resource=resource_profile_name)
             
@@ -204,14 +221,14 @@ class PanelResource(VerticalScroll):
                 self.notify(f"{message}, return code: {return_code}",severity="error")
 
     def action_delete_resource_profile(self) -> None:
-        resource_profile_name = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_name",Input).value
-        resource_profile_class = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_class",Input).value
+        resource_profile_name = self.get_child_by_type(PanelResourceName).get_child_by_id("resource_profile_name",Input).value
+        resource_profile_class = self.get_child_by_type(PanelResourceClassAndOwner).get_child_by_id("resource_profile_class",Input).value
         generic_confirmation_modal(self,modal_text=f"Are you sure you want to delete resource profile {resource_profile_name} in {resource_profile_class}?",confirm_action="delete_resource_profile_api",action_widget=self)
 
 
     def action_save_resource_profile(self) -> None:
-        resource_profile_name = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_name",Input).value
-        resource_profile_class = self.get_child_by_type(PanelResourceNameAndClass).get_child_by_id("resource_profile_class",Input).value
+        resource_profile_name = self.get_child_by_type(PanelResourceName).get_child_by_id("resource_profile_name",Input).value
+        resource_profile_class = self.get_child_by_type(PanelResourceClassAndOwner).get_child_by_id("resource_profile_class",Input).value
         resource_profile_exists = resource.resource_profile_exists(resource=resource_profile_name,resource_class=resource_profile_class)
 
         operator = "alter" if resource_profile_exists else "add"

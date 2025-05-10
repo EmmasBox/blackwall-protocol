@@ -13,6 +13,8 @@ if racfu_enabled:
 else:
     print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
 
+#TODO remove workaround for padded class names when RACFu fixes the bug
+
 @dataclass
 class BaseResourceTraits(TraitsBase):
     #add+alter fields
@@ -23,11 +25,11 @@ class BaseResourceTraits(TraitsBase):
     audit_read: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_read: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     audit_update: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    security_category: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    security_category: str | None = field(default=None,metadata={"label": "Security category", "allowed_in": {"add","alter"}})
     installation_data: str | None = field(default=None,metadata={"label": "Installation data", "allowed_in": {"add","alter"}})
     level: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     member_class_name: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
-    notify_userid: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    notify_userid: str | None = field(default=None,metadata={"label": "Notify userid", "allowed_in": {"add","alter"}})
     security_label: str | None = field(default=None,metadata={"label": "Security label", "allowed_in": {"add","alter"}})
     security_level: str | None = field(default=None,metadata={"label": "Security level", "allowed_in": {"add","alter"}})
     single_data_set_tape_volume: bool | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
@@ -227,12 +229,15 @@ class CfdefResourceTraits(TraitsBase):
     valid_other_characters: str | None = field(default=None,metadata={"label": "Valid other characters","allowed_in": {"add","alter","extract"}})
     validation_rexx_exec: str | None = field(default=None,metadata={"label": "Validation rexx exec","allowed_in": {"add","alter","extract"}})
 
+def fix_class(class_name: str):
+    return f"{class_name:<8}".upper()
+
 #General resource profile function
 def resource_profile_exists(resource_class: str,resource: str) -> bool:
     """Checks if a general resource profile exists, returns true or false"""
     if racfu_enabled:
         """Checks if a general resource profile exists, returns true or false"""
-        result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource.upper(), "class_name": resource_class.upper()}) # type: ignore
+        result = racfu({"operation": "extract", "admin_type": "resource", "resource": resource.upper(), "class": fix_class(resource_class)}) # type: ignore
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return False
@@ -241,7 +246,7 @@ def get_resource_profile(resource_class: str, resource: str) -> dict:
     """Returns a dict with information about the resource profile"""
     if racfu_enabled:
         """Doesn't handle general resource profiles that don't exist, recommend using resource_profile_exists() first"""
-        result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource.upper(), "class_name": resource_class.upper()}) # type: ignore
+        result = racfu({"operation": "extract", "admin_type": "resource", "resource": resource.upper(), "class": fix_class(resource_class)}) # type: ignore
         return result.result
     else:
         return {}
@@ -250,7 +255,7 @@ def get_resource_acl(resource_class: str, resource: str) -> list[dict]:
     """Returns a string list with the access list of the specified resource"""
     if racfu_enabled:
         """Returns a list of active classes on the system"""
-        result = racfu({"operation": "extract", "admin_type": "resource", "profile_name": resource.upper(), "class_name": resource_class.upper()}) # type: ignore
+        result = racfu({"operation": "extract", "admin_type": "resource", "resource": resource.upper(), "class": fix_class(resource_class)}) # type: ignore
         return result.result["profile"]["base"]["base:access_list"] # type: ignore
     else:
         return []
@@ -296,8 +301,8 @@ def update_resource_profile(
         {
             "operation": operation, 
             "admin_type": "resource", 
-            "profile_name": resource.upper(),
-            "class_name": resource_class.upper(),
+            "resource": resource.upper(),
+            "class": fix_class(resource_class),
             "traits":  traits,
         },
     )
@@ -309,8 +314,8 @@ def delete_resource_profile(resource_class: str,resource: str) -> tuple[str, int
                 {
                     "operation": "delete", 
                     "admin_type": "resource", 
-                    "profile_name": resource.upper(),
-                    "class_name": resource_class.upper(),
+                    "resource": resource.upper(),
+                    "class": fix_class(resource_class),
                 },
             )
         #TODO add error message

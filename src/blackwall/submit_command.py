@@ -2,6 +2,7 @@
 import subprocess
 from datetime import datetime
 
+from blackwall.secret_scrubber import remove_secret
 from blackwall.settings import get_user_setting
 
 
@@ -33,4 +34,5 @@ def generate_command_meta_header(command_type: str,command: str) -> str:
 
 def execute_command(command: str) -> str | None:
     output = subprocess.run(f'tsocmd "{command}"', text=False, shell=True, check=True, capture_output=True)
-    return generate_command_meta_header("TSO",command) + output.stdout.decode("utf-8", errors="ignore")
+    scrubbed_command = remove_secret(string_input=command)
+    return generate_command_meta_header("TSO",scrubbed_command) + output.stdout.decode("utf-8", errors="ignore")
