@@ -33,5 +33,5 @@ class RvaryScreen(Screen):
                 self.notify("Password does not match",severity="error")
         else:
             self.app.pop_screen()
-        input_value = self.query_exactly_one("#rvary_password",Input).value
+        self.query_exactly_one("#rvary_password",Input).value = ""
         self.query_exactly_one("#rvary_password_confirm",Input).value = ""
