@@ -54,6 +54,8 @@ class BaseUserTraits(TraitsBase):
 
     audit_logging: bool | None = field(default=None,metadata={"label": "uaudit","allowed_in": {"alter", "extract"}})
 
+    restrict_global_access_checking: bool | None = field(default=None,metadata={"label": "Restricted","allowed_in": {"add", "alter", "extract"}})
+
 @dataclass
 class CICSUserTraits(TraitsBase):
     operator_class: str | None = field(default=None, metadata={"label": "operator class", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
