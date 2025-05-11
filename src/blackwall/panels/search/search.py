@@ -31,7 +31,7 @@ class PanelSearchUser(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Search users",classes="search-label")
         yield Input(max_length=8,restrict=racf_id_regex,id="search_field",classes="field-short-generic")
-        yield Button(label=f"{get_emoji("🔎")}Search",action="search")
+        yield Button(label=f"{get_emoji("🔎")} Search",action="search")
 
     async def action_search(self):
         await self.app.run_action(self.search_action,default_namespace=self.parent)
@@ -45,7 +45,7 @@ class PanelSearchGroup(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Search for group",classes="search-label")
         yield Input(max_length=8,id="search_field",restrict=racf_id_regex,classes="field-short-generic")
-        yield Button(label=f"{get_emoji("🔎")}Search",action="search")
+        yield Button(label=f"{get_emoji("🔎")} Search",action="search")
 
     async def action_search(self):
         await self.app.run_action(self.search_action,default_namespace=self.parent)
@@ -59,7 +59,7 @@ class PanelSearchDataset(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Search for dataset profile",classes="search-label")
         yield Input(max_length=255,id="search_field",classes="field-long-generic")
-        yield Button(label=f"{get_emoji("🔎")}Search",action="search")
+        yield Button(label=f"{get_emoji("🔎")} Search",action="search")
 
     async def action_search(self):
         await self.app.run_action(self.search_action,default_namespace=self.parent)
@@ -76,7 +76,7 @@ class PanelSearchResource(VerticalGroup):
         yield Label("Search for resource profile",classes="search-label")
         yield Input(max_length=8,id="search_field_class",suggester=SuggestFromList(self.active_classes,case_sensitive=False),placeholder="class...",classes="field-short-generic")
         yield Input(max_length=255,placeholder="resource profile...",classes="field-long-generic")
-        yield Button(label=f"{get_emoji("🔎")}Search",action="search")
+        yield Button(label=f"{get_emoji("🔎")} Search",action="search")
 
     async def action_search(self):
         await self.app.run_action(self.search_action,default_namespace=self.parent)
