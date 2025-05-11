@@ -3,9 +3,11 @@ from dataclasses import dataclass
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.reactive import reactive
+from textual.suggester import SuggestFromList
 from textual.widgets import Button, Collapsible, Input, Label, RadioButton, Select
 
 from blackwall.api import resource
+from blackwall.api.setropts import get_active_classes
 from blackwall.emoji import get_emoji
 from blackwall.modals import generic_confirmation_modal
 from blackwall.notifications import send_notification
@@ -22,11 +24,11 @@ from ..traits_ui import (
 class PanelResourceInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Creation date:",classes="date-labels")
-        yield Input(id="base_create_date",disabled=True,classes="date-fields")
+        yield Input(id="base_create_date",disabled=True,classes="date-fields",compact=True)      
         yield Label("Last change date:",classes="date-labels")
-        yield Input(id="base_last_change_date",disabled=True,classes="date-fields")
+        yield Input(id="base_last_change_date",disabled=True,classes="date-fields",compact=True)      
         yield Label("Last reference time:",classes="date-labels")
-        yield Input(id="base_last_reference_date",disabled=True,classes="date-fields")
+        yield Input(id="base_last_reference_date",disabled=True,classes="date-fields",compact=True)      
 
 class PanelResourceName(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -34,9 +36,11 @@ class PanelResourceName(VerticalGroup):
         yield Input(max_length=255,id="resource_profile_name",classes="resource-name-field")
 
 class PanelResourceClassAndOwner(HorizontalGroup):
+    active_classes = get_active_classes()
+
     def compose(self) -> ComposeResult:
         yield Label("Class:")
-        yield Input(max_length=8,id="resource_profile_class",classes="class-field")
+        yield Input(max_length=8,suggester=SuggestFromList(self.active_classes,case_sensitive=False),id="resource_profile_class",classes="class-field")
         yield Label("Owner:")
         yield Input(max_length=8,restrict=racf_id_regex,id="base_owner",classes="class-field")
 

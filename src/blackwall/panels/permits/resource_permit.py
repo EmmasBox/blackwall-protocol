@@ -1,9 +1,11 @@
 from textual import on
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
+from textual.suggester import SuggestFromList
 from textual.widgets import Button, DataTable, Input, Label, Select
 
 from blackwall.api import group, permit, resource
+from blackwall.api.setropts import get_active_classes
 from blackwall.emoji import get_emoji
 from blackwall.notifications import send_notification
 from blackwall.panels.traits_ui import get_traits_from_input
@@ -22,8 +24,10 @@ class PanelResourcePermitSearchField(HorizontalGroup):
         super().__init__()
         self.search_action = search_action
 
+    active_classes = get_active_classes()
+
     def compose(self) -> ComposeResult:
-        yield Input(id="search_permit_class",placeholder="class...",classes="field-short-generic")
+        yield Input(id="search_permit_class",suggester=SuggestFromList(self.active_classes,case_sensitive=False),placeholder="class...",classes="field-short-generic")
         yield Input(id="search_permit_profile",placeholder="profile name...",classes="search-field")    
         yield Button(label="Get ACL",id="search_permit_button",action="search")
 

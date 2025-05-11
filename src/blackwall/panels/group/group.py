@@ -22,7 +22,7 @@ from ..traits_ui import (
 class PanelGroupInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Creation date:",classes="date-labels")
-        yield Input(id="base_create_date",disabled=True,classes="date-fields")
+        yield Input(id="base_create_date",disabled=True,classes="date-fields",compact=True)      
 
 class PanelGroupNameAndSubgroup(HorizontalGroup):
     def compose(self) -> ComposeResult:

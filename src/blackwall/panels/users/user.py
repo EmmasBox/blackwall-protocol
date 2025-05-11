@@ -24,11 +24,11 @@ from ..traits_ui import (
 class PanelUserInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Creation date:",classes="date-labels")
-        yield Input(id="base_create_date",disabled=True,classes="date-fields")
+        yield Input(id="base_create_date",disabled=True,classes="date-fields",compact=True)
         yield Label("Last access date:",classes="date-labels")
-        yield Input(id="base_last_access_date",disabled=True,classes="date-fields")
-        #yield Label("Last access time:",classes="date-labels")
-        #yield Input(id="last_acess_time",disabled=True,classes="date-fields")
+        yield Input(id="base_last_access_date",disabled=True,classes="date-fields",compact=True)
+        yield Label("Revoke date:",classes="date-labels")
+        yield Input(id="base_revoke_date",disabled=True,classes="date-fields",compact=True)      
 
 class PanelUserName(HorizontalGroup):
     """Username and name components"""
@@ -61,10 +61,18 @@ class PanelUserInstalldata(HorizontalGroup):
         yield Label("Installation data: ")
         yield Input(max_length=255,id="base_installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a user. You can use installation data to describe whatever you want, such as department or what the user is for")
 
+class PanelUserMetaPasswordInfo(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Password change date:",classes="date-labels")
+        yield Input(id="base_password_change_date",disabled=True,classes="date-fields",compact=True)   
+        yield Label("Password change interval:",classes="date-labels")
+        yield Input(id="base_password_change_interval",disabled=True,classes="date-fields",compact=True)  
+
 class PanelUserPassword(VerticalGroup):
     """Change/add password component"""
     def compose(self) -> ComposeResult:
-        with Lazy(widget=Collapsible(title="Password")):
+        with Collapsible(title="Password"):
+            yield PanelUserMetaPasswordInfo()
             yield Label("Passwords can only be 8 characters long")
             yield Label("New password:")
             yield Input(max_length=8,id="base_password",classes="password",password=True)
@@ -81,10 +89,13 @@ class PanelUserAttributes(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
         with Collapsible(title="User attributes"):
+            yield Label("Priviliges:")
             yield RadioButton("Special",id="base_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option",classes="generic-checkbox-small")
             yield RadioButton("Operations",id="base_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards",classes="generic-checkbox-small")
             yield RadioButton("Auditor",id="base_auditor",classes="generic-checkbox-small",tooltip="This attribute allows you to change system options and extract data about the RACF database, this one is pretty dangerous but not as dagnerous as special.")
             yield RadioButton("Read only auditor",id="base_audit_responsibility",classes="generic-checkbox-small",tooltip="This attribute allows you to extract data about the RACF database, but you can't change any settings. This one is still dangerous but signifincantly less than the others as nothing can be changed.")
+            yield Label("Restrictions:")
+            yield RadioButton("Restricted",id="base_restrict_global_access_checking",classes="generic-checkbox-small",tooltip="If you enable this then the user won't be able to access resources through UACC. Useful for certain types of system users.")
 
 class PanelUserAccess(VerticalGroup):
     """User dataset component"""

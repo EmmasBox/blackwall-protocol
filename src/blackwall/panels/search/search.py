@@ -4,9 +4,11 @@
 from textual import on
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalScroll
+from textual.suggester import SuggestFromList
 from textual.widgets import Button, Input, Label, RadioButton, RadioSet
 
 from blackwall.api import dataset, group, keyrings, resource, user
+from blackwall.api.setropts import get_active_classes
 from blackwall.messages import OpenTab
 from blackwall.panels.dataset.dataset import DatasetInfo, PanelDataset
 from blackwall.panels.group.group import GroupInfo, PanelGroup
@@ -36,9 +38,11 @@ class SearchField(HorizontalGroup):
         super().__init__()
         self.search_action = search_action
 
+    active_classes = get_active_classes()
+
     def compose(self) -> ComposeResult:
         yield Label("Search:")
-        yield Input(name="Class",max_length=8,id="search_field_class",classes="field-short-generic")
+        yield Input(name="Class",suggester=SuggestFromList(self.active_classes,case_sensitive=False),max_length=8,id="search_field_class",classes="field-short-generic")
         yield Input(name="Search",id="search_field",classes="search-field")
         yield Button("Search",action="search")
 
