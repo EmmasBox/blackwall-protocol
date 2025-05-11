@@ -15,7 +15,7 @@ else:
 
 @dataclass
 class BasePermitTraits(TraitsBase):
-    access: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
+    access: str | None = field(default=None,metadata={"label": "Data application", "allowed_in": {"alter"}})
     model_profile_class: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
     model_profile: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
     model_profile_generic: bool | None = field(default=None,metadata={"allowed_in": {"alter"}})
