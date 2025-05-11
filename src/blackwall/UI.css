@@ -206,6 +206,10 @@ RefreshScreen {
     height: 1fr;
 }
 
+.search-label {
+    margin: 1;
+}
+
 # Analysis panel
 .analysis-confirm {
     margin: 1;

@@ -41,7 +41,7 @@ class PanelSearchUser(VerticalGroup):
         self.search_action = search_action
 
     def compose(self) -> ComposeResult:
-        yield Label("Search users",classes="copy-label")
+        yield Label("Search users",classes="search-label")
         yield Input(max_length=8,restrict=racf_id_regex,id="search_field",classes="field-short-generic")
         yield Button(label="Search",action="search")
 
@@ -55,7 +55,7 @@ class PanelSearchGroup(VerticalGroup):
         self.search_action = search_action
 
     def compose(self) -> ComposeResult:
-        yield Label("Search for group",classes="Search-label")
+        yield Label("Search for group",classes="search-label")
         yield Input(max_length=8,id="search_field",restrict=racf_id_regex,classes="field-short-generic")
         yield Button(label="Search",action="search")
 
@@ -69,7 +69,7 @@ class PanelSearchDataset(VerticalGroup):
         self.search_action = search_action
 
     def compose(self) -> ComposeResult:
-        yield Label("Search for dataset profile",classes="copy-label")
+        yield Label("Search for dataset profile",classes="search-label")
         yield Input(max_length=255,id="search_field",classes="field-long-generic")
         yield Button(label="Search",action="search")
 
@@ -85,7 +85,7 @@ class PanelSearchResource(VerticalGroup):
     active_classes = get_active_classes()
 
     def compose(self) -> ComposeResult:
-        yield Label("Search for resource profile",classes="copy-label")
+        yield Label("Search for resource profile",classes="search-label")
         yield Input(max_length=8,id="search_field_class",suggester=SuggestFromList(self.active_classes,case_sensitive=False),placeholder="class...",classes="field-short-generic")
         yield Input(max_length=255,placeholder="resource profile...",classes="field-long-generic")
         yield Button(label="Search",action="search")
