@@ -28,7 +28,7 @@ class PanelUserInfo(HorizontalGroup):
         yield Label("Last access date:",classes="date-labels")
         yield Input(id="base_last_access_date",disabled=True,classes="date-fields")
         yield Label("Revoke date:",classes="date-labels")
-        
+        yield Input(id="base_revoke_date",disabled=True,classes="date-fields")        
 
 class PanelUserName(HorizontalGroup):
     """Username and name components"""
