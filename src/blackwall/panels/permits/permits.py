@@ -49,7 +49,7 @@ class PanelResourcePermitCreate(HorizontalGroup):
     async def action_update(self):
         await self.app.run_action(self.update_action,default_namespace=self.parent)
 
-class PanelResourcePermitList(VerticalGroup):
+class PanelPermitsList(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Current permits:",classes="label-generic")
         yield DataTable(id="resource_permits_table")
@@ -59,17 +59,17 @@ class PanelResourcePermitList(VerticalGroup):
         permit_table.zebra_stripes = True
         permit_table.add_columns(*PERMIT_COLUMNS[0]) 
 
-class PanelResourcePermit(VerticalScroll):
+class PanelPermits(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield PanelResourcePermitInfo()
         yield PanelResourcePermitSearchField(search_action="search")
         yield PanelResourcePermitCreate(update_action="update")
-        yield PanelResourcePermitList()
+        yield PanelPermitsList()
 
     def get_acl(self, notification: bool) -> None:
         search_profile_field_value = self.get_child_by_type(PanelResourcePermitSearchField).get_child_by_id("search_permit_profile",Input).value
         search_class_field_value = self.get_child_by_type(PanelResourcePermitSearchField).get_child_by_id("search_permit_class",Input).value
-        permit_table = self.get_child_by_type(PanelResourcePermitList).get_child_by_id("resource_permits_table",DataTable)
+        permit_table = self.get_child_by_type(PanelPermitsList).get_child_by_id("resource_permits_table",DataTable)
         
         if resource.resource_profile_exists(resource=search_profile_field_value,resource_class=search_class_field_value):
             resource_acl = resource.get_resource_acl(resource=search_profile_field_value,resource_class=search_class_field_value)
