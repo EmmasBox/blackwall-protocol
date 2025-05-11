@@ -22,11 +22,11 @@ from ..traits_ui import (
 class PanelResourceInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Creation date:",classes="date-labels")
-        yield Input(id="base_create_date",disabled=True,classes="date-fields")
+        yield Input(id="base_create_date",disabled=True,classes="date-fields",compact=True)      
         yield Label("Last change date:",classes="date-labels")
-        yield Input(id="base_last_change_date",disabled=True,classes="date-fields")
+        yield Input(id="base_last_change_date",disabled=True,classes="date-fields",compact=True)      
         yield Label("Last reference time:",classes="date-labels")
-        yield Input(id="base_last_reference_date",disabled=True,classes="date-fields")
+        yield Input(id="base_last_reference_date",disabled=True,classes="date-fields",compact=True)      
 
 class PanelResourceName(VerticalGroup):
     def compose(self) -> ComposeResult:

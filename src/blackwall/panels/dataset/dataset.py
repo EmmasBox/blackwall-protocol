@@ -56,11 +56,11 @@ class PanelDatasetSecurityLevelAndCategories(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Collapsible(title="Security level and category"):
             yield Label("Security level")
-            yield Input(max_length=8,id="base_security_level",classes="field-short-generic")
+            yield Input(max_length=8,id="base_security_level",classes="field-short-generic",compact=True)      
             yield Label("Security category:")
-            yield Input(max_length=8,id="base_security_category",classes="field-short-generic")
+            yield Input(max_length=8,id="base_security_category",classes="field-short-generic",compact=True)      
             yield Label("Security label:")
-            yield Input(max_length=8,id="base_security_label",classes="field-short-generic")
+            yield Input(max_length=8,id="base_security_label",classes="field-short-generic",compact=True)      
 
 class PanelDatasetUACC(VerticalGroup):
     def compose(self) -> ComposeResult:
