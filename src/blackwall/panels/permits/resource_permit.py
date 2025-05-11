@@ -46,7 +46,7 @@ class PanelResourcePermitCreate(HorizontalGroup):
         yield Button(f"{get_emoji("💾")} Save",id="resource_permit_save",action="update")
 
     @on(Input.Submitted)
-    async def action_create(self):
+    async def action_update(self):
         await self.app.run_action(self.update_action,default_namespace=self.parent)
 
 class PanelResourcePermitList(VerticalGroup):
