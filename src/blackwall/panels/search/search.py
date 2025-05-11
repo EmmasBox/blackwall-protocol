@@ -103,8 +103,8 @@ class PanelSearch(VerticalScroll):
     def action_search(self) -> None:
         search_switcher_id = self.query_exactly_one("#search_switcher", ContentSwitcher).current
         if search_switcher_id is not None:
-            search_query = self.get_child_by_id(search_switcher_id).query_exactly_one("#search_field",Input).value
-            search_query_class = self.query_exactly_one("#search_field_class",Input).value
+            search_query = self.query_exactly_one(f"#{search_switcher_id}").query_exactly_one("#search_field",Input).value
+            search_query_class = self.query_exactly_one(f"#{search_switcher_id}").query_exactly_one("#search_field_class",Input).value
         
             if search_switcher_id == "search_any_panel":
                 results = search_database_query_one(query=search_query, class_name=None,query_types=QueryType.all())
