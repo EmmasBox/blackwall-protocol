@@ -20,6 +20,7 @@ from blackwall.panels.search.search_backend import QueryType, search_database_qu
 from blackwall.panels.users.user import PanelUser, UserInfo
 from blackwall.regex import racf_id_regex
 
+
 class PanelSearchUser(VerticalGroup):
     def __init__(self, search_action: str, id: str):  # noqa: A002
         super().__init__()
