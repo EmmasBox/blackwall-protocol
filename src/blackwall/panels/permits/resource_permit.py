@@ -100,7 +100,7 @@ class PanelResourcePermit(VerticalScroll):
         racf_id_field_value = self.get_child_by_type(PanelResourcePermitCreate).get_child_by_id("permit_racf_id",Input).value
 
         if resource.resource_profile_exists(resource=search_profile_field_value,resource_class=search_class_field_value):
-            base_segment = get_traits_from_input("alter", self, prefix="base", trait_cls=permit.BasePermitTraits)
+            base_segment = get_traits_from_input(operator="alter", widget=self, prefix="base", trait_cls=permit.BasePermitTraits)
 
             return_code = permit.update_resource_permit(profile=search_profile_field_value,class_name=search_class_field_value,racf_id=racf_id_field_value,base=base_segment)
 
