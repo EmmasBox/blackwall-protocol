@@ -64,9 +64,9 @@ class PanelUserInstalldata(HorizontalGroup):
 class PanelUserMetaPasswordInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Password change date:",classes="date-labels")
-        yield Input(id="base_password_change_date",disabled=True,classes="date-fields")    
+        yield Input(id="base_password_change_date",disabled=True,classes="date-fields",compact=True)   
         yield Label("Password change interval:",classes="date-labels")
-        yield Input(id="base_password_change_interval",disabled=True,classes="date-fields")  
+        yield Input(id="base_password_change_interval",disabled=True,classes="date-fields",compact=True)  
 
 class PanelUserPassword(VerticalGroup):
     """Change/add password component"""
