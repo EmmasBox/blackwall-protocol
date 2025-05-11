@@ -28,8 +28,6 @@ class PanelUserInfo(HorizontalGroup):
         yield Label("Last access date:",classes="date-labels")
         yield Input(id="base_last_access_date",disabled=True,classes="date-fields")
         yield Label("Revoke date:",classes="date-labels")
-        yield Input(id="base_revoke_date",disabled=True,classes="date-fields")
-        yield RadioButton("Revoked",id="base_revoked",tooltip="Revoked users won't be able to logon, this can happen after too many failed access attempts.",classes="generic-checkbox-small",disabled=True)
         
 
 class PanelUserName(HorizontalGroup):
