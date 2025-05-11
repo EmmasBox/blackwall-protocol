@@ -24,11 +24,11 @@ from ..traits_ui import (
 class PanelUserInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Creation date:",classes="date-labels")
-        yield Input(id="base_create_date",disabled=True,classes="date-fields")
+        yield Input(id="base_create_date",disabled=True,classes="date-fields",compact=True)
         yield Label("Last access date:",classes="date-labels")
-        yield Input(id="base_last_access_date",disabled=True,classes="date-fields")
+        yield Input(id="base_last_access_date",disabled=True,classes="date-fields",compact=True)
         yield Label("Revoke date:",classes="date-labels")
-        yield Input(id="base_revoke_date",disabled=True,classes="date-fields")        
+        yield Input(id="base_revoke_date",disabled=True,classes="date-fields",compact=True)      
 
 class PanelUserName(HorizontalGroup):
     """Username and name components"""
