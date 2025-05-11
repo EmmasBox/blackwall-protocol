@@ -81,10 +81,10 @@ class PanelSearchResource(VerticalGroup):
 
 class PanelSearchSwitcherButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:
-        yield Button(id="search_user_panel",label="User",classes="search-buttons")
-        yield Button(id="search_group_panel",label="Group",classes="search-buttons")
-        yield Button(id="search_dataset_panel",label="Dataset profile",classes="search-buttons")
-        yield Button(id="search_resource_panel",label="Resource profile",classes="search-buttons")
+        yield Button(id="search_user_panel_button",label="User",classes="search-buttons",name="search_user_panel")
+        yield Button(id="search_group_panel_button",label="Group",classes="search-buttons",name="search_group_panel")
+        yield Button(id="search_dataset_panel_button",label="Dataset profile",classes="search-buttons",name="search_dataset_panel")
+        yield Button(id="search_resource_panel_button",label="Resource profile",classes="search-buttons",name="search_resource_panel")
         #yield Button(id="search_keyring_panel",label="Keyring",classes="search-buttons")
 
 class PanelSearch(VerticalScroll):
@@ -97,7 +97,7 @@ class PanelSearch(VerticalScroll):
             yield PanelSearchResource(search_action="search",id="search_resource_panel")
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
-        self.query_one(ContentSwitcher).current = event.button.id  
+        self.query_one(ContentSwitcher).current = event.button.name  
 
     @on(Input.Submitted)
     def action_search(self) -> None:
