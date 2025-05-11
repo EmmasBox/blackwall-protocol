@@ -17,9 +17,9 @@ from blackwall.regex import racf_id_regex
 class PanelDatasetInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Last change date:",classes="date-labels")
-        yield Input(id="base_last_change_date",disabled=True,classes="date-fields")
+        yield Input(id="base_last_change_date",disabled=True,classes="date-fields",compact=True)      
         yield Label("Creation date:",classes="date-labels")
-        yield Input(id="base_create_date",disabled=True,classes="date-fields")
+        yield Input(id="base_create_date",disabled=True,classes="date-fields",compact=True)      
 
 class PanelDatasetName(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -56,11 +56,11 @@ class PanelDatasetSecurityLevelAndCategories(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Collapsible(title="Security level and category"):
             yield Label("Security level")
-            yield Input(max_length=8,id="base_security_level",classes="field-short-generic",compact=True)      
+            yield Input(max_length=8,id="base_security_level",classes="field-short-generic")   
             yield Label("Security category:")
-            yield Input(max_length=8,id="base_security_category",classes="field-short-generic",compact=True)      
+            yield Input(max_length=8,id="base_security_category",classes="field-short-generic")   
             yield Label("Security label:")
-            yield Input(max_length=8,id="base_security_label",classes="field-short-generic",compact=True)      
+            yield Input(max_length=8,id="base_security_label",classes="field-short-generic")    
 
 class PanelDatasetUACC(VerticalGroup):
     def compose(self) -> ComposeResult:
