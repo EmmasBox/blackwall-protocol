@@ -7,7 +7,7 @@ from blackwall.emoji import get_emoji
 from blackwall.messages import OpenTab
 from blackwall.panels.copy.copy import PanelCopy
 from blackwall.panels.errors.history import PanelErrorHistory
-from blackwall.panels.permits.resource_permit import PanelResourcePermit
+from blackwall.panels.permits.permits import PanelResourcePermit
 from blackwall.settings import get_user_setting
 
 from .panels.analysis.analysis import PanelAnalysis
@@ -124,7 +124,7 @@ class TabSystem(HorizontalGroup):
 
     def action_open_resource_permits(self) -> None:
         """Add a new resource permits tab."""
-        self.post_message(OpenTab("Resource permits",PanelResourcePermit()))
+        self.post_message(OpenTab("Permits",PanelResourcePermit()))
 
     def action_open_copy(self) -> None:
         """Add a new copy panel tab."""
