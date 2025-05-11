@@ -106,10 +106,10 @@ class PanelSearch(VerticalScroll):
             search_query = self.get_child_by_id(search_switcher_id).query_exactly_one("#search_field",Input).value
             search_query_class = self.query_exactly_one("#search_field_class",Input).value
         
-            if search_switcher_id == "search_type_any":
+            if search_switcher_id == "search_any_panel":
                 results = search_database_query_one(query=search_query, class_name=None,query_types=QueryType.all())
                 self.post_message(OpenTab("Results",PanelResultsMixedType(results)))
-            elif search_switcher_id == "search_type_user":
+            elif search_switcher_id == "search_user_panel":
                 if user.user_exists(username=search_query):
                     new_user_panel = PanelUser()
 
@@ -176,7 +176,7 @@ class PanelSearch(VerticalScroll):
                     self.notify(f"Found user: {search_query}")
                 else:
                     self.notify(f"User {search_query} couldn't be found")
-            elif search_switcher_id == "search_type_group":
+            elif search_switcher_id == "search_group_panel":
                 if group.group_exists(group=search_query):
                     new_group_panel = PanelGroup()
 
@@ -197,7 +197,7 @@ class PanelSearch(VerticalScroll):
                     self.notify(f"Found group: {search_query}")
                 else:
                     self.notify(f"Group {search_query} couldn't be found")
-            elif search_switcher_id == "search_type_dataset":
+            elif search_switcher_id == "search_dataset_panel":
                 if dataset.dataset_profile_exists(dataset=search_query):
                     new_dataset_panel = PanelDataset()
 
@@ -215,7 +215,7 @@ class PanelSearch(VerticalScroll):
                     self.notify(f"Found dataset profile: {search_query}")
                 else:
                     self.notify(f"Dataset profile {search_query} couldn't be found")
-            elif search_switcher_id == "search_type_resource":
+            elif search_switcher_id == "search_resource_panel":
                 if resource.resource_profile_exists(resource=search_query,resource_class=search_query_class):
                     new_resource_panel = PanelResource()
 
@@ -288,7 +288,7 @@ class PanelSearch(VerticalScroll):
                     self.notify(f"Found resource profile: {search_query}")
                 else:
                     self.notify(f"Resource profile {search_query} couldn't be found")
-            elif search_switcher_id == "search_type_keyring":
+            elif search_switcher_id == "search_keyring_panel":
                 if keyrings.keyring_exists(keyring=search_query,owner=search_query_class):
                     new_keyring_panel = PanelKeyring()
 
