@@ -61,10 +61,18 @@ class PanelUserInstalldata(HorizontalGroup):
         yield Label("Installation data: ")
         yield Input(max_length=255,id="base_installation_data",classes="installation-data",tooltip="Installation data is an optional piece of data you can assign to a user. You can use installation data to describe whatever you want, such as department or what the user is for")
 
+class PanelUserMetaPasswordInfo(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Password change date:",classes="date-labels")
+        yield Input(id="base_password_change_date",disabled=True,classes="date-fields")    
+        yield Label("Password change interval:",classes="date-labels")
+        yield Input(id="base_password_change_interval",disabled=True,classes="date-fields")  
+
 class PanelUserPassword(VerticalGroup):
     """Change/add password component"""
     def compose(self) -> ComposeResult:
-        with Lazy(widget=Collapsible(title="Password")):
+        with Collapsible(title="Password"):
+            yield PanelUserMetaPasswordInfo()
             yield Label("Passwords can only be 8 characters long")
             yield Label("New password:")
             yield Input(max_length=8,id="base_password",classes="password",password=True)
