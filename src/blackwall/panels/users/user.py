@@ -108,7 +108,7 @@ class PanelUserAccess(VerticalGroup):
             yield Label("Security label:")
             yield Input(max_length=8,id="base_security_label",classes="field-short-generic")
             yield Label("UACC:")
-            yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],id="base_universal_access",value="NONE",classes="uacc-select")
+            yield Select([("NONE", "NONE"),("EXECUTE", "EXECUTE"),("READ", "READ"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],id="base_universal_access",value="NONE",classes="uacc-select")
             yield RadioButton(label="Audit logging (UAUDIT)",id="base_audit_logging",classes="generic-checkbox-small")
 
 class PanelUserDatasets(VerticalGroup):
