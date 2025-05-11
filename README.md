@@ -6,7 +6,7 @@ The current version may not be indicative of the quality in future stable releas
 
 [![pypi/v/blackwall](https://badgen.net/pypi/v/blackwall)](https://pypi.org/project/blackwall/) [![pypi/python/blackwall](https://badgen.net/pypi/python/blackwall)](https://pypi.org/project/blackwall/) [![pypi/dm/blackwall](https://badgen.net/pypi/dm/blackwall)](https://pypi.org/project/blackwall/) [![security: bandit](https://img.shields.io/github/actions/workflow/status/EmmasBox/blackwall-protocol/.github%2Fworkflows%2Fbandit.yml?label=Bandit%20Security)](https://github.com/PyCQA/bandit) [![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 
-![Blackwall Banner](blackwall_banner.svg)
+![Blackwall Banner](https://raw.githubusercontent.com/EmmasBox/blackwall-protocol/refs/heads/main/blackwall_banner.svg)
 
 # Blackwall Protocol
 
