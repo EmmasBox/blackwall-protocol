@@ -104,9 +104,9 @@ class PanelResourcePermit(VerticalScroll):
 
             return_code = permit.update_resource_permit(profile=search_profile_field_value,class_name=search_class_field_value,racf_id=racf_id_field_value,base=base_segment)
 
-            self.get_acl(notification=False)
-
             refresh_racf()
+
+            self.get_acl(notification=False)
 
             if return_code == 0:
                 self.notify("Created permit",severity="information")
