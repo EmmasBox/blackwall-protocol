@@ -3,9 +3,9 @@
 
 from textual import on
 from textual.app import ComposeResult
-from textual.containers import HorizontalGroup, VerticalScroll
+from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.suggester import SuggestFromList
-from textual.widgets import Button, Input, Label, RadioButton, RadioSet
+from textual.widgets import Button, ContentSwitcher, Input, Label, RadioButton, RadioSet
 
 from blackwall.api import dataset, group, keyrings, resource, user
 from blackwall.api.setropts import get_active_classes
@@ -18,6 +18,7 @@ from blackwall.panels.resource.resource import PanelResource, ResourceInfo
 from blackwall.panels.search.results import PanelResultsMixedType
 from blackwall.panels.search.search_backend import QueryType, search_database_query_one
 from blackwall.panels.users.user import PanelUser, UserInfo
+from blackwall.regex import racf_id_regex
 
 
 class SearchSelector(HorizontalGroup):
@@ -33,26 +34,81 @@ class SearchSelector(HorizontalGroup):
             yield RadioButton("All",disabled=True)
             yield RadioButton("Only one",value=True)
 
-class SearchField(HorizontalGroup):
-    def __init__(self, search_action: str):
+class PanelSearchUser(VerticalGroup):
+    def __init__(self, search_action: str, id: str):  # noqa: A002
         super().__init__()
+        self.id = id
+        self.search_action = search_action
+
+    def compose(self) -> ComposeResult:
+        yield Label("Search users",classes="copy-label")
+        yield Input(max_length=8,restrict=racf_id_regex,id="search_field",classes="field-short-generic")
+        yield Button(label="Search",action="search")
+
+    async def action_search(self):
+        await self.app.run_action(self.search_action,default_namespace=self.parent)
+
+class PanelSearchGroup(VerticalGroup):
+    def __init__(self, search_action: str, id: str):  # noqa: A002
+        super().__init__()
+        self.id = id
+        self.search_action = search_action
+
+    def compose(self) -> ComposeResult:
+        yield Label("Search for group",classes="Search-label")
+        yield Input(max_length=8,id="search_field",restrict=racf_id_regex,classes="field-short-generic")
+        yield Button(label="Search",action="search")
+
+    async def action_search(self):
+        await self.app.run_action(self.search_action,default_namespace=self.parent)
+
+class PanelSearchDataset(VerticalGroup):
+    def __init__(self, search_action: str, id: str):  # noqa: A002
+        super().__init__()
+        self.id = id
+        self.search_action = search_action
+
+    def compose(self) -> ComposeResult:
+        yield Label("Search for dataset profile",classes="copy-label")
+        yield Input(max_length=255,id="search_field",classes="field-long-generic")
+        yield Button(label="Search",action="search")
+
+    async def action_search(self):
+        await self.app.run_action(self.search_action,default_namespace=self.parent)
+
+class PanelSearchResource(VerticalGroup):
+    def __init__(self, search_action: str, id: str):  # noqa: A002
+        super().__init__()
+        self.id = id
         self.search_action = search_action
 
     active_classes = get_active_classes()
 
     def compose(self) -> ComposeResult:
-        yield Label("Search:")
-        yield Input(name="Class",suggester=SuggestFromList(self.active_classes,case_sensitive=False),max_length=8,id="search_field_class",classes="field-short-generic")
-        yield Input(name="Search",id="search_field",classes="search-field")
-        yield Button("Search",action="search")
+        yield Label("Search for resource profile",classes="copy-label")
+        yield Input(max_length=8,id="search_field_class",suggester=SuggestFromList(self.active_classes,case_sensitive=False),placeholder="class...",classes="field-short-generic")
+        yield Input(max_length=255,placeholder="resource profile...",classes="field-long-generic")
+        yield Button(label="Search",action="search")
 
     async def action_search(self):
         await self.app.run_action(self.search_action,default_namespace=self.parent)
 
+class PanelSearchSwitcherButtons(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield Button(id="search_user_panel",label="User",classes="search-buttons")
+        yield Button(id="search_group_panel",label="Group",classes="search-buttons")
+        yield Button(id="search_dataset_panel",label="Dataset profile",classes="search-buttons")
+        yield Button(id="search_resource_panel",label="Resource profile",classes="search-buttons")
+        #yield Button(id="search_keyring_panel",label="Keyring",classes="search-buttons")
+
 class PanelSearch(VerticalScroll):
     def compose(self) -> ComposeResult:
-        yield SearchSelector()
-        yield SearchField(search_action="search")
+        yield PanelSearchSwitcherButtons()
+        with ContentSwitcher(initial="search_user_panel",classes="search-switcher"):
+            yield PanelSearchUser(search_action="search",id="search_user_panel")
+            yield PanelSearchGroup(search_action="search",id="search_group_panel")
+            yield PanelSearchDataset(search_action="search",id="search_dataset_panel")
+            yield PanelSearchResource(search_action="search",id="search_resource_panel")
 
     @on(Input.Submitted)
     def action_search(self) -> None:

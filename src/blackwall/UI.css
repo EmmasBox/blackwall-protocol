@@ -196,14 +196,8 @@ RefreshScreen {
 }
 
 # Search panel
-.search-field {
-    width: 120;
-    margin-bottom: 1;
-}
-
-.search-selector {
+.search-buttons {
     margin: 1;
-    width: 32;
 }
 
 # Analysis panel
