@@ -5,7 +5,7 @@ from textual.suggester import SuggestFromList
 from textual.widgets import Button, DataTable, Input, Label, Select
 
 from blackwall.api import group, permit, resource
-from blackwall.api.setropts import get_active_classes
+from blackwall.api.setropts import get_active_classes, refresh_racf
 from blackwall.emoji import get_emoji
 from blackwall.notifications import send_notification
 from blackwall.panels.traits_ui import get_traits_from_input
@@ -105,6 +105,8 @@ class PanelResourcePermit(VerticalScroll):
             return_code = permit.update_resource_permit(profile=search_profile_field_value,class_name=search_class_field_value,racf_id=racf_id_field_value,base=base_segment)
 
             self.get_acl(notification=False)
+
+            refresh_racf()
 
             if return_code == 0:
                 self.notify("Created permit",severity="information")
