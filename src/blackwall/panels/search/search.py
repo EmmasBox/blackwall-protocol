@@ -110,6 +110,9 @@ class PanelSearch(VerticalScroll):
             yield PanelSearchDataset(search_action="search",id="search_dataset_panel")
             yield PanelSearchResource(search_action="search",id="search_resource_panel")
 
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        self.query_one(ContentSwitcher).current = event.button.id  
+
     @on(Input.Submitted)
     def action_search(self) -> None:
         search_query = self.get_child_by_type(SearchField).get_child_by_id("search_field",Input).value
