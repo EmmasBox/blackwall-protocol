@@ -65,7 +65,7 @@ class PanelDatasetSecurityLevelAndCategories(VerticalGroup):
 class PanelDatasetUACC(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("UACC:")
-        yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="NONE",classes="uacc-select",id="base_universal_access")
+        yield Select([("NONE", "NONE"),("EXECUTE", "EXECUTE"),("READ", "READ"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="NONE",classes="uacc-select",id="base_universal_access")
 
 class PanelDatasetNotify(VerticalGroup):
     def compose(self) -> ComposeResult:

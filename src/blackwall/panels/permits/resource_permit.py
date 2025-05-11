@@ -5,7 +5,7 @@ from textual.suggester import SuggestFromList
 from textual.widgets import Button, DataTable, Input, Label, Select
 
 from blackwall.api import group, permit, resource
-from blackwall.api.setropts import get_active_classes
+from blackwall.api.setropts import get_active_classes, refresh_racf
 from blackwall.emoji import get_emoji
 from blackwall.notifications import send_notification
 from blackwall.panels.traits_ui import get_traits_from_input
@@ -41,12 +41,12 @@ class PanelResourcePermitCreate(HorizontalGroup):
         self.update_action = update_action
     
     def compose(self) -> ComposeResult:
-        yield Select([("NONE", "NONE"),("READ", "READ"),("EXECUTE", "EXECUTE"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="READ",classes="uacc-select",id="base_access")
+        yield Select([("NONE", "NONE"),("EXECUTE", "EXECUTE"),("READ", "READ"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="READ",classes="uacc-select",id="base_access")
         yield Input(id="permit_racf_id",placeholder="ID...",max_length=8,restrict=racf_id_regex,classes="field-short-generic", tooltip="User ID or group ID you want this permit change to affect")    
         yield Button(f"{get_emoji("💾")} Save",id="resource_permit_save",action="update")
 
     @on(Input.Submitted)
-    async def action_create(self):
+    async def action_update(self):
         await self.app.run_action(self.update_action,default_namespace=self.parent)
 
 class PanelResourcePermitList(VerticalGroup):
@@ -100,9 +100,11 @@ class PanelResourcePermit(VerticalScroll):
         racf_id_field_value = self.get_child_by_type(PanelResourcePermitCreate).get_child_by_id("permit_racf_id",Input).value
 
         if resource.resource_profile_exists(resource=search_profile_field_value,resource_class=search_class_field_value):
-            base_segment = get_traits_from_input("alter", self, prefix="base", trait_cls=permit.BasePermitTraits)
+            base_segment = get_traits_from_input(operator="alter", widget=self, prefix="base", trait_cls=permit.BasePermitTraits)
 
             return_code = permit.update_resource_permit(profile=search_profile_field_value,class_name=search_class_field_value,racf_id=racf_id_field_value,base=base_segment)
+
+            refresh_racf()
 
             self.get_acl(notification=False)
 

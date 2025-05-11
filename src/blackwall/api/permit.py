@@ -15,7 +15,7 @@ else:
 
 @dataclass
 class BasePermitTraits(TraitsBase):
-    access: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
+    access: str | None = field(default=None,metadata={"label": "Data application", "allowed_in": {"alter"}})
     model_profile_class: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
     model_profile: str | None = field(default=None,metadata={"allowed_in": {"alter"}})
     model_profile_generic: bool | None = field(default=None,metadata={"allowed_in": {"alter"}})
@@ -36,16 +36,16 @@ def update_dataset_permit(dataset: str, racf_id: str, base: BasePermitTraits) ->
     if racfu_enabled:
         traits = base.to_traits(prefix="base")
 
-        result = racfu({"operation": "alter", "admin_type": "permission", "data_set": dataset.upper(), "auth_id": racf_id.upper(), "traits":  traits})
-        return result.result["return_codes"]["racf_return_code"] == 0
+        result = racfu({"operation": "alter", "admin_type": "permission", "data_set": dataset.upper(), "userid": racf_id.upper(), "traits":  traits})
+        return result.result["return_codes"]["racf_return_code"]
     else:
         return 8
 
 def delete_dataset_permit(dataset: str, racf_id: str) -> int:
     """Deletes a dataset permit"""
     if racfu_enabled:
-        result = racfu({"operation": "delete", "admin_type": "permission", "data_set": dataset.upper(), "auth_id": racf_id.upper()})
-        return result.result["return_codes"]["racf_return_code"] == 0
+        result = racfu({"operation": "delete", "admin_type": "permission", "data_set": dataset.upper(), "userid": racf_id.upper()})
+        return result.result["return_codes"]["racf_return_code"]
     else:
         return 8
 
@@ -54,15 +54,15 @@ def update_resource_permit(profile: str ,class_name: str, racf_id: str, base: Ba
     if racfu_enabled:
         traits = base.to_traits(prefix="base")
 
-        result = racfu({"operation": "alter", "admin_type": "permission", "profile_name": profile.upper(), "class_name": class_name.upper(), "auth_id": racf_id.upper(), "traits":  traits})
-        return result.result["return_codes"]["racf_return_code"] == 0
+        result = racfu({"operation": "alter", "admin_type": "permission", "resource": profile.upper(), "class": class_name.upper(), "userid": racf_id.upper(), "traits":  traits})
+        return result.result["return_codes"]["racf_return_code"]
     else:
         return 8
 
 def delete_resource_permit(profile: str, class_name: str, racf_id: str) -> int:
     """Deletes a general resource profile permit"""
     if racfu_enabled:
-        result = racfu({"operation": "delete", "admin_type": "permission", "profile_name": profile.upper(), "class_name": class_name.upper(), "auth_id": racf_id.upper()})
-        return result.result["return_codes"]["racf_return_code"] == 0
+        result = racfu({"operation": "delete", "admin_type": "permission", "resource": profile.upper(), "class": class_name.upper(), "userid": racf_id.upper()})
+        return result.result["return_codes"]["racf_return_code"]
     else:
         return 8
