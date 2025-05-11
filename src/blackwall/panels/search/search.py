@@ -216,7 +216,7 @@ class PanelSearch(VerticalScroll):
                     self.notify(f"Dataset profile {search_query} couldn't be found")
             elif search_switcher_id == "search_resource_panel":
                 search_query_class = self.query_exactly_one(f"#{search_switcher_id}").query_exactly_one("#search_field_class",Input).value
-                
+
                 if resource.resource_profile_exists(resource=search_query,resource_class=search_query_class):
                     new_resource_panel = PanelResource()
 
@@ -290,18 +290,18 @@ class PanelSearch(VerticalScroll):
                 else:
                     self.notify(f"Resource profile {search_query} couldn't be found")
             elif search_switcher_id == "search_keyring_panel":
-                search_query_class = self.query_exactly_one(f"#{search_switcher_id}").query_exactly_one("#search_field_class",Input).value
+                search_query_keyring_owner = self.query_exactly_one(f"#{search_switcher_id}").query_exactly_one("#search_field_keyring_owner",Input).value
 
-                if keyrings.keyring_exists(keyring=search_query,owner=search_query_class):
+                if keyrings.keyring_exists(keyring=search_query,owner=search_query_keyring_owner):
                     new_keyring_panel = PanelKeyring()
 
-                    key_dict = keyrings.get_keyring(keyring=search_query,owner=search_query_class)
+                    key_dict = keyrings.get_keyring(keyring=search_query,owner=search_query_keyring_owner)
 
                     keyring_traits = keyrings.KeyringTraits.from_dict(prefix=None,source=key_dict)
 
                     new_keyring_panel.keyring_info = KeyringInfo(
                         keyring_name=search_query,
-                        keyring_owner=search_query_class,
+                        keyring_owner=search_query_keyring_owner,
                         keyring_traits=keyring_traits,
                     )
 
