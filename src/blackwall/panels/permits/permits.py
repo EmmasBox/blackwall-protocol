@@ -55,10 +55,6 @@ class PanelResourcePermitCreate(HorizontalGroup):
         await self.app.run_action(self.update_action,default_namespace=self.parent)
 
 class PanelResourcePermitsList(VerticalGroup):
-    def __init__(self, delete_action: str):
-        super().__init__()
-        self.delete_action = delete_action
-
     def compose(self) -> ComposeResult:
         yield Label("Current permits:",classes="label-generic")
         yield DataTable(id="resource_permits_table")
@@ -69,16 +65,12 @@ class PanelResourcePermitsList(VerticalGroup):
         permit_table.add_columns(*PERMIT_RESOURCE_COLUMNS[0]) 
         permit_table.cursor_type = "row"
 
-    @on(Input.Submitted)
-    async def action_delete(self):
-        await self.app.run_action(self.delete_action,default_namespace=self.parent)
-
 class PanelPermitsResource(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield PanelResourcePermitInfo()
         yield PanelResourcePermitSearchField(search_action="search_resource_profile")
         yield PanelResourcePermitCreate(update_action="resource_permit_update")
-        yield PanelResourcePermitsList(delete_action="")
+        yield PanelResourcePermitsList()
 
     def get_resource_profile_acl(self, notification: bool) -> None:
         search_profile_field_value = self.get_child_by_type(PanelResourcePermitSearchField).query_exactly_one("#search_permit_resource_profile",Input).value
@@ -126,6 +118,11 @@ class PanelPermitsResource(VerticalGroup):
                 self.notify("Created permit",severity="information")
             else:
                 send_notification(self,message=f"Couldn't create permit, return code: {return_code}",severity="error")
+
+    def key_del(self) -> None:
+        datatable = self.query_exactly_one("#resource_permits_table", DataTable)
+        current_row = datatable.cursor_coordinate
+        self.notify("test")
 
 class PanelDatasetPermitInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
