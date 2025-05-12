@@ -66,7 +66,7 @@ class PanelPermitsResource(VerticalGroup):
         yield PanelResourcePermitCreate(update_action="update")
         yield PanelPermitsList()
 
-class PanelPermitsSwitcherButtons(VerticalGroup):
+class PanelPermitsSwitcherButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Button(id="permit_resource_panel_button",label="Resource profile",classes="search-buttons",name="permit_resource_panel")
         yield Button(id="permit_dataset_panel_button",label="Dataset profile",classes="search-buttons",name="permit_dataset_panel")
