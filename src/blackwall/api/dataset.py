@@ -101,7 +101,10 @@ def get_dataset_acl(dataset: str) -> list[dict]:
     if racfu_enabled:
         """Returns a list of active classes on the system"""
         result = racfu({"operation": "extract", "admin_type": "data-set", "data_set": dataset.upper()}) # type: ignore
-        return result.result["profile"]["base"]["base:access_list"] # type: ignore
+        if "base:access_list" in result.result["profile"]["base"]["base:access_list"]:
+            return result.result["profile"]["base"]["base:access_list"] # type: ignore
+        else:
+            return []
     else:
         return []
 
