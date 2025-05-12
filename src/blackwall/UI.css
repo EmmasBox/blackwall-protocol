@@ -202,7 +202,7 @@ RefreshScreen {
 
 .search-switcher {
     border: panel $primary;
-    width: 90%;
+    width: 95%;
     height: 1fr;
 }
 
@@ -213,7 +213,7 @@ RefreshScreen {
 # Permit panel
 .permit-switcher {
     border: panel $primary;
-    width: 90%;
+    width: 95%;
     height: 1fr;
 }
 
@@ -264,7 +264,7 @@ ToggleButton.-on > .toggle--button {
 
 .copy-switcher {
     border: panel $primary;
-    width: 90%;
+    width: 95%;
     height: 1fr;
 }
 
