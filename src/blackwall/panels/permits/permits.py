@@ -11,7 +11,7 @@ from blackwall.notifications import send_notification
 from blackwall.panels.traits_ui import get_traits_from_input
 from blackwall.regex import racf_id_regex
 
-PERMIT_COLUMNS = [
+PERMIT_RESOURCE_COLUMNS = [
     ("ID", "Type", "Access"),
 ]
 
@@ -76,7 +76,7 @@ class PanelResourcePermitsList(VerticalGroup):
     def on_mount(self) -> None:
         permit_table = self.get_child_by_id("resource_permits_table",DataTable)
         permit_table.zebra_stripes = True
-        permit_table.add_columns(*PERMIT_COLUMNS[0]) 
+        permit_table.add_columns(*PERMIT_RESOURCE_COLUMNS[0]) 
 
 class PanelPermitsResource(VerticalGroup):
     def compose(self) -> ComposeResult:
