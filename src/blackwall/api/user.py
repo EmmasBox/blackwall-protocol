@@ -218,6 +218,17 @@ def get_user(username: str) -> dict[str, Any]:
         return result.result
     else:
         return False
+    
+def get_installation_data(username: str) -> str:
+    """Gets the installation data of a user"""
+    if racfu_enabled:
+        result = racfu({"operation": "extract", "admin_type": "user", "userid": username.upper()})
+        if "base:installation_data" in result.result["profile"]["base"]:
+            return result.result["profile"]["base"]["base:installation_data"] # type: ignore
+        else:
+            return ""
+    else:
+        return ""
 
 @dataclass
 class UserObject:
