@@ -1,5 +1,6 @@
 from textual import on
 from textual.app import ComposeResult
+from textual.binding import Binding
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.suggester import SuggestFromList
 from textual.widgets import Button, ContentSwitcher, DataTable, Input, Label, Select
@@ -55,6 +56,10 @@ class PanelResourcePermitCreate(HorizontalGroup):
         await self.app.run_action(self.update_action,default_namespace=self.parent)
 
 class PanelResourcePermitsList(VerticalGroup):
+    BINDINGS = [
+        Binding(key="delete",description="Deletes a permit",action=""),
+    ]
+
     def compose(self) -> ComposeResult:
         yield Label("Current permits:",classes="label-generic")
         yield DataTable(id="resource_permits_table")
@@ -173,6 +178,10 @@ class PanelDatasetPermitCreate(HorizontalGroup):
         await self.app.run_action(self.update_action,default_namespace=self.parent)
 
 class PanelDatasetPermitsList(VerticalGroup):
+    BINDINGS = [
+        Binding(key="delete",description="Deletes a permit",action=""),
+    ]
+
     def compose(self) -> ComposeResult:
         yield Label("Current permits:",classes="label-generic")
         yield DataTable(id="dataset_permits_table")
