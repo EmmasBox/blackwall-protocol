@@ -5,7 +5,7 @@ from textual import on
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.suggester import SuggestFromList
-from textual.widgets import Button, ContentSwitcher, Input, Label, RadioButton, RadioSet
+from textual.widgets import Button, ContentSwitcher, Input, Label
 
 from blackwall.api import dataset, group, keyrings, resource, user
 from blackwall.api.setropts import get_active_classes
