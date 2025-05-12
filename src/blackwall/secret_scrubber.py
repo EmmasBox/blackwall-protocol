@@ -7,7 +7,7 @@ secrets = [
     "BINDPW",
 ]
 
-redact_message = ">REDACTED SECRET"
+redact_message = "[REDACTED SECRET]"
 
 def remove_secret(string_input: str) -> str:
     """Scrubs passwords and passphrases from commands"""
