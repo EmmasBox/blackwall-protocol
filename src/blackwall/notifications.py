@@ -9,4 +9,4 @@ def send_notification(self,message: str, severity: SeverityLevel):
     if get_user_setting(section="notifications",setting="use_modal"):
         generic_warning_modal(self,modal_text=message)
     else:
-        self.notify(message,severity=severity)
+        self.notify(message,severity=severity,markup=False)
