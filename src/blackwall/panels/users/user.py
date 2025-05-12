@@ -3,7 +3,6 @@ from dataclasses import dataclass
 
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
-from textual.lazy import Lazy
 from textual.reactive import reactive
 from textual.widgets import Button, Collapsible, Input, Label, RadioButton, Select
 
@@ -79,10 +78,18 @@ class PanelUserPassword(VerticalGroup):
             yield Label("New password:")
             yield Input(max_length=8,id="base_password",classes="password",password=True)
 
+class PanelUserMetaPassphraseInfo(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Passphrase change date:",classes="date-labels")
+        yield Input(id="base_passphrase_change_date",disabled=True,classes="date-fields",compact=True)   
+        yield Label("Passphrase change interval:",classes="date-labels")
+        yield Input(id="base_passphrase_change_interval",disabled=True,classes="date-fields",compact=True)  
+
 class PanelUserPassphrase(VerticalGroup):
     """Change/add passphrase component"""
     def compose(self) -> ComposeResult:
-        with Lazy(widget=Collapsible(title="Passphrase")):
+        with Collapsible(title="Passphrase"):
+            yield PanelUserMetaPassphraseInfo()
             yield Label("Passphrases need to be between 12 and 100 characaters long")
             yield Label("New passphrase:")
             yield Input(max_length=100,id="base_passphrase",classes="passphrase",password=True)
