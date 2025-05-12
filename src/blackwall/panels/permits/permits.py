@@ -4,7 +4,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.suggester import SuggestFromList
 from textual.widgets import Button, ContentSwitcher, DataTable, Input, Label, Select
 
-from blackwall.api import group, permit, resource
+from blackwall.api import dataset, group, permit, resource
 from blackwall.api.setropts import get_active_classes, refresh_racf
 from blackwall.emoji import get_emoji
 from blackwall.notifications import send_notification
@@ -14,6 +14,11 @@ from blackwall.regex import racf_id_regex
 PERMIT_RESOURCE_COLUMNS = [
     ("ID", "Type", "Access"),
 ]
+
+PERMIT_DATASET_COLUMNS = [
+    ("ID", "Type", "Access"),
+]
+
 
 class PanelResourcePermitInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
@@ -48,25 +53,6 @@ class PanelResourcePermitCreate(HorizontalGroup):
     @on(Input.Submitted)
     async def action_update(self):
         await self.app.run_action(self.update_action,default_namespace=self.parent)
-
-class PanelDatasetPermitInfo(HorizontalGroup):
-    def compose(self) -> ComposeResult:
-        yield Label("Use this panel to create, delete, and update permits for dataset profiles",classes="label-generic")
-
-class PanelDatasetPermitSearchField(HorizontalGroup):
-    def __init__(self, search_action: str):
-        super().__init__()
-        self.search_action = search_action
-
-    active_classes = get_active_classes()
-
-    def compose(self) -> ComposeResult:
-        yield Input(id="search_permit_dataset_profile",placeholder="profile name...",classes="search-field")    
-        yield Button(label="Get ACL",id="search_permit_button",action="search_dataset_profile")
-
-    @on(Input.Submitted)
-    async def action_search(self):
-        await self.app.run_action(self.search_action,default_namespace=self.parent)
 
 class PanelResourcePermitsList(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -132,10 +118,66 @@ class PanelPermitsResource(VerticalGroup):
             else:
                 send_notification(self,message=f"Couldn't create permit, return code: {return_code}",severity="error")
 
+class PanelDatasetPermitInfo(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Use this panel to create, delete, and update permits for dataset profiles",classes="label-generic")
+
+class PanelDatasetPermitSearchField(HorizontalGroup):
+    def __init__(self, search_action: str):
+        super().__init__()
+        self.search_action = search_action
+
+    active_classes = get_active_classes()
+
+    def compose(self) -> ComposeResult:
+        yield Input(id="search_permit_dataset_profile",placeholder="profile name...",classes="search-field")    
+        yield Button(label="Get ACL",id="search_dataset_permit_button",action="search_dataset_profile")
+
+    @on(Input.Submitted)
+    async def action_search(self):
+        await self.app.run_action(self.search_action,default_namespace=self.parent)
+
+class PanelDatasetPermitsList(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Current permits:",classes="label-generic")
+        yield DataTable(id="dataset_permits_table")
+
+    def on_mount(self) -> None:
+        permit_table = self.get_child_by_id("dataset_permits_table",DataTable)
+        permit_table.zebra_stripes = True
+        permit_table.add_columns(*PERMIT_DATASET_COLUMNS[0]) 
+
 class PanelPermitsDataset(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield PanelDatasetPermitInfo()
-        yield PanelDatasetPermitSearchField(search_action="")
+        yield PanelDatasetPermitSearchField(search_action="search_dataset_profile")
+        yield PanelDatasetPermitsList()
+
+    def get_dataset_profile_acl(self, notification: bool) -> None:
+        search_profile_field_value = self.get_child_by_type(PanelDatasetPermitSearchField).query_exactly_one("#search_permit_dataset_profile",Input).value
+        permit_table = self.get_child_by_type(PanelDatasetPermitsList).get_child_by_id("dataset_permits_table",DataTable)
+        
+        if dataset.dataset_profile_exists(dataset=search_profile_field_value):
+            resource_acl = dataset.get_dataset_acl(dataset=search_profile_field_value)
+            permit_table.clear(columns=False)
+
+            for entry in resource_acl:
+                entry_id = entry["base:access_id"]
+                entry_access = entry["base:access_type"]
+
+                #Checks if the entry is a user or group
+                id_type = "group" if group.group_exists(entry_id) else "user"
+                
+                #Adds the entry to the datatable
+                permit_table.add_row(entry_id,id_type,entry_access)
+            if notification:
+                self.notify(f"Found dataset profile {search_profile_field_value}",markup=False,severity="information")
+        else:
+            if notification:
+                self.notify(f"Couldn't find dataset profile {search_profile_field_value}",markup=False,severity="error")
+
+    def action_search_dataset_profile(self) -> None:
+        self.get_dataset_profile_acl(notification=True)
 
 class PanelPermitsSwitcherButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:
