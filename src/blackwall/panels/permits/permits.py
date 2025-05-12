@@ -130,11 +130,11 @@ class PanelPermitsResource(VerticalGroup):
 
             return_code = permit.delete_resource_permit(class_name=search_class_field_value,profile=search_profile_field_value,racf_id=cell_info)
         
-            refresh_racf()
-
-            self.get_resource_profile_acl(notification=False)
-
             if return_code == 0:
+                refresh_racf()
+
+                self.get_resource_profile_acl(notification=False)
+
                 self.notify("Permit deleted")
             else:
                 send_notification(self,message=f"Couldn't delete permit, return code: {return_code}",severity="error")
