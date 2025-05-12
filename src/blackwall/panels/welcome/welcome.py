@@ -11,6 +11,7 @@ from blackwall.messages import OpenTab
 from blackwall.panels.analysis.analysis import PanelAnalysis
 from blackwall.panels.dataset.dataset import PanelDataset
 from blackwall.panels.group.group import PanelGroup
+from blackwall.panels.permits.permits import PanelPermits
 from blackwall.panels.resource.resource import PanelResource
 from blackwall.panels.search.search import PanelSearch
 from blackwall.panels.setropts.setropts import PanelSetropts
@@ -52,6 +53,7 @@ class PanelWelcomeActions(VerticalGroup):
         yield Button("Create group", classes="welcome-suggestion-button",action="create_group")
         yield Button("Create dataset profile", classes="welcome-suggestion-button",action="create_dataset")
         yield Button("Create general resource profile", classes="welcome-suggestion-button",action="create_resource")
+        yield Button("Create permit", classes="welcome-suggestion-button",action="create_permit")
         yield Button("View system options", classes="welcome-suggestion-button",action="view_options")
         #yield Button("Analyse system health", classes="welcome-suggestion-button",action="create_analysis")
 
@@ -69,6 +71,9 @@ class PanelWelcomeActions(VerticalGroup):
 
     async def action_create_resource(self):
         self.post_message(OpenTab(title="Create resource profile",content=PanelResource()))
+
+    async def action_create_permit(self):
+        self.post_message(OpenTab(title="Permit",content=PanelPermits()))
 
     async def action_view_options(self):
         self.post_message(OpenTab(title="RACF options",content=PanelSetropts()))
