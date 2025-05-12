@@ -28,7 +28,9 @@ class PanelUserInfo(HorizontalGroup):
         yield Label("Last access date:",classes="date-labels")
         yield Input(id="base_last_access_date",disabled=True,classes="date-fields",compact=True)
         yield Label("Revoke date:",classes="date-labels")
-        yield Input(id="base_revoke_date",disabled=True,classes="date-fields",compact=True)      
+        yield Input(id="base_revoke_date",disabled=True,classes="date-fields",compact=True)    
+        yield Label("Protected:",classes="date-labels")
+        yield Input(id="base_protected",disabled=True,classes="date-fields",compact=True)     
 
 class PanelUserName(HorizontalGroup):
     """Username and name components"""
