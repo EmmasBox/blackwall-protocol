@@ -2,7 +2,7 @@ from textual import on
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.suggester import SuggestFromList
-from textual.widgets import Button, DataTable, Input, Label, Select
+from textual.widgets import Button, ContentSwitcher, DataTable, Input, Label, Select
 
 from blackwall.api import group, permit, resource
 from blackwall.api.setropts import get_active_classes, refresh_racf
@@ -27,9 +27,9 @@ class PanelResourcePermitSearchField(HorizontalGroup):
     active_classes = get_active_classes()
 
     def compose(self) -> ComposeResult:
-        yield Input(id="search_permit_class",suggester=SuggestFromList(self.active_classes,case_sensitive=False),placeholder="class...",classes="field-short-generic")
-        yield Input(id="search_permit_profile",placeholder="profile name...",classes="search-field")    
-        yield Button(label="Get ACL",id="search_permit_button",action="search")
+        yield Input(id="search_permit_resource_class",suggester=SuggestFromList(self.active_classes,case_sensitive=False),placeholder="class...",classes="field-short-generic")
+        yield Input(id="search_permit_resource_profile",placeholder="profile name...",classes="search-field")    
+        yield Button(label="Get ACL",id="search_permit_button",action="search_resource_profile")
 
     @on(Input.Submitted)
     async def action_search(self):
@@ -59,16 +59,29 @@ class PanelPermitsList(VerticalGroup):
         permit_table.zebra_stripes = True
         permit_table.add_columns(*PERMIT_COLUMNS[0]) 
 
-class PanelPermits(VerticalScroll):
+class PanelPermitsResource(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield PanelResourcePermitInfo()
         yield PanelResourcePermitSearchField(search_action="search")
         yield PanelResourcePermitCreate(update_action="update")
         yield PanelPermitsList()
 
-    def get_acl(self, notification: bool) -> None:
-        search_profile_field_value = self.get_child_by_type(PanelResourcePermitSearchField).get_child_by_id("search_permit_profile",Input).value
-        search_class_field_value = self.get_child_by_type(PanelResourcePermitSearchField).get_child_by_id("search_permit_class",Input).value
+class PanelPermitsSwitcherButtons(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield Button(id="permit_resource_panel_button",label="Resource profile",classes="search-buttons",name="permit_resource_panel")
+        yield Button(id="permit_dataset_panel_button",label="Dataset profile",classes="search-buttons",name="permit_dataset_panel")
+
+class PanelPermits(VerticalScroll):
+    def compose(self) -> ComposeResult:
+        with ContentSwitcher(initial="permit_resource_panel",id="permit_switcher",classes="permit-switcher"):
+            yield PanelPermitsResource(id="permit_resource_panel")
+
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        self.query_one(ContentSwitcher).current = event.button.name  
+
+    def get_resource_profile_acl(self, notification: bool) -> None:
+        search_profile_field_value = self.get_child_by_type(PanelPermitsResource).query_exactly_one("#search_permit_resource_profile",Input).value
+        search_class_field_value = self.get_child_by_type(PanelPermitsResource).query_exactly_one("#search_permit_resource_class",Input).value
         permit_table = self.get_child_by_type(PanelPermitsList).get_child_by_id("resource_permits_table",DataTable)
         
         if resource.resource_profile_exists(resource=search_profile_field_value,resource_class=search_class_field_value):
@@ -90,12 +103,12 @@ class PanelPermits(VerticalScroll):
             if notification:
                 self.notify(f"Couldn't find profile {search_profile_field_value} in class {search_class_field_value}",severity="error")
 
-    def action_search(self) -> None:
-        self.get_acl(notification=True)
+    def action_search_resource_profile(self) -> None:
+        self.get_resource_profile_acl(notification=True)
 
-    def action_update(self) -> None:
-        search_profile_field_value = self.get_child_by_type(PanelResourcePermitSearchField).get_child_by_id("search_permit_profile",Input).value
-        search_class_field_value = self.get_child_by_type(PanelResourcePermitSearchField).get_child_by_id("search_permit_class",Input).value
+    def action_resource_permit_update(self) -> None:
+        search_profile_field_value = self.get_child_by_type(PanelPermitsResource).query_exactly_one("#search_permit_resource_profile",Input).value
+        search_class_field_value = self.get_child_by_type(PanelPermitsResource).query_exactly_one("#search_permit_resource_class",Input).value
 
         racf_id_field_value = self.get_child_by_type(PanelResourcePermitCreate).get_child_by_id("permit_racf_id",Input).value
 
@@ -106,7 +119,7 @@ class PanelPermits(VerticalScroll):
 
             refresh_racf()
 
-            self.get_acl(notification=False)
+            self.get_resource_profile_acl(notification=False)
 
             if return_code == 0:
                 self.notify("Created permit",severity="information")
