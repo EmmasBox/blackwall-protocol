@@ -119,10 +119,21 @@ class PanelPermitsResource(VerticalGroup):
                 send_notification(self,message=f"Couldn't create permit, return code: {return_code}",severity="error")
 
     def key_delete(self) -> None:
+        search_profile_field_value = self.get_child_by_type(PanelResourcePermitSearchField).query_exactly_one("#search_permit_resource_profile",Input).value
+        search_class_field_value = self.get_child_by_type(PanelResourcePermitSearchField).query_exactly_one("#search_permit_resource_class",Input).value
+
         datatable = self.query_exactly_one("#resource_permits_table", DataTable)
-        current_row = datatable.cursor_coordinate
-        cells = datatable.get_cell_at(current_row)
-        self.notify(cells)
+        column_index = datatable.cursor_column
+        if column_index == 0:
+            current_row = datatable.cursor_coordinate
+            cell_info = datatable.get_cell_at(current_row)
+
+            return_code = permit.delete_resource_permit(class_name=search_class_field_value,profile=search_profile_field_value,racf_id=cell_info)
+
+            if return_code == 0:
+                self.notify("Permit deleted")
+            else:
+                send_notification(self,message=f"Couldn't delete permit, return code: {return_code}",severity="error")
 
 class PanelDatasetPermitInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
