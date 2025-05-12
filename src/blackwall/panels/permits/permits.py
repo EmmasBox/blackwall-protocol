@@ -63,7 +63,6 @@ class PanelResourcePermitsList(VerticalGroup):
         permit_table = self.get_child_by_id("resource_permits_table",DataTable)
         permit_table.zebra_stripes = True
         permit_table.add_columns(*PERMIT_RESOURCE_COLUMNS[0]) 
-        permit_table.cursor_type = "row"
 
 class PanelPermitsResource(VerticalGroup):
     def compose(self) -> ComposeResult:
@@ -167,7 +166,6 @@ class PanelDatasetPermitsList(VerticalGroup):
         permit_table = self.get_child_by_id("dataset_permits_table",DataTable)
         permit_table.zebra_stripes = True
         permit_table.add_columns(*PERMIT_DATASET_COLUMNS[0]) 
-        permit_table.cursor_type = "row"
 
 class PanelPermitsDataset(VerticalGroup):
     def compose(self) -> ComposeResult:
