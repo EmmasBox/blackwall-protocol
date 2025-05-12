@@ -91,6 +91,15 @@ class PanelPermitsResource(VerticalGroup):
         yield PanelResourcePermitCreate(update_action="resource_permit_update")
         yield PanelPermitsList()
 
+    @on(Input.Submitted)
+    async def action_search(self):
+        await self.app.run_action(self.search_action,default_namespace=self.parent)
+
+    @on(Input.Submitted)
+    async def action_update(self):
+        await self.app.run_action(self.update_action,default_namespace=self.parent)
+
+
 class PanelPermitsDataset(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield PanelDatasetPermitInfo()
