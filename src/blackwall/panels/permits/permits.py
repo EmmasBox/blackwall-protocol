@@ -61,7 +61,7 @@ class PanelResourcePermitsList(VerticalGroup):
     ]
 
     def compose(self) -> ComposeResult:
-        yield Label("Current permits:",classes="label-generic")
+        yield Label("Access list:",classes="label-generic")
         yield DataTable(id="resource_permits_table")
 
     def on_mount(self) -> None:
@@ -183,7 +183,7 @@ class PanelDatasetPermitsList(VerticalGroup):
     ]
 
     def compose(self) -> ComposeResult:
-        yield Label("Current permits:",classes="label-generic")
+        yield Label("Access list:",classes="label-generic")
         yield DataTable(id="dataset_permits_table")
 
     def on_mount(self) -> None:
