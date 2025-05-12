@@ -79,6 +79,12 @@ class PanelPermitsList(VerticalGroup):
         permit_table.add_columns(*PERMIT_COLUMNS[0]) 
 
 class PanelPermitsResource(VerticalGroup):
+    def __init__(self, search_action: str, update_action: str, id: str):  # noqa: A002
+        super().__init__()
+        self.id = id
+        self.search_action = search_action
+        self.update_action = update_action
+
     def compose(self) -> ComposeResult:
         yield PanelResourcePermitInfo()
         yield PanelResourcePermitSearchField(search_action="search_resource_profile")
@@ -99,7 +105,7 @@ class PanelPermits(VerticalScroll):
     def compose(self) -> ComposeResult:
         yield PanelPermitsSwitcherButtons()
         with ContentSwitcher(initial="permit_resource_panel",id="permit_switcher",classes="permit-switcher"):
-            yield PanelPermitsResource(id="permit_resource_panel")
+            yield PanelPermitsResource(id="permit_resource_panel",search_action="search_resource_profile",update_action="resource_permit_update")
             yield PanelPermitsDataset(id="permit_dataset_panel")
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
