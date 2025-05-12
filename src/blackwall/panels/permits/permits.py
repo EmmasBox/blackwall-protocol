@@ -137,6 +137,20 @@ class PanelDatasetPermitSearchField(HorizontalGroup):
     async def action_search(self):
         await self.app.run_action(self.search_action,default_namespace=self.parent)
 
+class PanelDatasetPermitCreate(HorizontalGroup):
+    def __init__(self, update_action: str):
+        super().__init__()
+        self.update_action = update_action
+    
+    def compose(self) -> ComposeResult:
+        yield Select([("NONE", "NONE"),("EXECUTE", "EXECUTE"),("READ", "READ"),("UPDATE", "UPDATE"),("CONTROL", "CONTROL"),("ALTER", "ALTER")],value="READ",classes="uacc-select",id="base_access")
+        yield Input(id="permit_racf_id",placeholder="ID...",max_length=8,restrict=racf_id_regex,classes="field-short-generic", tooltip="User ID or group ID you want this permit change to affect")    
+        yield Button(f"{get_emoji("💾")} Save",id="resource_permit_save",action="update")
+
+    @on(Input.Submitted)
+    async def action_update(self):
+        await self.app.run_action(self.update_action,default_namespace=self.parent)
+
 class PanelDatasetPermitsList(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Current permits:",classes="label-generic")
@@ -151,6 +165,7 @@ class PanelPermitsDataset(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield PanelDatasetPermitInfo()
         yield PanelDatasetPermitSearchField(search_action="search_dataset_profile")
+        yield PanelDatasetPermitCreate(update_action="dataset_permit_update")
         yield PanelDatasetPermitsList()
 
     def get_dataset_profile_acl(self, notification: bool) -> None:
@@ -178,6 +193,25 @@ class PanelPermitsDataset(VerticalGroup):
 
     def action_search_dataset_profile(self) -> None:
         self.get_dataset_profile_acl(notification=True)
+
+    def action_dataset_permit_update(self) -> None:
+        search_profile_field_value = self.get_child_by_type(PanelDatasetPermitSearchField).query_exactly_one("#search_permit_dataset_profile",Input).value
+
+        racf_id_field_value = self.get_child_by_type(PanelDatasetPermitCreate).get_child_by_id("permit_racf_id",Input).value
+
+        if dataset.dataset_profile_exists(dataset=search_profile_field_value):
+            base_segment = get_traits_from_input(operator="alter", widget=self, prefix="base", trait_cls=permit.BasePermitTraits)
+
+            return_code = permit.update_dataset_permit(dataset=search_profile_field_value,racf_id=racf_id_field_value,base=base_segment)
+
+            refresh_racf()
+
+            self.get_dataset_profile_acl(notification=False)
+
+            if return_code == 0:
+                self.notify("Created permit",severity="information")
+            else:
+                send_notification(self,message=f"Couldn't create permit, return code: {return_code}",severity="error")
 
 class PanelPermitsSwitcherButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:
