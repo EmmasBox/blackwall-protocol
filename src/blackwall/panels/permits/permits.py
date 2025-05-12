@@ -73,6 +73,7 @@ class PanelPermitsSwitcherButtons(VerticalGroup):
 
 class PanelPermits(VerticalScroll):
     def compose(self) -> ComposeResult:
+        yield PanelPermitsSwitcherButtons()
         with ContentSwitcher(initial="permit_resource_panel",id="permit_switcher",classes="permit-switcher"):
             yield PanelPermitsResource(id="permit_resource_panel")
 
