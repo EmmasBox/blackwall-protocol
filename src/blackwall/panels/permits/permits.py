@@ -68,7 +68,7 @@ class PanelDatasetPermitSearchField(HorizontalGroup):
     async def action_search(self):
         await self.app.run_action(self.search_action,default_namespace=self.parent)
 
-class PanelPermitsList(VerticalGroup):
+class PanelResourcePermitsList(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Current permits:",classes="label-generic")
         yield DataTable(id="resource_permits_table")
@@ -79,51 +79,16 @@ class PanelPermitsList(VerticalGroup):
         permit_table.add_columns(*PERMIT_COLUMNS[0]) 
 
 class PanelPermitsResource(VerticalGroup):
-    def __init__(self, search_action: str, update_action: str, id: str):  # noqa: A002
-        super().__init__()
-        self.id = id
-        self.search_action = search_action
-        self.update_action = update_action
-
     def compose(self) -> ComposeResult:
         yield PanelResourcePermitInfo()
         yield PanelResourcePermitSearchField(search_action="search_resource_profile")
         yield PanelResourcePermitCreate(update_action="resource_permit_update")
-        yield PanelPermitsList()
-
-    @on(Input.Submitted)
-    async def action_search(self):
-        await self.app.run_action(self.search_action,default_namespace=self.parent)
-
-    @on(Input.Submitted)
-    async def action_update(self):
-        await self.app.run_action(self.update_action,default_namespace=self.parent)
-
-
-class PanelPermitsDataset(VerticalGroup):
-    def compose(self) -> ComposeResult:
-        yield PanelDatasetPermitInfo()
-        yield PanelDatasetPermitSearchField(search_action="")
-
-class PanelPermitsSwitcherButtons(HorizontalGroup):
-    def compose(self) -> ComposeResult:
-        yield Button(id="permit_resource_panel_button",label="Resource profile",classes="search-buttons",name="permit_resource_panel")
-        yield Button(id="permit_dataset_panel_button",label="Dataset profile",classes="search-buttons",name="permit_dataset_panel")
-
-class PanelPermits(VerticalScroll):
-    def compose(self) -> ComposeResult:
-        yield PanelPermitsSwitcherButtons()
-        with ContentSwitcher(initial="permit_resource_panel",id="permit_switcher",classes="permit-switcher"):
-            yield PanelPermitsResource(id="permit_resource_panel",search_action="search_resource_profile",update_action="resource_permit_update")
-            yield PanelPermitsDataset(id="permit_dataset_panel")
-
-    def on_button_pressed(self, event: Button.Pressed) -> None:
-        self.query_one(ContentSwitcher).current = event.button.name  
+        yield PanelResourcePermitsList()
 
     def get_resource_profile_acl(self, notification: bool) -> None:
-        search_profile_field_value = self.get_child_by_type(PanelPermitsResource).query_exactly_one("#search_permit_resource_profile",Input).value
-        search_class_field_value = self.get_child_by_type(PanelPermitsResource).query_exactly_one("#search_permit_resource_class",Input).value
-        permit_table = self.get_child_by_type(PanelPermitsList).get_child_by_id("resource_permits_table",DataTable)
+        search_profile_field_value = self.get_child_by_type(PanelResourcePermitSearchField).query_exactly_one("#search_permit_resource_profile",Input).value
+        search_class_field_value = self.get_child_by_type(PanelResourcePermitSearchField).query_exactly_one("#search_permit_resource_class",Input).value
+        permit_table = self.get_child_by_type(PanelResourcePermitsList).get_child_by_id("resource_permits_table",DataTable)
         
         if resource.resource_profile_exists(resource=search_profile_field_value,resource_class=search_class_field_value):
             resource_acl = resource.get_resource_acl(resource=search_profile_field_value,resource_class=search_class_field_value)
@@ -148,8 +113,8 @@ class PanelPermits(VerticalScroll):
         self.get_resource_profile_acl(notification=True)
 
     def action_resource_permit_update(self) -> None:
-        search_profile_field_value = self.get_child_by_type(PanelPermitsResource).query_exactly_one("#search_permit_resource_profile",Input).value
-        search_class_field_value = self.get_child_by_type(PanelPermitsResource).query_exactly_one("#search_permit_resource_class",Input).value
+        search_profile_field_value = self.get_child_by_type(PanelResourcePermitSearchField).query_exactly_one("#search_permit_resource_profile",Input).value
+        search_class_field_value = self.get_child_by_type(PanelResourcePermitSearchField).query_exactly_one("#search_permit_resource_class",Input).value
 
         racf_id_field_value = self.get_child_by_type(PanelResourcePermitCreate).get_child_by_id("permit_racf_id",Input).value
 
@@ -166,4 +131,24 @@ class PanelPermits(VerticalScroll):
                 self.notify("Created permit",severity="information")
             else:
                 send_notification(self,message=f"Couldn't create permit, return code: {return_code}",severity="error")
+
+class PanelPermitsDataset(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield PanelDatasetPermitInfo()
+        yield PanelDatasetPermitSearchField(search_action="")
+
+class PanelPermitsSwitcherButtons(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield Button(id="permit_resource_panel_button",label="Resource profile",classes="search-buttons",name="permit_resource_panel")
+        yield Button(id="permit_dataset_panel_button",label="Dataset profile",classes="search-buttons",name="permit_dataset_panel")
+
+class PanelPermits(VerticalScroll):
+    def compose(self) -> ComposeResult:
+        yield PanelPermitsSwitcherButtons()
+        with ContentSwitcher(initial="permit_resource_panel",id="permit_switcher",classes="permit-switcher"):
+            yield PanelPermitsResource(id="permit_resource_panel")
+            yield PanelPermitsDataset(id="permit_dataset_panel")
+
+    def on_button_pressed(self, event: Button.Pressed) -> None:
+        self.query_one(ContentSwitcher).current = event.button.name  
                 
