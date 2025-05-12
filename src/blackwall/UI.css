@@ -202,12 +202,22 @@ RefreshScreen {
 
 .search-switcher {
     border: panel $primary;
-    width: 90%;
     height: 1fr;
 }
 
 .search-label {
     margin: 1;
+}
+
+.search-field {
+    width: 90;
+    margin-bottom: 1;
+}
+
+# Permit panel
+.permit-switcher {
+    border: panel $primary;
+    height: 1fr;
 }
 
 # Analysis panel
@@ -257,7 +267,6 @@ ToggleButton.-on > .toggle--button {
 
 .copy-switcher {
     border: panel $primary;
-    width: 90%;
     height: 1fr;
 }
 

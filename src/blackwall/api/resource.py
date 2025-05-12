@@ -256,7 +256,10 @@ def get_resource_acl(resource_class: str, resource: str) -> list[dict]:
     if racfu_enabled:
         """Returns a list of active classes on the system"""
         result = racfu({"operation": "extract", "admin_type": "resource", "resource": resource.upper(), "class": fix_class(resource_class)}) # type: ignore
-        return result.result["profile"]["base"]["base:access_list"] # type: ignore
+        if "base:access_list" in result.result["profile"]["base"]:
+            return result.result["profile"]["base"]["base:access_list"] # type: ignore
+        else:
+            return []
     else:
         return []
 

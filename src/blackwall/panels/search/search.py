@@ -5,7 +5,7 @@ from textual import on
 from textual.app import ComposeResult
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.suggester import SuggestFromList
-from textual.widgets import Button, ContentSwitcher, Input, Label, RadioButton, RadioSet
+from textual.widgets import Button, ContentSwitcher, Input, Label
 
 from blackwall.api import dataset, group, keyrings, resource, user
 from blackwall.api.setropts import get_active_classes
@@ -30,7 +30,7 @@ class PanelSearchUser(VerticalGroup):
 
     def compose(self) -> ComposeResult:
         yield Label("Search users",classes="search-label")
-        yield Input(max_length=8,restrict=racf_id_regex,id="search_field",classes="field-short-generic")
+        yield Input(max_length=8,placeholder="id...",restrict=racf_id_regex,id="search_field",classes="field-short-generic")
         yield Button(label=f"{get_emoji("🔎")} Search",action="search")
 
     async def action_search(self):
@@ -44,7 +44,7 @@ class PanelSearchGroup(VerticalGroup):
 
     def compose(self) -> ComposeResult:
         yield Label("Search for group",classes="search-label")
-        yield Input(max_length=8,id="search_field",restrict=racf_id_regex,classes="field-short-generic")
+        yield Input(max_length=8,placeholder="id...",id="search_field",restrict=racf_id_regex,classes="field-short-generic")
         yield Button(label=f"{get_emoji("🔎")} Search",action="search")
 
     async def action_search(self):
@@ -58,7 +58,7 @@ class PanelSearchDataset(VerticalGroup):
 
     def compose(self) -> ComposeResult:
         yield Label("Search for dataset profile",classes="search-label")
-        yield Input(max_length=255,id="search_field",classes="field-long-generic")
+        yield Input(max_length=255,placeholder="dataset profile name...",id="search_field",classes="field-long-generic")
         yield Button(label=f"{get_emoji("🔎")} Search",action="search")
 
     async def action_search(self):
