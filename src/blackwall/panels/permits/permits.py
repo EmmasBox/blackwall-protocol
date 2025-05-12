@@ -124,10 +124,10 @@ class PanelPermits(VerticalScroll):
                 #Adds the entry to the datatable
                 permit_table.add_row(entry_id,id_type,entry_access)
             if notification:
-                self.notify(f"Found profile {search_profile_field_value} in class {search_class_field_value}",severity="information")
+                self.notify(f"Found profile {search_profile_field_value} in class {search_class_field_value}",markup=False,severity="information")
         else:
             if notification:
-                self.notify(f"Couldn't find profile {search_profile_field_value} in class {search_class_field_value}",severity="error")
+                self.notify(f"Couldn't find profile {search_profile_field_value} in class {search_class_field_value}",markup=False,severity="error")
 
     def action_search_resource_profile(self) -> None:
         self.get_resource_profile_acl(notification=True)
