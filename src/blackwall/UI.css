@@ -209,6 +209,11 @@ RefreshScreen {
     margin: 1;
 }
 
+.search-field {
+    width: 100%;
+}
+
+
 # Permit panel
 .permit-switcher {
     border: panel $primary;
