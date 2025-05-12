@@ -234,6 +234,26 @@ class PanelPermitsDataset(VerticalGroup):
             else:
                 send_notification(self,message=f"Couldn't create permit, return code: {return_code}",severity="error")
 
+    def key_delete(self) -> None:
+        search_profile_field_value = self.get_child_by_type(PanelDatasetPermitSearchField).query_exactly_one("#search_permit_dataset_profile",Input).value
+
+        datatable = self.query_exactly_one("#dataset_permits_table", DataTable)
+        column_index = datatable.cursor_column
+        if column_index == 0:
+            current_row = datatable.cursor_coordinate
+            cell_info = datatable.get_cell_at(current_row)
+
+            return_code = permit.delete_dataset_permit(dataset=search_profile_field_value,racf_id=cell_info)
+        
+            if return_code == 0:
+                refresh_racf()
+
+                self.get_dataset_profile_acl(notification=False)
+
+                self.notify(f"Dataset permit deleted for {cell_info}")
+            else:
+                send_notification(self,message=f"Couldn't delete dataset permit, return code: {return_code}",severity="error")
+
 class PanelPermitsSwitcherButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Button(id="permit_resource_panel_button",label="Resource profile",classes="search-buttons",name="permit_resource_panel")
