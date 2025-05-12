@@ -33,7 +33,7 @@ class PanelResourcePermitSearchField(HorizontalGroup):
 
     def compose(self) -> ComposeResult:
         yield Input(id="search_permit_resource_class",suggester=SuggestFromList(self.active_classes,case_sensitive=False),placeholder="class...",classes="field-short-generic")
-        yield Input(id="search_permit_resource_profile",placeholder="profile name...",classes="search-field")    
+        yield Input(id="search_permit_resource_profile",placeholder="resource profile name...",classes="search-field")    
         yield Button(label="Get ACL",id="search_permit_button",action="search_resource_profile")
 
     @on(Input.Submitted)
@@ -130,7 +130,7 @@ class PanelDatasetPermitSearchField(HorizontalGroup):
     active_classes = get_active_classes()
 
     def compose(self) -> ComposeResult:
-        yield Input(id="search_permit_dataset_profile",placeholder="profile name...",classes="search-field")    
+        yield Input(id="search_permit_dataset_profile",placeholder="dataset profile name...",classes="search-field")    
         yield Button(label="Get ACL",id="search_dataset_permit_button",action="search_dataset_profile")
 
     @on(Input.Submitted)
