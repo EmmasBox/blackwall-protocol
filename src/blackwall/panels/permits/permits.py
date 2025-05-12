@@ -122,7 +122,8 @@ class PanelPermitsResource(VerticalGroup):
     def key_delete(self) -> None:
         datatable = self.query_exactly_one("#resource_permits_table", DataTable)
         current_row = datatable.cursor_coordinate
-        self.notify("test")
+        cells = datatable.get_cell_at(current_row)
+        self.notify(cells)
 
 class PanelDatasetPermitInfo(HorizontalGroup):
     def compose(self) -> ComposeResult:
