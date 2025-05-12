@@ -135,7 +135,7 @@ class PanelPermitsResource(VerticalGroup):
 
                 self.get_resource_profile_acl(notification=False)
 
-                self.notify("Permit deleted")
+                self.notify(f"Permit deleted for {cell_info}")
             else:
                 send_notification(self,message=f"Couldn't delete permit, return code: {return_code}",severity="error")
 
