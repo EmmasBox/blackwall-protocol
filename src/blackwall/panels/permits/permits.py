@@ -129,6 +129,10 @@ class PanelPermitsResource(VerticalGroup):
             cell_info = datatable.get_cell_at(current_row)
 
             return_code = permit.delete_resource_permit(class_name=search_class_field_value,profile=search_profile_field_value,racf_id=cell_info)
+        
+            refresh_racf()
+
+            self.get_resource_profile_acl(notification=False)
 
             if return_code == 0:
                 self.notify("Permit deleted")
