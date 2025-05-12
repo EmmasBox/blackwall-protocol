@@ -210,9 +210,8 @@ RefreshScreen {
 }
 
 .search-field {
-    width: 80;
+    width: 90;
 }
-
 
 # Permit panel
 .permit-switcher {
