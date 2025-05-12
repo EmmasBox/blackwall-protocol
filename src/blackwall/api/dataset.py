@@ -96,6 +96,15 @@ def get_dataset_profile(dataset: str) -> dict:
     else:
         return {}
 
+def get_dataset_acl(dataset: str) -> list[dict]:
+    """Returns a string list with the access list of the specified dataset profile"""
+    if racfu_enabled:
+        """Returns a list of active classes on the system"""
+        result = racfu({"operation": "extract", "admin_type": "data-set", "data_set": dataset.upper()}) # type: ignore
+        return result.result["profile"]["base"]["base:access_list"] # type: ignore
+    else:
+        return []
+
 @dataclass
 class DatasetObject:
     base_traits: BaseDatasetTraits
