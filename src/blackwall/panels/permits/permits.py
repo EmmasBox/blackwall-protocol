@@ -119,7 +119,7 @@ class PanelPermitsResource(VerticalGroup):
             else:
                 send_notification(self,message=f"Couldn't create permit, return code: {return_code}",severity="error")
 
-    def key_del(self) -> None:
+    def key_delete(self) -> None:
         datatable = self.query_exactly_one("#resource_permits_table", DataTable)
         current_row = datatable.cursor_coordinate
         self.notify("test")
