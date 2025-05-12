@@ -49,6 +49,25 @@ class PanelResourcePermitCreate(HorizontalGroup):
     async def action_update(self):
         await self.app.run_action(self.update_action,default_namespace=self.parent)
 
+class PanelDatasetPermitInfo(HorizontalGroup):
+    def compose(self) -> ComposeResult:
+        yield Label("Use this panel to create, delete, and update permits for dataset profiles",classes="label-generic")
+
+class PanelDatasetPermitSearchField(HorizontalGroup):
+    def __init__(self, search_action: str):
+        super().__init__()
+        self.search_action = search_action
+
+    active_classes = get_active_classes()
+
+    def compose(self) -> ComposeResult:
+        yield Input(id="search_permit_dataset_profile",placeholder="profile name...",classes="search-field")    
+        yield Button(label="Get ACL",id="search_permit_button",action="search_dataset_profile")
+
+    @on(Input.Submitted)
+    async def action_search(self):
+        await self.app.run_action(self.search_action,default_namespace=self.parent)
+
 class PanelPermitsList(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Current permits:",classes="label-generic")
@@ -66,6 +85,11 @@ class PanelPermitsResource(VerticalGroup):
         yield PanelResourcePermitCreate(update_action="resource_permit_update")
         yield PanelPermitsList()
 
+class PanelPermitsDataset(VerticalGroup):
+    def compose(self) -> ComposeResult:
+        yield PanelDatasetPermitInfo()
+        yield PanelDatasetPermitSearchField(search_action="")
+
 class PanelPermitsSwitcherButtons(HorizontalGroup):
     def compose(self) -> ComposeResult:
         yield Button(id="permit_resource_panel_button",label="Resource profile",classes="search-buttons",name="permit_resource_panel")
@@ -76,6 +100,7 @@ class PanelPermits(VerticalScroll):
         yield PanelPermitsSwitcherButtons()
         with ContentSwitcher(initial="permit_resource_panel",id="permit_switcher",classes="permit-switcher"):
             yield PanelPermitsResource(id="permit_resource_panel")
+            yield PanelPermitsDataset(id="permit_dataset_panel")
 
     def on_button_pressed(self, event: Button.Pressed) -> None:
         self.query_one(ContentSwitcher).current = event.button.name  
