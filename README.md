@@ -129,6 +129,14 @@ Not all terminals are capable of displaying advanced TUI applications. Below is 
 
 Once you have installed Blackwall and have the required permissions you can start it by typing the command in an SSH session:
 
+if it's installed site wide
+
 ```sh
 blackwall
+```
+
+if it's installed on a user level
+
+```sh
+python -m blackwall.main
 ```
