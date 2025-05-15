@@ -13,11 +13,11 @@ from blackwall.panels.traits_ui import get_traits_from_input
 from blackwall.regex import racf_id_regex
 
 PERMIT_RESOURCE_COLUMNS = [
-    ("ID", "Type", "Access"),
+    ("ID", "Access", "Type", "Installation data"),
 ]
 
 PERMIT_DATASET_COLUMNS = [
-    ("ID", "Type", "Access"),
+    ("ID", "Access", "Type","Installation data"),
 ]
 
 
@@ -93,7 +93,7 @@ class PanelPermitsResource(VerticalGroup):
                 id_type = "group" if group.group_exists(entry_id) else "user"
                 
                 #Adds the entry to the datatable
-                permit_table.add_row(entry_id,id_type,entry_access)
+                permit_table.add_row(entry_id,entry_access,id_type)
             if notification:
                 self.notify(f"Found profile {search_profile_field_value} in class {search_class_field_value}",markup=False,severity="information")
         else:
@@ -214,7 +214,7 @@ class PanelPermitsDataset(VerticalGroup):
                 id_type = "group" if group.group_exists(entry_id) else "user"
                 
                 #Adds the entry to the datatable
-                permit_table.add_row(entry_id,id_type,entry_access)
+                permit_table.add_row(entry_id,entry_access,id_type)
             if notification:
                 self.notify(f"Found dataset profile {search_profile_field_value}",markup=False,severity="information")
         else:
