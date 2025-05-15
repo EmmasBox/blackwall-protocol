@@ -121,9 +121,9 @@ Not all terminals are capable of displaying advanced TUI applications. Below is 
  MacOS terminal   | No        | -
  Raspbian         | No        | -
  TSO OMVS in z/OS | No        | -
- VS Code          | Yes*      | Set `terminal.integrated.minimumContrastRatio` to 1 and enable `terminal.integrated.enableImages`. Otherwise some UI elements will display incorrectly.
+ VS Code          | Yes*      | Set `terminal.integrated.minimumContrastRatio` to 1 and enable `terminal.integrated.enableImages`. Otherwise some UI elements will display incorrectly. You may also need to change the keybindings to prevent VS Code from hijacking ctrl+q and ctrl+p.
  Windows Console  | No        | -
- Windows Terminal | Yes       | Included with Windows 11 and can be installed manually on Windows 10 through the MS app store.
+ Windows Terminal | Yes*      | Included with Windows 11 and can be installed manually on Windows 10 through the MS app store. You may also need to change the keybindings to prevent Windows Terminal from hijacking ctrl+q and ctrl+p.
 
 ## Running Blackwall Protocol
 
