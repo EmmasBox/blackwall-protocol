@@ -91,9 +91,14 @@ class PanelPermitsResource(VerticalGroup):
 
                 #Checks if the entry is a user or group
                 id_type = "group" if group.group_exists(entry_id) else "user"
+                installation_data = ""
+                if id_type == "group":
+                    installation_data = group.get_installation_data(group=entry_id)
+                else:
+                    installation_data = user.get_installation_data(username=entry_id)
                 
                 #Adds the entry to the datatable
-                permit_table.add_row(entry_id,entry_access,id_type)
+                permit_table.add_row(entry_id,entry_access,id_type,installation_data)
             if notification:
                 self.notify(f"Found profile {search_profile_field_value} in class {search_class_field_value}",markup=False,severity="information")
         else:
@@ -217,8 +222,6 @@ class PanelPermitsDataset(VerticalGroup):
                     installation_data = group.get_installation_data(group=entry_id)
                 else:
                     installation_data = user.get_installation_data(username=entry_id)
-                
-                self.notify("install data: " + installation_data)
 
                 #Adds the entry to the datatable
                 permit_table.add_row(entry_id,entry_access,id_type,installation_data)
