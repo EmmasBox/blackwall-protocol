@@ -218,6 +218,8 @@ class PanelPermitsDataset(VerticalGroup):
                 else:
                     installation_data = user.get_installation_data(username=entry_id)
                 
+                self.notify("install data: " + installation_data)
+
                 #Adds the entry to the datatable
                 permit_table.add_row(entry_id,entry_access,id_type,installation_data)
             if notification:
