@@ -5,7 +5,7 @@ from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.suggester import SuggestFromList
 from textual.widgets import Button, ContentSwitcher, DataTable, Input, Label, Select
 
-from blackwall.api import dataset, group, permit, resource
+from blackwall.api import dataset, group, permit, resource, user
 from blackwall.api.setropts import get_active_classes, refresh_racf
 from blackwall.emoji import get_emoji
 from blackwall.notifications import send_notification
@@ -13,11 +13,11 @@ from blackwall.panels.traits_ui import get_traits_from_input
 from blackwall.regex import racf_id_regex
 
 PERMIT_RESOURCE_COLUMNS = [
-    ("ID", "Type", "Access"),
+    ("ID", "Access", "Type", "Installation data"),
 ]
 
 PERMIT_DATASET_COLUMNS = [
-    ("ID", "Type", "Access"),
+    ("ID", "Access", "Type","Installation data"),
 ]
 
 
@@ -91,9 +91,14 @@ class PanelPermitsResource(VerticalGroup):
 
                 #Checks if the entry is a user or group
                 id_type = "group" if group.group_exists(entry_id) else "user"
+                installation_data = ""
+                if id_type == "group":
+                    installation_data = group.get_installation_data(group=entry_id)
+                else:
+                    installation_data = user.get_installation_data(username=entry_id)
                 
                 #Adds the entry to the datatable
-                permit_table.add_row(entry_id,id_type,entry_access)
+                permit_table.add_row(entry_id,entry_access,id_type,installation_data)
             if notification:
                 self.notify(f"Found profile {search_profile_field_value} in class {search_class_field_value}",markup=False,severity="information")
         else:
@@ -212,9 +217,14 @@ class PanelPermitsDataset(VerticalGroup):
 
                 #Checks if the entry is a user or group
                 id_type = "group" if group.group_exists(entry_id) else "user"
-                
+                installation_data = ""
+                if id_type == "group":
+                    installation_data = group.get_installation_data(group=entry_id)
+                else:
+                    installation_data = user.get_installation_data(username=entry_id)
+
                 #Adds the entry to the datatable
-                permit_table.add_row(entry_id,id_type,entry_access)
+                permit_table.add_row(entry_id,entry_access,id_type,installation_data)
             if notification:
                 self.notify(f"Found dataset profile {search_profile_field_value}",markup=False,severity="information")
         else:

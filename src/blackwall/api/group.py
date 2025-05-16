@@ -66,6 +66,17 @@ def get_group(group: str) -> dict:
     else:
         return {}
 
+def get_installation_data(group: str) -> str:
+    """Gets the installation data of a group"""
+    if racfu_enabled:
+        result = racfu({"operation": "extract", "admin_type": "group", "group": group.upper()})
+        if "base:installation_data" in result.result["profile"]["base"]:
+            return result.result["profile"]["base"]["base:installation_data"] # type: ignore
+        else:
+            return ""
+    else:
+        return ""
+
 def get_group_connections(group: str):
     """Get information on group connections"""
     pass
