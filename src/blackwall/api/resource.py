@@ -294,6 +294,9 @@ def update_resource_profile(
 
     labels = ["kerb","dlf","eim","jes","icsf","ictx","idtparms","session","svfmr","stdata","proxy","mfpolicy","sigver","tme","cdtinfo","ssignon","cfdef"]
     for label in labels:
+        # ICTX is only valid in ldapbind
+        if resource_class != "LDAPBIND" and label == "ictx":
+            continue
         trait_object: TraitsBase | None = getattr(resource_object,f"{label}_traits")
         if trait_object is not None:
             traits.update(trait_object.to_traits(label))
