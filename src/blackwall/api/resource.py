@@ -39,7 +39,7 @@ class BaseResourceTraits(TraitsBase):
     terminal_access_allowed_day: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     terminal_access_allowed_time: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
 
-    tape_vtoc: bool | None = field(default=None,metadata={"label": "Tape VTOC", "allowed_in": {"add","alter","extract"}})
+    tape_vtoc: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
     #add fields
     model_profile: str | None = field(default=None,metadata={"allowed_in": {"add"}})
@@ -91,7 +91,7 @@ class KerbResourceTraits(TraitsBase):
 class DLFDataResourceTraits(TraitsBase):
     job_name: str | None = field(default=None,metadata={"label": "Job name","allowed_in": {"add","alter","extract"}})
     job_names: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
-    retain_object_after_use: bool | None = field(default=None,metadata={"label": "Retain object after use","allowed_in": {"add","alter"}})
+    #retain_object_after_use: bool | None = field(default=None,metadata={"label": "Retain object after use","allowed_in": {"add","alter"}})
 
 @dataclass
 class EIMResourceTraits(TraitsBase):
@@ -294,6 +294,9 @@ def update_resource_profile(
 
     labels = ["kerb","dlf","eim","jes","icsf","ictx","idtparms","session","svfmr","stdata","proxy","mfpolicy","sigver","tme","cdtinfo","ssignon","cfdef"]
     for label in labels:
+        # ICTX is only valid in ldapbind
+        if resource_class != "LDAPBIND" and label == "ictx":
+            continue
         trait_object: TraitsBase | None = getattr(resource_object,f"{label}_traits")
         if trait_object is not None:
             traits.update(trait_object.to_traits(label))

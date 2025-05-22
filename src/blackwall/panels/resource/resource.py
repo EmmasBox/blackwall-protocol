@@ -85,7 +85,7 @@ class PanelResourceSegments(VerticalGroup):
             yield from generate_trait_section(title="SIGVER", prefix="sigver", traits_class=resource.SIGVERResourceTraits)
             yield from generate_trait_section(title="tme", prefix="tme", traits_class=resource.TMEResourceTraits)
             yield from generate_trait_section(title="SSIGNON", prefix="ssignon", traits_class=resource.SSIGNONResourceTraits)
-            yield from generate_trait_section(title="Cfdef", prefix="Cfdef", traits_class=resource.CfdefResourceTraits)
+            yield from generate_trait_section(title="Cfdef", prefix="cfdef", traits_class=resource.CfdefResourceTraits)
             yield from generate_trait_section(title="Class Descriptor Table (CDT) info", prefix="cdtinfo", traits_class=resource.CDTINFOResourceTraits)
 
 class PanelResourceActionButtons(HorizontalGroup):
