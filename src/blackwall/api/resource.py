@@ -39,7 +39,7 @@ class BaseResourceTraits(TraitsBase):
     terminal_access_allowed_day: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     terminal_access_allowed_time: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
 
-    tape_vtoc: bool | None = field(default=None,metadata={"label": "Tape VTOC", "allowed_in": {"add","alter","extract"}})
+    tape_vtoc: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
 
     #add fields
     model_profile: str | None = field(default=None,metadata={"allowed_in": {"add"}})
