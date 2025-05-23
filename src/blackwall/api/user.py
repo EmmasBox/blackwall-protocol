@@ -134,7 +134,7 @@ class OMVSUserTraits(TraitsBase):
     home_directory: str | None = field(default=None, metadata={"label": "home directory", "input_args": {"classes": "field-long-generic"}})
     default_shell: str | None = field(default=None, metadata={"label": "default shell", "input_args": {"classes": "field-long-generic"}})
     max_address_space_size: int | None = field(default=None, metadata={"label": "max address space size", "input_args": {"classes": "field-long-generic"}})
-    max_cpu_time: int | None = field(default=None, metadata={"label": "home directory", "input_args": {"max_length": 10, "classes": "field-medium-generic"}})
+    max_cpu_time: int | None = field(default=None, metadata={"label": "Max CPU time", "input_args": {"max_length": 10, "classes": "field-medium-generic"}})
     max_files_per_process: int | None = field(default=None, metadata={"label": "max files per process", "input_args": {"classes": "field-long-generic"}})
     max_file_mapping_pages: int | None = field(default=None, metadata={"label": "max file mapping pages", "input_args": {"classes": "field-long-generic"}})
     max_processes: int | None = field(default=None, metadata={"label": "max processes", "input_args": {"classes": "field-long-generic"}})
