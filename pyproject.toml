@@ -4,7 +4,7 @@ description = "Blackwall Protocol for mainframe security administration"
 dynamic = ["version"]
 requires-python = ">=3.12"
 dependencies = [
-  "sear==0.1.1 ; sys_platform=='zos'",
+  "pysear==0.1.1 ; sys_platform=='zos'",
   "textual>=3.2.0",
 ]
 authors = [
