@@ -1,4 +1,4 @@
-#API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
+#API module for Blackwall Protocol, this wraps SEAR to increase ease of use and prevent updates from borking everything
 
 import importlib.util
 from dataclasses import dataclass, field
@@ -6,13 +6,13 @@ from typing import Any
 
 from blackwall.api.traits_base import TraitsBase
 
-#Checks if RACFU can be imported
-racfu_enabled = importlib.util.find_spec('racfu')
+#Checks if SEAR can be imported
+sear_enabled = importlib.util.find_spec('sear')
 
-if racfu_enabled:
-    from racfu import racfu  # type: ignore
+if sear_enabled:
+    from sear import sear  # type: ignore
 else:
-    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
+    print("##BLKWL_ERROR_2 Warning: could not find SEAR, entering lockdown mode")       
 
 @dataclass
 class CertificateTraits:
@@ -44,16 +44,16 @@ class KeyringObject:
     certificate_traits: CertificateTraits
 
 def keyring_exists(keyring: str, owner: str):
-    if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "keyring", "keyring": keyring, "owner": owner.upper()})
+    if sear_enabled:
+        result = sear({"operation": "extract", "admin_type": "keyring", "keyring": keyring, "owner": owner.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return {}
 
 def get_keyring(keyring: str, owner: str) -> dict[str, Any]:
     """Extracts information on a keyring"""
-    if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "keyring", "keyring": keyring, "owner": owner.upper()})
+    if sear_enabled:
+        result = sear({"operation": "extract", "admin_type": "keyring", "keyring": keyring, "owner": owner.upper()})
         if result.result is not None:
             return result.result["keyrings"][0]
     return {"": ""}

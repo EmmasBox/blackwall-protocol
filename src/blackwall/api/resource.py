@@ -1,19 +1,17 @@
-#General resource API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
+#General resource API module for Blackwall Protocol, this wraps SEAR to increase ease of use and prevent updates from borking everything
 
 import importlib.util
 from dataclasses import dataclass, field
 
 from .traits_base import TraitsBase
 
-#Checks if RACFU can be imported
-racfu_enabled = importlib.util.find_spec('racfu')
+#Checks if SEAR can be imported
+sear_enabled = importlib.util.find_spec('sear')
 
-if racfu_enabled:
-    from racfu import racfu  # type: ignore
+if sear_enabled:
+    from sear import sear  # type: ignore
 else:
-    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
-
-#TODO remove workaround for padded class names when RACFu fixes the bug
+    print("##BLKWL_ERROR_2 Warning: could not find SEAR, entering lockdown mode")  
 
 @dataclass
 class BaseResourceTraits(TraitsBase):
@@ -229,33 +227,30 @@ class CfdefResourceTraits(TraitsBase):
     valid_other_characters: str | None = field(default=None,metadata={"label": "Valid other characters","allowed_in": {"add","alter","extract"}})
     validation_rexx_exec: str | None = field(default=None,metadata={"label": "Validation rexx exec","allowed_in": {"add","alter","extract"}})
 
-def fix_class(class_name: str):
-    return f"{class_name:<8}".upper()
-
 #General resource profile function
 def resource_profile_exists(resource_class: str,resource: str) -> bool:
     """Checks if a general resource profile exists, returns true or false"""
-    if racfu_enabled:
+    if sear_enabled:
         """Checks if a general resource profile exists, returns true or false"""
-        result = racfu({"operation": "extract", "admin_type": "resource", "resource": resource.upper(), "class": fix_class(resource_class)}) # type: ignore
+        result = sear({"operation": "extract", "admin_type": "resource", "resource": resource.upper(), "class": resource_class}) # type: ignore
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return False
 
 def get_resource_profile(resource_class: str, resource: str) -> dict:
     """Returns a dict with information about the resource profile"""
-    if racfu_enabled:
+    if sear_enabled:
         """Doesn't handle general resource profiles that don't exist, recommend using resource_profile_exists() first"""
-        result = racfu({"operation": "extract", "admin_type": "resource", "resource": resource.upper(), "class": fix_class(resource_class)}) # type: ignore
+        result = sear({"operation": "extract", "admin_type": "resource", "resource": resource.upper(), "class": resource_class}) # type: ignore
         return result.result
     else:
         return {}
     
 def get_resource_acl(resource_class: str, resource: str) -> list[dict]:
     """Returns a string list with the access list of the specified resource"""
-    if racfu_enabled:
+    if sear_enabled:
         """Returns a list of active classes on the system"""
-        result = racfu({"operation": "extract", "admin_type": "resource", "resource": resource.upper(), "class": fix_class(resource_class)}) # type: ignore
+        result = sear({"operation": "extract", "admin_type": "resource", "resource": resource.upper(), "class": resource_class}) # type: ignore
         if "base:access_list" in result.result["profile"]["base"]:
             return result.result["profile"]["base"]["base:access_list"] # type: ignore
         else:
@@ -303,28 +298,28 @@ def update_resource_profile(
 
     operation = "add" if create else "alter"
     
-    result = racfu( # type: ignore
+    result = sear( # type: ignore
         {
             "operation": operation, 
             "admin_type": "resource", 
             "resource": resource.upper(),
-            "class": fix_class(resource_class),
+            "class": resource_class,
             "traits":  traits,
         },
     )
     return result.result["return_codes"]["racf_return_code"]
 
 def delete_resource_profile(resource_class: str,resource: str) -> tuple[str, int]:
-    if racfu_enabled:
-        result = racfu( # type: ignore
+    if sear_enabled:
+        result = sear( # type: ignore
                 {
                     "operation": "delete", 
                     "admin_type": "resource", 
                     "resource": resource.upper(),
-                    "class": fix_class(resource_class),
+                    "class": resource_class,
                 },
             )
         #TODO add error message
         return "", result.result["return_codes"]["racf_return_code"]
     else:
-        return "RACFu can't be found", 8
+        return "SEAR can't be found", 8

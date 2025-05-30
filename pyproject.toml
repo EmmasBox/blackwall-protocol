@@ -4,7 +4,7 @@ description = "Blackwall Protocol for mainframe security administration"
 dynamic = ["version"]
 requires-python = ">=3.12"
 dependencies = [
-  "racfu==1.0a2.dev2 ; sys_platform=='zos'",
+  "sear==0.1.1 ; sys_platform=='zos'",
   "textual>=3.2.0",
 ]
 authors = [
@@ -13,7 +13,7 @@ authors = [
 ]
 readme = "README.md"
 license = {file = "LICENSE"}
-keywords = ["RACF", "security", "mainframe", "zos", "TUI", "RACFu", "ESM"]
+keywords = ["RACF", "security", "mainframe", "zos", "TUI", "SEAR", "ESM"]
 
 classifiers = [    
   #Application audience and type

@@ -1,17 +1,17 @@
-#Group API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
+#Group API module for Blackwall Protocol, this wraps SEAR to increase ease of use and prevent updates from borking everything
 
 import importlib.util
 from dataclasses import dataclass, field
 
 from .traits_base import TraitsBase
 
-#Checks if RACFU can be imported
-racfu_enabled = importlib.util.find_spec('racfu')
+#Checks if SEAR can be imported
+sear_enabled = importlib.util.find_spec('sear')
 
-if racfu_enabled:
-    from racfu import racfu  # type: ignore
+if sear_enabled:
+    from sear import sear  # type: ignore
 else:
-    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
+    print("##BLKWL_ERROR_2 Warning: could not find SEAR, entering lockdown mode")       
 
 @dataclass
 class BaseGroupTraits(TraitsBase):
@@ -52,24 +52,24 @@ class TMEGroupTraits(TraitsBase):
 #Group functions
 def group_exists(group: str) -> bool:
     """Checks if a group exists, returns true or false"""
-    if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "group", "group": group.upper()})
+    if sear_enabled:
+        result = sear({"operation": "extract", "admin_type": "group", "group": group.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return False
 
 def get_group(group: str) -> dict:
     """Doesn't handle group profiles that don't exist, recommend using group_exists() first"""
-    if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "group", "group": group.upper()})
+    if sear_enabled:
+        result = sear({"operation": "extract", "admin_type": "group", "group": group.upper()})
         return result.result
     else:
         return {}
 
 def get_installation_data(group: str) -> str:
     """Gets the installation data of a group"""
-    if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "group", "group": group.upper()})
+    if sear_enabled:
+        result = sear({"operation": "extract", "admin_type": "group", "group": group.upper()})
         if "base:installation_data" in result.result["profile"]["base"]:
             return result.result["profile"]["base"]["base:installation_data"] # type: ignore
         else:
@@ -90,7 +90,7 @@ class GroupObject:
     ovm_traits: OVMGroupTraits | None = None
 
 def update_group(group: str,create: bool, group_object: GroupObject):
-    if racfu_enabled:
+    if sear_enabled:
         """Creates or updates an existing group"""
         traits = group_object.base_traits.to_traits(prefix="base")
 
@@ -102,7 +102,7 @@ def update_group(group: str,create: bool, group_object: GroupObject):
 
         operation = "add" if create else "alter"
         
-        result = racfu(
+        result = sear(
             {
                 "operation": operation, 
                 "admin_type": "group", 
@@ -113,9 +113,9 @@ def update_group(group: str,create: bool, group_object: GroupObject):
         return result.result["return_codes"]["racf_return_code"]
 
 def delete_group(group: str) -> tuple[str, int]:
-    if racfu_enabled:
+    if sear_enabled:
         """Deletes a group"""
-        result = racfu(
+        result = sear(
             {
                 "operation": "delete", 
                 "admin_type": "group", 
@@ -125,4 +125,4 @@ def delete_group(group: str) -> tuple[str, int]:
         #TODO add error message
         return "", result.result["return_codes"]["racf_return_code"]
     else:
-        return "RACFu can't be found", 8
+        return "SEAR can't be found", 8
