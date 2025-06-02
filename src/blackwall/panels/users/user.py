@@ -26,6 +26,8 @@ class PanelUserInfo(HorizontalGroup):
         yield Input(id="base_create_date",disabled=True,classes="date-fields",compact=True)
         yield Label("Last access date:",classes="date-labels")
         yield Input(id="base_last_access_date",disabled=True,classes="date-fields",compact=True)
+        yield Label("Last access time:",classes="date-labels")
+        yield Input(id="base_last_access_time",disabled=True,classes="date-fields",compact=True)
         yield Label("Revoke date:",classes="date-labels")
         yield Input(id="base_revoke_date",disabled=True,classes="date-fields",compact=True)    
         yield Label("Protected:",classes="date-labels")
@@ -90,7 +92,7 @@ class PanelUserPassphrase(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Collapsible(title="Passphrase"):
             yield PanelUserMetaPassphraseInfo()
-            yield Label("Passphrases need to be between 12 and 100 characaters long")
+            yield Label("Passphrases need to be between 12 and 100 characters long")
             yield Label("New passphrase:")
             yield Input(max_length=100,id="base_passphrase",classes="passphrase",password=True)
     
@@ -98,11 +100,11 @@ class PanelUserAttributes(VerticalGroup):
     """User attributes component"""
     def compose(self) -> ComposeResult:
         with Collapsible(title="User attributes"):
-            yield Label("Priviliges:")
+            yield Label("Privileges:")
             yield RadioButton("Special",id="base_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option",classes="generic-checkbox-small")
             yield RadioButton("Operations",id="base_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards",classes="generic-checkbox-small")
-            yield RadioButton("Auditor",id="base_auditor",classes="generic-checkbox-small",tooltip="This attribute allows you to change system options and extract data about the RACF database, this one is pretty dangerous but not as dagnerous as special.")
-            yield RadioButton("Read only auditor",id="base_audit_responsibility",classes="generic-checkbox-small",tooltip="This attribute allows you to extract data about the RACF database, but you can't change any settings. This one is still dangerous but signifincantly less than the others as nothing can be changed.")
+            yield RadioButton("Auditor",id="base_auditor",classes="generic-checkbox-small",tooltip="This attribute allows you to change system options and extract data about the RACF database, this one is pretty dangerous but not as dangerous as special.")
+            yield RadioButton("Read only auditor",id="base_audit_responsibility",classes="generic-checkbox-small",tooltip="This attribute allows you to extract data about the RACF database, but you can't change any settings. This one is still dangerous but significantly less than the others as nothing can be changed.")
             yield Label("Restrictions:")
             yield RadioButton("Restricted",id="base_restrict_global_access_checking",classes="generic-checkbox-small",tooltip="If you enable this then the user won't be able to access resources through UACC. Useful for certain types of system users.")
 

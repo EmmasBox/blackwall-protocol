@@ -5,13 +5,13 @@ from typing import Any
 
 from .traits_base import TraitsBase
 
-#Checks if RACFU can be imported
-racfu_enabled = importlib.util.find_spec('racfu')
+#Checks if SEAR can be imported
+sear_enabled = importlib.util.find_spec('sear')
 
-if racfu_enabled:
-    from racfu import racfu  # type: ignore
+if sear_enabled:
+    from sear import sear  # type: ignore
 else:
-    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
+    print("##BLKWL_ERROR_2 Warning: could not find SEAR, entering lockdown mode")   
 
 @dataclass
 class BaseSetroptsTraits(TraitsBase):
@@ -53,7 +53,7 @@ class BaseSetroptsTraits(TraitsBase):
     rvary_status_password_format: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     rvary_status_password: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     rvary_status_password_format: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
-    #log_commands_issuesd_by_special_users: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
+    log_commands_issued_by_special_users: bool | None = field(default=None,metadata={"label": "Log commands issued by special users","allowed_in": {"alter","extract"},"input_args": {"classes": "field-medium-generic"}})
     max_session_key_interval: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
 
     #security_level_auditing: str | None = field(default=None,metadata={"label": "Security level auditing", "allowed_in": {"alter","extract"}})
@@ -100,26 +100,26 @@ class BaseSetroptsTraits(TraitsBase):
 
 def get_racf_options() -> dict[str, Any]:
     """Returns a dict with all of the RACF options"""
-    if racfu_enabled:
+    if sear_enabled:
         """Can be used to extract RACF options"""
-        result = racfu({"operation": "extract", "admin_type": "racf-options"}) # type: ignore
+        result = sear({"operation": "extract", "admin_type": "racf-options"}) # type: ignore
         return result.result
     else:
         return {}
     
 def get_active_classes() -> list[str]:
     """Returns a string list with all of the active classes on the system"""
-    if racfu_enabled:
+    if sear_enabled:
         """Returns a list of active classes on the system"""
-        result = racfu({"operation": "extract", "admin_type": "racf-options"}) # type: ignore
+        result = sear({"operation": "extract", "admin_type": "racf-options"}) # type: ignore
         return result.result["profile"]["base"]["base:active_classes"] # type: ignore
     else:
         return []
 
 def refresh_racf():
     """Refresh RACF"""
-    if racfu_enabled:
-        result = racfu(
+    if sear_enabled:
+        result = sear(
             {
                 "operation": "alter", 
                 "admin_type": "racf-options", 
@@ -132,10 +132,10 @@ def refresh_racf():
 
 def update_racf_options(base: BaseSetroptsTraits):
     """Modify RACF options"""
-    if racfu_enabled:
+    if sear_enabled:
         traits = base.to_traits(prefix="base")
         
-        result = racfu(
+        result = sear(
             {
                 "operation": "alter", 
                 "admin_type": "racf-options", 
@@ -146,8 +146,8 @@ def update_racf_options(base: BaseSetroptsTraits):
     
 def racf_change_rvary_password(password: str) -> int:
     """Change rvary password"""
-    if racfu_enabled:
-        result = racfu(
+    if sear_enabled:
+        result = sear(
             {
                 "operation": "alter", 
                 "admin_type": "racf-options", 

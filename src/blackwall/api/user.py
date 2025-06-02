@@ -1,4 +1,4 @@
-#User API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
+#User API module for Blackwall Protocol, this wraps SEAR to increase ease of use and prevent updates from borking everything
 
 import importlib.util
 from dataclasses import dataclass, field
@@ -6,13 +6,13 @@ from typing import Any
 
 from .traits_base import TraitsBase
 
-#Checks if RACFU can be imported
-racfu_enabled = importlib.util.find_spec('racfu')
+#Checks if SEAR can be imported
+sear_enabled = importlib.util.find_spec('sear')
 
-if racfu_enabled:
-    from racfu import racfu  # type: ignore
+if sear_enabled:
+    from sear import sear  # type: ignore
 else:
-    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
+    print("##BLKWL_ERROR_2 Warning: could not find SEAR, entering lockdown mode") 
 
 @dataclass
 class BaseUserTraits(TraitsBase):
@@ -134,7 +134,7 @@ class OMVSUserTraits(TraitsBase):
     home_directory: str | None = field(default=None, metadata={"label": "home directory", "input_args": {"classes": "field-long-generic"}})
     default_shell: str | None = field(default=None, metadata={"label": "default shell", "input_args": {"classes": "field-long-generic"}})
     max_address_space_size: int | None = field(default=None, metadata={"label": "max address space size", "input_args": {"classes": "field-long-generic"}})
-    max_cpu_time: int | None = field(default=None, metadata={"label": "home directory", "input_args": {"max_length": 10, "classes": "field-medium-generic"}})
+    max_cpu_time: int | None = field(default=None, metadata={"label": "Max CPU time", "input_args": {"max_length": 10, "classes": "field-medium-generic"}})
     max_files_per_process: int | None = field(default=None, metadata={"label": "max files per process", "input_args": {"classes": "field-long-generic"}})
     max_file_mapping_pages: int | None = field(default=None, metadata={"label": "max file mapping pages", "input_args": {"classes": "field-long-generic"}})
     max_processes: int | None = field(default=None, metadata={"label": "max processes", "input_args": {"classes": "field-long-generic"}})
@@ -205,24 +205,24 @@ class WorkattrUserTraits(TraitsBase):
 #User functions
 def user_exists(username: str) -> bool:
     """Checks if a user exists, returns true or false"""
-    if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "user", "userid": username.upper()})
+    if sear_enabled:
+        result = sear({"operation": "extract", "admin_type": "user", "userid": username.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return False
     
 def get_user(username: str) -> dict[str, Any]:
     """Doesn't handle users that don't exist, recommend using user_exists() first"""
-    if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "user", "userid": username.upper()})
+    if sear_enabled:
+        result = sear({"operation": "extract", "admin_type": "user", "userid": username.upper()})
         return result.result
     else:
         return False
     
 def get_installation_data(username: str) -> str:
     """Gets the installation data of a user"""
-    if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "user", "userid": username.upper()})
+    if sear_enabled:
+        result = sear({"operation": "extract", "admin_type": "user", "userid": username.upper()})
         if "base:installation_data" in result.result["profile"]["base"]:
             return result.result["profile"]["base"]["base:installation_data"] # type: ignore
         else:
@@ -266,7 +266,7 @@ def update_user(
 
     operation = "add" if create else "alter"
 
-    result = racfu(
+    result = sear(
             {
                 "operation": operation, 
                 "admin_type": "user", 
@@ -277,9 +277,9 @@ def update_user(
     return result.result["return_codes"]["racf_return_code"]
 
 def delete_user(username: str) -> tuple[str, int]:
-    if racfu_enabled:
+    if sear_enabled:
         """Deletes a user"""
-        result = racfu(
+        result = sear(
                 {
                     "operation": "delete", 
                     "admin_type": "user", 
@@ -288,4 +288,4 @@ def delete_user(username: str) -> tuple[str, int]:
             )
         return result.result["commands"][0]["messages"][0], result.result["return_codes"]["racf_return_code"]
     else:
-        return "RACFu can't be found", 8
+        return "SEAR can't be found", 8

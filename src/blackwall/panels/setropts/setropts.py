@@ -115,7 +115,7 @@ class PanelSetropts(VerticalScroll):
             self.notify(f"Couldn't update system settings, return code: {return_code}",severity="error")
 
     def action_save(self) -> None:
-        generic_confirmation_modal(self,modal_text="Are you abosulutely sure you want to change the RACF system options?",action_widget=self,confirm_action="save_setropts_api")
+        generic_confirmation_modal(self,modal_text="Are you absolutely sure you want to change the RACF system options?",action_widget=self,confirm_action="save_setropts_api")
 
     def action_switch(self) -> None:
         if self.setropts_info.mode is PanelMode.read:

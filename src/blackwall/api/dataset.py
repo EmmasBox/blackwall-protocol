@@ -1,17 +1,17 @@
-#API module for Blackwall Protocol, this wraps RACFU to increase ease of use and prevent updates from borking everything
+#API module for Blackwall Protocol, this wraps SEAR to increase ease of use and prevent updates from borking everything
 
 import importlib.util
 from dataclasses import dataclass, field
 
 from .traits_base import TraitsBase
 
-#Checks if RACFU can be imported
-racfu_enabled = importlib.util.find_spec('racfu')
+#Checks if SEAR can be imported
+sear_enabled = importlib.util.find_spec('sear')
 
-if racfu_enabled:
-    from racfu import racfu  # type: ignore
+if sear_enabled:
+    from sear import sear  # type: ignore
 else:
-    print("##BLKWL_ERROR_2 Warning: could not find RACFU, entering lockdown mode")       
+    print("##BLKWL_ERROR_2 Warning: could not find SEAR, entering lockdown mode")       
 
 @dataclass
 class BaseDatasetTraits(TraitsBase):
@@ -82,25 +82,25 @@ class TMEDatasetTraits(TraitsBase):
 #Dataset functions
 def dataset_profile_exists(dataset: str) -> bool:
     """Checks if a dataset profile exists, returns true or false"""
-    if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "data-set", "data_set": dataset.upper()})
+    if sear_enabled:
+        result = sear({"operation": "extract", "admin_type": "data-set", "data_set": dataset.upper()})
         return result.result["return_codes"]["racf_return_code"] == 0
     else:
         return False
 
 def get_dataset_profile(dataset: str) -> dict:
     """Doesn't handle dataset profiles that don't exist, recommend using dataset_profile_exists() first"""
-    if racfu_enabled:
-        result = racfu({"operation": "extract", "admin_type": "data-set", "data_set": dataset.upper()})
+    if sear_enabled:
+        result = sear({"operation": "extract", "admin_type": "data-set", "data_set": dataset.upper()})
         return result.result
     else:
         return {}
 
 def get_dataset_acl(dataset: str) -> list[dict]:
     """Returns a string list with the access list of the specified dataset profile"""
-    if racfu_enabled:
+    if sear_enabled:
         """Returns a list of active classes on the system"""
-        result = racfu({"operation": "extract", "admin_type": "data-set", "data_set": dataset.upper()}) # type: ignore
+        result = sear({"operation": "extract", "admin_type": "data-set", "data_set": dataset.upper()}) # type: ignore
         if "base:access_list" in result.result["profile"]["base"]:
             return result.result["profile"]["base"]["base:access_list"] # type: ignore
         else:
@@ -114,12 +114,12 @@ class DatasetObject:
 
 def update_dataset_profile(dataset: str, create: bool, dataset_object: DatasetObject):
     """Creates or updates a dataset profile"""
-    if racfu_enabled:
+    if sear_enabled:
         traits = dataset_object.base_traits.to_traits(prefix="base")
         
         operation = "add" if create else "alter"
         
-        result = racfu(
+        result = sear(
             {
                 "operation": operation, 
                 "admin_type": "data-set", 
@@ -131,8 +131,8 @@ def update_dataset_profile(dataset: str, create: bool, dataset_object: DatasetOb
 
 def delete_dataset_profile(dataset: str) -> tuple[str, int]:
     """Deletes a dataset profile"""
-    if racfu_enabled:
-        result = racfu(
+    if sear_enabled:
+        result = sear(
                 {
                     "operation": "delete", 
                     "admin_type": "data-set", 
@@ -142,4 +142,4 @@ def delete_dataset_profile(dataset: str) -> tuple[str, int]:
         #TODO add error message
         return "", result.result["return_codes"]["racf_return_code"]
     else:
-        return "RACFu can't be found", 8
+        return "SEAR can't be found", 8

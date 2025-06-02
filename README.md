@@ -43,9 +43,9 @@ Blackwall does not support ACF2 or Top Secret. Users are welcome to fork the cod
 
 #### Python packages
 
-- Textual 3.2.0 or later (for UI)
-- [RACFU](https://github.com/ambitus/racfu) 1.0a2-dev2 (To communicate with RACF)
-  - RACFU being a dependency means you need the IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space configured.
+- Textual 3.3.0 or later (for UI)
+- [SEAR](https://github.com/Mainframe-Renewal-Project/sear) 0.1.1 (To communicate with RACF)
+  - SEAR being a dependency means you need the IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space configured.
 
 ### Optional dependencies
 
@@ -64,7 +64,7 @@ If your environment is not airgapped, you can automatically install Blackwall an
 pip install blackwall
 ```
 
-If your environment is airgapped, you will have to download and install [Textual](https://pypi.org/project/textual/) and [RACFU](https://pypi.org/project/racfu/) manually by downloading the wheel/whl files and uploading them to the mainframe. Make sure you get the correct minimum package versions.
+If your environment is airgapped, you will have to download and install [Textual](https://pypi.org/project/textual/) and [SEAR](https://pypi.org/project/pysear/) manually by downloading the wheel/whl files and uploading them to the mainframe. Make sure you get the correct minimum package versions.
 After you have [downloaded Blackwall](https://pypi.org/project/blackwall/), upload the .whl package to the machine through Zowe Explorer or SSH and run the pip command in the folder with the .whl file:
 
 ```sh
