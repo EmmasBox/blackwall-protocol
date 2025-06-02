@@ -23,6 +23,7 @@
         "OMVS",
         "operparm",
         "pathlib",
+        "pypi",
         "pysear",
         "racf",
         "raclist",
