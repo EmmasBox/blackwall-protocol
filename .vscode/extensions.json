@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    // Spell checker
+    "streetsidesoftware.code-spell-checker",
+    // Markdown linter
+    "davidanson.vscode-markdownlint",
+    // Ruff linter for Python
+    "charliermarsh.ruff",
+  ]
+}
