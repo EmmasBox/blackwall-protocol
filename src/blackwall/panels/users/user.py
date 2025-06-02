@@ -26,6 +26,8 @@ class PanelUserInfo(HorizontalGroup):
         yield Input(id="base_create_date",disabled=True,classes="date-fields",compact=True)
         yield Label("Last access date:",classes="date-labels")
         yield Input(id="base_last_access_date",disabled=True,classes="date-fields",compact=True)
+        yield Label("Last access time:",classes="date-labels")
+        yield Input(id="base_last_access_time",disabled=True,classes="date-fields",compact=True)
         yield Label("Revoke date:",classes="date-labels")
         yield Input(id="base_revoke_date",disabled=True,classes="date-fields",compact=True)    
         yield Label("Protected:",classes="date-labels")
