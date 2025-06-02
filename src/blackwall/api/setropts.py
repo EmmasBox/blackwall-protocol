@@ -53,7 +53,7 @@ class BaseSetroptsTraits(TraitsBase):
     rvary_status_password_format: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     rvary_status_password: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
     rvary_status_password_format: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
-    #log_commands_issuesd_by_special_users: bool | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
+    log_commands_issued_by_special_users: bool | None = field(default=None,metadata={"label": "Log commands issued by special users","allowed_in": {"alter","extract"}})
     max_session_key_interval: str | None = field(default=None,metadata={"allowed_in": {"alter","extract"}})
 
     #security_level_auditing: str | None = field(default=None,metadata={"label": "Security level auditing", "allowed_in": {"alter","extract"}})
