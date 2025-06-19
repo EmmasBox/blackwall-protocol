@@ -111,7 +111,7 @@ class ICSFResourceTraits(TraitsBase):
     symmetric_export_public_keys: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
     symmetric_cpacf_rewrap: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     symmetric_cpacf_rewrap_return: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    asymetric_key_usage: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    asymmetric_key_usage: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     key_usage_options: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
 
 @dataclass
