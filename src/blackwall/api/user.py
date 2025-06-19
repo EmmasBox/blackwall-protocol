@@ -26,7 +26,7 @@ class BaseUserTraits(TraitsBase):
     special: bool | None = field(default=None,metadata={"label": "Special"})
     operations: bool | None = field(default=None,metadata={"label": "Operations"})
     auditor: bool | None = field(default=None,metadata={"label": "Auditor"})
-    audit_responsibility: bool | None = field(default=None,metadata={"label": "Read only auditor"})
+    read_only_auditor: bool | None = field(default=None,metadata={"label": "Read only auditor"})
 
     password: str | None = field(default=None, metadata={
         "masked": True,
@@ -45,8 +45,8 @@ class BaseUserTraits(TraitsBase):
     class_authorization: str | None = field(default=None)
     universal_access: str | None = field(default=None,metadata={"label": "UACC"})
 
-    model_data_set: str | None = field(default=None,metadata={"label": "Model dataset"})
-    group_data_set_access: bool | None = field(default=None,metadata={"label": "Group dataset access"})
+    model_dataset: str | None = field(default=None,metadata={"label": "Model dataset"})
+    group_dataset_access: bool | None = field(default=None,metadata={"label": "Group dataset access"})
 
     create_date: str | None = field(default=None,metadata={"label": "Create date","allowed_in": {"extract"}})
     last_access_date: str | None = field(default=None,metadata={"label": "Last access date","allowed_in": {"extract"}})
@@ -189,7 +189,7 @@ class TSOUserTraits(TraitsBase):
     default_region_size: int | None = field(default=None, metadata={"label": "default region size", "input_args": {"classes": "field-medium-generic"}})
     max_region_size: int | None = field(default=None, metadata={"label": "max region size", "input_args": {"classes": "field-medium-generic"}})
     sysout_class: str | None = field(default=None, metadata={"label": "sysout class", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
-    data_set_allocation_unit: str | None = field(default=None, metadata={"label": "dataset allocation unit", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
+    dataset_allocation_unit: str | None = field(default=None, metadata={"label": "dataset allocation unit", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
     user_data: str | None = field(default=None, metadata={"label": "user data", "input_args": {"max_length": 8,"classes": "field-short-generic"}})
 
 @dataclass

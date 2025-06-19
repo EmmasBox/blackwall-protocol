@@ -36,7 +36,7 @@ def update_dataset_permit(dataset: str, racf_id: str, base: BasePermitTraits) ->
     if sear_enabled:
         traits = base.to_traits(prefix="base")
 
-        result = sear({"operation": "alter", "admin_type": "permission", "data_set": dataset.upper(), "userid": racf_id.upper(), "traits":  traits})
+        result = sear({"operation": "alter", "admin_type": "permission", "dataset": dataset.upper(), "userid": racf_id.upper(), "traits":  traits})
         return result.result["return_codes"]["racf_return_code"]
     else:
         return 8
@@ -44,7 +44,7 @@ def update_dataset_permit(dataset: str, racf_id: str, base: BasePermitTraits) ->
 def delete_dataset_permit(dataset: str, racf_id: str) -> int:
     """Deletes a dataset permit"""
     if sear_enabled:
-        result = sear({"operation": "delete", "admin_type": "permission", "data_set": dataset.upper(), "userid": racf_id.upper()})
+        result = sear({"operation": "delete", "admin_type": "permission", "dataset": dataset.upper(), "userid": racf_id.upper()})
         return result.result["return_codes"]["racf_return_code"]
     else:
         return 8

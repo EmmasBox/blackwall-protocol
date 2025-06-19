@@ -17,7 +17,7 @@ else:
 class BaseGroupTraits(TraitsBase):
     owner: str | None = field(default=None,metadata={"label": "Owner", "allowed_in": {"add","alter","extract"}})
     installation_data: str | None = field(default=None,metadata={"label": "Installation data", "allowed_in": {"add","alter","extract"}})
-    data_set_model: str | None = field(default=None,metadata={"label": "Dataset model", "allowed_in": {"add","alter","extract"}})
+    dataset_model: str | None = field(default=None,metadata={"label": "Dataset model", "allowed_in": {"add","alter","extract"}})
     superior_group: str | None = field(default=None,metadata={"label": "Superior group","allowed_in": {"add","alter","extract"}})
     terminal_universal_access: bool | None = field(default=None,metadata={"label": "Terminal universal access","allowed_in": {"add","alter","extract"}})
     universal: str | None = field(default=None,metadata={"allowed_in": {"add","extract"}})

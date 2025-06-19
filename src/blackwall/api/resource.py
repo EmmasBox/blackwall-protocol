@@ -30,7 +30,7 @@ class BaseResourceTraits(TraitsBase):
     notify_userid: str | None = field(default=None,metadata={"label": "Notify userid", "allowed_in": {"add","alter"}})
     security_label: str | None = field(default=None,metadata={"label": "Security label", "allowed_in": {"add","alter"}})
     security_level: str | None = field(default=None,metadata={"label": "Security level", "allowed_in": {"add","alter"}})
-    single_data_set_tape_volume: bool | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    single_dataset_tape_volume: bool | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     time_zone: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     universal_access: str | None = field(default=None,metadata={"label": "UACC", "allowed_in": {"add","alter"}})
     warn_on_insufficient_access: bool | None = field(default=None,metadata={"label": "Warn on insufficient access", "allowed_in": {"add","alter"}})
