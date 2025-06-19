@@ -5,7 +5,7 @@ dynamic = ["version"]
 requires-python = ">=3.12"
 dependencies = [
   "pysear==0.2.0 ; sys_platform=='zos'",
-  "textual>=3.3.0",
+  "textual>=3.4.0",
 ]
 authors = [
   {name = "Emma Skovgaard"},
@@ -39,7 +39,7 @@ classifiers = [
 [project.optional-dependencies]
 images = [
   "qrcode>=8.1",
-  "textual-image>=0.8.2",
+  "textual-image>=0.8.3",
 ]
 dev = [
   "textual-dev>=1.7.0",
