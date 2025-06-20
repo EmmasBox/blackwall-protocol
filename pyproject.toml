@@ -5,7 +5,7 @@ dynamic = ["version"]
 requires-python = ">=3.12"
 dependencies = [
   "pysear==0.2.0 ; sys_platform=='zos'",
-  "textual>=3.4.0",
+  "textual>=3.5.0",
 ]
 authors = [
   {name = "Emma Skovgaard"},
