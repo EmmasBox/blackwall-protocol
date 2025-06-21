@@ -65,6 +65,22 @@ def get_group(group: str) -> dict:
         return result.result
     else:
         return {}
+    
+def get_groups(group: str) -> dict:
+    """Gets all groups on the system. Possibly slow on large systems"""
+    if sear_enabled:
+        result = sear({"operation": "search", "admin_type": "group"})
+        return result.result
+    else:
+        return {}
+
+def search_group(group: str) -> dict:
+    """Query groups on the system to find specific ones"""
+    if sear_enabled:
+        result = sear({"operation": "search", "admin_type": "group", "group_filter": group})
+        return result.result
+    else:
+        return {}
 
 def get_installation_data(group: str) -> str:
     """Gets the installation data of a group"""
