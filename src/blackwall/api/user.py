@@ -219,6 +219,22 @@ def get_user(username: str) -> dict[str, Any]:
     else:
         return False
     
+def get_users() -> dict[str, Any]:
+    """Extracts all users on the system, possibly slow on large systems"""
+    if sear_enabled:
+        result = sear({"operation":"search","admin_type":"user"})
+        return result.result
+    else:
+        return False
+    
+def search_users(query: str) -> dict[str, Any]:
+    """Doesn't handle users that don't exist, recommend using user_exists() first"""
+    if sear_enabled:
+        result = sear({"operation":"search","admin_type":"user", "userid_filter": query})
+        return result.result
+    else:
+        return False
+    
 def get_installation_data(username: str) -> str:
     """Gets the installation data of a user"""
     if sear_enabled:
