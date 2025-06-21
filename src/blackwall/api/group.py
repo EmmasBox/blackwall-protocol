@@ -66,7 +66,7 @@ def get_group(group: str) -> dict:
     else:
         return {}
     
-def get_groups(group: str) -> dict:
+def get_groups() -> dict:
     """Gets all groups on the system. Possibly slow on large systems"""
     if sear_enabled:
         result = sear({"operation": "search", "admin_type": "group"})
@@ -74,10 +74,10 @@ def get_groups(group: str) -> dict:
     else:
         return {}
 
-def search_group(group: str) -> dict:
+def search_group(query: str) -> dict:
     """Query groups on the system to find specific ones"""
     if sear_enabled:
-        result = sear({"operation": "search", "admin_type": "group", "group_filter": group})
+        result = sear({"operation": "search", "admin_type": "group", "group_filter": query})
         return result.result
     else:
         return {}
