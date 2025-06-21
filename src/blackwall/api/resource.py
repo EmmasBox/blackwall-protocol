@@ -246,6 +246,24 @@ def get_resource_profile(resource_class: str, resource: str) -> dict:
     else:
         return {}
     
+def get_resource_profiles(resource_class: str) -> dict:
+    """Gets all resource profiles in a class"""
+    if sear_enabled:
+        """Doesn't handle general resource profiles that don't exist, recommend using resource_profile_exists() first"""
+        result = sear({"operation": "search", "admin_type": "resource", "class": resource_class}) # type: ignore
+        return result.result
+    else:
+        return {}
+    
+def search_resource_profiles(resource_class: str, query: str) -> dict:
+    """Searches for profiles matching a filter"""
+    if sear_enabled:
+        """Doesn't handle general resource profiles that don't exist, recommend using resource_profile_exists() first"""
+        result = sear({"operation": "search", "admin_type": "resource", "class": resource_class, "resource_filter": query}) # type: ignore
+        return result.result
+    else:
+        return {}
+    
 def get_resource_acl(resource_class: str, resource: str) -> list[dict]:
     """Returns a string list with the access list of the specified resource"""
     if sear_enabled:
