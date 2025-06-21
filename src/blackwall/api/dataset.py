@@ -95,6 +95,22 @@ def get_dataset_profile(dataset: str) -> dict:
         return result.result
     else:
         return {}
+    
+def get_dataset_profiles() -> dict:
+    """Gets all dataset profiles on the system. Possibly slow on large systems"""
+    if sear_enabled:
+        result = sear({"operation": "search", "admin_type": "dataset"})
+        return result.result
+    else:
+        return {}
+
+def search_dataset_profiles(query: str) -> dict:
+    """Get dataset profiles matching a specific filtering"""
+    if sear_enabled:
+        result = sear({"operation": "extract", "admin_type": "dataset", "dataset_filter": query})
+        return result.result
+    else:
+        return {}
 
 def get_dataset_acl(dataset: str) -> list[dict]:
     """Returns a string list with the access list of the specified dataset profile"""
