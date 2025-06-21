@@ -228,7 +228,7 @@ def get_users() -> dict[str, Any]:
         return False
     
 def search_users(query: str) -> dict[str, Any]:
-    """Doesn't handle users that don't exist, recommend using user_exists() first"""
+    """Query users on the system to get ones matching a specific filter"""
     if sear_enabled:
         result = sear({"operation":"search","admin_type":"user", "userid_filter": query})
         return result.result
