@@ -16,7 +16,7 @@ from blackwall.panels.group.group import GroupInfo, PanelGroup
 from blackwall.panels.keyrings.keyrings import KeyringInfo, PanelKeyring
 from blackwall.panels.panel_mode import PanelMode
 from blackwall.panels.resource.resource import PanelResource, ResourceInfo
-from blackwall.panels.search.results import PanelResultsMixedType
+from blackwall.panels.search.results import PanelResultsMixedType, PanelResultsUsers
 from blackwall.panels.search.search_backend import QueryType, search_database_query_one
 from blackwall.panels.users.user import PanelUser, UserInfo
 from blackwall.regex import racf_id_regex
@@ -176,7 +176,9 @@ class PanelSearch(VerticalScroll):
 
                     self.notify(f"Found user: {search_query}")
                 else:
-                    self.notify(f"User {search_query} couldn't be found")
+                    search_results = user.search_users(query=search_query)
+                    results_panel = PanelResultsUsers(search_results)
+                    self.post_message(OpenTab("Results",results_panel))
             elif search_switcher_id == "search_group_panel":
                 if group.group_exists(group=search_query):
                     new_group_panel = PanelGroup()
