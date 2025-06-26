@@ -30,6 +30,9 @@ class PanelResultsUsers(VerticalScroll):
         user_table = self.get_child_by_id("results_user_table",DataTable)
         user_table.zebra_stripes = True
         user_table.add_columns(*USER_COLUMNS[0]) 
+        if "profiles" in self.user_dict:
+            for user in self.user_dict["profiles"]:
+                user_table.add_row(user)
 
 class PanelResultsGroup(VerticalScroll):
     def __init__(self, group_dict: dict):
