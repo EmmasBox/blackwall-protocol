@@ -176,7 +176,7 @@ class PanelSearch(VerticalScroll):
 
                     self.notify(f"Found user: {search_query}")
                 else:
-                    if search_query == "":
+                    if search_query == "" or search_query == "*":
                         search_results = user.get_users()
                     else:
                         search_results = user.search_users(query=search_query)
