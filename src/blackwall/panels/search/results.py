@@ -34,7 +34,8 @@ class PanelResultsUsers(VerticalScroll):
         if "profiles" in self.user_dict:
             for user_entry in self.user_dict["profiles"]:
                 user_info = user.get_user(username=user_entry)
-                base_traits = user.BaseUserTraits.from_dict(prefix="base",source=user_info["profile"]["base"])
+                if "profile" in user_info:
+                    base_traits = user.BaseUserTraits.from_dict(prefix="base",source=user_info["profile"]["base"])
                 user_table.add_row(user_entry,base_traits.name,base_traits.owner,base_traits.default_group)
 
 class PanelResultsGroup(VerticalScroll):
