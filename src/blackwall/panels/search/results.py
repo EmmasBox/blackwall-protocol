@@ -36,7 +36,9 @@ class PanelResultsUsers(VerticalScroll):
                 user_info = user.get_user(username=user_entry)
                 if "profile" in user_info:
                     base_traits = user.BaseUserTraits.from_dict(prefix="base",source=user_info["profile"]["base"])
-                    user_table.add_row(user_entry,base_traits.name,base_traits.owner,base_traits.default_group)
+                    if 'profile' in user_info and 'omvs' in user_info['profile']:
+                        omvs_traits = user.OMVSUserTraits.from_dict(prefix="omvs",source=user_info["profile"]["omvs"])
+                    user_table.add_row(user_entry,base_traits.name,base_traits.owner,base_traits.default_group,"","",f"{base_traits.last_access_date} at {base_traits.last_access_time}",base_traits.create_date)
                 else:
                     user_table.add_row(user_entry)
 
