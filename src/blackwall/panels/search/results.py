@@ -3,6 +3,7 @@ from textual.app import ComposeResult
 from textual.containers import VerticalScroll
 from textual.widgets import DataTable, Label
 
+from blackwall.api import user
 from blackwall.panels.search.search_backend import QueryType
 
 USER_COLUMNS = [
@@ -31,8 +32,9 @@ class PanelResultsUsers(VerticalScroll):
         user_table.zebra_stripes = True
         user_table.add_columns(*USER_COLUMNS[0]) 
         if "profiles" in self.user_dict:
-            for user in self.user_dict["profiles"]:
-                user_table.add_row(user)
+            for user_entry in self.user_dict["profiles"]:
+                user_info = user.get_user(username=user_entry)
+                user_table.add_row(user_entry)
 
 class PanelResultsGroup(VerticalScroll):
     def __init__(self, group_dict: dict):

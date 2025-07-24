@@ -176,7 +176,10 @@ class PanelSearch(VerticalScroll):
 
                     self.notify(f"Found user: {search_query}")
                 else:
-                    search_results = user.search_users(query=search_query)
+                    if search_query == "":
+                        search_results = user.get_users()
+                    else:
+                        search_results = user.search_users(query=search_query)
                     results_panel = PanelResultsUsers(search_results)
                     self.post_message(OpenTab("Results",results_panel))
             elif search_switcher_id == "search_group_panel":
