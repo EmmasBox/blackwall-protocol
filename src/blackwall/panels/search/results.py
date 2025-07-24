@@ -68,7 +68,7 @@ class PanelResultsUsers(Vertical):
 
             self.post_message(OpenTab(f"User: {cell_info}",new_user_panel))
 
-class PanelResultsGroup(VerticalScroll):
+class PanelResultsGroup(Vertical):
     def __init__(self, group_dict: dict):
         super().__init__()
         self.group_dict = group_dict
@@ -82,7 +82,7 @@ class PanelResultsGroup(VerticalScroll):
         group_table.zebra_stripes = True
         group_table.add_columns(*GROUP_COLUMNS[0])
 
-class PanelResultsDatasets(VerticalScroll):
+class PanelResultsDatasets(Vertical):
     def __init__(self, dataset_dict: dict):
         super().__init__()
         self.dataset_dict = dataset_dict
@@ -96,7 +96,7 @@ class PanelResultsDatasets(VerticalScroll):
         dataset_table.zebra_stripes = True
         dataset_table.add_columns(*DATASET_COLUMNS[0])
 
-class PanelResultsResources(VerticalScroll):
+class PanelResultsResources(Vertical):
     def __init__(self, resource_dict: dict):
         super().__init__()
         self.resource_dict = resource_dict
@@ -105,7 +105,7 @@ class PanelResultsResources(VerticalScroll):
         yield Label("General resources profiles:")
         yield DataTable(id="results_dataset_table")        
 
-class PanelResultsMixedType(VerticalScroll):
+class PanelResultsMixedType(Vertical):
     def __init__(self, results: dict[QueryType,dict]):
         super().__init__()
         self.results = results
