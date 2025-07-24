@@ -4,7 +4,9 @@ from textual.containers import VerticalScroll
 from textual.widgets import DataTable, Label
 
 from blackwall.api import user
+from blackwall.messages import OpenTab
 from blackwall.panels.search.search_backend import QueryType
+from blackwall.panels.traits_ui import get_user_objects_for_panel
 
 USER_COLUMNS = [
     ("User", "Name", "Owner", "Group", "SOAR", "RIRP","Last logon", "Created","Authentication", "UID", "Shell", "Home"),
@@ -55,6 +57,16 @@ class PanelResultsUsers(VerticalScroll):
                                        )
                 else:
                     user_table.add_row(user_entry)
+
+    def key_enter(self) -> None:
+        datatable = self.query_exactly_one("#results_user_table", DataTable)
+        column_index = datatable.cursor_column
+        if column_index == 0:
+            current_row = datatable.cursor_coordinate
+            cell_info = datatable.get_cell_at(current_row)
+            new_user_panel = get_user_objects_for_panel(cell_info)
+
+            self.post_message(OpenTab(f"User: {cell_info}",new_user_panel))
 
 class PanelResultsGroup(VerticalScroll):
     def __init__(self, group_dict: dict):
