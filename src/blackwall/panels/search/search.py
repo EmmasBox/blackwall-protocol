@@ -17,7 +17,7 @@ from blackwall.panels.keyrings.keyrings import KeyringInfo, PanelKeyring
 from blackwall.panels.resource.resource import PanelResource, ResourceInfo
 from blackwall.panels.search.results import PanelResultsMixedType, PanelResultsUsers
 from blackwall.panels.search.search_backend import QueryType, search_database_query_one
-from blackwall.panels.traits_ui import get_user_objects_for_panel
+from blackwall.panels.users.generator import get_user_objects_for_panel
 from blackwall.regex import racf_id_regex
 
 

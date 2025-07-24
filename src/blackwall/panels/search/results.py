@@ -6,7 +6,7 @@ from textual.widgets import DataTable, Label
 from blackwall.api import user
 from blackwall.messages import OpenTab
 from blackwall.panels.search.search_backend import QueryType
-from blackwall.panels.traits_ui import get_user_objects_for_panel
+from blackwall.panels.users.generator import get_user_objects_for_panel
 
 USER_COLUMNS = [
     ("User", "Name", "Owner", "Group", "SOAR", "RIRP","Last logon", "Created","Authentication", "UID", "Shell", "Home"),
