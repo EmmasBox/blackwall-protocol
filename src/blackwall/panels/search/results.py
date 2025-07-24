@@ -7,7 +7,7 @@ from blackwall.api import user
 from blackwall.panels.search.search_backend import QueryType
 
 USER_COLUMNS = [
-    ("User", "Owner", "Group", "SOAR", "RIRP", "UID", "Shell", "Home", "Last logon", "Created"),
+    ("User", "Name", "Owner", "Group", "SOAR", "RIRP","Last logon", "Created","Authentication", "UID", "Shell", "Home"),
 ]
 
 GROUP_COLUMNS = [
@@ -34,7 +34,8 @@ class PanelResultsUsers(VerticalScroll):
         if "profiles" in self.user_dict:
             for user_entry in self.user_dict["profiles"]:
                 user_info = user.get_user(username=user_entry)
-                user_table.add_row(user_entry)
+                base_traits = user.BaseUserTraits.from_dict(prefix="base",source=user_info["profile"]["base"])
+                user_table.add_row(user_entry,base_traits.name,base_traits.owner,base_traits.default_group)
 
 class PanelResultsGroup(VerticalScroll):
     def __init__(self, group_dict: dict):
