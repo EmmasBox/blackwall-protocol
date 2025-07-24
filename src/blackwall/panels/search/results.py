@@ -1,6 +1,6 @@
 
 from textual.app import ComposeResult
-from textual.containers import VerticalScroll
+from textual.containers import Vertical
 from textual.widgets import DataTable, Label
 
 from blackwall.api import user
@@ -20,7 +20,7 @@ DATASET_COLUMNS = [
     ("Dataset", "UACC", "Owner", "Created"),
 ]
 
-class PanelResultsUsers(VerticalScroll):
+class PanelResultsUsers(Vertical):
     def __init__(self, user_dict: dict):
         super().__init__()
         self.user_dict = user_dict
