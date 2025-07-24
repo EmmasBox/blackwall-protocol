@@ -7,7 +7,7 @@ from blackwall.api import user
 from blackwall.panels.search.search_backend import QueryType
 
 USER_COLUMNS = [
-    ("User", "Owner", "dfltgrp", "SOA", "RIRP", "UID", "Shell", "Home", "Last logon", "Created"),
+    ("User", "Owner", "Group", "SOAR", "RIRP", "UID", "Shell", "Home", "Last logon", "Created"),
 ]
 
 GROUP_COLUMNS = [
