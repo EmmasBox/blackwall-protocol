@@ -38,8 +38,8 @@ classifiers = [
 
 [project.optional-dependencies]
 images = [
-  "qrcode>=8.1",
-  "textual-image>=0.8.3",
+  "qrcode~=8.1",
+  "textual-image~=0.8.3",
 ]
 dev = [
   "textual-dev>=1.7.0",
