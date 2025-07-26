@@ -30,7 +30,9 @@ jobs:
         run: |
           # NOTE: put your own distribution build steps here.
           python -m pip install build
+          python -m pip install shiv
           python -m build
+          shiv -e "blackwall.main:main" -o ./dist/blackwall.pyz blackwall
       - name: Upload distributions
         uses: actions/upload-artifact@v4
         with:
