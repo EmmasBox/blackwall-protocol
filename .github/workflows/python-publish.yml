@@ -46,8 +46,6 @@ jobs:
       needs:
         - release-build
 
-      environment:
-          name: pypi
       env:
           GH_TOKEN: ${{ github.token }}
 
