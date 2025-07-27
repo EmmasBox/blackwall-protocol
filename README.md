@@ -43,8 +43,8 @@ Blackwall does not support ACF2 or Top Secret. Users are welcome to fork the cod
 
 #### Python packages
 
-- Textual 3.3.0 or later (for UI)
-- [SEAR](https://github.com/Mainframe-Renewal-Project/sear) 0.1.1 (To communicate with RACF)
+- Textual 3.7.1 or later (for UI)
+- [SEAR](https://github.com/Mainframe-Renewal-Project/sear) 0.2.1 (To communicate with RACF)
   - SEAR being a dependency means you need the IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space configured.
 
 ### Optional dependencies
