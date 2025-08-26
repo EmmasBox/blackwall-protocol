@@ -6,5 +6,9 @@
     "davidanson.vscode-markdownlint",
     // Ruff linter for Python
     "charliermarsh.ruff",
+    // Python extension
+    "ms-python.python",
+    // Pylance extension
+    "ms-python.vscode-pylance",
   ]
 }
