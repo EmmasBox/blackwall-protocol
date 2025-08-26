@@ -28,3 +28,6 @@ dist
 
 # Vim backup files
 *~
+
+# Executables
+.pyz
