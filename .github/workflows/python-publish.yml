@@ -69,7 +69,8 @@ jobs:
 
       runs-on: ubuntu-latest
       needs:
-        - release-build
+        - release-build-312
+        - release-build-313
 
       env:
           GH_TOKEN: ${{ github.token }}
@@ -90,7 +91,8 @@ jobs:
   pypi-publish:
     runs-on: ubuntu-latest
     needs:
-      - release-build
+      - release-build-312
+      - release-build-313
     permissions:
       # IMPORTANT: this permission is mandatory for trusted publishing
       id-token: write
