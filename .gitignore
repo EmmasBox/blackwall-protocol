@@ -10,6 +10,7 @@
 *.xlsb
 *.xlsm
 *.xlsx
+*.tmp
 
 # Python
 !pyproject.toml
