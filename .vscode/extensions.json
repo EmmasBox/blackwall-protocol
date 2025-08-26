@@ -10,5 +10,7 @@
     "ms-python.python",
     // Pylance extension
     "ms-python.vscode-pylance",
+    // Textual CSS extension
+    "textualize.textual-syntax-highlighter"
   ]
 }
