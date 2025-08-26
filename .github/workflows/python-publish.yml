@@ -16,7 +16,7 @@ permissions:
   contents: read
 
 jobs:
-  release-build:
+  release-build-312:
     runs-on: ubuntu-latest
 
     steps:
@@ -32,7 +32,30 @@ jobs:
           python -m pip install build
           python -m pip install shiv
           python -m build
-          shiv -e "blackwall.main:main" -o ./dist/blackwall.pyz blackwall
+          shiv -e "blackwall.main:main" -o ./dist/blackwall_py312.pyz blackwall
+      - name: Upload distributions
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-dists
+          path: dist/
+
+  release-build-313:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Build release distributions
+        run: |
+          # NOTE: put your own distribution build steps here.
+          python -m pip install build
+          python -m pip install shiv
+          python -m build
+          shiv -e "blackwall.main:main" -o ./dist/blackwall_py313.pyz blackwall
       - name: Upload distributions
         uses: actions/upload-artifact@v4
         with:
