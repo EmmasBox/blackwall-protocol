@@ -30,4 +30,4 @@ dist
 *~
 
 # Executables
-.pyz
+*.pyz
