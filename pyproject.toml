@@ -2,7 +2,7 @@
 name = "blackwall"
 description = "Blackwall Protocol for mainframe security administration"
 dynamic = ["version"]
-requires-python = ">=3.12"
+requires-python = ">=3.13"
 dependencies = [
   "pysear~=0.4.0 ; sys_platform=='zos'",
   "textual~=3.7.1",
