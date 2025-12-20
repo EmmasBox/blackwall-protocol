@@ -55,7 +55,7 @@ Pypi = "https://pypi.org/project/blackwall/"
 Documentation = "https://emmasbox.github.io/blackwall-protocol-docs/"
 
 [build-system]
-requires = ["setuptools >= 61.0", "setuptools-scm >= 8.2"]
+requires = ["setuptools >= 80.9", "setuptools-scm >= 9.2"]
 build-backend = "setuptools.build_meta"
 
 [tool.setuptools_scm]
