@@ -1,10 +1,8 @@
 
-from textual import on
 from textual.app import ComposeResult
-from textual.binding import Binding
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.reactive import reactive
-from textual.widgets import DataTable, Input, Label, Select
+from textual.widgets import DataTable, Input, Label
 
 from blackwall.api.rrsf import (
     BaseRRSFTraits,
