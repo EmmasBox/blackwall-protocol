@@ -10,7 +10,8 @@ from blackwall.api.rrsf import (
 )
 
 RRSF_COLUMNS = [
-    ("Node", 
+    (
+     "Node", 
      "System name", 
      "Description", 
      "State", 
