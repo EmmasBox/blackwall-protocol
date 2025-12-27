@@ -8,6 +8,7 @@ from blackwall.api.rrsf import (
     BaseRRSFTraits,
     get_rrsf_options,
 )
+from blackwall.emoji import get_emoji
 
 RRSF_COLUMNS = [
     (
@@ -17,8 +18,8 @@ RRSF_COLUMNS = [
      "State", 
      "Protocol",
      "Requests denied", 
-     "Received work" , 
-     "Sent work", 
+     f"Received work{get_emoji(" 🔽")}" , 
+     f"Sent work{get_emoji(" 🔼")}" , 
      ),
 ]
 
