@@ -142,7 +142,7 @@ class TabSystem(HorizontalGroup):
 
     def action_open_rrsf(self) -> None:
         """Add a new RRSF panel tab."""
-        self.post_message(OpenTab(f"{get_emoji("↔️")} RRSF status",PanelRRSF()))
+        self.post_message(OpenTab(f"{get_emoji("🔃")} RRSF status",PanelRRSF()))
 
     #Remove current tab
     def action_remove(self) -> None:
