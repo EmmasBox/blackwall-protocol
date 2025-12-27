@@ -1,35 +1,37 @@
 
-from collections.abc import Generator
-
 from textual import on
 from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.reactive import reactive
-from textual.suggester import SuggestFromList
-from textual.widgets import Button, ContentSwitcher, DataTable, Input, Label, Select
+from textual.widgets import DataTable, Input, Label, Select
 
 from blackwall.api.rrsf import (
     BaseRRSFTraits,
     get_rrsf_options,
 )
 
+RRSF_COLUMNS = [
+    ("Node","System name", "Description", "State", "Protocol","Requests denied"),
+]
 
-def generate_rrsf_node(node: dict) -> Generator:
-    if "node_name" in node:
-        yield Label(node["node_name"])
-
-    if "multisystem_node_name" in node:
-        yield Label(f"System: {node["multisystem_node_name"]}")
 
 class PanelRRSFNodes(VerticalGroup):
     base_traits: reactive[BaseRRSFTraits] = reactive(BaseRRSFTraits())
 
-    def compose(self) -> ComposeResult:
-        yield Label("RRSF Nodes", classes="rrsf-label")
+    def on_mount(self) -> None:
+        rrsf_table = self.get_child_by_id("rrsf_nodes_table",DataTable)
+        rrsf_table.zebra_stripes = True
+        rrsf_table.add_columns(*RRSF_COLUMNS[0]) 
+
+    def watch_base_traits(self):
         if self.base_traits.nodes is not None:
             for node in self.base_traits.nodes:
-                yield from generate_rrsf_node(node)
+                pass
+
+    def compose(self) -> ComposeResult:
+        yield Label("RRSF Nodes", classes="rrsf-label")
+        yield DataTable(id="rrsf_nodes_table")
 
 class PanelRRSFMetaData(HorizontalGroup):
     base_traits: reactive[BaseRRSFTraits] = reactive(BaseRRSFTraits())
