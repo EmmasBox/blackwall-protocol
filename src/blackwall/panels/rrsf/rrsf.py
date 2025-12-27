@@ -24,6 +24,11 @@ RRSF_COLUMNS = [
      ),
 ]
 
+def rrsf_get_key(key: str, dict: dict):
+    if key in dict:
+        return str(dict[key])
+    else:
+        return ""
 
 class PanelRRSFNodes(VerticalGroup):
     base_traits: reactive[BaseRRSFTraits] = reactive(BaseRRSFTraits())
@@ -39,16 +44,16 @@ class PanelRRSFNodes(VerticalGroup):
 
             for node in self.base_traits.nodes:
                 rrsf_table.add_row(
-                    node["base:node_name"] or "",
-                    node["base:multisystem_node_name"] or "",
-                    node["base:node_description"] or "",
-                    str(node["base:node_state"] or ""),
-                    node["base:node_protocol"] or "",
-                    str(node["base:requests_denied"] or ""),
-                    node["base:date_of_last_received_work"] or "",
-                    node["base:time_of_last_received_work"] or "",
-                    node["base:date_of_last_sent_work"] or "",
-                    node["base:time_of_last_sent_work"] or "",
+                    rrsf_get_key("base:node_name", node),
+                    rrsf_get_key("base:multisystem_node_name", node),
+                    rrsf_get_key("base:node_description", node),
+                    rrsf_get_key("base:node_state", node),
+                    rrsf_get_key("base:node_protocol", node),
+                    rrsf_get_key("base:requests_denied", node),
+                    rrsf_get_key("base:date_of_last_received_work", node),
+                    rrsf_get_key("base:time_of_last_received_work", node),
+                    rrsf_get_key("base:date_of_last_sent_work", node),
+                    rrsf_get_key("base:time_of_last_sent_work", node),
                     )
 
     def compose(self) -> ComposeResult:
