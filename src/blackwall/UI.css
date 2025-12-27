@@ -273,3 +273,10 @@ ToggleButton.-on > .toggle--button {
 .copy-buttons {
     margin: 1;
 }
+
+# RRSF panel
+
+.rrsf-metadata {
+    margin: 1;
+    max-width: 16;
+}
