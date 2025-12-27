@@ -2,6 +2,7 @@
 
 import importlib.util
 from dataclasses import dataclass, field
+from typing import Any
 
 from .traits_base import TraitsBase
 
@@ -20,6 +21,7 @@ class BaseRRSFTraits(TraitsBase):
     subsystem_userid: str | None = field(default=None,metadata={"label": "Sub-system userid","allowed_in": {"extract"}})
     subsystem_operator_prefix: str | None = field(default=None,metadata={"label": "Sub-system operator prefix","allowed_in": {"extract"}})
     number_of_defined_nodes: int | None = field(default=None,metadata={"label": "RRSF nodes defined","allowed_in": {"extract"}})
+    nodes: list[Any] | None = field(default=None,metadata={"allowed_in": {"extract"}})
 
 def get_rrsf_options() -> dict[str, Any]:
     """Returns a dict with all of the RRSF options"""
