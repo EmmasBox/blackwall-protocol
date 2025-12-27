@@ -30,7 +30,7 @@ class BaseResourceTraits(TraitsBase):
     notify_userid: str | None = field(default=None,metadata={"label": "Notify userid", "allowed_in": {"add","alter"}})
     security_label: str | None = field(default=None,metadata={"label": "Security label", "allowed_in": {"add","alter"}})
     security_level: str | None = field(default=None,metadata={"label": "Security level", "allowed_in": {"add","alter"}})
-    single_data_set_tape_volume: bool | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
+    single_dataset_tape_volume: bool | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     time_zone: str | None = field(default=None,metadata={"allowed_in": {"add","alter"}})
     universal_access: str | None = field(default=None,metadata={"label": "UACC", "allowed_in": {"add","alter"}})
     warn_on_insufficient_access: bool | None = field(default=None,metadata={"label": "Warn on insufficient access", "allowed_in": {"add","alter"}})
@@ -111,7 +111,7 @@ class ICSFResourceTraits(TraitsBase):
     symmetric_export_public_keys: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
     symmetric_cpacf_rewrap: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     symmetric_cpacf_rewrap_return: bool | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
-    asymetric_key_usage: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
+    asymmetric_key_usage: str | None = field(default=None,metadata={"allowed_in": {"add","alter","extract"}})
     key_usage_options: list[str] | None = field(default=None,metadata={"allowed_in": {"extract"}})
 
 @dataclass
@@ -242,6 +242,24 @@ def get_resource_profile(resource_class: str, resource: str) -> dict:
     if sear_enabled:
         """Doesn't handle general resource profiles that don't exist, recommend using resource_profile_exists() first"""
         result = sear({"operation": "extract", "admin_type": "resource", "resource": resource.upper(), "class": resource_class}) # type: ignore
+        return result.result
+    else:
+        return {}
+    
+def get_resource_profiles(resource_class: str) -> dict:
+    """Gets all resource profiles in a class"""
+    if sear_enabled:
+        """Doesn't handle general resource profiles that don't exist, recommend using resource_profile_exists() first"""
+        result = sear({"operation": "search", "admin_type": "resource", "class": resource_class}) # type: ignore
+        return result.result
+    else:
+        return {}
+    
+def search_resource_profiles(resource_class: str, query: str) -> dict:
+    """Searches for profiles matching a filter"""
+    if sear_enabled:
+        """Doesn't handle general resource profiles that don't exist, recommend using resource_profile_exists() first"""
+        result = sear({"operation": "search", "admin_type": "resource", "class": resource_class, "resource_filter": query}) # type: ignore
         return result.result
     else:
         return {}

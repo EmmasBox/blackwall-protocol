@@ -10,14 +10,18 @@
 *.xlsb
 *.xlsm
 *.xlsx
+*.tmp
 
 # Python
 !pyproject.toml
 .venv
+venv
 __pycache__
 build
 *.egg-info
 dist
+*.whl
+*.ruff_cache
 
 # Vim swap files
 [._]*.s[a-v][a-z]
@@ -28,3 +32,6 @@ dist
 
 # Vim backup files
 *~
+
+# Executables
+*.pyz

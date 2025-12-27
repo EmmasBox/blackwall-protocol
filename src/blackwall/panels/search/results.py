@@ -1,12 +1,15 @@
 
 from textual.app import ComposeResult
-from textual.containers import VerticalScroll
+from textual.containers import Vertical
 from textual.widgets import DataTable, Label
 
+from blackwall.api import user
+from blackwall.messages import OpenTab
 from blackwall.panels.search.search_backend import QueryType
+from blackwall.panels.users.generator import get_user_objects_for_panel
 
 USER_COLUMNS = [
-    ("User", "Owner", "dfltgrp", "SOA", "RIRP", "UID", "Shell", "Home", "Last logon", "Created"),
+    ("User", "Name", "Owner", "Group","Last logon", "Created", "UID", "Shell", "Home"),
 ]
 
 GROUP_COLUMNS = [
@@ -17,7 +20,7 @@ DATASET_COLUMNS = [
     ("Dataset", "UACC", "Owner", "Created"),
 ]
 
-class PanelResultsUsers(VerticalScroll):
+class PanelResultsUsers(Vertical):
     def __init__(self, user_dict: dict):
         super().__init__()
         self.user_dict = user_dict
@@ -30,8 +33,52 @@ class PanelResultsUsers(VerticalScroll):
         user_table = self.get_child_by_id("results_user_table",DataTable)
         user_table.zebra_stripes = True
         user_table.add_columns(*USER_COLUMNS[0]) 
+        if "profiles" in self.user_dict:
+            for user_entry in self.user_dict["profiles"]:
+                user_info = user.get_user(username=user_entry)
+                if "profile" in user_info:
+                    base_traits = user.BaseUserTraits.from_dict(prefix="base",source=user_info["profile"]["base"])
 
-class PanelResultsGroup(VerticalScroll):
+                    uid_temp = ""
+                    shell_temp = ""
+                    home_temp = ""
+
+                    if 'omvs' in user_info['profile']:
+                        omvs_traits = user.OMVSUserTraits.from_dict(prefix="omvs",source=user_info["profile"]["omvs"])
+
+                        uid_temp = omvs_traits.uid
+                        shell_temp = omvs_traits.default_shell
+                        home_temp = omvs_traits.home_directory
+                    
+                    if base_traits.last_access_date is not None and base_traits.last_access_time is not None:
+                        logon_date = f"{base_traits.last_access_date} at {base_traits.last_access_time}"
+                    else:
+                        logon_date = ""
+                    
+                    user_table.add_row(user_entry,
+                                       base_traits.name,
+                                       base_traits.owner,
+                                       base_traits.default_group,
+                                       logon_date,
+                                       base_traits.create_date,
+                                       uid_temp,
+                                       shell_temp,
+                                       home_temp,
+                                       )
+                else:
+                    user_table.add_row(user_entry)
+
+    def key_enter(self) -> None:
+        datatable = self.query_exactly_one("#results_user_table", DataTable)
+        column_index = datatable.cursor_column
+        if column_index == 0:
+            current_row = datatable.cursor_coordinate
+            cell_info = datatable.get_cell_at(current_row)
+            new_user_panel = get_user_objects_for_panel(cell_info)
+
+            self.post_message(OpenTab(f"User: {cell_info}",new_user_panel))
+
+class PanelResultsGroup(Vertical):
     def __init__(self, group_dict: dict):
         super().__init__()
         self.group_dict = group_dict
@@ -45,7 +92,7 @@ class PanelResultsGroup(VerticalScroll):
         group_table.zebra_stripes = True
         group_table.add_columns(*GROUP_COLUMNS[0])
 
-class PanelResultsDatasets(VerticalScroll):
+class PanelResultsDatasets(Vertical):
     def __init__(self, dataset_dict: dict):
         super().__init__()
         self.dataset_dict = dataset_dict
@@ -59,7 +106,7 @@ class PanelResultsDatasets(VerticalScroll):
         dataset_table.zebra_stripes = True
         dataset_table.add_columns(*DATASET_COLUMNS[0])
 
-class PanelResultsResources(VerticalScroll):
+class PanelResultsResources(Vertical):
     def __init__(self, resource_dict: dict):
         super().__init__()
         self.resource_dict = resource_dict
@@ -68,7 +115,7 @@ class PanelResultsResources(VerticalScroll):
         yield Label("General resources profiles:")
         yield DataTable(id="results_dataset_table")        
 
-class PanelResultsMixedType(VerticalScroll):
+class PanelResultsMixedType(Vertical):
     def __init__(self, results: dict[QueryType,dict]):
         super().__init__()
         self.results = results

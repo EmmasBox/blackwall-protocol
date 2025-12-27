@@ -1,0 +1,6 @@
+*.py		text working-tree-encoding=UTF-8
+*.pyc		text working-tree-encoding=UTF-8
+*.svg		text working-tree-encoding=UTF-8
+*.png		text working-tree-encoding=UTF-8
+*.toml		text working-tree-encoding=ISO8859-1
+*.tml		text working-tree-encoding=ISO8859-1

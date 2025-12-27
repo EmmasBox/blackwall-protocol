@@ -41,7 +41,7 @@ class PanelGroupInstallationData(VerticalGroup):
 class PanelGroupDatasetModel(VerticalGroup):
     def compose(self) -> ComposeResult:
         yield Label("Dataset model:")
-        yield Input(id="base_data_set_model",classes="field-long-generic")
+        yield Input(id="base_dataset_model",classes="field-long-generic")
 
 class PanelGroupTerminalUACC(VerticalGroup):
     def compose(self) -> ComposeResult:

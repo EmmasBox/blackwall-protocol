@@ -104,7 +104,7 @@ class PanelUserAttributes(VerticalGroup):
             yield RadioButton("Special",id="base_special",tooltip="This is RACF's way of making a user admin. Special users can make other users special, making this a potentially dangerous option",classes="generic-checkbox-small")
             yield RadioButton("Operations",id="base_operations",tooltip="This is a very dangerous attribute that allows you to bypass most security checks on the system, this should only be used during maintenance tasks and removed immediately afterwards",classes="generic-checkbox-small")
             yield RadioButton("Auditor",id="base_auditor",classes="generic-checkbox-small",tooltip="This attribute allows you to change system options and extract data about the RACF database, this one is pretty dangerous but not as dangerous as special.")
-            yield RadioButton("Read only auditor",id="base_audit_responsibility",classes="generic-checkbox-small",tooltip="This attribute allows you to extract data about the RACF database, but you can't change any settings. This one is still dangerous but significantly less than the others as nothing can be changed.")
+            yield RadioButton("Read only auditor",id="base_read_only_auditor",classes="generic-checkbox-small",tooltip="This attribute allows you to extract data about the RACF database, but you can't change any settings. This one is still dangerous but significantly less than the others as nothing can be changed.")
             yield Label("Restrictions:")
             yield RadioButton("Restricted",id="base_restrict_global_access_checking",classes="generic-checkbox-small",tooltip="If you enable this then the user won't be able to access resources through UACC. Useful for certain types of system users.")
 
@@ -127,8 +127,8 @@ class PanelUserDatasets(VerticalGroup):
     def compose(self) -> ComposeResult:
         with Collapsible(title="Datasets"):
             yield Label("Model dataset:")
-            yield Input(max_length=255,id="base_model_data_set",classes="field-long-generic")
-            yield RadioButton(label="Group dataset access",id="base_group_data_set_access",classes="generic-checkbox-medium")
+            yield Input(max_length=255,id="base_model_dataset",classes="field-long-generic")
+            yield RadioButton(label="Group dataset access",id="base_group_dataset_access",classes="generic-checkbox-medium")
 
 class PanelUserSegments(VerticalGroup):
     """Component where the user can add segments such as the OMVS segment"""

@@ -43,8 +43,8 @@ Blackwall does not support ACF2 or Top Secret. Users are welcome to fork the cod
 
 #### Python packages
 
-- Textual 3.3.0 or later (for UI)
-- [SEAR](https://github.com/Mainframe-Renewal-Project/sear) 0.1.1 (To communicate with RACF)
+- Textual 3.7.1 or later (for UI)
+- [SEAR](https://github.com/Mainframe-Renewal-Project/sear) 0.2.1 (To communicate with RACF)
   - SEAR being a dependency means you need the IRRSEQ00, IRRSMO00 and RACF Subsystem Address Space configured.
 
 ### Optional dependencies
@@ -97,14 +97,19 @@ pip install blackwall[images]
 
 Make sure each user that is supposed to use this software has access to the following RACF profiles:
 
- Class    | Profile                  | Access | Reason
-----------|--------------------------|--------|--------
- FACILITY | IRR.RADMIN.LISTUSER      | Read   | User information
- FACILITY | IRR.RADMIN.LISTGRP       | Read   | Group information
- FACILITY | IRR.RADMIN.RLIST         | Read   | General resource profile information
- FACILITY | IRR.RADMIN.LISTDSD       | Read   | Dataset profile information
- FACILITY | IRR.RADMIN.SETROPTS.LIST | Read   | RACF system settings
- XFACILIT | IRR.IRRSMO00.PRECHECK    | Read   | Create new profiles in RACF and modify things
+ Class    | Profile                                   | Access | Reason
+----------|-------------------------------------------|--------|--------
+ FACILITY | IRR.RADMIN.LISTUSER                       | Read   | User information
+ FACILITY | IRR.RADMIN.LISTGRP                        | Read   | Group information
+ FACILITY | IRR.RADMIN.RLIST                          | Read   | General resource profile information
+ FACILITY | IRR.RADMIN.LISTDSD                        | Read   | Dataset profile information
+ FACILITY | IRR.RADMIN.SETROPTS.LIST                  | Read   | RACF system settings
+ FACILITY | IRR.DIGTCERT.LIST                         | Read   | List certificates
+ FACILITY | IRR.DIGTCERT.LISTRING                     | Read   | List keyrings
+ FACILITY | IRR.RADMIN.EXTRACT.RRSF                   | Read   | RRSF settings
+ XFACILIT | IRR.IRRSMO00.PRECHECK                     | Read   | Create new profiles in RACF and modify things
+ OPERCMDS | <replace with subsystem-name>.SET.LIST    | Read   | RRSF node definitions
+ OPERCMDS | <replace with subsystem-name>.TARGET.LIST | Read   | RRSF node definitions
 
 It is suggested to create a group with each of the required resources. This group can be named "BLACKWAL" after the program.
 

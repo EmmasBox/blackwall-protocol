@@ -16,6 +16,7 @@ from .panels.command_output.command_output import PanelCommandOutput
 from .panels.dataset.dataset import PanelDataset
 from .panels.group.group import PanelGroup
 from .panels.resource.resource import PanelResource
+from .panels.rrsf.rrsf import PanelRRSF
 from .panels.search.search import PanelSearch
 from .panels.setropts.setropts import PanelSetropts
 from .panels.users.user import PanelUser
@@ -41,6 +42,7 @@ class TabSystem(HorizontalGroup):
         #("ctrl+a", "open_analysis", "Open analysis tab"),
         ("ctrl+o", "open_options", "Open RACF options tab"),
         ("ctrl+n", "open_resource_permits", "Open resource permits tab"),
+        ("ctrl+s", "open_rrsf", "Open RRSF tab"),
         #("ctrl+k", "open_copy", "Open copy tab"),
         #("ctrl+b", "open_backout", "Open backout tab"),
         ("ctrl+w", "remove", "Remove active tab"),
@@ -137,6 +139,10 @@ class TabSystem(HorizontalGroup):
     def action_open_backout(self) -> None:
         """Add a new backout panel tab."""
         self.post_message(OpenTab(f"{get_emoji("↪")} Backout changes",PanelBackout()))
+
+    def action_open_rrsf(self) -> None:
+        """Add a new RRSF panel tab."""
+        self.post_message(OpenTab(f"{get_emoji("🔃")} RRSF status",PanelRRSF()))
 
     #Remove current tab
     def action_remove(self) -> None:

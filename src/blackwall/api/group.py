@@ -17,7 +17,7 @@ else:
 class BaseGroupTraits(TraitsBase):
     owner: str | None = field(default=None,metadata={"label": "Owner", "allowed_in": {"add","alter","extract"}})
     installation_data: str | None = field(default=None,metadata={"label": "Installation data", "allowed_in": {"add","alter","extract"}})
-    data_set_model: str | None = field(default=None,metadata={"label": "Dataset model", "allowed_in": {"add","alter","extract"}})
+    dataset_model: str | None = field(default=None,metadata={"label": "Dataset model", "allowed_in": {"add","alter","extract"}})
     superior_group: str | None = field(default=None,metadata={"label": "Superior group","allowed_in": {"add","alter","extract"}})
     terminal_universal_access: bool | None = field(default=None,metadata={"label": "Terminal universal access","allowed_in": {"add","alter","extract"}})
     universal: str | None = field(default=None,metadata={"allowed_in": {"add","extract"}})
@@ -62,6 +62,22 @@ def get_group(group: str) -> dict:
     """Doesn't handle group profiles that don't exist, recommend using group_exists() first"""
     if sear_enabled:
         result = sear({"operation": "extract", "admin_type": "group", "group": group.upper()})
+        return result.result
+    else:
+        return {}
+    
+def get_groups() -> dict:
+    """Gets all groups on the system. Possibly slow on large systems"""
+    if sear_enabled:
+        result = sear({"operation": "search", "admin_type": "group"})
+        return result.result
+    else:
+        return {}
+
+def search_group(query: str) -> dict:
+    """Query groups on the system to find specific ones"""
+    if sear_enabled:
+        result = sear({"operation": "search", "admin_type": "group", "group_filter": query})
         return result.result
     else:
         return {}
