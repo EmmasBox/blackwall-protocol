@@ -276,6 +276,10 @@ ToggleButton.-on > .toggle--button {
 
 # RRSF panel
 
+.rrsf-metadata-label {
+    margin: 1;
+}
+
 .rrsf-metadata {
     margin: 1;
     max-width: 16;
