@@ -46,7 +46,7 @@ class PanelRRSFNodes(VerticalGroup):
                     rrsf_get_key("base:multisystem_node_name", node),
                     rrsf_get_key("base:node_description", node),
                     rrsf_get_key("base:node_state", node),
-                    rrsf_get_key("base:node_protocol", node),
+                    rrsf_get_key("base:node_protocol", node).upper(),
                     rrsf_get_key("base:requests_denied", node),
                     f"{rrsf_get_key("base:time_of_last_received_work", node)} {rrsf_get_key("base:date_of_last_received_work", node)}",
                     f"{rrsf_get_key("base:time_of_last_sent_work", node)} {rrsf_get_key("base:date_of_last_sent_work", node)}",
