@@ -24,7 +24,7 @@ RRSF_COLUMNS = [
      ),
 ]
 
-def rrsf_get_key(key: str, dict: dict):
+def rrsf_get_key(key: str, dict: dict) -> str:
     if key in dict:
         return str(dict[key])
     else:
