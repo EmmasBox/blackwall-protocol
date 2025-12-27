@@ -104,6 +104,8 @@ Make sure each user that is supposed to use this software has access to the foll
  FACILITY | IRR.RADMIN.RLIST                          | Read   | General resource profile information
  FACILITY | IRR.RADMIN.LISTDSD                        | Read   | Dataset profile information
  FACILITY | IRR.RADMIN.SETROPTS.LIST                  | Read   | RACF system settings
+ FACILITY | IRR.DIGTCERT.LIST                         | Read   | List certificates
+ FACILITY | IRR.DIGTCERT.LISTRING                     | Read   | List keyrings
  FACILITY | IRR.RADMIN.EXTRACT.RRSF                   | Read   | RRSF settings
  XFACILIT | IRR.IRRSMO00.PRECHECK                     | Read   | Create new profiles in RACF and modify things
  OPERCMDS | <replace with subsystem-name>.SET.LIST    | Read   | RRSF node definitions
