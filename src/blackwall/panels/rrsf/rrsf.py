@@ -12,19 +12,17 @@ from blackwall.api.rrsf import (
 RRSF_COLUMNS = [
     (
      "Node", 
-     "System name", 
+     "System", 
      "Description", 
      "State", 
      "Protocol",
      "Requests denied", 
-     "Date of last received work" , 
-     "Time of last received work", 
-     "Date of last sent work", 
-     "Time of last sent work",
+     "Received work" , 
+     "Sent work", 
      ),
 ]
 
-def rrsf_get_key(key: str, dict: dict):
+def rrsf_get_key(key: str, dict: dict) -> str:
     if key in dict:
         return str(dict[key])
     else:
@@ -48,12 +46,10 @@ class PanelRRSFNodes(VerticalGroup):
                     rrsf_get_key("base:multisystem_node_name", node),
                     rrsf_get_key("base:node_description", node),
                     rrsf_get_key("base:node_state", node),
-                    rrsf_get_key("base:node_protocol", node),
+                    rrsf_get_key("base:node_protocol", node).upper(),
                     rrsf_get_key("base:requests_denied", node),
-                    rrsf_get_key("base:date_of_last_received_work", node),
-                    rrsf_get_key("base:time_of_last_received_work", node),
-                    rrsf_get_key("base:date_of_last_sent_work", node),
-                    rrsf_get_key("base:time_of_last_sent_work", node),
+                    f"{rrsf_get_key("base:time_of_last_received_work", node)} {rrsf_get_key("base:date_of_last_received_work", node)}",
+                    f"{rrsf_get_key("base:time_of_last_sent_work", node)} {rrsf_get_key("base:date_of_last_sent_work", node)}",
                     )
 
     def compose(self) -> ComposeResult:
@@ -73,6 +69,9 @@ class PanelRRSFMetaData(HorizontalGroup):
 
         if self.base_traits.subsystem_userid is not None:
             self.get_child_by_id(id="rrsf_subsystem_userid",expect_type=Input).value = self.base_traits.subsystem_userid
+        
+        if self.base_traits.subsystem_operator_prefix is not None:
+            self.get_child_by_id(id="rrsf_subsystem_operator_prefix",expect_type=Input).value = self.base_traits.subsystem_operator_prefix
 
     def compose(self) -> ComposeResult:
         yield Label("Subsystem name: ", classes="rrsf-label")
@@ -80,6 +79,9 @@ class PanelRRSFMetaData(HorizontalGroup):
         
         yield Label("Subsystem userid: ", classes="rrsf-label")
         yield Input(id="rrsf_subsystem_userid", max_length=8, disabled=True, compact=True, classes="rrsf-metadata")
+
+        yield Label("Operator prefix: ", classes="rrsf-label")
+        yield Input(id="rrsf_subsystem_operator_prefix", max_length=8, disabled=True, compact=True, classes="rrsf-metadata")
 
 class PanelRRSF(VerticalScroll):
     base_traits: reactive[BaseRRSFTraits] = reactive(BaseRRSFTraits())
