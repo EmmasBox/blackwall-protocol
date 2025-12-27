@@ -9,7 +9,7 @@ from blackwall.panels.search.search_backend import QueryType
 from blackwall.panels.users.generator import get_user_objects_for_panel
 
 USER_COLUMNS = [
-    ("User", "Name", "Owner", "Group", "SOAR", "RIRP","Last logon", "Created","Authentication", "UID", "Shell", "Home"),
+    ("User", "Name", "Owner", "Group","Last logon", "Created", "UID", "Shell", "Home"),
 ]
 
 GROUP_COLUMNS = [
@@ -38,8 +38,17 @@ class PanelResultsUsers(Vertical):
                 user_info = user.get_user(username=user_entry)
                 if "profile" in user_info:
                     base_traits = user.BaseUserTraits.from_dict(prefix="base",source=user_info["profile"]["base"])
-                    if 'profile' in user_info and 'omvs' in user_info['profile']:
+
+                    uid_temp = ""
+                    shell_temp = ""
+                    home_temp = ""
+
+                    if 'omvs' in user_info['profile']:
                         omvs_traits = user.OMVSUserTraits.from_dict(prefix="omvs",source=user_info["profile"]["omvs"])
+
+                        uid_temp = omvs_traits.uid
+                        shell_temp = omvs_traits.default_shell
+                        home_temp = omvs_traits.home_directory
                     
                     if base_traits.last_access_date is not None and base_traits.last_access_time is not None:
                         logon_date = f"{base_traits.last_access_date} at {base_traits.last_access_time}"
@@ -50,10 +59,11 @@ class PanelResultsUsers(Vertical):
                                        base_traits.name,
                                        base_traits.owner,
                                        base_traits.default_group,
-                                       "",
-                                       "",
                                        logon_date,
                                        base_traits.create_date,
+                                       uid_temp,
+                                       shell_temp,
+                                       home_temp,
                                        )
                 else:
                     user_table.add_row(user_entry)
