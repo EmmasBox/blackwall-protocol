@@ -38,12 +38,12 @@ class PanelRRSFMetaData(HorizontalGroup):
             self.notify(self.base_traits.subsystem_name)
 
     def watch_base_traits(self):
-        if self.base_traits.subsystem_name is not None:
-            yield Label(f"Subsystem name: {self.base_traits.subsystem_name}")
-        
-        if self.base_traits.subsystem_userid is not None:
-            yield Label(f"Subsystem userid: {self.base_traits.subsystem_userid}")
+        pass
 
+    def compose(self) -> ComposeResult:
+        yield Label("Subsystem name: ")
+        
+        yield Label("Subsystem userid: ")
 
 class PanelRRSF(VerticalScroll):
     base_traits: reactive[BaseRRSFTraits] = reactive(BaseRRSFTraits())
