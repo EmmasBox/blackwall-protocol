@@ -26,8 +26,17 @@ class PanelRRSFNodes(VerticalGroup):
 
     def watch_base_traits(self):
         if self.base_traits.nodes is not None:
+            rrsf_table = self.get_child_by_id("rrsf_nodes_table",DataTable)
+
             for node in self.base_traits.nodes:
-                pass
+                rrsf_table.add_row(
+                    node["base:node_name"] or "",
+                    node["base:multisystem_node_name"] or "",
+                    node["base:node_description"],
+                    str(node["base:node_state"] or ""),
+                    node["base:node_protocol"] or "",
+                    str(node["base:requests_denied"] or ""),
+                    )
 
     def compose(self) -> ComposeResult:
         yield Label("RRSF Nodes", classes="rrsf-label")
