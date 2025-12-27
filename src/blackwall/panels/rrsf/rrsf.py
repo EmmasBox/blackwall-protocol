@@ -38,7 +38,11 @@ class PanelRRSFMetaData(HorizontalGroup):
             self.notify(self.base_traits.subsystem_name)
 
     def watch_base_traits(self):
-        pass
+        if self.base_traits.subsystem_name is not None:
+            self.get_child_by_id(id="rrsf_subsystem_name",expect_type=Input).value = self.base_traits.subsystem_name
+
+        if self.base_traits.subsystem_userid is not None:
+            self.get_child_by_id(id="rrsf_subsystem_userid",expect_type=Input).value = self.base_traits.subsystem_userid
 
     def compose(self) -> ComposeResult:
         yield Label("Subsystem name: ")
