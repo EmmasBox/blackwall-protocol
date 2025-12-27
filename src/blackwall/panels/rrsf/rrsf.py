@@ -41,7 +41,7 @@ class PanelRRSFNodes(VerticalGroup):
                 rrsf_table.add_row(
                     node["base:node_name"] or "",
                     node["base:multisystem_node_name"] or "",
-                    node["base:node_description"],
+                    node["base:node_description"] or "",
                     str(node["base:node_state"] or ""),
                     node["base:node_protocol"] or "",
                     str(node["base:requests_denied"] or ""),
