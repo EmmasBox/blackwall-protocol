@@ -4,7 +4,7 @@ from collections.abc import Generator
 from textual import on
 from textual.app import ComposeResult
 from textual.binding import Binding
-from textual.containers import VerticalGroup, HorizontalGroup, VerticalScroll
+from textual.containers import HorizontalGroup, VerticalGroup, VerticalScroll
 from textual.reactive import reactive
 from textual.suggester import SuggestFromList
 from textual.widgets import Button, ContentSwitcher, DataTable, Input, Label, Select
@@ -13,7 +13,6 @@ from blackwall.api.rrsf import (
     BaseRRSFTraits,
     get_rrsf_options,
 )
-from blackwall.panels.traits_ui import generate_trait_inputs
 
 
 def generate_rrsf_node(node: dict) -> Generator:
@@ -34,6 +33,10 @@ class PanelRRSFNodes(VerticalGroup):
 class PanelRRSFMetaData(HorizontalGroup):
     base_traits: reactive[BaseRRSFTraits] = reactive(BaseRRSFTraits())
 
+    def on_mount(self) -> None:
+        if self.base_traits.subsystem_name is not None:
+            self.notify(self.base_traits.subsystem_name)
+
     def compose(self) -> ComposeResult:
         if self.base_traits.subsystem_name is not None:
             yield Label(f"Subsystem name: {self.base_traits.subsystem_name}")
@@ -46,7 +49,6 @@ class PanelRRSF(VerticalScroll):
 
     def on_mount(self) -> None:
         rrsf_options = get_rrsf_options()
-        self.notify(rrsf_options["profile"]["base"]["subystem_name"])
         self.get_child_by_type(PanelRRSFNodes).base_traits = BaseRRSFTraits.from_dict(prefix="base",source=rrsf_options["profile"]["base"])
         self.get_child_by_type(PanelRRSFMetaData).base_traits = BaseRRSFTraits.from_dict(prefix="base",source=rrsf_options["profile"]["base"])
 
