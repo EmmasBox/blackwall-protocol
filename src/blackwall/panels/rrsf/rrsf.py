@@ -46,7 +46,7 @@ class PanelRRSF(VerticalScroll):
 
     def on_mount(self) -> None:
         rrsf_options = get_rrsf_options()
-        self.notify(rrsf_options["subystem_name"])
+        self.notify(rrsf_options["profile"]["base"]["subystem_name"])
         self.get_child_by_type(PanelRRSFNodes).base_traits = BaseRRSFTraits.from_dict(prefix="base",source=rrsf_options["profile"]["base"])
         self.get_child_by_type(PanelRRSFMetaData).base_traits = BaseRRSFTraits.from_dict(prefix="base",source=rrsf_options["profile"]["base"])
 
