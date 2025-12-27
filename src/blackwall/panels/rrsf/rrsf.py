@@ -17,10 +17,8 @@ RRSF_COLUMNS = [
      "State", 
      "Protocol",
      "Requests denied", 
-     "Date of last received work" , 
-     "Time of last received work", 
-     "Date of last sent work", 
-     "Time of last sent work",
+     "Received work" , 
+     "Sent work", 
      ),
 ]
 
@@ -50,10 +48,8 @@ class PanelRRSFNodes(VerticalGroup):
                     rrsf_get_key("base:node_state", node),
                     rrsf_get_key("base:node_protocol", node),
                     rrsf_get_key("base:requests_denied", node),
-                    rrsf_get_key("base:date_of_last_received_work", node),
-                    rrsf_get_key("base:time_of_last_received_work", node),
-                    rrsf_get_key("base:date_of_last_sent_work", node),
-                    rrsf_get_key("base:time_of_last_sent_work", node),
+                    f"{rrsf_get_key("base:time_of_last_received_work", node)} {rrsf_get_key("base:date_of_last_received_work", node)}",
+                    f"{rrsf_get_key("base:time_of_last_sent_work", node)} {rrsf_get_key("base:date_of_last_sent_work", node)}",
                     )
 
     def compose(self) -> ComposeResult:
