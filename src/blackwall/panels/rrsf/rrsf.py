@@ -12,7 +12,17 @@ from blackwall.api.rrsf import (
 )
 
 RRSF_COLUMNS = [
-    ("Node","System name", "Description", "State", "Protocol","Requests denied"),
+    ("Node", 
+     "System name", 
+     "Description", 
+     "State", 
+     "Protocol",
+     "Requests denied", 
+     "Date of last received work" , 
+     "Time of last received work", 
+     "Date of last sent work", 
+     "Time of last sent work",
+     ),
 ]
 
 
@@ -36,6 +46,10 @@ class PanelRRSFNodes(VerticalGroup):
                     str(node["base:node_state"] or ""),
                     node["base:node_protocol"] or "",
                     str(node["base:requests_denied"] or ""),
+                    node["base:date_of_last_received_work"] or "",
+                    node["base:time_of_last_received_work"] or "",
+                    node["base:date_of_last_sent_work"] or "",
+                    node["base:time_of_last_sent_work"] or "",
                     )
 
     def compose(self) -> ComposeResult:
