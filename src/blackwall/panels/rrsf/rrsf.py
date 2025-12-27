@@ -26,6 +26,7 @@ class PanelRRSFNodes(VerticalGroup):
     base_traits: reactive[BaseRRSFTraits] = reactive(BaseRRSFTraits())
 
     def compose(self) -> ComposeResult:
+        yield Label("RRSF Nodes")
         if self.base_traits.nodes is not None:
             for node in self.base_traits.nodes:
                 yield from generate_rrsf_node(node)
