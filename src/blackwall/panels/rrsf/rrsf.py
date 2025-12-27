@@ -26,7 +26,7 @@ class PanelRRSFNodes(VerticalGroup):
     base_traits: reactive[BaseRRSFTraits] = reactive(BaseRRSFTraits())
 
     def compose(self) -> ComposeResult:
-        yield Label("RRSF Nodes")
+        yield Label("RRSF Nodes", classes="rrsf-label")
         if self.base_traits.nodes is not None:
             for node in self.base_traits.nodes:
                 yield from generate_rrsf_node(node)
@@ -46,10 +46,10 @@ class PanelRRSFMetaData(HorizontalGroup):
             self.get_child_by_id(id="rrsf_subsystem_userid",expect_type=Input).value = self.base_traits.subsystem_userid
 
     def compose(self) -> ComposeResult:
-        yield Label("Subsystem name: ", classes="rrsf-metadata-label")
+        yield Label("Subsystem name: ", classes="rrsf-label")
         yield Input(id="rrsf_subsystem_name", max_length=8, disabled=True, compact=True, classes="rrsf-metadata")
         
-        yield Label("Subsystem userid: ", classes="rrsf-metadata-label")
+        yield Label("Subsystem userid: ", classes="rrsf-label")
         yield Input(id="rrsf_subsystem_userid", max_length=8, disabled=True, compact=True, classes="rrsf-metadata")
 
 class PanelRRSF(VerticalScroll):
