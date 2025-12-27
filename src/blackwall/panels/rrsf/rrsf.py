@@ -69,6 +69,9 @@ class PanelRRSFMetaData(HorizontalGroup):
 
         if self.base_traits.subsystem_userid is not None:
             self.get_child_by_id(id="rrsf_subsystem_userid",expect_type=Input).value = self.base_traits.subsystem_userid
+        
+        if self.base_traits.subsystem_operator_prefix is not None:
+            self.get_child_by_id(id="rrsf_subsystem_operator_prefix",expect_type=Input).value = self.base_traits.subsystem_operator_prefix
 
     def compose(self) -> ComposeResult:
         yield Label("Subsystem name: ", classes="rrsf-label")
@@ -76,6 +79,9 @@ class PanelRRSFMetaData(HorizontalGroup):
         
         yield Label("Subsystem userid: ", classes="rrsf-label")
         yield Input(id="rrsf_subsystem_userid", max_length=8, disabled=True, compact=True, classes="rrsf-metadata")
+
+        yield Label("Operator prefix: ", classes="rrsf-label")
+        yield Input(id="rrsf_subsystem_operator_prefix", max_length=8, disabled=True, compact=True, classes="rrsf-metadata")
 
 class PanelRRSF(VerticalScroll):
     base_traits: reactive[BaseRRSFTraits] = reactive(BaseRRSFTraits())
