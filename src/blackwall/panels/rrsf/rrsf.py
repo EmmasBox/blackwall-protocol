@@ -42,8 +42,10 @@ class PanelRRSFMetaData(HorizontalGroup):
 
     def compose(self) -> ComposeResult:
         yield Label("Subsystem name: ")
+        yield Input(id="rrsf_subsystem_name", max_length=8, disabled=True, compact=True,classes="name")
         
         yield Label("Subsystem userid: ")
+        yield Input(id="rrsf_subsystem_userid", max_length=8, disabled=True, compact=True,classes="name")
 
 class PanelRRSF(VerticalScroll):
     base_traits: reactive[BaseRRSFTraits] = reactive(BaseRRSFTraits())
