@@ -18,8 +18,8 @@ RRSF_COLUMNS = [
      "State", 
      "Protocol",
      "Requests denied", 
-     f"Received work{get_emoji(" 🔽")}" , 
-     f"Sent work{get_emoji(" 🔼")}" , 
+     f"Received work{get_emoji(" ⬇️")}" , 
+     f"Sent work{get_emoji(" ⬆️")}" , 
      ),
 ]
 
